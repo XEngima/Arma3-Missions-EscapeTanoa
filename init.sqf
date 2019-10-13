@@ -85,14 +85,14 @@ setTerrainGrid (paramsArray select 4);
 
 switch (_dynamicWeather) do {
     case 0: { execVM "Scripts\Escape\StaticWeatherEffects.sqf"; }; // Dynamic weather off
-    case 1: { [0.1, 0.1, 0, [random 8, random 8]] execVM "Scripts\DRN\DynamicWeatherEffects\DynamicWeatherEffects.sqf"; }; // Dynamic weather (start clear)
+    case 1: { [0.01, 0.1, 0, [random 8, random 8]] execVM "Scripts\DRN\DynamicWeatherEffects\DynamicWeatherEffects.sqf"; }; // Dynamic weather (start clear)
     default {
          // Dynamic weather (start random)
-        if (random 100 < 50) then {
-            _fog = random 0.1;
+        if (random 100 < 75) then {
+            _fog = random 0.05;
         }
         else {
-            _fog = random 0.3;
+            _fog = random 0.1;
         };
         
         [_fog] execVM "Scripts\DRN\DynamicWeatherEffects\DynamicWeatherEffects.sqf";

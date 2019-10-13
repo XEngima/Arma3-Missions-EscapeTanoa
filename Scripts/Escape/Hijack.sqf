@@ -4,12 +4,12 @@ private ["_marker", "_extractionPointNo", "_count", "_text"];
 _generatorTrailer = _this select 0;
 _unit = _this select 1;
 
-_count = 30;
+_count = drn_var_Escape_timeToHijack;
 if (typeOf _unit == "FR_AC") then {
 	_count = 10;
 };
 
-while {(_count > 0) && (_unit distance _generatorTrailer < 3) && !(_unit getVariable "NORRN_unconscious")} do
+while { _count > 0 && _unit distance _generatorTrailer < 3 } do
 {
 	_text = "HIJACKING " + str _count;
 
@@ -18,8 +18,6 @@ while {(_count > 0) && (_unit distance _generatorTrailer < 3) && !(_unit getVari
 
 	_count = _count - 1;
 };
-
-if (_unit getVariable "NORRN_unconscious") exitWith {};
 
 if (_count > 0 && _unit distance _generatorTrailer > 3) exitWith {
     cutText ["You must get closer!", "Plain", 1];
@@ -36,7 +34,8 @@ if (_count == 0) then {
         publicVariable "drn_var_Escape_ExtractionMarkerPos";
         
         _marker = createMarker ["drn_visibleGoalMarker", drn_var_Escape_ExtractionMarkerPos];
-        _marker setMarkerType "Faction_US";
+        _marker setMarkerType "hd_pickup";
+        _marker setMarkerColor "ColorBlufor";
         
         [_extractionPointNo] call drn_fnc_Escape_CreateExtractionPointServer;
         

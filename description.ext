@@ -6,13 +6,13 @@ class Header
   maxPlayers = 8;
 };
 
-onLoadMission = "ESCAPE CHERNARUS 1.8";
+onLoadMission = "ESCAPE TANOA 1.9 - BY ENGIMA";
 OnLoadMissionTime = FALSE;
 
 // description.ext settings for revive
 ///////////////////////////////////////////////////////////////////////////////////////////
-respawn = "BASE";
-respawndelay = 4;
+//respawn = "BASE";
+//respawndelay = 4;
 disabledAI = 1;
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -48,7 +48,7 @@ class Params
 		title="Dynamic Weather";
 		values[]={0, 1, 2};
 		texts[]={"Off", "On (Start clear)", "On (Start random)"};
-		default = 2;
+		default = 1;
 	};
 	class Grass
 	{	

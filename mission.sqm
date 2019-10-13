@@ -8,18 +8,18 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=90;
+		nextID=110;
 	};
 	class MarkerIDProvider
 	{
-		nextID=3;
+		nextID=19;
 	};
 	class Camera
 	{
-		pos[]={8970.1104,35.814583,10039.63};
-		dir[]={0.73725891,-0.15748449,-0.65717375};
-		up[]={0.11760203,0.98751199,-0.10482482};
-		aside[]={-0.66548747,1.3838289e-006,-0.7465992};
+		pos[]={6260.9717,81.828903,13466.439};
+		dir[]={0.76315027,-0.13556072,-0.63197899};
+		up[]={0.10449018,0.99074656,-0.086527765};
+		aside[]={-0.63785738,1.4025281e-006,-0.77025443};
 	};
 };
 binarizationWanted=0;
@@ -27,13 +27,14 @@ addons[]=
 {
 	"A3_Characters_F",
 	"A3_Structures_F_Exp_Walls_Tin",
-	"A3_Ui_F"
+	"A3_Ui_F",
+	"A3_Boat_F_Boat_Armed_01"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=3;
+		items=4;
 		class Item0
 		{
 			className="A3_Characters_F";
@@ -55,38 +56,191 @@ class AddonsMetaData
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
+		class Item3
+		{
+			className="A3_Boat_F";
+			name="Arma 3 Alpha - Boats and Submersibles";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
 	};
 };
 randomSeed=14160686;
 class ScenarioData
 {
 	author="Engima";
+	class Header
+	{
+		gameType="Escape";
+		minPlayers=1;
+		maxPlayers=8;
+	};
+};
+class CustomAttributes
+{
+	class Category0
+	{
+		name="Multiplayer";
+		class Attribute0
+		{
+			property="ReviveBleedOutDelay";
+			expression="false";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"SCALAR"
+						};
+					};
+					value=300;
+				};
+			};
+		};
+		class Attribute1
+		{
+			property="ReviveDelay";
+			expression="false";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"SCALAR"
+						};
+					};
+					value=20.563976;
+				};
+			};
+		};
+		class Attribute2
+		{
+			property="ReviveMedicSpeedMultiplier";
+			expression="false";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"SCALAR"
+						};
+					};
+					value=3;
+				};
+			};
+		};
+		class Attribute3
+		{
+			property="RespawnTemplates";
+			expression="true";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"ARRAY"
+						};
+					};
+					class value
+					{
+						items=2;
+						class Item0
+						{
+							class data
+							{
+								class type
+								{
+									type[]=
+									{
+										"STRING"
+									};
+								};
+								value="EndMission";
+							};
+						};
+						class Item1
+						{
+							class data
+							{
+								class type
+								{
+									type[]=
+									{
+										"STRING"
+									};
+								};
+								value="None";
+							};
+						};
+					};
+				};
+			};
+		};
+		class Attribute4
+		{
+			property="ReviveMode";
+			expression="false";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"SCALAR"
+						};
+					};
+					value=1;
+				};
+			};
+		};
+		nAttributes=5;
+	};
 };
 class Mission
 {
+	appId=395180;
 	class Intel
 	{
+		briefingName="ESCAPE TANOA";
+		resistanceWest=0;
 		timeOfChanges=1800.0002;
-		startWeather=0.30000001;
+		startWeather=0.75216275;
+		startFog=0.019161042;
 		startWind=0.1;
 		startWaves=0.1;
-		forecastWeather=0;
+		forecastWeather=0.75216275;
 		forecastWind=0.1;
 		forecastWaves=0.1;
 		forecastLightnings=0.1;
+		rainForced=1;
+		windForced=1;
 		year=2035;
 		month=6;
 		day=6;
 		hour=12;
 		minute=0;
-		startFogBase=250;
-		forecastFogBase=250;
-		startFogDecay=0.014;
-		forecastFogDecay=0.014;
+		startFogBase=-30.389099;
+		forecastFogBase=-47.634644;
+		startFogDecay=0.1;
+		forecastFogDecay=0.1;
 	};
 	class Entities
 	{
-		items=10;
+		items=30;
 		class Item0
 		{
 			dataType="Group";
@@ -708,6 +862,212 @@ class Mission
 			colorName="ColorGreen";
 			id=33;
 			atlOffset=-0.00019073486;
+		};
+		class Item10
+		{
+			dataType="Marker";
+			position[]={6461.1538,0,13269.016};
+			name="drn_Escape_ExtractionPos1";
+			type="Empty";
+			id=90;
+			atlOffset=6.9432898;
+		};
+		class Item11
+		{
+			dataType="Marker";
+			position[]={14890.896,0,10649.597};
+			name="drn_Escape_ExtractionPos2";
+			type="Empty";
+			id=91;
+			atlOffset=5.9405222;
+		};
+		class Item12
+		{
+			dataType="Marker";
+			position[]={13797.104,0,7684.814};
+			name="drn_Escape_ExtractionPos3";
+			type="Empty";
+			id=92;
+			atlOffset=5.6086764;
+		};
+		class Item13
+		{
+			dataType="Marker";
+			position[]={13307.129,0,4034.9636};
+			name="drn_Escape_ExtractionPos4";
+			type="Empty";
+			id=93;
+			atlOffset=2.6304736;
+		};
+		class Item14
+		{
+			dataType="Marker";
+			position[]={9718.626,0,2599.1274};
+			name="drn_Escape_ExtractionPos5";
+			type="Empty";
+			id=94;
+			atlOffset=1.8160424;
+		};
+		class Item15
+		{
+			dataType="Marker";
+			position[]={9164.999,0,5856.459};
+			name="drn_Escape_ExtractionPos6";
+			type="Empty";
+			id=95;
+			atlOffset=6.2466846;
+		};
+		class Item16
+		{
+			dataType="Marker";
+			position[]={4600.2144,0,7899.1626};
+			name="drn_Escape_ExtractionPos7";
+			type="Empty";
+			id=96;
+			atlOffset=5.630312;
+		};
+		class Item17
+		{
+			dataType="Marker";
+			position[]={4881.2412,0,11451.72};
+			name="drn_Escape_ExtractionPos8";
+			type="Empty";
+			id=97;
+			atlOffset=4.6146321;
+		};
+		class Item18
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={8346.0371,3.3238735,6122.4224};
+			};
+			side="Empty";
+			class Attributes
+			{
+			};
+			id=98;
+			type="B_Boat_Armed_01_minigun_F";
+			atlOffset=9.8649635;
+		};
+		class Item19
+		{
+			dataType="Marker";
+			position[]={6095.8115,0,13522.306};
+			name="drn_Escape_ExtracionBoatSpawnPos1";
+			type="Empty";
+			id=99;
+			atlOffset=29.540413;
+		};
+		class Item20
+		{
+			dataType="Marker";
+			position[]={15282.715,0,10100.295};
+			name="drn_Escape_ExtracionBoatSpawnPos2";
+			type="Empty";
+			id=100;
+			atlOffset=45.387234;
+		};
+		class Item21
+		{
+			dataType="Marker";
+			position[]={14192.709,0,7401.4316};
+			name="drn_Escape_ExtracionBoatSpawnPos3";
+			type="Empty";
+			id=101;
+			atlOffset=23.347094;
+		};
+		class Item22
+		{
+			dataType="Marker";
+			position[]={13779.154,0,3739.8811};
+			name="drn_Escape_ExtracionBoatSpawnPos4";
+			type="Empty";
+			id=102;
+			atlOffset=27.373266;
+		};
+		class Item23
+		{
+			dataType="Marker";
+			position[]={8979.6465,0,2048.7808};
+			name="drn_Escape_ExtracionBoatSpawnPos5";
+			type="Empty";
+			id=103;
+			atlOffset=29.170279;
+		};
+		class Item24
+		{
+			dataType="Marker";
+			position[]={9040.9346,0,5450.7402};
+			name="drn_Escape_ExtracionBoatSpawnPos6";
+			type="Empty";
+			id=104;
+			atlOffset=23.415039;
+		};
+		class Item25
+		{
+			dataType="Marker";
+			position[]={4200.2158,0,7807.3198};
+			name="drn_Escape_ExtracionBoatSpawnPos7";
+			type="Empty";
+			id=105;
+			atlOffset=7.8869085;
+		};
+		class Item26
+		{
+			dataType="Marker";
+			position[]={4556.3892,0,11114.328};
+			name="drn_Escape_ExtracionBoatSpawnPos8";
+			type="Empty";
+			id=106;
+			atlOffset=26.572121;
+		};
+		class Item27
+		{
+			dataType="Trigger";
+			position[]={9054.041,264.99722,9217.4258};
+			class Attributes
+			{
+				onActivation="player setPos drn_var_Escape_ExtractionMarkerPos";
+				sizeA=0;
+				sizeB=0;
+				sizeC=0;
+				activationBy="ALPHA";
+			};
+			id=107;
+			type="EmptyDetector";
+			atlOffset=-44.285004;
+		};
+		class Item28
+		{
+			dataType="Trigger";
+			position[]={6556.5439,0.89686131,13223.18};
+			class Attributes
+			{
+				onActivation="hint str fog;";
+				sizeA=0;
+				sizeB=0;
+				activationBy="BRAVO";
+			};
+			id=108;
+			type="EmptyDetector";
+			atlOffset=0.064816296;
+		};
+		class Item29
+		{
+			dataType="Trigger";
+			position[]={6386.188,0.00040340424,13128.995};
+			class Attributes
+			{
+				condition="drn_var_Escape_MissionComplete";
+				sizeA=0;
+				sizeB=0;
+				timeout[]={3,3,3};
+				type="END1";
+			};
+			id=109;
+			type="EmptyDetector";
+			atlOffset=2.2070003;
 		};
 	};
 };

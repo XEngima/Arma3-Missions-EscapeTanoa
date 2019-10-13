@@ -24,6 +24,7 @@ _guardsAreArmed = false;
 _guardLivesLong = false;
 
 _allowComCentersTooClose = true;
+drn_var_Escape_timeToHijack = 5; // 60
 
 // Debug Variables
 

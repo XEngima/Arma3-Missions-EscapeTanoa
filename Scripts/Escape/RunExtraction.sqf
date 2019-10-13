@@ -8,11 +8,11 @@ _spawnMarkerName = "drn_Escape_ExtracionBoatSpawnPos" + str _extractionPointNo;
 _extractionMarkerName = "drn_Escape_ExtractionPos" + str _extractionPointNo;
 _extractionMarkerName2 = "drn_Escape_ExtractionPos" + str _extractionPointNo + "_1";
 
-_result = [[((getMarkerPos _spawnMarkerName) select 0) + 15, ((getMarkerPos _spawnMarkerName) select 1) + 10, 0], 0, "RHIB2Turret", drn_var_playerSide] call BIS_fnc_spawnVehicle;
+_result = [[((getMarkerPos _spawnMarkerName) select 0) + 15, ((getMarkerPos _spawnMarkerName) select 1) + 10, 0], 0, "B_Boat_Armed_01_minigun_F", drn_var_playerSide] call BIS_fnc_spawnVehicle;
 _boat1 = _result select 0;
 _group1 = _result select 2;
 
-_result = [[((getMarkerPos _spawnMarkerName) select 0) - 15, ((getMarkerPos _spawnMarkerName) select 1) - 10, 0], 0, "RHIB2Turret", drn_var_playerSide] call BIS_fnc_spawnVehicle;
+_result = [[((getMarkerPos _spawnMarkerName) select 0) - 15, ((getMarkerPos _spawnMarkerName) select 1) - 10, 0], 0, "B_Boat_Armed_01_minigun_F", drn_var_playerSide] call BIS_fnc_spawnVehicle;
 _boat2 = _result select 0;
 _group2 = _result select 2;
 

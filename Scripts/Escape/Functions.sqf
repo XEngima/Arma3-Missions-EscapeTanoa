@@ -44,6 +44,51 @@ drn_fnc_Escape_GetPlayers = {
 	drn_players
 };
 
+drn_fnc_Escape_RemoveAi = {
+	if (!isNil "p1") then {
+		if (!isPlayer p1) then {
+			deleteVehicle p1;
+		};
+	};
+	if (!isNil "p2") then {
+		if (!isPlayer p2) then {
+			deleteVehicle p2;
+		};
+	};
+	if (!isNil "p3") then {
+		if (!isPlayer p3) then {
+			deleteVehicle p3;
+		};
+	};
+	if (!isNil "p4") then {
+		if (!isPlayer p4) then {
+			deleteVehicle p4;
+		};
+	};
+	if (!isNil "p5") then {
+		if (!isPlayer p5) then {
+			deleteVehicle p5;
+		};
+	};
+	if (!isNil "p6") then {
+		if (!isPlayer p6) then {
+			deleteVehicle p6;
+		};
+	};
+	if (!isNil "p7") then {
+		if (!isPlayer p7) then {
+			deleteVehicle p7;
+		};
+	};
+	if (!isNil "p8") then {
+		if (!isPlayer p8) then {
+			deleteVehicle p8;
+		};
+	};
+
+	drn_players
+};
+
 drn_fnc_Escape_OnSpawnGeneralSoldierUnit = {
     _this setVehicleAmmo (0.2 + random 0.6);
     _this removeWeapon "ItemGPS";

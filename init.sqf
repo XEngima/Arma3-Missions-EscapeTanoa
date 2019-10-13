@@ -54,10 +54,13 @@ if (isServer) then {
 };
 
 _volume = soundVolume;
+
+/*
 enableSaving [false, false];
 0 fadeSound 0;
 enableRadio false;
 0 cutText ["", "BLACK FADED"];
+*/
 
 if (!isDedicated) then {
     waitUntil {!isNull player};

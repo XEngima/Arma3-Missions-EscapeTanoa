@@ -6,7 +6,7 @@ _centerPos = _this select 0;
 _rotateDir = _this select 1;
 if (count _this > 2) then { _staticWeaponClasses = _this select 2; } else { _staticWeaponClasses = []; };
 if (count _this > 3) then { _parkedVehicleClasses = _this select 3; } else { _parkedVehicleClasses = []; };
-hint "b1";
+
 _fnc_CreateObject = {
     private ["_className", "_relativePos", "_relativeDir", "_centerPos", "_rotateDir"];
     private ["_object", "_realPos", "_realDir"];
@@ -33,11 +33,6 @@ _pos = [-18, 16.5];
 _dir = 90;
 ["Land_fort_bagfence_corner", _pos, _dir, _centerPos, _rotateDir] call _fnc_CreateObject;
 */
-
-//(North western wall)
-_pos = [-18, 15.15];
-_dir = 0;
-["Land_BagFence_Long_F", _pos, _dir, _centerPos, _rotateDir] call _fnc_CreateObject;
 
 // (Western wall)
 _posX = -19.2;
@@ -181,56 +176,44 @@ _dir = 180;
 
 // Barracks
 
-_pos = [-13, -3];
-_dir = 180;
+_pos = [-13, -8];
+_dir = 90;
 ["B_Slingload_01_Repair_F", _pos, _dir, _centerPos, _rotateDir] call _fnc_CreateObject;
 
 // Power Generator
-_pos = [4, -7];
-_dir = 90;
+_pos = [0, -7];
+_dir = 0;
 _powerGenerator = ["Land_PowerGenerator_F", _pos, _dir, _centerPos, _rotateDir] call _fnc_CreateObject;
 _powerGenerator addAction ["Hijack communication center", "Scripts\Escape\Hijack.sqf"];
 
-//_powerGenerator setVehicleInit "this addAction [""Hijack communication center"", ""Scripts\Escape\Hijack.sqf""];";
-//processInitCommands;
-
 // Antennas
 
-_pos = [-4, -8];
-_dir = 90;
+_pos = [-16, 10];
+_dir = random 360;
 ["OmniDirectionalAntenna_01_sand_F", _pos, _dir, _centerPos, _rotateDir] call _fnc_CreateObject;
 
-_pos = [14, 2];
-_dir = 90;
-["OmniDirectionalAntenna_01_sand_F", _pos, _dir, _centerPos, _rotateDir] call _fnc_CreateObject;
+_pos = [-15, 6];
+_dir = random 360;
+["SatelliteAntenna_01_Sand_F", _pos, _dir, _centerPos, _rotateDir] call _fnc_CreateObject;
 
-// Toilet
+// Toilets
 
-_pos = [-8, -9];
-_dir = 180;
+_pos = [-15, -4];
+_dir = 270;
+["Land_FieldToilet_F", _pos, _dir, _centerPos, _rotateDir] call _fnc_CreateObject;
+
+_pos = [-15, -2];
+_dir = 270;
 ["Land_FieldToilet_F", _pos, _dir, _centerPos, _rotateDir] call _fnc_CreateObject;
 
 // Fuel Tank
-_pos = [11, -7];
-_dir = 90;
+_pos = [7, -7];
+_dir = 0;
 ["B_Slingload_01_Fuel_F", _pos, _dir, _centerPos, _rotateDir] call _fnc_CreateObject;
 
-// Camo Nets
-_pos = [-13, -6];
-_dir = 180;
-["CamoNet_OPFOR_open_F", _pos, _dir, _centerPos, _rotateDir] call _fnc_CreateObject;
-
-_pos = [7, -9];
-_dir = 180;
-["CamoNet_OPFOR_open_F", _pos, _dir, _centerPos, _rotateDir] call _fnc_CreateObject;
-
-_pos = [16, 9];
-_dir = 90;
-["CamoNet_OPFOR_open_F", _pos, _dir, _centerPos, _rotateDir] call _fnc_CreateObject;
-
 // Field Hospital
-_pos = [-15.5, 9];
-_dir = 90;
+_pos = [3, -7];
+_dir = 0;
 ["B_Slingload_01_Medevac_F", _pos, _dir, _centerPos, _rotateDir] call _fnc_CreateObject;
 
 // Flag
@@ -257,18 +240,36 @@ if (count _staticWeaponClasses > 0) then {
 
 if (count _parkedVehicleClasses > 0) then {
     // Cars
-    _pos = [15.5, 12];
+    _pos = [12, 10];
     _dir = 270;
     
     _vehicle = _parkedVehicleClasses select floor random count _parkedVehicleClasses;
     [_vehicle, _pos, _dir, _centerPos, _rotateDir] call _fnc_CreateObject;
     
-    _pos = [15.5, 6.5];
+    _pos = [12, 6.5];
     _dir = 270;
     
     _vehicle = _parkedVehicleClasses select floor random count _parkedVehicleClasses;
     [_vehicle, _pos, _dir, _centerPos, _rotateDir] call _fnc_CreateObject;
 };
+
+// Camo Nets
+_pos = [-13, -6];
+_dir = 270;
+["CamoNet_OPFOR_big_F", _pos, _dir, _centerPos, _rotateDir] call _fnc_CreateObject;
+
+_pos = [5, -9];
+_dir = 180;
+["CamoNet_OPFOR_big_F", _pos, _dir, _centerPos, _rotateDir] call _fnc_CreateObject;
+
+_pos = [12, 8];
+_dir = 90;
+["CamoNet_OPFOR_big_F", _pos, _dir, _centerPos, _rotateDir] call _fnc_CreateObject;
+
+//(North western wall)
+_pos = [-18, 15.15];
+_dir = 0;
+["Land_BagFence_Long_F", _pos, _dir, _centerPos, _rotateDir] call _fnc_CreateObject;
 
 
 

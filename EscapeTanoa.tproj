@@ -2,16 +2,6 @@
 <Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProjectRootNode Name="EscapeTanoa" FileName="">
     <SubNodes>
-      <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="respawnSpecial" FileName="respawnSpecial">
-        <SubNodes>
-          <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="respawnSpecial.sqf" FileName="respawnSpecial\respawnSpecial.sqf">
-            <SubNodes />
-          </ProjectNodeViewModel>
-          <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="Spawn_chopperInit.sqf" FileName="respawnSpecial\Spawn_chopperInit.sqf">
-            <SubNodes />
-          </ProjectNodeViewModel>
-        </SubNodes>
-      </ProjectNodeViewModel>
       <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Scripts" FileName="Scripts">
         <SubNodes>
           <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="DRN" FileName="Scripts\DRN">
@@ -36,19 +26,6 @@
               <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Diagnostics" FileName="Scripts\DRN\Diagnostics">
                 <SubNodes>
                   <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="MonitorEmptyGroups.sqf" FileName="Scripts\DRN\Diagnostics\MonitorEmptyGroups.sqf">
-                    <SubNodes />
-                  </ProjectNodeViewModel>
-                </SubNodes>
-              </ProjectNodeViewModel>
-              <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="DynamicGuardedLocations" FileName="Scripts\DRN\DynamicGuardedLocations">
-                <SubNodes>
-                  <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="DepopulateLocation.sqf" FileName="Scripts\DRN\DynamicGuardedLocations\DepopulateLocation.sqf">
-                    <SubNodes />
-                  </ProjectNodeViewModel>
-                  <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="InitGuardedLocations.sqf" FileName="Scripts\DRN\DynamicGuardedLocations\InitGuardedLocations.sqf">
-                    <SubNodes />
-                  </ProjectNodeViewModel>
-                  <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="PopulateLocation.sqf" FileName="Scripts\DRN\DynamicGuardedLocations\PopulateLocation.sqf">
                     <SubNodes />
                   </ProjectNodeViewModel>
                 </SubNodes>

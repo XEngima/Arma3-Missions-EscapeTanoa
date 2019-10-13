@@ -49,6 +49,8 @@ _showGroupDiagnostics = false;
 drn_var_playerSide = west;
 drn_var_enemySide = east;
 
+call drn_fnc_Escape_RemoveAi;
+
 drn_var_Escape_AllPlayersDead = false;
 drn_var_Escape_MissionComplete = false;
 publicVariable "drn_var_Escape_AllPlayersDead";
@@ -113,6 +115,7 @@ if (true) then {
         _index = floor random count drn_arr_communicationCenterMarkers;
         _currentPos = (drn_arr_communicationCenterMarkers select _index) select 0;
 
+// Arma 2 solution
 /*
         // North west
         if (count _chosenComCenIndexes == 0) then {
@@ -225,9 +228,11 @@ if (true) then {
         _instanceNo = _instanceNo + 1;
     } foreach _chosenComCenIndexes;
 
-    if (_comCenGuardsExist) then {
-        _scriptHandle = [_playerGroup, "drn_CommunicationCenterPatrolMarker", drn_var_enemySide, "INS", 4, _minEnemies, _maxEnemies, _enemyMinSkill, _enemyMaxSkill, _enemySpawnDistance] execVM "Scripts\DRN\DynamicGuardedLocations\InitGuardedLocations.sqf";
-        waitUntil {scriptDone _scriptHandle};
+    if (_comCenGuardsExist) then
+    {
+        // Arma 2 solution        
+        //_scriptHandle = [_playerGroup, "drn_CommunicationCenterPatrolMarker", drn_var_enemySide, "INS", 4, _minEnemies, _maxEnemies, _enemyMinSkill, _enemyMaxSkill, _enemySpawnDistance] execVM "Scripts\DRN\DynamicGuardedLocations\InitGuardedLocations.sqf";
+        //waitUntil {scriptDone _scriptHandle};
     };
     
     drn_var_Escape_communicationCenterPositions = _comCenPositions;
@@ -281,8 +286,9 @@ if (_useAmmoDepots) then {
             };
         };
         
-        _scriptHandle = [_playerGroup, "drn_AmmoDepotPatrolMarker", drn_var_enemySide, "INS", 3, _minEnemies, _maxEnemies, _enemyMinSkill, _enemyMaxSkill, _enemySpawnDistance, _debugAmmoDepots] execVM "Scripts\DRN\DynamicGuardedLocations\InitGuardedLocations.sqf";
-        waitUntil {scriptDone _scriptHandle};
+        // Arma 2 solution
+        //_scriptHandle = [_playerGroup, "drn_AmmoDepotPatrolMarker", drn_var_enemySide, "INS", 3, _minEnemies, _maxEnemies, _enemyMinSkill, _enemyMaxSkill, _enemySpawnDistance, _debugAmmoDepots] execVM "Scripts\DRN\DynamicGuardedLocations\InitGuardedLocations.sqf";
+        //waitUntil {scriptDone _scriptHandle};
     };
 };
 

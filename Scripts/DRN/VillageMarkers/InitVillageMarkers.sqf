@@ -33,7 +33,7 @@ drn_fnc_VillageMarkers_PutVillageMarkersOnMap = {
 };
 
 if (isServer) then {
-	[true] call drn_fnc_VillageMarkers_PutVillageMarkersOnMap;
+	[false] call drn_fnc_VillageMarkers_PutVillageMarkersOnMap;
 };
 
 drn_var_villageMarkersInitialized = true;

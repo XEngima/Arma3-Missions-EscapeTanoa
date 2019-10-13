@@ -8,18 +8,18 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=112;
+		nextID=124;
 	};
 	class MarkerIDProvider
 	{
-		nextID=20;
+		nextID=22;
 	};
 	class Camera
 	{
-		pos[]={9014.0117,63.478394,9975.5332};
-		dir[]={-0.44018093,-0.29845163,0.8468678};
-		up[]={-0.13764736,0.9544223,0.26482034};
-		aside[]={0.88730514,2.7223723e-007,0.46120054};
+		pos[]={6878.1909,8.3975754,7228.8584};
+		dir[]={0.95489073,-0.12897889,-0.26772854};
+		up[]={0.12424897,0.99163574,-0.03483735};
+		aside[]={-0.26998502,-9.4087591e-007,-0.96293575};
 	};
 };
 binarizationWanted=0;
@@ -240,7 +240,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=32;
+		items=33;
 		class Item0
 		{
 			dataType="Group";
@@ -1072,26 +1072,34 @@ class Mission
 		class Item30
 		{
 			dataType="Marker";
-			position[]={8386,19.43,10311.783};
-			name="marker_19";
-			markerType="ELLIPSE";
-			type="ellipse";
-			a=120;
-			b=220;
-			angle=124.81699;
-			id=110;
+			position[]={6909.4141,2.724,7234.189};
+			name="drn_searchChopperStartPosMarker";
+			type="Empty";
+			angle=54.916973;
+			id=112;
+			atlOffset=0.00039410591;
 		};
 		class Item31
 		{
 			dataType="Marker";
-			position[]={8787.8555,19.163555,10168.123};
-			name="marker_20";
-			markerType="ELLIPSE";
-			type="ellipse";
-			a=120;
-			b=300;
-			angle=231.978;
-			id=111;
+			position[]={6890.5415,2.6370668,7207.9741};
+			name="marker_21";
+			type="Empty";
+			id=122;
+		};
+		class Item32
+		{
+			dataType="Trigger";
+			position[]={6904.4429,2.6523464,7196.728};
+			class Attributes
+			{
+				onActivation="player setPos getMarkerPos ""marker_21""";
+				sizeA=0;
+				sizeB=0;
+				activationBy="CHARLIE";
+			};
+			id=123;
+			type="EmptyDetector";
 		};
 	};
 };

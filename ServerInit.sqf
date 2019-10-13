@@ -10,12 +10,12 @@ private ["_allowComCentersTooClose"];
 _useRandomStartPos = false;
 _useEscapeSurprises = false;
 _useAmmoDepots = false;
-_useSearchLeader = false;
+_useSearchLeader = true;
 _useMotorizedSearchGroup = false;
 _useVillagePatrols = false;
 _useMilitaryTraffic = false;
 _useAmbientInfantry = false;
-_useSearchChopper = false;
+_useSearchChopper = true;
 _useRoadBlocks = false;
 
 _guardsExist = true;
@@ -39,7 +39,7 @@ _debugRoadBlocks = false;
 drn_var_Escape_debugMotorizedSearchGroup = false;
 drn_var_Escape_debugDropChoppers = false;
 drn_var_Escape_debugReinforcementTruck = false;
-drn_var_Escape_debugSearchChopper = false;
+drn_var_Escape_debugSearchChopper = true;
 drn_var_Escape_DebugSearchGroup = false;
 drn_var_Escape_debugCivilEnemy = false;
 

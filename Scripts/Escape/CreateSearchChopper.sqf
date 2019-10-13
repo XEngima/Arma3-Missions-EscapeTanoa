@@ -17,7 +17,7 @@
 if (!isServer) exitWith {};
 
 private ["_homePos", "_side", "_searchAreaMarker", "_searchTimeMin", "_refuelTimeMin", "_minSkill", "_maxSkill", "_unitArray", "_debug"];
-private ["_chopper", "_group", "_pilot", "_gunner1", "_gunner2"];
+private ["_chopper", "_group", "_pilot", "_gunner1"];
 private ["_vehicleVarName", "_vehicleVarNameBase", "_vehicleVarNameNo"];
 
 _homePos = _this select 0;
@@ -57,29 +57,28 @@ while {!(isNil _vehicleVarName)} do {
 	_vehicleVarName = _vehicleVarNameBase + str _vehicleVarNameNo;
 };
 
-_chopper = "Mi17_Ins" createVehicle _homePos;
+_chopper = "O_Heli_Light_02_unarmed_F" createVehicle _homePos;
 _chopper lock false;
 _chopper setVehicleVarName _vehicleVarName;
 _chopper call compile format ["%1=_this;", _vehicleVarName];
 
 _group = createGroup _side;
 
-"Ins_Soldier_Pilot" createUnit [position player, _group, "", (_minSkill + random (_maxSkill - _minSkill)), "LIEUTNANT"];
-"Ins_Soldier_Pilot" createUnit [position player, _group, "", (_minSkill + random (_maxSkill - _minSkill)), "LIEUTNANT"];
-"Ins_Soldier_Pilot" createUnit [position player, _group, "", (_minSkill + random (_maxSkill - _minSkill)), "LIEUTNANT"];
+//"O_helipilot_F" createUnit [[0, 0, 25], _group, "", (_minSkill + random (_maxSkill - _minSkill)), "LIEUTNANT"];
+//"O_helipilot_F" createUnit [[0, 0, 25], _group, "", (_minSkill + random (_maxSkill - _minSkill)), "LIEUTNANT"];
+
+_group createUnit ["O_helipilot_F", [0, 0, 25], [], 0, "FORM"];
+_group createUnit ["O_helipilot_F", [0, 0, 25], [], 0, "FORM"];
 
 _unitArray = _unitArray + units _group;
 
 _pilot = (units _group) select 0;
 _gunner1 = (units _group) select 1;
-_gunner2 = (units _group) select 2;
 
 _pilot assignAsDriver _chopper;
 _pilot moveInDriver _chopper;
 _gunner1 assignAsGunner _chopper;
 _gunner1 moveInTurret [_chopper, [0]];
-_gunner2 assignAsGunner _chopper;
-_gunner2 moveInTurret [_chopper, [1]];
 
 {
     _x call drn_fnc_Escape_OnSpawnGeneralSoldierUnit;

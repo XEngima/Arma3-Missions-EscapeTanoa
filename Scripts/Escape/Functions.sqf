@@ -91,20 +91,28 @@ drn_fnc_Escape_RemoveAi = {
 
 drn_fnc_Escape_OnSpawnGeneralSoldierUnit = {
     _this setVehicleAmmo (0.2 + random 0.6);
+    _this unassignItem "ItemGPS";
     _this removeWeapon "ItemGPS";
+    _this unassignItem "ItemMap";
     _this removeWeapon "ItemMap";
+    _this unassignItem "ItemCompass";
     _this removeWeapon "ItemCompass";
     
     _this setSkill (drn_var_Escape_enemyMinSkill + random (drn_var_Escape_enemyMaxSkill - drn_var_Escape_enemyMinSkill));
     
     if (random 100 < 30) then {
+    	_this assignItem "ItemMap";
         _this addWeapon "ItemMap";
+        
+	    if (random 100 < 33) then {
+	    	_this assignItem "ItemCompass";
+	        _this addWeapon "ItemCompass";
+	    };
     };
-    if (random 100 < 30) then {
-        _this addWeapon "ItemCompass";
-    };
+    
     if (random 100 < 25) then {
         if (!(_this hasWeapon "NVGoggles")) then {
+        	_this assignItem "NVGoggles";
             _this addweapon "NVGoggles";
         };
     };
@@ -1204,4 +1212,4 @@ if (isServer) then {
     publicVariable "drn_var_Escape_FunctionsInitializedOnServer";
 };
 
-
+    

@@ -204,7 +204,7 @@ while {true} do {
                 _debugMarkerColor = "ColorYellow";
             };
             
-            [_debugMarkerName, getPos ((units _group) select 0), "Dot", _debugMarkerColor] call drn_fnc_CL_SetDebugMarkerAllClients;
+            [_debugMarkerName, getPos ((units _group) select 0), "hd_dot", _debugMarkerColor] call drn_fnc_CL_SetDebugMarkerAllClients;
             
             _debugMarkers set [count _debugMarkers, _debugMarkerName];
         } foreach _activeGroups;

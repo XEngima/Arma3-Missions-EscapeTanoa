@@ -14,7 +14,7 @@ _useSearchLeader = true;
 _useMotorizedSearchGroup = false;
 _useVillagePatrols = false;
 _useMilitaryTraffic = false;
-_useAmbientInfantry = false;
+_useAmbientInfantry = true;
 _useSearchChopper = true;
 _useRoadBlocks = false;
 
@@ -33,7 +33,7 @@ _debugAmmoDepots = false;
 _debugSearchLeader = false;
 _debugVillagePatrols = false;
 _debugMilitaryTraffic = false;
-_debugAmbientInfantry = false;
+_debugAmbientInfantry = true;
 _debugGarbageCollector = false;
 _debugRoadBlocks = false;
 drn_var_Escape_debugMotorizedSearchGroup = false;
@@ -324,7 +324,7 @@ if (_useMotorizedSearchGroup) then {
 // Run initialization for scripts that need the players to be gathered at the start position
 [_useVillagePatrols, _useMilitaryTraffic, _useAmbientInfantry, _debugVillagePatrols, _debugMilitaryTraffic, _debugAmbientInfantry, _enemyMinSkill, _enemyMaxSkill, _enemySpawnDistance, _enemyFrequency, _useRoadBlocks, _debugRoadBlocks] spawn {
     private ["_useVillagePatrols", "_useMilitaryTraffic", "_useAmbientInfantry", "_debugVillagePatrols", "_debugMilitaryTraffic", "_debugAmbientInfantry", "_enemyMinSkill", "_enemyMaxSkill", "_enemySpawnDistance", "_enemyFrequency", "_useRoadBlocks", "_debugRoadBlocks"];
-    private ["_fnc_OnSpawnAmbientInfantryGroup", "_fnc_OnSpawnAmbientInfantryUnit", "_scriptHandle"];
+    private ["_fnc_OnSpawnAmbientInfantryGroup", "_scriptHandle"];
     private ["_playerGroup", "_minEnemiesPerGroup", "_maxEnemiesPerGroup", "_fnc_OnSpawnGroup"];
     
     _useVillagePatrols = _this select 0;
@@ -374,22 +374,8 @@ if (_useMotorizedSearchGroup) then {
     };
     
     // Initialize ambient infantry groups
-    if (_useAmbientInfantry) then {
-        
-        _fnc_OnSpawnAmbientInfantryUnit = {
-            _this setVehicleAmmo (0.3 + random 0.7);
-            _this removeWeapon "ItemGPS";
-            _this removeWeapon "ItemMap";
-            _this removeWeapon "ItemCompass";
-            
-            if (random 100 > 75) then {
-                _this addWeapon "ItemMap";
-                if (random 100 > 67) then {
-                    _this addWeapon "ItemCompass";
-                };
-            };
-        };
-        
+    if (_useAmbientInfantry) then
+    {
         _fnc_OnSpawnAmbientInfantryGroup = {
             private ["_unit", "_enemyUnit", "_i"];
             private ["_scriptHandle"];
@@ -439,7 +425,7 @@ if (_useMotorizedSearchGroup) then {
         _radius = (_enemySpawnDistance + 500) / 1000;
         _infantryGroupsCount = round (_groupsPerSqkm * _radius * _radius * 3.141592);
         
-        [_playerGroup, drn_var_enemySide, drn_arr_Escape_InfantryTypes, _infantryGroupsCount, _enemySpawnDistance + 200, _enemySpawnDistance + 500, _minEnemiesPerGroup, _maxEnemiesPerGroup, _enemyMinSkill, _enemyMaxSkill, 750, _fnc_OnSpawnAmbientInfantryUnit, _fnc_OnSpawnAmbientInfantryGroup, _debugAmbientInfantry] execVM "Scripts\DRN\AmbientInfantry\AmbientInfantry.sqf";
+        [_playerGroup, drn_var_enemySide, drn_arr_Escape_InfantryTypes, _infantryGroupsCount, _enemySpawnDistance + 200, _enemySpawnDistance + 500, _minEnemiesPerGroup, _maxEnemiesPerGroup, _enemyMinSkill, _enemyMaxSkill, 750, drn_fnc_Escape_OnSpawnGeneralSoldierUnit, _fnc_OnSpawnAmbientInfantryGroup, _debugAmbientInfantry] execVM "Scripts\DRN\AmbientInfantry\AmbientInfantry.sqf";
         sleep 0.25;
     };
     

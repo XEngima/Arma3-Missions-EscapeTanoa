@@ -7,7 +7,7 @@ private ["_allowComCentersTooClose"];
 
 // Developer Variables
 
-_useRandomStartPos = false;
+_useRandomStartPos = false; // working
 _useEscapeSurprises = false;
 _useAmmoDepots = true;
 _useSearchLeader = true;
@@ -15,7 +15,7 @@ _useMotorizedSearchGroup = false;
 _useVillagePatrols = false;
 _useMilitaryTraffic = false;
 _useAmbientInfantry = true;
-_useSearchChopper = true;
+_useSearchChopper = false; // working
 _useRoadBlocks = false;
 
 _guardsExist = true;
@@ -33,7 +33,7 @@ _debugAmmoDepots = false;
 _debugSearchLeader = false;
 _debugVillagePatrols = false;
 _debugMilitaryTraffic = false;
-_debugAmbientInfantry = true;
+_debugAmbientInfantry = false;
 _debugGarbageCollector = false;
 _debugRoadBlocks = false;
 drn_var_Escape_debugMotorizedSearchGroup = false;

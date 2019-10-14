@@ -9,7 +9,7 @@ private ["_allowComCentersTooClose"];
 
 _useRandomStartPos = false;
 _useEscapeSurprises = false;
-_useAmmoDepots = false;
+_useAmmoDepots = true;
 _useSearchLeader = true;
 _useMotorizedSearchGroup = false;
 _useVillagePatrols = false;

@@ -121,10 +121,12 @@ drn_fnc_Escape_OnSpawnGeneralSoldierUnit = {
 drn_fnc_Escape_FindGoodPos = {
     private ["_i", "_startPos", "_isOk", "_result", "_roadSegments"];
     
-    // Choose a random and flat position (for-loopen and markers are for test on new maps).
-    for [{_i = 0},  {_i < 1}, {_i = _i + 1}] do {
+    // Choose a random and flat position (for loop and markers are for test on new maps).
+    for [{_i = 0},  {_i < 1000}, {_i = _i + 1}] do {
         _isOk = false;
         while {!_isOk} do {
+        
+        /*
             if (random 100 > 60) then {
                 _startPos = + [8000 + random 5000, 4000 + random 6000]; // Most difficult place
             }
@@ -136,21 +138,25 @@ drn_fnc_Escape_FindGoodPos = {
                     _startPos = + [500 + random 12500, 500 + random 12500]; // Easiest place
                 };
             };
-            
+        */
+			
+			_startPos = [random worldSize, random worldSize];
+
             //diag_log ("startPos == " + str _startPos);
             _result = _startPos isFlatEmpty [0, 0, 0.25, 1, 0, false, objNull];
             _roadSegments = _startPos nearRoads 12;
             
             if ((count _result > 0) && (count _roadSegments == 0) && (!surfaceIsWater _startPos)) then {
-                
-                if (((nearestBuilding _startPos) distance _startPos) > 50) then {
-                    _isOk = true;
-                };
+                if (_startPos distance [10735,8511] < 5500) then {
+	                if (((nearestBuilding _startPos) distance _startPos) > 50) then {
+	                    _isOk = true;
+	                };
+	            };
             };
         };
         
-        //_marker = createMarker ["marker" + str _i, _startPos];
-        //_marker setMarkerType "Warning";
+        private _marker = createMarker ["marker" + str _i, _startPos];
+        _marker setMarkerType "mil_warning";
     };
     
     _startPos
@@ -158,7 +164,7 @@ drn_fnc_Escape_FindGoodPos = {
 
 drn_fnc_Escape_FindAmmoDepotPositions = {
     private ["_occupiedPositions"];
-    private ["_positions", "_i", "_j", "_tooCloseAnotherPos", "_pos", "_maxDistance", "_countNW", "_countNE", "_countSE", "_countSW", "_isOk"];
+    private ["_positions", "_i", "_j", "_tooCloseAnotherPos", "_pos", "_maxDistance", /*"_countNW", "_countNE", "_countSE", "_countSW",*/ "_isOk"];
     
     _occupiedPositions = _this;
     
@@ -166,10 +172,12 @@ drn_fnc_Escape_FindAmmoDepotPositions = {
     _i = 0;
     _maxDistance = 500;
     
+    /*
     _countNW = 0;
     _countNE = 0;
     _countSE = 0;
     _countSW = 0;
+    */
     
     while {count _positions < 10} do {
         _isOk = false;
@@ -179,6 +187,7 @@ drn_fnc_Escape_FindAmmoDepotPositions = {
             _pos = call drn_fnc_Escape_FindGoodPos;
             _isOk = true;
             
+            /*
             if (count _positions < 8) then {
                 if (_pos select 0 <= ((getMarkerPos "center") select 0) && _pos select 1 > ((getMarkerPos "center") select 1)) then {
                     if (_countNW < 2) then {
@@ -213,6 +222,7 @@ drn_fnc_Escape_FindAmmoDepotPositions = {
                     };
                 };
             };
+            */
             
             _j = _j + 1;
             if (_j > 100) then {

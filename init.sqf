@@ -1,3 +1,6 @@
+call compile preprocessFileLineNumbers "Engima\PatrolledAreas\Init.sqf"; // Added by Engima.PatrolledAreas
+call compile preprocessFileLineNumbers "Scripts\DRN\CommonLib\CommonLib.sqf";
+call compile preprocessFileLineNumbers "Engima\CommonLib\CommonLib.sqf"; // Added by Engima.CommonLib
 private ["_volume", "_dynamicWeather", "_isJipPlayer"];
 private ["_showIntro", "_showPlayerMapAndCompass", "_fog", "_playerIsImmortal", "_playersEnteredWorld"];
 
@@ -73,7 +76,6 @@ if (_playerIsImmortal) then {
 
 // Initialization
 drn_arr_JipSpawnPos = [];
-call compile preprocessFileLineNumbers "Scripts\DRN\CommonLib\CommonLib.sqf";
 call drn_fnc_CL_InitParams;
 
 call compile preprocessFileLineNumbers "Scripts\Escape\Functions.sqf";

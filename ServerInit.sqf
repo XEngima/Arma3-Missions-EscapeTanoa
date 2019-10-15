@@ -274,18 +274,18 @@ if (_useAmmoDepots) then {
         {
             case 1: // 1-2 players
             {
-                _minEnemies = 6;
-                _maxEnemies = 8;
+                _minEnemies = 2;
+                _maxEnemies = 4;
             };
             case 2: // 3-5 players
             {
-                _minEnemies = 8;
-                _maxEnemies = 12;
+                _minEnemies = 4;
+                _maxEnemies = 7;
             };
             default // 6-8 players
             {
-                _minEnemies = 12;
-                _maxEnemies = 18;
+                _minEnemies = 7;
+                _maxEnemies = 12;
             };
         };
         

@@ -172,12 +172,10 @@ drn_fnc_Escape_FindAmmoDepotPositions = {
     _i = 0;
     _maxDistance = 500;
     
-    /*
-    _countNW = 0;
-    _countNE = 0;
-    _countSE = 0;
-    _countSW = 0;
-    */
+    private _countNW = 0;
+    private _countNE = 0;
+    private _countSE = 0;
+    private _countSW = 0;
     
     while {count _positions < 10} do {
         _isOk = false;
@@ -187,9 +185,8 @@ drn_fnc_Escape_FindAmmoDepotPositions = {
             _pos = call drn_fnc_Escape_FindGoodPos;
             _isOk = true;
             
-            /*
             if (count _positions < 8) then {
-                if (_pos select 0 <= ((getMarkerPos "center") select 0) && _pos select 1 > ((getMarkerPos "center") select 1)) then {
+                if (_pos select 0 <= ((getMarkerPos "centre") select 0) && _pos select 1 > ((getMarkerPos "centre") select 1)) then {
                     if (_countNW < 2) then {
                         _countNW = _countNW + 1;
                     }
@@ -197,7 +194,7 @@ drn_fnc_Escape_FindAmmoDepotPositions = {
                         _isOk = false;
                     };
                 };
-                if (_pos select 0 > ((getMarkerPos "center") select 0) && _pos select 1 > ((getMarkerPos "center") select 1)) then {
+                if (_pos select 0 > ((getMarkerPos "centre") select 0) && _pos select 1 > ((getMarkerPos "centre") select 1)) then {
                     if (_countNE < 2) then {
                         _countNE = _countNE + 1;
                     }
@@ -205,7 +202,7 @@ drn_fnc_Escape_FindAmmoDepotPositions = {
                         _isOk = false;
                     };
                 };
-                if (_pos select 0 > ((getMarkerPos "center") select 0) && _pos select 1 <= ((getMarkerPos "center") select 1)) then {
+                if (_pos select 0 > ((getMarkerPos "centre") select 0) && _pos select 1 <= ((getMarkerPos "centre") select 1)) then {
                     if (_countSE < 2) then {
                         _countSE = _countSE + 1;
                     }
@@ -213,7 +210,7 @@ drn_fnc_Escape_FindAmmoDepotPositions = {
                         _isOk = false;
                     };
                 };
-                if (_pos select 0 <= ((getMarkerPos "center") select 0) && _pos select 1 <= ((getMarkerPos "center") select 1)) then {
+                if (_pos select 0 <= ((getMarkerPos "centre") select 0) && _pos select 1 <= ((getMarkerPos "centre") select 1)) then {
                     if (_countSW < 2) then {
                         _countSW = _countSW + 1;
                     }
@@ -222,7 +219,6 @@ drn_fnc_Escape_FindAmmoDepotPositions = {
                     };
                 };
             };
-            */
             
             _j = _j + 1;
             if (_j > 100) then {
@@ -302,18 +298,19 @@ drn_fnc_Escape_BuildAmmoDepot = {
     };
     _instanceNo = drn_BuildAmmoDepot_MarkerInstanceNo;
     
-    _pos = [(_middlePos select 0) - 4, (_middlePos select 1) + 6, 0];
-    _object = "Land_New_WiredFence_5m_F" createVehicle _pos;
+    private _className = "Land_New_WiredFence_5m_F";
+    _pos = [(_middlePos select 0) - 7.5, (_middlePos select 1) + 7.5, 0];
+    _object = createVehicle [_className, _pos, [], 0, "CAN_COLLIDE"];
     _object setPos _pos;
     _object setDir 0;
     
-    _pos = [(_middlePos select 0) - 0, (_middlePos select 1) + 6, 0];
-    _object = "Land_New_WiredFence_5m_F" createVehicle _pos;
+    _pos = [(_middlePos select 0) - 2.5, (_middlePos select 1) + 7.5, 0];
+    _object = createVehicle [_className, _pos, [], 0, "CAN_COLLIDE"];
     _object setPos _pos;
     _object setDir 0;
     
-    _pos = [(_middlePos select 0) + 4, (_middlePos select 1) + 6, 0];
-    _object = "Land_New_WiredFence_5m_F" createVehicle _pos;
+    _pos = [(_middlePos select 0) + 2.5, (_middlePos select 1) + 7.5, 0];
+    _object = createVehicle [_className, _pos, [], 0, "CAN_COLLIDE"];
     _object setPos _pos;
     _object setDir 0;
     
@@ -321,81 +318,70 @@ drn_fnc_Escape_BuildAmmoDepot = {
 //    _object = "Land_New_WiredFence_5m_F" createVehicle _pos;
 //    _object setPos _pos;
 //    _object setDir 0;
-    
-    _pos = [(_middlePos select 0) - 6, (_middlePos select 1) - 4, 0];
-    _object = "Land_New_WiredFence_5m_F" createVehicle _pos;
+
+    _pos = [(_middlePos select 0) - 10, (_middlePos select 1) + 5, 0];
+    _object = createVehicle [_className, _pos, [], 0, "CAN_COLLIDE"];
     _object setPos _pos;
     _object setDir 270;
     
-    _pos = [(_middlePos select 0) - 6, (_middlePos select 1) - 0, 0];
-    _object = "Land_New_WiredFence_5m_F" createVehicle _pos;
+    _pos = [(_middlePos select 0) - 10, (_middlePos select 1) - 0, 0];
+    _object = createVehicle [_className, _pos, [], 0, "CAN_COLLIDE"];
     _object setPos _pos;
     _object setDir 270;
     
-    _pos = [(_middlePos select 0) - 6, (_middlePos select 1) + 4, 0];
-    _object = "Land_New_WiredFence_5m_F" createVehicle _pos;
+    _pos = [(_middlePos select 0) - 10, (_middlePos select 1) - 5, 0];
+    _object = createVehicle [_className, _pos, [], 0, "CAN_COLLIDE"];
     _object setPos _pos;
     _object setDir 270;
-    
+
 //    _pos = [(_middlePos select 0) - 6, (_middlePos select 1) + 4.5, 0];
 //    _object = "Land_New_WiredFence_5m_F" createVehicle _pos;
 //    _object setPos _pos;
 //    _object setDir 270;
     
-    _pos = [(_middlePos select 0) - 4, (_middlePos select 1) - 6, 0];
-    _object = "Land_New_WiredFence_5m_F" createVehicle _pos;
+    _pos = [(_middlePos select 0) - 7.5, (_middlePos select 1) - 7.5, 0];
+    _object = createVehicle [_className, _pos, [], 0, "CAN_COLLIDE"];
     _object setPos _pos;
     _object setDir 180;
     
-    /*
-    _pos = [(_middlePos select 0) - 1.5, (_middlePos select 1) - 6, 0];
-    _object = "Land_New_WiredFence_5m_F" createVehicle _pos;
+    _pos = [(_middlePos select 0) + 2.5, (_middlePos select 1) - 7.5, 0];
+    _object = createVehicle [_className, _pos, [], 0, "CAN_COLLIDE"];
     _object setPos _pos;
     _object setDir 180;
     
-    _pos = [(_middlePos select 0) + 1.5, (_middlePos select 1) - 6, 0];
-    _object = "Land_New_WiredFence_5m_F" createVehicle _pos;
-    _object setPos _pos;
-    _object setDir 180;
-    */
     
-    _pos = [(_middlePos select 0) + 4, (_middlePos select 1) - 6, 0];
-    _object = "Land_New_WiredFence_5m_F" createVehicle _pos;
-    _object setPos _pos;
-    _object setDir 180;
-    
-    _pos = [(_middlePos select 0) + 6, (_middlePos select 1) - 4, 0];
-    _object = "Land_New_WiredFence_5m_F" createVehicle _pos;
+    _pos = [(_middlePos select 0) + 5, (_middlePos select 1) + 5, 0];
+    _object = createVehicle [_className, _pos, [], 0, "CAN_COLLIDE"];
     _object setPos _pos;
     _object setDir 90;
     
-    _pos = [(_middlePos select 0) + 6, (_middlePos select 1) - 0, 0];
-    _object = "Land_New_WiredFence_5m_F" createVehicle _pos;
+    _pos = [(_middlePos select 0) + 5, (_middlePos select 1) - 0, 0];
+    _object = createVehicle [_className, _pos, [], 0, "CAN_COLLIDE"];
     _object setPos _pos;
     _object setDir 90;
     
-    _pos = [(_middlePos select 0) + 6, (_middlePos select 1) + 4, 0];
-    _object = "Land_New_WiredFence_5m_F" createVehicle _pos;
+    _pos = [(_middlePos select 0) + 5, (_middlePos select 1) - 5, 0];
+    _object = createVehicle [_className, _pos, [], 0, "CAN_COLLIDE"];
     _object setPos _pos;
     _object setDir 90;
-    
+
 //    _pos = [(_middlePos select 0) + 6, (_middlePos select 1) + 4.5, 0];
 //    _object = "Land_New_WiredFence_5m_F" createVehicle _pos;
 //    _object setPos _pos;
 //    _object setDir 90;
     
     // Tunnor
-    _pos = [(_middlePos select 0) + 7, (_middlePos select 1) - 5, 0];
+    _pos = [(_middlePos select 0) + 9, (_middlePos select 1) - 7, 0];
     _object = "MetalBarrel_burning_F" createVehicle _pos;
     _object setPos _pos;
     _object setDir 90;
     
-    _pos = [(_middlePos select 0) - 5, (_middlePos select 1) + 7, 0];
+    _pos = [(_middlePos select 0) - 7, (_middlePos select 1) + 9, 0];
     _object = "MetalBarrel_burning_F" createVehicle _pos;
     _object setPos _pos;
     _object setDir 90;
     
-    // Flagga
+    // Flagga   
     
     _pos = [(_middlePos select 0) + 3.2, (_middlePos select 1) - 6.5, 0];
     _object = "Flag_CSAT_F" createVehicle _pos;
@@ -409,12 +395,12 @@ drn_fnc_Escape_BuildAmmoDepot = {
     
     // Skylt
     
-    _pos = [(_middlePos select 0) + 3, (_middlePos select 1) - 7, 0];
+    _pos = [(_middlePos select 0) + 3, (_middlePos select 1) - 9, 0];
     _object = "Land_sign_noentry_small_en_pl_F" createVehicle _pos;
     _object setPos _pos;
     _object setDir 340;
     
-    _pos = [(_middlePos select 0) - 3, (_middlePos select 1) - 7, 0];
+    _pos = [(_middlePos select 0) - 3, (_middlePos select 1) - 9, 0];
     _object = "Land_sign_uwaga_pl_2_F" createVehicle _pos;
     _object setPos _pos;
     _object setDir 20;
@@ -448,25 +434,23 @@ drn_fnc_Escape_BuildAmmoDepot = {
     
     // Cars
     
+    _car = "";
     if (random 10 > 1 && count _parkedVehicleClasses > 0) then {
-        _car = _parkedVehicleClasses select floor random count _parkedVehicleClasses;
-    }
-    else {
-        _car = "";
+        _car = selectRandom _parkedVehicleClasses;
     };
     
     if (_car != "") then {
         _randomNo = random 4;
-        _pos = [(_middlePos select 0) + 8, (_middlePos select 1), 0];
+        _pos = [(_middlePos select 0) + 12, (_middlePos select 1), 0];
         _angle = 45;
         if ((random 100) > 50) then {_angle = 0;} else {_angle = 180;};
         
         if (_randomNo > 2) then {
-            _pos = [(_middlePos select 0) - 8, (_middlePos select 1), 0];
+            _pos = [(_middlePos select 0) - 12, (_middlePos select 1), 0];
             if ((random 100) > 50) then {_angle = 0;} else {_angle = 180;};
         };
         if (_randomNo > 3) then {
-            _pos = [(_middlePos select 0), (_middlePos select 1) + 8, 0];
+            _pos = [(_middlePos select 0), (_middlePos select 1) + 12, 0];
             if ((random 100) > 50) then {_angle = 90;} else {_angle = 270;};
         };
         
@@ -481,13 +465,13 @@ drn_fnc_Escape_BuildAmmoDepot = {
 
 	// Weapon boxes
 	
-	"Box_East_Ammo_F" createVehicle [(_middlePos select 0) - 3 + random 6, (_middlePos select 1) - 3 + random 6, 0];
-	"Box_T_East_Wps_F" createVehicle [(_middlePos select 0) - 3 + random 6, (_middlePos select 1) - 3 + random 6, 0];
-	"Box_CSAT_Equip_F" createVehicle [(_middlePos select 0) - 3 + random 6, (_middlePos select 1) - 3 + random 6, 0];
-	"Box_East_AmmoOrd_F" createVehicle [(_middlePos select 0) - 3 + random 6, (_middlePos select 1) - 3 + random 6, 0];
-	"Box_East_Grenades_F" createVehicle [(_middlePos select 0) - 3 + random 6, (_middlePos select 1) - 3 + random 6, 0];
-	"Box_East_WpsLaunch_F" createVehicle [(_middlePos select 0) - 3 + random 6, (_middlePos select 1) - 3 + random 6, 0];
-	"Box_East_WpsSpecial_F" createVehicle [(_middlePos select 0) - 3 + random 6, (_middlePos select 1) - 3 + random 6, 0];
+	"Box_East_Ammo_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
+	"Box_T_East_Wps_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
+	"Box_CSAT_Equip_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
+	"Box_East_AmmoOrd_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
+	"Box_East_Grenades_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
+	"Box_East_WpsLaunch_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
+	"Box_East_WpsSpecial_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
 
 /*
     // Basic Weapon Box

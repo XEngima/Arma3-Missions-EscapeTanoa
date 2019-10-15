@@ -8,18 +8,18 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=157;
+		nextID=159;
 	};
 	class MarkerIDProvider
 	{
-		nextID=23;
+		nextID=25;
 	};
 	class Camera
 	{
-		pos[]={9012.6523,35.152641,10017.354};
-		dir[]={-0.59251595,-0.30192199,0.74688137};
-		up[]={-0.18764743,0.95332837,0.23653528};
-		aside[]={0.78343821,1.7875573e-007,0.6215139};
+		pos[]={8959.4053,41.876083,10017.239};
+		dir[]={0.89303356,-0.3433139,0.29106593};
+		up[]={0.32643589,0.93920976,0.10639462};
+		aside[]={0.30989769,5.5483542e-007,-0.95082015};
 	};
 };
 binarizationWanted=0;
@@ -240,7 +240,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=33;
+		items=35;
 		class Item0
 		{
 			dataType="Group";
@@ -1100,6 +1100,23 @@ class Mission
 			};
 			id=123;
 			type="EmptyDetector";
+		};
+		class Item33
+		{
+			dataType="Marker";
+			position[]={9053.6973,26.271751,10101.819};
+			name="testAmmoDepotMarker";
+			type="Empty";
+			id=157;
+		};
+		class Item34
+		{
+			dataType="Marker";
+			position[]={9991.2744,60.349998,9747.7754};
+			name="centre";
+			type="Empty";
+			id=158;
+			atlOffset=-0.00046539307;
 		};
 	};
 };

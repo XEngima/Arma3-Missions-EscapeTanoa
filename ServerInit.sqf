@@ -219,7 +219,9 @@ if (true) then {
         waitUntil {scriptDone _scriptHandle};
         
         _marker = createMarker ["drn_CommunicationCenterMapMarker" + str _instanceNo, _pos];
-        _marker setMarkerType "mil_flag";
+        _marker setMarkerType "mil_box";
+        _marker setMarkerColor "ColorOpfor";
+        _marker setMarkerText "Com";
         
         _marker = createMarkerLocal ["drn_CommunicationCenterPatrolMarker" + str _instanceNo, _pos];
         _marker setMarkerShapeLocal "ELLIPSE";

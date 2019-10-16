@@ -245,12 +245,12 @@ if (true) then {
 			["SIDE", east],
 			["MIN_UNITS_PER_GROUP", 2],
 			["MAX_UNITS_PER_GROUP", 5],
-			["SPAWN_DISTANCE", 500],
+			["SPAWN_DISTANCE", _enemySpawnDistance],
 			["AREA_PER_GROUP", 2000],
 			["GROUP_PROBABILITY_OF_PRESENCE", 1],
 			["MIN_SKILL", _enemyMinSkill],
 			["MAX_SKILL", _enemyMaxSkill],
-			["DEBUG", true]
+			["DEBUG", _debugAmmoDepots]
 		];
 		
 		_parameters call PATAREAS_PatrolledAreas;

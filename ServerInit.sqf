@@ -12,7 +12,7 @@ _useEscapeSurprises = false;
 _useAmmoDepots = true; // working
 _useSearchLeader = true; // working
 _useMotorizedSearchGroup = false;
-_useVillagePatrols = true; // working
+_useVillagePatrols = false; // working
 _useMilitaryTraffic = false;
 _useAmbientInfantry = true; // working
 _useSearchChopper = false; // working
@@ -29,7 +29,7 @@ drn_var_Escape_timeToHijack = 5; // 60
 // Debug Variables
 
 _debugEscapeSurprises = false;
-_debugAmmoAndComPatrols = true;
+_debugAmmoAndComPatrols = false;
 _debugSearchLeader = false;
 _debugVillagePatrols = false;
 _debugMilitaryTraffic = false;
@@ -434,9 +434,6 @@ if (_useMotorizedSearchGroup) then {
 		];
 		
 		_parameters call PATAREAS_PatrolledAreas;
-	
-        //_scriptHandle = [(units _playerGroup) select 0, drn_var_enemySide, drn_arr_Escape_InfantryTypes, _minEnemiesPerGroup, _maxEnemiesPerGroup, 5000, _enemyMinSkill, _enemyMaxSkill, _enemySpawnDistance + 250, _fnc_OnSpawnGroup, _debugVillagePatrols] execVM "Scripts\DRN\VillagePatrols\InitVillagePatrols.sqf";
-        //waitUntil {scriptDone _scriptHandle};
     };
     
     // Initialize ambient infantry groups
@@ -477,13 +474,13 @@ if (_useMotorizedSearchGroup) then {
             case 2: // 3-5 players
             {
                 _minEnemiesPerGroup = 2;
-                _maxEnemiesPerGroup = 8;
+                _maxEnemiesPerGroup = 7;
                 _groupsPerSqkm = 1.2;
             };
             default // 6-8 players
             {
-                _minEnemiesPerGroup = 2;
-                _maxEnemiesPerGroup = 12;
+                _minEnemiesPerGroup = 3;
+                _maxEnemiesPerGroup = 10;
                 _groupsPerSqkm = 1.4;
             };
         };

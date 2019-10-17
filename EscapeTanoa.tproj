@@ -137,19 +137,6 @@
                   </ProjectNodeViewModel>
                 </SubNodes>
               </ProjectNodeViewModel>
-              <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="VillagePatrols" FileName="Scripts\DRN\VillagePatrols">
-                <SubNodes>
-                  <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="DepopulateVillage.sqf" FileName="Scripts\DRN\VillagePatrols\DepopulateVillage.sqf">
-                    <SubNodes />
-                  </ProjectNodeViewModel>
-                  <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="InitVillagePatrols.sqf" FileName="Scripts\DRN\VillagePatrols\InitVillagePatrols.sqf">
-                    <SubNodes />
-                  </ProjectNodeViewModel>
-                  <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="PopulateVillage.sqf" FileName="Scripts\DRN\VillagePatrols\PopulateVillage.sqf">
-                    <SubNodes />
-                  </ProjectNodeViewModel>
-                </SubNodes>
-              </ProjectNodeViewModel>
             </SubNodes>
           </ProjectNodeViewModel>
           <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Escape" FileName="Scripts\Escape">

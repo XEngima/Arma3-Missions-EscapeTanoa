@@ -27,6 +27,7 @@ drn_fnc_VillageMarkers_PutVillageMarkersOnMap = {
 		_marker setMarkerShapeLocal _shape;
 		_marker setMarkerDirLocal _dir;
 		_marker setMarkerSizeLocal _size;
+		drn_actualVillageMarkers pushBack _marker;
 
 		_villageIndex = _villageIndex + 1;
 	} foreach drn_villageMarkers;

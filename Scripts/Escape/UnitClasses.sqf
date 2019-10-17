@@ -48,9 +48,9 @@ drn_arr_Escape_ReinforcementTruck_vehicleClasses = ["Ural_INS", "UralOpen_INS"];
 drn_arr_Escape_ReinforcementTruck_vehicleClassesMaxCargo = [14, 14];
 
 // Random array. Motorized search groups are sometimes sent to look for you. This array contains possible class definitions for the vehicles.
-drn_arr_Escape_MotorizedSearchGroup_vehicleClasses = ["BMP2_INS", "BMP3", "BTR90", "GAZ_Vodnik"];
+drn_arr_Escape_MotorizedSearchGroup_vehicleClasses = ["O_APC_Wheeled_02_rcws_v2_F", "O_APC_Tracked_02_cannon_F"];
 // Total cargo motorized search group vehicle. Each element corresponds to a vehicle (array element) in array drn_arr_Escape_MotorizedSearchGroup_vehicleClasses above.
-drn_arr_Escape_MotorizedSearchGroup_vehicleClassesMaxCargo = [7, 5, 7, 10];
+drn_arr_Escape_MotorizedSearchGroup_vehicleClassesMaxCargo = [7, 5];
 
 // A communication center is guarded by vehicles depending on variable _enemyFrequency. 1 = a random light armor. 2 = a random heavy armor. 3 = a random 
 // light *and* a random heavy armor.

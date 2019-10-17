@@ -1,0 +1,39 @@
+--- ENGIMA'S MOTORIZED SEARCH GROUP (VER 1.00) ---
+
+Engima's Motorized Search Group is a script that controls a search patrol using an armored (or any) vehicle. The group
+moves to and searches a marker area for enemies, attacking on contact.
+
+When it arrives at the search marker, the cargo units disembark and form a line with the vehicle and start the search
+randomly across the search area. If the distance from one destination point to another is far, the units will embark,
+but if it's close the units will move by foot. Area may be of any size, and vehicle must have cargo slots for all group
+members excluding crew.
+
+If search area marker does not exist, the group will do nothing. If it starts to exist, the group will start moving.
+
+Script works in singleplayer, multiplayer, hosted, dedicated and for JIPs.
+
+
+--- INSTRUCTIONS ---
+
+Any vehicle with cargo slots, and any infantry unit, can be used.
+
+1. Place the vehicle of any side on the map. Vehicle needs empty cargo slots, and should contain crew.
+2. Place infantry units beside the vehicle and make sure they are in the same group as the vehicle.
+3. Place a marker on the map to define a search area. Marker must be of a shape (not an icon) with any size. Name it 
+   e.g. "SearchAreaMarker".
+4. Add the following line to the init field of the vehicle:
+
+_nil = [this, "SearchAreaMarker"] execVM "Engima\MotorizedSearchGroup\MotorizedSearchGroup.sqf";
+
+
+--- LIST OF PARAMETERS ---
+
+Here is a complete list of the parameters and what they do:
+
+* VEHICLE (Object): The vehicle to add motorized search group behavior to.
+
+* MARKERNAME (String): Name of the marker to search.
+  
+* DEBUG (Boolean): Whether script is running in debug mode or not. In debug mode the vehicle and its destinations will be
+  visible on the map.
+  Optional. Can be true or false. Default value is false.

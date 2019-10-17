@@ -11,6 +11,16 @@
               </ProjectNodeViewModel>
             </SubNodes>
           </ProjectNodeViewModel>
+          <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="MotorizedSearchGroup" FileName="Engima\MotorizedSearchGroup">
+            <SubNodes>
+              <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="Documentation.txt" FileName="Engima\MotorizedSearchGroup\Documentation.txt">
+                <SubNodes />
+              </ProjectNodeViewModel>
+              <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="MotorizedSearchGroup.sqf" FileName="Engima\MotorizedSearchGroup\MotorizedSearchGroup.sqf">
+                <SubNodes />
+              </ProjectNodeViewModel>
+            </SubNodes>
+          </ProjectNodeViewModel>
           <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="PatrolledAreas" FileName="Engima\PatrolledAreas">
             <SubNodes>
               <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Server" FileName="Engima\PatrolledAreas\Server">
@@ -92,13 +102,6 @@
                     <SubNodes />
                   </ProjectNodeViewModel>
                   <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="MoveVehicle.sqf" FileName="Scripts\DRN\MilitaryTraffic\MoveVehicle.sqf">
-                    <SubNodes />
-                  </ProjectNodeViewModel>
-                </SubNodes>
-              </ProjectNodeViewModel>
-              <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="MotorizedSearchGroup" FileName="Scripts\DRN\MotorizedSearchGroup">
-                <SubNodes>
-                  <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="MotorizedSearchGroup.sqf" FileName="Scripts\DRN\MotorizedSearchGroup\MotorizedSearchGroup.sqf">
                     <SubNodes />
                   </ProjectNodeViewModel>
                 </SubNodes>

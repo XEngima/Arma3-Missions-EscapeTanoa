@@ -45,7 +45,7 @@ for "_i" from 1 to _soldiersCount do {
     _infantryType = _infantryTypes select floor random count _infantryTypes;
     _insurgentSoldier = _group createUnit [_infantryType, [0,0,30], [], 0, "FORM"];
     _insurgentSoldier setSkill (_minSkill + random (_maxSkill - _minSkill));
-    _insurgentSoldier setRank "LIEUTNANT";
+    _insurgentSoldier setRank "LIEUTENANT";
     _insurgentSoldier moveInCargo _vehicle;
     _insurgentSoldier assignAsCargo _vehicle;
     _insurgentSoldiers set [count _insurgentSoldiers, _insurgentSoldier];
@@ -58,5 +58,5 @@ _group selectLeader (_insurgentSoldiers select 0);
     _x setSkill (_minSkill + random (_maxSkill - _minSkill));
 } foreach units _group;
 
-[_vehicle, _searchAreaMarker, _debug] execVM "Scripts\DRN\MotorizedSearchGroup\MotorizedSearchGroup.sqf";
-
+[_vehicle, _searchAreaMarker, _debug] execVM "Engima\MotorizedSearchGroup\MotorizedSearchGroup.sqf";
+//[_vehicle, _searchAreaMarker, _debug] execVM "Scripts\DRN\MotorizedSearchGroup\MotorizedSearchGroup.sqf";

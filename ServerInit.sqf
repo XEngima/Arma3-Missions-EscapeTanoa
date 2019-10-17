@@ -9,12 +9,12 @@ private ["_allowComCentersTooClose", "_debugAmmoAndComPatrols"];
 
 _useRandomStartPos = false; // working
 _useEscapeSurprises = false;
-_useAmmoDepots = true; // working
+_useAmmoDepots = false; // working
 _useSearchLeader = true; // working
-_useMotorizedSearchGroup = true;
+_useMotorizedSearchGroup = false; // working
 _useVillagePatrols = false; // working
-_useMilitaryTraffic = false;
-_useAmbientInfantry = true; // working
+_useMilitaryTraffic = false; // working
+_useAmbientInfantry = false; // working
 _useSearchChopper = false; // working
 _useRoadBlocks = false;
 
@@ -502,15 +502,15 @@ if (_useMotorizedSearchGroup) then {
         {
             case 1: // 1-3 players
             {
-                _vehiclesPerSqkm = 1.6;
+                _vehiclesPerSqkm = 0.5;
             };
             case 2: // 4-6 players
             {
-                _vehiclesPerSqkm = 1.4;
+                _vehiclesPerSqkm = 0.5;
             };
             default // 7-8 players
             {
-                _vehiclesPerSqkm = 1.2;
+                _vehiclesPerSqkm = 0.5;
             };
         };
         
@@ -518,13 +518,14 @@ if (_useMotorizedSearchGroup) then {
         _vehiclesCount = round (_vehiclesPerSqkm * (_radius / 1000) * (_radius / 1000) * 3.141592);
         
         _fnc_onSpawnCivilian = {
-            private ["_vehicle", "_crew"];
-            _vehicle = _this select 0;
-            _crew = _this select 1;
-            //_vehiclesGroup = _result select 2;
+            params ["_vehicle", "_group"];
+            private ["_crew"];
+            
+            _crew = units _group;
             
             {
                 {
+                	_x unassignItem "ItemMap";
                     _x removeWeapon "ItemMap";
                 } foreach _crew; // foreach crew
                 
@@ -541,15 +542,30 @@ if (_useMotorizedSearchGroup) then {
             if (random 100 < 20) then {
                 private ["_index", "_weaponItem"];
                 
-                _index = floor random count drn_arr_CivilianCarWeapons;
-                _weaponItem = drn_arr_CivilianCarWeapons select _index;
+                //_index = floor random count drn_arr_CivilianCarWeapons;
+                //_weaponItem = drn_arr_CivilianCarWeapons select _index;
                 
-                _vehicle addWeaponCargoGlobal [_weaponItem select 0, 1];
-                _vehicle addMagazineCargoGlobal [_weaponItem select 1, _weaponItem select 2];
+                //_vehicle addWeaponCargoGlobal [_weaponItem select 0, 1];
+                //_vehicle addMagazineCargoGlobal [_weaponItem select 1, _weaponItem select 2];
             };
         };
         
-        [_playerGroup, civilian, drn_arr_Escape_MilitaryTraffic_CivilianVehicleClasses, _vehiclesCount, _enemySpawnDistance, _radius, 0.5, 0.5, _fnc_onSpawnCivilian, _debugMilitaryTraffic] execVM "Scripts\DRN\MilitaryTraffic\MilitaryTraffic.sqf";
+		private _parameters = [
+			["SIDE", civilian],
+			["VEHICLES", ["C_Offroad_01_F", "C_Offroad_01_repair_F", "C_Quadbike_01_F", "C_Hatchback_01_F", "C_Hatchback_01_sport_F", "C_SUV_01_F", "C_Van_01_transport_F", "C_Van_01_box_F", "C_Van_01_fuel_F"]],
+			["VEHICLES_COUNT", _vehiclesCount],
+			["MIN_SPAWN_DISTANCE", _enemySpawnDistance],
+			["MAX_SPAWN_DISTANCE", _radius],
+			["MIN_SKILL", 0.4],
+			["MAX_SKILL", 0.6],
+			["ON_UNIT_CREATED", _fnc_onSpawnCivilian],
+			["DEBUG", _debugMilitaryTraffic]
+		];
+		
+		// Start an instance of the traffic
+		_parameters spawn ENGIMA_TRAFFIC_StartTraffic;
+        
+        //[_playerGroup, civilian, drn_arr_Escape_MilitaryTraffic_CivilianVehicleClasses, _vehiclesCount, _enemySpawnDistance, _radius, 0.5, 0.5, _fnc_onSpawnCivilian, _debugMilitaryTraffic] execVM "Scripts\DRN\MilitaryTraffic\MilitaryTraffic.sqf";
         sleep 0.25;
         
         // Enemy military traffic
@@ -558,21 +574,36 @@ if (_useMotorizedSearchGroup) then {
         {
             case 1: // 1-3 players
             {
-                _vehiclesPerSqkm = 0.6;
+                _vehiclesPerSqkm = 0.2;
             };
             case 2: // 4-6 players
             {
-                _vehiclesPerSqkm = 0.8;
+                _vehiclesPerSqkm = 0.4;
             };
             default // 7-8 players
             {
-                _vehiclesPerSqkm = 1;
+                _vehiclesPerSqkm = 0.6;
             };
         };
         
         _radius = _enemySpawnDistance + 500;
         _vehiclesCount = round (_vehiclesPerSqkm * (_radius / 1000) * (_radius / 1000) * 3.141592);
-        [_playerGroup, drn_var_enemySide, drn_arr_Escape_MilitaryTraffic_EnemyVehicleClasses, _vehiclesCount, _enemySpawnDistance, _radius, _enemyMinSkill, _enemyMaxSkill, drn_fnc_Escape_TrafficSearch, _debugMilitaryTraffic] execVM "Scripts\DRN\MilitaryTraffic\MilitaryTraffic.sqf";
+        
+		_parameters = [
+			["SIDE", east],
+			["VEHICLES", drn_arr_Escape_MilitaryTraffic_EnemyVehicleClasses],
+			["VEHICLES_COUNT", _vehiclesCount],
+			["MIN_SPAWN_DISTANCE", _enemySpawnDistance],
+			["MAX_SPAWN_DISTANCE", _radius],
+			["MIN_SKILL", _enemyMinSkill],
+			["MAX_SKILL", _enemyMaxSkill],
+			["DEBUG", _debugMilitaryTraffic]
+		];
+		
+		// Start an instance of the traffic
+		_parameters spawn ENGIMA_TRAFFIC_StartTraffic;
+        
+        //[_playerGroup, drn_var_enemySide, drn_arr_Escape_MilitaryTraffic_EnemyVehicleClasses, _vehiclesCount, _enemySpawnDistance, _radius, _enemyMinSkill, _enemyMaxSkill, drn_fnc_Escape_TrafficSearch, _debugMilitaryTraffic] execVM "Scripts\DRN\MilitaryTraffic\MilitaryTraffic.sqf";
         sleep 0.25;
     };
     

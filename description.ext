@@ -64,6 +64,6 @@ class Params
 		title="Enemy Spawn Distance";
 		values[]={800,1050,1300};
 		texts[]={"Short (better performance)", "Medium", "Far (for good rigs)"};
-		default = 1300;
+		default = 800;
 	};
 };

@@ -26,13 +26,103 @@ drn_arr_Escape_MilitaryTraffic_CivilianVehicleClasses = ["SkodaBlue", "SkodaGree
 // Variable _enemyFrequency applies to server parameter, and can be one of the values 1 (Few), 2 (Some) or 3 (A lot).
 switch (_enemyFrequency) do {
     case 1: {
-        drn_arr_Escape_MilitaryTraffic_EnemyVehicleClasses = ["O_Truck_02_box_F"];
+        drn_arr_Escape_MilitaryTraffic_EnemyVehicleClasses = [
+        	"O_APC_Tracked_02_cannon_F",
+        	"O_APC_Wheeled_02_rcws_v2_F",
+        	"O_MBT_02_arty_F",
+        	"O_MRAP_02_F",
+        	"O_MRAP_02_gmg_F",
+        	"O_MRAP_02_hmg_F",
+        	"O_LSV_02_AT_F",
+        	"O_LSV_02_armed_F",
+        	"O_Quadbike_01_F",
+        	"O_Truck_03_device_F",
+        	"O_Truck_03_ammo_F",
+        	"O_Truck_03_medical_F",
+        	"O_Truck_03_fuel_F",
+        	"O_Truck_03_repair_F",
+        	"O_Truck_03_covered_F",
+        	"O_Truck_02_Ammo_F",
+        	"O_Truck_02_fuel_F",
+        	"O_Truck_02_medical_F",
+        	"O_Truck_02_box_F",
+        	"O_Truck_02_transport_F",
+        	"O_Truck_02_covered_F",
+        	"O_MBT_02_cannon_F",
+        	"O_G_Van_01_fuel_F",
+        	"O_G_Offroad_01_F",
+        	"O_G_Offroad_01_AT_F",
+        	"O_G_Offroad_01_armed_F",
+        	"O_G_Offroad_01_repair_F",
+        	"O_G_Quadbike_01_F",
+        	"O_G_Van_01_transport_F"
+        ];
     };
     case 2: {
-        drn_arr_Escape_MilitaryTraffic_EnemyVehicleClasses = ["O_Truck_02_box_F"];
+        drn_arr_Escape_MilitaryTraffic_EnemyVehicleClasses = [
+        	"O_APC_Tracked_02_cannon_F",
+        	"O_APC_Wheeled_02_rcws_v2_F",
+        	"O_MBT_02_arty_F",
+        	"O_MRAP_02_F",
+        	"O_MRAP_02_gmg_F",
+        	"O_MRAP_02_hmg_F",
+        	"O_LSV_02_AT_F",
+        	"O_LSV_02_armed_F",
+        	"O_Quadbike_01_F",
+        	"O_Truck_03_device_F",
+        	"O_Truck_03_ammo_F",
+        	"O_Truck_03_medical_F",
+        	"O_Truck_03_fuel_F",
+        	"O_Truck_03_repair_F",
+        	"O_Truck_03_covered_F",
+        	"O_Truck_02_Ammo_F",
+        	"O_Truck_02_fuel_F",
+        	"O_Truck_02_medical_F",
+        	"O_Truck_02_box_F",
+        	"O_Truck_02_transport_F",
+        	"O_Truck_02_covered_F",
+        	"O_MBT_02_cannon_F",
+        	"O_G_Van_01_fuel_F",
+        	"O_G_Offroad_01_F",
+        	"O_G_Offroad_01_AT_F",
+        	"O_G_Offroad_01_armed_F",
+        	"O_G_Offroad_01_repair_F",
+        	"O_G_Quadbike_01_F",
+        	"O_G_Van_01_transport_F"
+        ];
     };
     default {
-        drn_arr_Escape_MilitaryTraffic_EnemyVehicleClasses = ["O_Truck_02_box_F"];
+        drn_arr_Escape_MilitaryTraffic_EnemyVehicleClasses = [
+        	"O_APC_Tracked_02_cannon_F",
+        	"O_APC_Wheeled_02_rcws_v2_F",
+        	"O_MBT_02_arty_F",
+        	"O_MRAP_02_F",
+        	"O_MRAP_02_gmg_F",
+        	"O_MRAP_02_hmg_F",
+        	"O_LSV_02_AT_F",
+        	"O_LSV_02_armed_F",
+        	"O_Quadbike_01_F",
+        	"O_Truck_03_device_F",
+        	"O_Truck_03_ammo_F",
+        	"O_Truck_03_medical_F",
+        	"O_Truck_03_fuel_F",
+        	"O_Truck_03_repair_F",
+        	"O_Truck_03_covered_F",
+        	"O_Truck_02_Ammo_F",
+        	"O_Truck_02_fuel_F",
+        	"O_Truck_02_medical_F",
+        	"O_Truck_02_box_F",
+        	"O_Truck_02_transport_F",
+        	"O_Truck_02_covered_F",
+        	"O_MBT_02_cannon_F",
+        	"O_G_Van_01_fuel_F",
+        	"O_G_Offroad_01_F",
+        	"O_G_Offroad_01_AT_F",
+        	"O_G_Offroad_01_armed_F",
+        	"O_G_Offroad_01_repair_F",
+        	"O_G_Quadbike_01_F",
+        	"O_G_Van_01_transport_F"
+        ];
     };
 };
 

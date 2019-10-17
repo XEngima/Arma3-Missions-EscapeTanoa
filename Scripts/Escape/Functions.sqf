@@ -690,7 +690,9 @@ drn_fnc_Escape_BuildAmmoDepot = {
     _marker = createMarkerLocal ["drn_AmmoDepotPatrolMarker" + str _instanceNo, _middlePos];
     _marker setMarkerShapeLocal "ELLIPSE";
     _marker setMarkerAlpha 0;
-    _marker setMarkerSizeLocal [50, 50];
+    _marker setMarkerSizeLocal [30, 30];
+    
+    _marker
 };
 
 drn_fnc_Escape_CreateExtractionPointServer = {

@@ -1,9 +1,9 @@
 if (!isServer) exitWith {};
 
 private ["_useEscapeSurprises", "_useRandomStartPos", "_useAmmoDepots", "_useSearchLeader", "_useMotorizedSearchGroup", "_useVillagePatrols", "_useMilitaryTraffic", "_useAmbientInfantry", "_useSearchChopper", "_useRoadBlocks", "_guardsExist", "_guardsAreArmed", "_guardLivesLong"];
-private ["_debugEscapeSurprises", "_debugAmmoDepots", "_debugSearchLeader", "_showGroupDiagnostics", "_debugVillagePatrols", "_debugMilitaryTraffic", "_debugAmbientInfantry", "_debugGarbageCollector", "_debugRoadBlocks"];
+private ["_debugEscapeSurprises", "_debugSearchLeader", "_showGroupDiagnostics", "_debugVillagePatrols", "_debugMilitaryTraffic", "_debugAmbientInfantry", "_debugGarbageCollector", "_debugRoadBlocks"];
 private ["_enemyMinSkill", "_enemyMaxSkill", "_searchChopperSearchTimeMin", "_searchChopperRefuelTimeMin", "_enemySpawnDistance", "_playerGroup", "_enemyFrequency", "_comCenGuardsExist", "_fenceRotateDir", "_scriptHandle"];
-private ["_allowComCentersTooClose"];
+private ["_allowComCentersTooClose", "_debugAmmoAndComPatrols"];
 
 // Developer Variables
 
@@ -29,7 +29,7 @@ drn_var_Escape_timeToHijack = 5; // 60
 // Debug Variables
 
 _debugEscapeSurprises = false;
-_debugAmmoDepots = false;
+_debugAmmoAndComPatrols = true;
 _debugSearchLeader = false;
 _debugVillagePatrols = false;
 _debugMilitaryTraffic = false;
@@ -49,6 +49,9 @@ _showGroupDiagnostics = false;
 
 drn_var_playerSide = west;
 drn_var_enemySide = east;
+
+drn_var_ammoDepotsInitialized = false;
+drn_var_comCentersInitialized = false;
 
 call drn_fnc_Escape_RemoveAi;
 
@@ -102,6 +105,9 @@ if (_showGroupDiagnostics) then {
     [] execVM "Scripts\DRN\Diagnostics\MonitorEmptyGroups.sqf";
 };
 
+drn_var_comCenPatrolMarkers = [];
+drn_var_ammoDepotPatrolMarkers = [];
+    
 // Initialize communication centers
 if (true) then {
     private ["_instanceNo", "_marker", "_minEnemies", "_maxEnemies", "_chosenComCenIndexes", "_index", "_comCenPositions", "_comCenItem", "_distanceBetween", "_currentPos", "_tooClose", "_pos", "_scriptHandle"];
@@ -187,23 +193,22 @@ if (true) then {
     {
         case 1: // 1-2 players
         {
-            _minEnemies = 8;
-            _maxEnemies = 12;
+            _minEnemies = 2;
+            _maxEnemies = 4;
         };
         case 2: // 3-5 players
         {
-            _minEnemies = 12;
-            _maxEnemies = 16;
+            _minEnemies = 4;
+            _maxEnemies = 7;
         };
         default // 6-8 players
         {
-            _minEnemies = 16;
-            _maxEnemies = 24;
+            _minEnemies = 7;
+            _maxEnemies = 12;
         };
     };
 
     _comCenPositions = [];
-    private _comCenPatrolMarkers = [];
     
     {
         private ["_index"];
@@ -228,7 +233,7 @@ if (true) then {
         _marker setMarkerShapeLocal "ELLIPSE";
         _marker setMarkerAlpha 0;
         _marker setMarkerSizeLocal [30, 30];
-        _comCenPatrolMarkers pushBack _marker;
+        drn_var_comCenPatrolMarkers pushBack _marker;
         
         _instanceNo = _instanceNo + 1;
     } foreach _chosenComCenIndexes;
@@ -238,22 +243,6 @@ if (true) then {
         // Arma 2 solution        
         //_scriptHandle = [_playerGroup, "drn_CommunicationCenterPatrolMarker", drn_var_enemySide, "INS", 4, _minEnemies, _maxEnemies, _enemyMinSkill, _enemyMaxSkill, _enemySpawnDistance] execVM "Scripts\DRN\DynamicGuardedLocations\InitGuardedLocations.sqf";
         //waitUntil {scriptDone _scriptHandle};
-        
-		private _parameters = [
-			["PATROL_AREAS", _comCenPatrolMarkers],
-			["UNIT_CLASSES", ["O_G_Soldier_F", "O_G_Soldier_lite_F", "O_G_Soldier_SL_F", "O_G_Soldier_TL_F", "O_G_Soldier_AR_F", "O_G_medic_F", "O_G_engineer_F", "O_G_Soldier_exp_F", "O_G_Soldier_GL_F", "O_G_Soldier_M_F", "O_G_Soldier_LAT_F", "O_G_Soldier_A_F", "O_G_officer_F"]],
-			["SIDE", east],
-			["MIN_UNITS_PER_GROUP", 2],
-			["MAX_UNITS_PER_GROUP", 5],
-			["SPAWN_DISTANCE", _enemySpawnDistance],
-			["AREA_PER_GROUP", 2000],
-			["GROUP_PROBABILITY_OF_PRESENCE", 1],
-			["MIN_SKILL", _enemyMinSkill],
-			["MAX_SKILL", _enemyMaxSkill],
-			["DEBUG", _debugAmmoDepots]
-		];
-		
-		_parameters call PATAREAS_PatrolledAreas;
     };
     
     drn_var_Escape_communicationCenterPositions = _comCenPositions;
@@ -264,53 +253,77 @@ if (true) then {
     if (_comCenGuardsExist) then {
         [_playerGroup, _comCenPositions, _enemySpawnDistance, _enemyFrequency] call drn_fnc_Escape_InitializeComCenArmor;
     };
+    
+	drn_var_comCentersInitialized = true;
 };
 
 // Initialize ammo depots
 if (_useAmmoDepots) then {
-    [_enemyMinSkill, _enemyMaxSkill, _debugAmmoDepots, _enemySpawnDistance, _playerGroup, _enemyFrequency] spawn {
-        private ["_enemyMinSkill", "_enemyMaxSkill", "_debugAmmoDepots", "_enemySpawnDistance", "_playerGroup", "_enemyFrequency"];
-        private ["_minEnemies", "_maxEnemies", "_bannedPositions", "_scriptHandle"];
-        
-        _enemyMinSkill = _this select 0;
-        _enemyMaxSkill = _this select 1;
-        _debugAmmoDepots = _this select 2;
-        _enemySpawnDistance = _this select 3;
-        _playerGroup = _this select 4;
-        _enemyFrequency = _this select 5;
-        
+    [_playerGroup, _enemyFrequency] spawn {
+        private ["_playerGroup", "_enemyFrequency"];
+        private ["_minEnemies", "_maxEnemies", "_bannedPositions", "_scriptHandle", "_ammoDepotPatrolMarker"];
+
+        _playerGroup = _this select 0;
+        _enemyFrequency = _this select 1;
+
         _bannedPositions = + drn_var_Escape_communicationCenterPositions + [drn_startPos, getMarkerPos "drn_insurgentAirfieldMarker"];
         drn_var_Escape_ammoDepotPositions = _bannedPositions call drn_fnc_Escape_FindAmmoDepotPositions;
         publicVariable "drn_var_Escape_ammoDepotPositions";
         
+//        _ammoDepotPatrolMarker = [getMarkerPos "testAmmoDepotMarker", drn_arr_Escape_AmmoDepot_StaticWeaponClasses, drn_arr_Escape_AmmoDepot_ParkedVehicleClasses] call drn_fnc_Escape_BuildAmmoDepot;
+//    	drn_var_ammoDepotPatrolMarkers pushBack _ammoDepotPatrolMarker;
+            
         for "_i" from 0 to (count drn_var_Escape_ammoDepotPositions) - 1 do {
             sleep 1;
-            [drn_var_Escape_ammoDepotPositions select _i, drn_arr_Escape_AmmoDepot_StaticWeaponClasses, drn_arr_Escape_AmmoDepot_ParkedVehicleClasses] call drn_fnc_Escape_BuildAmmoDepot;
+            _ammoDepotPatrolMarker = [drn_var_Escape_ammoDepotPositions select _i, drn_arr_Escape_AmmoDepot_StaticWeaponClasses, drn_arr_Escape_AmmoDepot_ParkedVehicleClasses] call drn_fnc_Escape_BuildAmmoDepot;
+        	drn_var_ammoDepotPatrolMarkers pushBack _ammoDepotPatrolMarker;
         };
         
-        switch (_enemyFrequency) do
-        {
-            case 1: // 1-2 players
-            {
-                _minEnemies = 2;
-                _maxEnemies = 4;
-            };
-            case 2: // 3-5 players
-            {
-                _minEnemies = 4;
-                _maxEnemies = 7;
-            };
-            default // 6-8 players
-            {
-                _minEnemies = 7;
-                _maxEnemies = 12;
-            };
-        };
-        
-        // Arma 2 solution
-        //_scriptHandle = [_playerGroup, "drn_AmmoDepotPatrolMarker", drn_var_enemySide, "INS", 3, _minEnemies, _maxEnemies, _enemyMinSkill, _enemyMaxSkill, _enemySpawnDistance, _debugAmmoDepots] execVM "Scripts\DRN\DynamicGuardedLocations\InitGuardedLocations.sqf";
-        //waitUntil {scriptDone _scriptHandle};
+		drn_var_ammoDepotsInitialized = true;
     };
+};
+
+// Put guards at ammo depots and communication centers
+
+[_enemySpawnDistance, _enemyMinSkill, _enemyMaxSkill, _debugAmmoAndComPatrols, _enemyFrequency] spawn {
+	params ["_enemySpawnDistance", "_enemyMinSkill", "_enemyMaxSkill", "_debugAmmoAndComPatrols", "_enemyFrequency"];
+	private ["_areaPerGroup"];
+	
+	waitUntil { drn_var_ammoDepotsInitialized && drn_var_comCentersInitialized };
+	
+    switch (_enemyFrequency) do
+    {
+        case 1: // 1-2 players
+        {
+        	_areaPerGroup = 4000; // 1 gruop
+        };
+        case 2: // 3-5 players
+        {
+        	_areaPerGroup = 3000; // 2 groups
+        };
+        default // 6-8 players
+        {
+        	_areaPerGroup = 1500; // 3 group
+        };
+    };
+	
+	_areaPerGroup = 4000;
+	
+	private _parameters = [
+		["PATROL_AREAS", drn_var_comCenPatrolMarkers + drn_var_ammoDepotPatrolMarkers],
+		["UNIT_CLASSES", ["O_G_Soldier_F", "O_G_Soldier_lite_F", "O_G_Soldier_SL_F", "O_G_Soldier_TL_F", "O_G_Soldier_AR_F", "O_G_medic_F", "O_G_engineer_F", "O_G_Soldier_exp_F", "O_G_Soldier_GL_F", "O_G_Soldier_M_F", "O_G_Soldier_LAT_F", "O_G_Soldier_A_F", "O_G_officer_F"]],
+		["SIDE", east],
+		["MIN_UNITS_PER_GROUP", 2],
+		["MAX_UNITS_PER_GROUP", 3],
+		["SPAWN_DISTANCE", _enemySpawnDistance],
+		["AREA_PER_GROUP", _areaPerGroup],
+		["GROUP_PROBABILITY_OF_PRESENCE", 1],
+		["MIN_SKILL", _enemyMinSkill],
+		["MAX_SKILL", _enemyMaxSkill],
+		["DEBUG", _debugAmmoAndComPatrols]
+	];
+	
+	_parameters call PATAREAS_PatrolledAreas;
 };
 
 // Initialize search leader
@@ -575,8 +588,6 @@ if (_useSearchChopper) then {
 [drn_startPos, _enemyMinSkill, _enemyMaxSkill, _guardsAreArmed, _guardsExist, _guardLivesLong, _enemyFrequency, _fenceRotateDir] spawn {
     private ["_startPos", "_enemyMinSkill", "_enemyMaxSkill", "_guardsAreArmed", "_guardsExist", "_guardLivesLong", "_enemyFrequency", "_fenceRotateDir"];
     private ["_i", "_guard", "_guardGroup", "_marker", "_guardCount", "_guardGroups", "_unit", "_createNewGroup", "_guardPos"];
-    
-    player sideChat "guards!";
     
     _startPos = _this select 0;
     _enemyMinSkill = _this select 1;

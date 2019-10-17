@@ -1,4 +1,4 @@
-﻿// Search Chopper v1.0
+// Search Chopper v1.0
 // Author: Engima of Östgöta Ops
 
 if (!isServer) exitWith {};

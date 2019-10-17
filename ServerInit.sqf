@@ -9,12 +9,12 @@ private ["_allowComCentersTooClose", "_debugAmmoAndComPatrols"];
 
 _useRandomStartPos = false; // working
 _useEscapeSurprises = false;
-_useAmmoDepots = true;
-_useSearchLeader = true;
+_useAmmoDepots = true; // working
+_useSearchLeader = true; // working
 _useMotorizedSearchGroup = false;
 _useVillagePatrols = false;
 _useMilitaryTraffic = false;
-_useAmbientInfantry = true;
+_useAmbientInfantry = true; // working
 _useSearchChopper = false; // working
 _useRoadBlocks = false;
 

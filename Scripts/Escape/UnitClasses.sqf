@@ -56,9 +56,9 @@ drn_arr_Escape_MotorizedSearchGroup_vehicleClassesMaxCargo = [7, 5, 7, 10];
 // light *and* a random heavy armor.
 
 // Random array. Light armored vehicles guarding the communication centers.
-drn_arr_ComCenDefence_lightArmorClasses = ["BMP2_INS", "BRDM2_INS", "BMP3", "BTR90", "GAZ_Vodnik"];
+drn_arr_ComCenDefence_lightArmorClasses = ["O_MRAP_02_hmg_F", "O_MRAP_02_gmg_F"];
 // Random array. Heavy armored vehicles guarding the communication centers.
-drn_arr_ComCenDefence_heavyArmorClasses = ["T72_INS", "ZSU_INS", "2S6M_Tunguska", "T90"];
+drn_arr_ComCenDefence_heavyArmorClasses = ["O_APC_Wheeled_02_rcws_v2_F", "O_APC_Tracked_02_cannon_F", "O_MBT_02_cannon_F"];
 
 // A communication center contains two static weapons (in two corners of the communication center).
 // Random array. Possible static weapon types for communication centers.

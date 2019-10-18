@@ -24,14 +24,14 @@ _guardsAreArmed = false;
 _guardLivesLong = false;
 
 _allowComCentersTooClose = false;
-drn_var_Escape_timeToHijack = 60; // 60
+drn_var_Escape_timeToHijack = 45; // 60
 
 // Debug Variables
 
 _debugEscapeSurprises = true;
 _debugAmmoAndComPatrols = false;
-_debugSearchLeader = true;
-_debugVillagePatrols = true;
+_debugSearchLeader = false;
+_debugVillagePatrols = false;
 _debugMilitaryTraffic = false;
 _debugAmbientInfantry = false;
 _debugGarbageCollector = false;
@@ -523,7 +523,7 @@ if (_useMotorizedSearchGroup) then {
             {
                 {
                 	_x unassignItem "ItemMap";
-                    _x removeWeapon "ItemMap";
+                    _x removeItem "ItemMap";
                 } foreach _crew; // foreach crew
                 
                 _x addeventhandler ["killed",{
@@ -682,35 +682,30 @@ if (_useSearchChopper) then {
     _guard disableAI "MOVE";
     _guard setDir _fenceRotateDir + 125;
     _guard setVehicleAmmo 0.3 + random 0.7;
-    _guard removeWeapon "ItemMap";
-    _guard removeWeapon "ItemCompass";
-    _guard removeWeapon "ItemGPS";
+    _guard unassignItem "ItemMap";
+    _guard removeItem "ItemMap";
+    _guard unassignItem "ItemCompass";
+    _guard removeItem "ItemCompass";
+    _guard unassignItem "ItemGPS";
+    _guard removeItem "ItemGPS";
     _guard setSkill _enemyMinSkill + random (_enemyMaxSkill - _enemyMinSkill);
     
-    _guard addMagazine drn_var_Escape_InnerFenceGuardSecondaryWeaponMagazine;
-    _guard addMagazine drn_var_Escape_InnerFenceGuardSecondaryWeaponMagazine;
-    _guard addMagazine drn_var_Escape_InnerFenceGuardSecondaryWeaponMagazine;
-    if (random 100 < 50) then {
-        _guard addMagazine drn_var_Escape_InnerFenceGuardSecondaryWeaponMagazine;
-    };
+    _guard addMagazines [drn_var_Escape_InnerFenceGuardSecondaryWeaponMagazine, floor random 5];
     _guard addWeapon drn_var_Escape_InnerFenceGuardSecondaryWeapon;
-    
-    if (random 100 < 40) then {
-        _guard addweapon "NVGoggles";
-    };
     
     // Spawn more guards
     _marker = createMarkerLocal ["drn_guardAreaMarker", _startPos];
     _marker setMarkerAlpha 0;
     _marker setMarkerShapeLocal "ELLIPSE";
-    _marker setMarkerSizeLocal [50, 50];
+    _marker setMarkerSizeLocal [25, 25];
     
     if (_guardsExist) then {
-        _guardCount = (4 + (_enemyFrequency)) + floor (random 2);
+        _guardCount = 1 + _enemyFrequency + floor (random 2);
     }
     else {
         _guardCount = 0;
     };
+    
     _guardGroups = [];
     _createNewGroup = true;
     
@@ -742,16 +737,19 @@ if (_useSearchChopper) then {
         
         {
             _unit = _x; //(units _guardGroup) select 0;
-            _unit removeWeapon "ItemMap";
-            _unit removeWeapon "ItemCompass";
-            _unit removeWeapon "ItemGPS";
+        	_unit unassignItem "ItemMap";
+            _unit removeItem "ItemMap";
+        	_unit unassignItem "ItemCompass";
+            _unit removeItem "ItemCompass";
+        	_unit unassignItem "ItemGPS";
+            _unit removeItem "ItemGPS";
             
             if (random 100 < 40) then {
-                _unit addweapon "NVGoggles";
+            	_unit assignItem "NVGoggles";
+                _unit addItem "NVGoggles";
             };
             
             _unit setSkill _enemyMinSkill + random (_enemyMaxSkill - _enemyMinSkill);
-            _unit removeMagazines "Handgrenade_East";
             
             if (_guardsAreArmed) then {
                 _unit setVehicleAmmo 0.3 + random 0.7;
@@ -831,7 +829,7 @@ if (_useSearchChopper) then {
     };
     
     if (_guardLivesLong) then {
-        sleep (30 + floor (random 40));
+        sleep (25 + floor (random 20));
     }
     else {
         sleep 10;

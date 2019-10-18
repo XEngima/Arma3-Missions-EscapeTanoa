@@ -16,11 +16,11 @@ if (!isServer && isNull player) then
 
 // Developer Variables
 
-_showIntro = false;
+_showIntro = true;
 
 // Debug Variables
 
-_showPlayerMapAndCompass = true;
+_showPlayerMapAndCompass = false;
 _playerIsImmortal = false; // Only works for unit p1
 
 // Initialization
@@ -28,7 +28,7 @@ _playerIsImmortal = false; // Only works for unit p1
 drn_var_Escape_firstPreloadDone = false;
 drn_var_Escape_playerEnteredWorld = false;
 
-["someId", "onEachFrame", {
+["EH1", "onPreloadFinished", {
 	if (!drn_var_Escape_firstPreloadDone) then {
 		drn_var_Escape_firstPreloadDone = true;
 
@@ -58,13 +58,13 @@ if (isServer) then {
 };
 
 _volume = soundVolume;
-
-/*
 enableSaving [false, false];
-0 fadeSound 0;
-enableRadio false;
-0 cutText ["", "BLACK FADED"];
-*/
+
+if (_showIntro) then {
+	0 fadeSound 0;
+	enableRadio false;
+	0 cutText ["", "BLACK FADED"];
+};
 
 if (!isDedicated) then {
     waitUntil {!isNull player};
@@ -302,6 +302,7 @@ if (!isNull player) then {
         else {
             sleep 1;
             if (_showIntro) then {
+/*
 			    [
 			    	[
 			    		["CAMP ROGAIN,", "<t align = 'center' shadow = '1' size = '0.7' font='PuristaBold'>%1</t>"],
@@ -309,8 +310,8 @@ if (!isNull player) then {
 			    		["10 MINUTES LATER ...", "<t align = 'center' shadow = '1' size = '1.0'>%1</t>", 15]
 			    	]
 			    ] spawn BIS_fnc_typeText;
-			    
-                ["<t size='0.9'>" + "Engima of Ostgota Ops presents" + "</t>",0.02,0.3,2,-1,0,3010] spawn bis_fnc_dynamicText;
+*/			    
+                ["<t size='0.9'>" + "Engima presents" + "</t>",0.02,0.3,2,-1,0,3010] spawn bis_fnc_dynamicText;
             };
             
             if (isMultiplayer) then {
@@ -333,18 +334,14 @@ if (!isNull player) then {
             if (_showIntro) then {            
                 0 cutText ["", "BLACK FADED"];
                 sleep 2.75;
-                0 cutText ["", "BLACK FADED"];
-                sleep 2.75;
             
-                ["<t size='0.9'>" + "Escape Chernarus" + "</t>",0.02,0.3,2,-1,0,3011] spawn bis_fnc_dynamicText;
+                ["<t size='0.9'>" + "Escape Tanoa" + "</t>",0.02,0.3,2,-1,0,3011] spawn bis_fnc_dynamicText;
                 
                 0 cutText ["", "BLACK FADED"];
                 sleep 2.75;
-                0 cutText ["", "BLACK FADED"];
-                sleep 2.75;
                 
                 0 cutText ["", "BLACK FADED"];
-                ["Somewhere in Chernarus", str (date select 2) + "/" + str (date select 1) + "/" + str (date select 0) + " " + str (date select 3) + ":00"] spawn BIS_fnc_infoText;
+                ["Somewhere on Tanoa", str (date select 2) + "/" + str (date select 1) + "/" + str (date select 0) + " " + str (date select 3) + ":00"] spawn BIS_fnc_infoText;
             };
         };
 
@@ -354,33 +351,31 @@ if (!isNull player) then {
             sleep 2;
         };
         
+        player unassignItem "ItemGps";
+        player removeItem "ItemGps";
+        player unassignItem "NVGoggles";
+        player removeItem "NVGoggles";
+        removeBackpack player;
+            
         if (_showPlayerMapAndCompass) then {
             _marker = createMarkerLocal ["drn_startPosMarker", drn_startPos];
             _marker setMarkerType "mil_dot";
             _marker setMarkerColor "ColorOpfor";
             _marker setMarkerText "Prison";
             
+            player assignItem "ItemMap";
+            player addWeapon "ItemMap";
             player assignItem "ItemCompass";
             player addWeapon "ItemCompass";
         }
         else {
             player unassignItem "ItemMap";
-            player removeWeapon "ItemMap";
+            player removeItem "ItemMap";
+            player unassignItem "ItemCompass";
+            player removeItem "ItemCompass";
         };
         
         enableRadio true;
-        
-        if (!_isJipPlayer) then {
-            [] spawn {
-                sleep 10;
-                
-                // Only show this on non ported missions
-                if (worldName == "Chernarus") then {
-                    sleep 20;
-                    [name player + "! Please tell me about your Escape Chernarus experience on the BIS Forum or at Armaholic.com! Thank you, and enjoy the mission!", true] call drn_fnc_CL_ShowTitleTextLocal;
-                };
-            };
-        };
 
         // Set position again (a fix for the bug that makes players run away after server restart and before fence is built by server)
         player setPos [(drn_startPos select 0) + (random 4) - 2, (drn_startPos select 1) + (random 6) - 3, 0];

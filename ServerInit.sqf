@@ -8,8 +8,8 @@ private ["_allowComCentersTooClose", "_debugAmmoAndComPatrols"];
 // Developer Variables
 
 _useRandomStartPos = false; // working
-_useEscapeSurprises = false;
-_useAmmoDepots = false; // working
+_useEscapeSurprises = true;
+_useAmmoDepots = true; // working
 _useSearchLeader = true; // working
 _useMotorizedSearchGroup = false; // working
 _useVillagePatrols = false; // working
@@ -23,23 +23,23 @@ _comCenGuardsExist = false;
 _guardsAreArmed = false;
 _guardLivesLong = false;
 
-_allowComCentersTooClose = true;
-drn_var_Escape_timeToHijack = 5; // 60
+_allowComCentersTooClose = false;
+drn_var_Escape_timeToHijack = 60; // 60
 
 // Debug Variables
 
-_debugEscapeSurprises = false;
+_debugEscapeSurprises = true;
 _debugAmmoAndComPatrols = false;
-_debugSearchLeader = false;
+_debugSearchLeader = true;
 _debugVillagePatrols = false;
 _debugMilitaryTraffic = false;
 _debugAmbientInfantry = false;
 _debugGarbageCollector = false;
-_debugRoadBlocks = true;
-drn_var_Escape_debugMotorizedSearchGroup = true;
+_debugRoadBlocks = false;
+drn_var_Escape_debugMotorizedSearchGroup = false;
 drn_var_Escape_debugDropChoppers = false;
 drn_var_Escape_debugReinforcementTruck = false;
-drn_var_Escape_debugSearchChopper = true;
+drn_var_Escape_debugSearchChopper = false;
 drn_var_Escape_DebugSearchGroup = false;
 drn_var_Escape_debugCivilEnemy = false;
 
@@ -123,37 +123,34 @@ if (true) then {
         _index = floor random count drn_arr_communicationCenterMarkers;
         _currentPos = (drn_arr_communicationCenterMarkers select _index) select 0;
 
-// Arma 2 solution
-/*
         // North west
         if (count _chosenComCenIndexes == 0) then {
-            while {_currentPos select 0 > (getMarkerPos "center") select 0 || _currentPos select 1 < (getMarkerPos "center") select 1} do {
+            while {_currentPos select 0 > (getMarkerPos "centre") select 0 || _currentPos select 1 < (getMarkerPos "centre") select 1} do {
                 _index = floor random count drn_arr_communicationCenterMarkers;
                 _currentPos = (drn_arr_communicationCenterMarkers select _index) select 0;
             };
         };
         // North east
         if (count _chosenComCenIndexes == 1) then {
-            while {_currentPos select 0 < (getMarkerPos "center") select 0 || _currentPos select 1 < (getMarkerPos "center") select 1} do {
+            while {_currentPos select 0 < (getMarkerPos "centre") select 0 || _currentPos select 1 < (getMarkerPos "centre") select 1} do {
                 _index = floor random count drn_arr_communicationCenterMarkers;
                 _currentPos = (drn_arr_communicationCenterMarkers select _index) select 0;
             };
         };
         // South east
         if (count _chosenComCenIndexes == 2) then {
-            while {_currentPos select 0 < (getMarkerPos "center") select 0 || _currentPos select 1 > (getMarkerPos "center") select 1} do {
+            while {_currentPos select 0 < (getMarkerPos "centre") select 0 || _currentPos select 1 > (getMarkerPos "centre") select 1} do {
                 _index = floor random count drn_arr_communicationCenterMarkers;
                 _currentPos = (drn_arr_communicationCenterMarkers select _index) select 0;
             };
         };
         // South west
         if (count _chosenComCenIndexes == 3) then {
-            while {_currentPos select 0 > (getMarkerPos "center") select 0 || _currentPos select 1 > (getMarkerPos "center") select 1} do {
+            while {_currentPos select 0 > (getMarkerPos "centre") select 0 || _currentPos select 1 > (getMarkerPos "centre") select 1} do {
                 _index = floor random count drn_arr_communicationCenterMarkers;
                 _currentPos = (drn_arr_communicationCenterMarkers select _index) select 0;
             };
         };
-*/
         
         if (!(_index in _chosenComCenIndexes)) then {
             _currentPos = (drn_arr_communicationCenterMarkers select _index) select 0;

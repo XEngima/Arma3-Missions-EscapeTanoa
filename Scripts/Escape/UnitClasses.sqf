@@ -154,7 +154,7 @@ drn_arr_ComCenDefence_heavyArmorClasses = ["O_APC_Wheeled_02_rcws_v2_F", "O_APC_
 // Random array. Possible static weapon types for communication centers.
 drn_arr_ComCenStaticWeapons = ["O_HMG_01_high_F"];
 // A communication center have two parked and empty vehicles of the following possible types.
-drn_arr_ComCenParkedVehicles = ["O_Truck_02_box_F", "O_MRAP_02_F", "O_LSV_02_armed_F"];
+drn_arr_ComCenParkedVehicles = ["O_MRAP_02_F"];
 
 // Random array. Enemies sometimes use civilian vehicles in their unconventional search for players. The following car types may be used.
 drn_arr_Escape_EnemyCivilianCarTypes = ["SkodaBlue", "SkodaGreen", "SkodaRed", "Skoda", "VWGolf", "MMT_Civ", "hilux1_civil_2_covered", "car_hatchback", "datsun1_civil_2_covered", "V3S_Civ", "car_sedan", "UralCivil", "UralCivil2", "Lada_base", "LadaLM", "Lada2", "Lada1"];

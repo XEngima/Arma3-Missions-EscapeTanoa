@@ -47,21 +47,20 @@ _chopper setVariable ["missionCompleted", false];
         
         // This code is a workaround. An ArmA bug causes chutes to fall empty if commented code below is used. Problem is not completely solved, since chutes still are empty, but at least the AI units are not seen slammed to the ground.
 
-        /*
-        _x action ["eject", _chopper];
         unassignVehicle _x;
+        _x action ["eject", _chopper];
+        _x leaveVehicle _chopper;
         
         waitUntil {vehicle _x != _chopper};
-        */
         
-        _parachute = "ParachuteEast" createVehicle position _chopper;
-        _parachute setPosATL getPosATL _chopper;
+        //_parachute = "ParachuteEast" createVehicle position _chopper;
+        //_parachute setPosATL getPosATL _chopper;
         
         (typeof _x) createUnit [[0, 0, 100], _dropGroup, "", 0.5, "PRIVATE"];
         
         _dropUnit = units _dropGroup select _i;
         _dropUnit call drn_fnc_Escape_OnSpawnGeneralSoldierUnit;
-        _dropUnit moveInDriver _parachute;
+        //_dropUnit moveInDriver _parachute;
         _i = _i + 1;
         
         deleteVehicle _x;

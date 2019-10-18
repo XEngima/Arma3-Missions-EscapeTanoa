@@ -1127,7 +1127,7 @@ drn_fnc_Escape_PopulateVehicle = {
         _unitType = _unitTypes select floor random count _unitTypes;
         _insurgentSoldier = _group createUnit [_unitType, [0,0,0], [], 0, "FORM"];
         
-        _insurgentSoldier setRank "LIEUTNANT";
+        _insurgentSoldier setRank "LIEUTENANT";
         _insurgentSoldier moveInDriver _vehicle;
         
         if (vehicle _insurgentSoldier != _insurgentSoldier) then {
@@ -1146,7 +1146,7 @@ drn_fnc_Escape_PopulateVehicle = {
         _unitType = _unitTypes select floor random count _unitTypes;
         _insurgentSoldier = _group createUnit [_unitType, [0,0,0], [], 0, "FORM"];
         
-        _insurgentSoldier setRank "LIEUTNANT";
+        _insurgentSoldier setRank "LIEUTENANT";
         _insurgentSoldier moveInGunner _vehicle;
         
         if (vehicle _insurgentSoldier != _insurgentSoldier) then {
@@ -1165,7 +1165,7 @@ drn_fnc_Escape_PopulateVehicle = {
         _unitType = _unitTypes select floor random count _unitTypes;
         _insurgentSoldier = _group createUnit [_unitType, [0,0,0], [], 0, "FORM"];
         
-        _insurgentSoldier setRank "LIEUTNANT";
+        _insurgentSoldier setRank "LIEUTENANT";
         _insurgentSoldier moveInCommander _vehicle;
         
         if (vehicle _insurgentSoldier != _insurgentSoldier) then {
@@ -1184,7 +1184,7 @@ drn_fnc_Escape_PopulateVehicle = {
         _unitType = _unitTypes select floor random count _unitTypes;
         _insurgentSoldier = _group createUnit [_unitType, [0,0,0], [], 0, "FORM"];
         
-        _insurgentSoldier setRank "LIEUTNANT";
+        _insurgentSoldier setRank "LIEUTENANT";
         _insurgentSoldier moveInCargo _vehicle;
         
         if (vehicle _insurgentSoldier != _insurgentSoldier) then {

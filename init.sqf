@@ -356,10 +356,15 @@ if (!isNull player) then {
         
         if (_showPlayerMapAndCompass) then {
             _marker = createMarkerLocal ["drn_startPosMarker", drn_startPos];
-            _marker setMarkerType "mil_Warning";
+            _marker setMarkerType "mil_dot";
+            _marker setMarkerColor "ColorOpfor";
+            _marker setMarkerText "Prison";
+            
+            player assignItem "ItemCompass";
             player addWeapon "ItemCompass";
         }
         else {
+            player unassignItem "ItemMap";
             player removeWeapon "ItemMap";
         };
         

@@ -20,11 +20,13 @@ _surprises = [];
 
 _surpriseArgs = [(_enemyFrequency + 2) + floor random (_enemyFrequency * 2)]; // [NoOfDropUnits]
 _timeInSek = 5 * 60 + random (60 * 60);
-_timeInSek = time + (_timeInSek * (0.5 + (4 - _enemyFrequency) / 4));
+_timeInSek = 0; //time + (_timeInSek * (0.5 + (4 - _enemyFrequency) / 4));
 _condition = {true};
 _surprise = ["DROPCHOPPER", _timeInSek, _condition, false, _surpriseArgs];
 _surprises set [count _surprises, _surprise];
 diag_log ("ESCAPE SURPRISE: " + str _surprise);
+
+/*
 
 // Russian Search Chopper
 
@@ -62,6 +64,7 @@ _surprise = ["CIVILIANENEMY", _timeInSek, {[drn_searchAreaMarkerName] call drn_f
 _surprises set [count _surprises, _surprise];
 diag_log ("ESCAPE SURPRISE: " + str _surprise);
 
+*/
 
 // Execute surprises
 
@@ -138,7 +141,7 @@ while {true} do {
                         [_group, drn_searchAreaMarkerName, _dropPos, drn_var_Escape_DebugSearchGroup] execVM "Scripts\DRN\SearchGroup\SearchGroup.sqf";                        
                     };
                     
-                    [getMarkerPos "drn_dropChopperStartPosMarker", drn_var_enemySide, "Mi17_Ins", "Ins_Soldier_Pilot", _dropUnits, _dropPosition, _minEnemySkill, _maxEnemySkill, _onGroupDropped, drn_var_Escape_debugDropChoppers] execVM "Scripts\Escape\CreateDropChopper.sqf";
+                    [getMarkerPos "drn_dropChopperStartPosMarker", drn_var_enemySide, "O_Heli_Light_02_unarmed_F", "O_Pilot_F", _dropUnits, _dropPosition, _minEnemySkill, _maxEnemySkill, _onGroupDropped, drn_var_Escape_debugDropChoppers] execVM "Scripts\Escape\CreateDropChopper.sqf";
                     
                     // Create next drop chopper
                     _surpriseArgs = [(_enemyFrequency + 2) + floor random (_enemyFrequency * 2)]; // [NoOfDropUnits]
@@ -160,8 +163,8 @@ while {true} do {
                     
                     _group = createGroup drn_var_enemySide;
 
-                    "Ins_Soldier_Pilot" createUnit [[0, 0, 30], _group, "", (_minEnemySkill + random (_maxEnemySkill - _minEnemySkill)), "LIEUTNANT"];
-                    "Ins_Soldier_Pilot" createUnit [[0, 0, 30], _group, "", (_minEnemySkill + random (_maxEnemySkill - _minEnemySkill)), "LIEUTNANT"];
+                    "Ins_Soldier_Pilot" createUnit [[0, 0, 30], _group, "", (_minEnemySkill + random (_maxEnemySkill - _minEnemySkill)), "LIEUTENANT"];
+                    "Ins_Soldier_Pilot" createUnit [[0, 0, 30], _group, "", (_minEnemySkill + random (_maxEnemySkill - _minEnemySkill)), "LIEUTENANT"];
 
                     ((units _group) select 0) assignAsDriver _chopper;
                     ((units _group) select 0) moveInDriver _chopper;
@@ -226,7 +229,7 @@ while {true} do {
         };
     } foreach _surprises;
     
-    sleep 60;
+    sleep 1;
 };
 
 

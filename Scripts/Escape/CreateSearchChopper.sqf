@@ -64,8 +64,8 @@ _chopper call compile format ["%1=_this;", _vehicleVarName];
 
 _group = createGroup _side;
 
-//"O_helipilot_F" createUnit [[0, 0, 25], _group, "", (_minSkill + random (_maxSkill - _minSkill)), "LIEUTNANT"];
-//"O_helipilot_F" createUnit [[0, 0, 25], _group, "", (_minSkill + random (_maxSkill - _minSkill)), "LIEUTNANT"];
+//"O_helipilot_F" createUnit [[0, 0, 25], _group, "", (_minSkill + random (_maxSkill - _minSkill)), "LIEUTENANT"];
+//"O_helipilot_F" createUnit [[0, 0, 25], _group, "", (_minSkill + random (_maxSkill - _minSkill)), "LIEUTENANT"];
 
 _group createUnit ["O_helipilot_F", [0, 0, 25], [], 0, "FORM"];
 _group createUnit ["O_helipilot_F", [0, 0, 25], [], 0, "FORM"];

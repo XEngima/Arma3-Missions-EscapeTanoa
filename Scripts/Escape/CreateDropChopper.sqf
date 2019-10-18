@@ -37,9 +37,9 @@ _chopper Call Compile Format ["%1 = _this; PublicVariable ""%1""", _vehicleVarNa
 
 _group = createGroup _side;
 
-_crewType createUnit [[0, 0, 30], _group, "", (_minSkill + random (_maxSkill - _minSkill)), "LIEUTNANT"];
-_crewType createUnit [[0, 0, 30], _group, "", (_minSkill + random (_maxSkill - _minSkill)), "LIEUTNANT"];
-_crewType createUnit [[0, 0, 30], _group, "", (_minSkill + random (_maxSkill - _minSkill)), "LIEUTNANT"];
+_crewType createUnit [[0, 0, 30], _group, "", (_minSkill + random (_maxSkill - _minSkill)), "LIEUTENANT"];
+_crewType createUnit [[0, 0, 30], _group, "", (_minSkill + random (_maxSkill - _minSkill)), "LIEUTENANT"];
+_crewType createUnit [[0, 0, 30], _group, "", (_minSkill + random (_maxSkill - _minSkill)), "LIEUTENANT"];
 
 _pilot = (units _group) select 0;
 _gunner1 = (units _group) select 1;

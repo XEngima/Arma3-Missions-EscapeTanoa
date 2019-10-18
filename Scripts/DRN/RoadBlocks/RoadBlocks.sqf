@@ -1,6 +1,6 @@
 private ["_referenceGroup", "_side", "_infantryClasses", "_mannedVehicleClasses", "_numberOfRoadBlocks", "_minSpawnDistance", "_maxSpawnDistance", "_minDistanceBetweenRoadBlocks", "_minSpawnDistanceAtStartup", "_fnc_OnSpawnInfantryGroup", "_fnc_OnSpawnMannedVehicle", "_debug"];
 private ["_roadBlocks", "_roadSegment", "_roadBlockItem", "_roadBlocksDeleted", "_instanceNo", "_tempRoadBlocks", "_farAway", "_units", "_group", "_firstLoop", "_minDistance", "_isFaction"];
-private ["_possibleInfantryTypes", "_possibleVehicleTypes", "_fnc_FindRoadBlockSegment", "_fnc_CreateRoadBlock"];
+private ["_possibleInfantryTypes", "_possibleVehicleTypes", "_noOfInfantryUnits", "_fnc_FindRoadBlockSegment", "_fnc_CreateRoadBlock"];
 
 _referenceGroup = _this select 0;
 if (count _this > 1) then { _side = _this select 1; } else { _side = west; };
@@ -13,7 +13,8 @@ if (count _this > 7) then { _minDistanceBetweenRoadBlocks = _this select 7; } el
 if (count _this > 8) then { _minSpawnDistanceAtStartup = _this select 8; } else { _minSpawnDistanceAtStartup = 300; };
 if (count _this > 9) then { _fnc_OnSpawnInfantryGroup = _this select 9; } else { _fnc_OnSpawnInfantryGroup = {}; };
 if (count _this > 10) then { _fnc_OnSpawnMannedVehicle = _this select 10; } else { _fnc_OnSpawnMannedVehicle = {}; };
-if (count _this > 11) then { _debug = _this select 11; } else { _debug = false; };
+if (count _this > 11) then { _noOfInfantryUnits = _this select 11; } else { _noOfInfantryUnits = 4; };
+if (count _this > 12) then { _debug = _this select 12; } else { _debug = false; };
 
 _isFaction = false;
 if (str _infantryClasses == """USMC""") then {
@@ -119,6 +120,11 @@ _fnc_FindRoadBlockSegment = {
             _isOk = false;
         };
         
+        // If road segment is a path (like on Tanoa), do not count it
+        if (!isOnRoad getPos _roadSegment) then {
+        	_isOk = false;
+        };
+        
         // Check if road segment is not close to a house
         if ((nearestBuilding _roadSegment) distance _roadSegment < 50) then {
             _isOk = false;
@@ -148,19 +154,30 @@ _fnc_FindRoadBlockSegment = {
 };
 
 _fnc_CreateRoadBlock = {
-    private ["_roadSegment", "_side", "_possibleInfantryTypes", "_possibleVehicleTypes", "_fnc_OnSpawnInfantryGroup", "_fnc_OnSpawnMannedVehicle"];
+    private ["_roadSegment", "_side", "_possibleInfantryTypes", "_possibleVehicleTypes", "_noOfInfantryUnits", "_fnc_OnSpawnInfantryGroup", "_fnc_OnSpawnMannedVehicle"];
     private ["_dir", "_pos", "_angle", "_posX", "_posY", "_result", "_group", "_barrier", "_guardTypes", "_units", "_vehicle", "_crew", "_possibleVehicles"];
     
     _roadSegment = _this select 0;
     _side = _this select 1;
     _possibleInfantryTypes = _this select 2;
     _possibleVehicleTypes = _this select 3;
-    _fnc_OnSpawnInfantryGroup = _this select 4;
-    _fnc_OnSpawnMannedVehicle = _this select 5;
+    _noOfInfantryUnits = _this select 4;
+    _fnc_OnSpawnInfantryGroup = _this select 5;
+    _fnc_OnSpawnMannedVehicle = _this select 6;
     
     _units = [];
-    
-    _dir = direction _roadSegment;
+
+	// Get actual direction
+	private _nextNode = objNull;
+	private _connectedRoads = roadsConnectedTo _roadSegment;
+	_dir = 0;
+	
+	if (count _connectedRoads > 0) then {
+		_nextNode = _connectedRoads select 0;
+		_dir = [getPos _roadSegment, getPos _nextNode] call BIS_fnc_dirTo;
+	};
+	
+    //_dir = direction _roadSegment;
     _pos = getPos _roadSegment;
     
     if (random 100 < 50) then {
@@ -170,15 +187,20 @@ _fnc_CreateRoadBlock = {
         _angle = -90;
     };
     
+//    createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
+//    createVehicle ["RoadCone_F", _pos getPos [5, _dir], [], 0, "CAN_COLLIDE"];
+    
     _posX = (getPos _roadSegment) select 0;
     _posY = (getPos _roadSegment) select 1;
     
-    _posX = _posX + 7.5 * sin (_dir + _angle);
-    _posY = _posY + 7.5 * cos (_dir + _angle);
+    private _roadWidth = [_roadSegment] call ENGIMA_TRAFFIC_CalculateRoadWidth;
+    
+    _posX = _posX + (_roadWidth / 2) * sin (_dir + _angle);
+    _posY = _posY + (_roadWidth / 2) * cos (_dir + _angle);
     _pos = [_posX, _posY];
 
     _possibleVehicles = _possibleVehicleTypes;
-    _result = [_pos, _dir, _possibleVehicles select floor random count _possibleVehicles, _side] call BIS_fnc_spawnVehicle;
+    _result = [_pos, _dir, selectRandom _possibleVehicles, _side] call BIS_fnc_spawnVehicle;
     _vehicle = _result select 0;
     _crew = _result select 1;
     _group = _result select 2;
@@ -186,44 +208,34 @@ _fnc_CreateRoadBlock = {
     _units = _units + [_vehicle];
     _units = _units + _crew;
     
-    //_waypoint = _group addWaypoint [_pos, 0];
-    //_waypoint setWaypointType "MOVE";
-    //_waypoint setWaypointBehaviour "AWARE";
-    //_waypoint setWaypointCombatMode "RED";
-    
     _result spawn _fnc_OnSpawnMannedVehicle;
     
     _posX = (getPos _roadSegment) select 0;
     _posY = (getPos _roadSegment) select 1;
     
-    _posX = _posX + 7.5 * sin (_dir - _angle);
-    _posY = _posY + 7.5 * cos (_dir - _angle);
+    _posX = _posX + (_roadWidth / 2) * sin (_dir - _angle);
+    _posY = _posY + (_roadWidth / 2) * cos (_dir - _angle);
     _pos = [_posX, _posY];
     
-    _barrier = "RoadBarrier_light" createVehicle _pos;
+    _barrier = createVehicle ["RoadBarrier_small_F", _pos, [], 0, "CAN_COLLIDE"];
     _barrier setDir (_dir);
     _units = _units + [_barrier];
     
     _posX = (getPos _roadSegment) select 0;
     _posY = (getPos _roadSegment) select 1;
     
-    _posX = _posX + 11 * sin (_dir - _angle);
-    _posY = _posY + 11 * cos (_dir - _angle);
+    _posX = _posX + (4 + _roadWidth / 2) * sin (_dir - _angle);
+    _posY = _posY + (4 + _roadWidth / 2) * cos (_dir - _angle);
     _pos = [_posX, _posY];
     
     _group = createGroup _side;
     _guardTypes = _possibleInfantryTypes;
-    (_guardTypes select floor random count _guardTypes) createUnit [_pos, _group, "", 0.5, "LIEUTNANT"];
-    (_guardTypes select floor random count _guardTypes) createUnit [_pos, _group, "", 0.5, "LIEUTNANT"];
-    (_guardTypes select floor random count _guardTypes) createUnit [_pos, _group, "", 0.5, "LIEUTNANT"];
-    (_guardTypes select floor random count _guardTypes) createUnit [_pos, _group, "", 0.5, "LIEUTNANT"];
+    
+    for "_i" from 1 to _noOfInfantryUnits do {
+	    (selectRandom _guardTypes) createUnit [_pos, _group, "", 0.5, "LIEUTENANT"];
+    };
     
     _units = _units + units _group;
-    
-    //_waypoint = _group addWaypoint [_pos, 0];
-    //_waypoint setWaypointType "MOVE";
-    //_waypoint setWaypointBehaviour "AWARE";
-    //_waypoint setWaypointCombatMode "YELLOW";
     
     _group spawn _fnc_OnSpawnInfantryGroup;
     
@@ -255,14 +267,14 @@ while {true} do {
         _roadSegment = [_roadBlocks, _referenceGroup, _minDistance, _maxSpawnDistance, _minDistanceBetweenRoadBlocks] call _fnc_FindRoadBlockSegment;
         
         if (!isNull _roadSegment) then {
-            _units = [_roadSegment, _side, _possibleInfantryTypes, _possibleVehicleTypes, _fnc_OnSpawnInfantryGroup, _fnc_OnSpawnMannedVehicle] call _fnc_CreateRoadBlock;
+            _units = [_roadSegment, _side, _possibleInfantryTypes, _possibleVehicleTypes, _noOfInfantryUnits, _fnc_OnSpawnInfantryGroup, _fnc_OnSpawnMannedVehicle] call _fnc_CreateRoadBlock;
             
             _roadBlockItem = [_instanceNo, _roadSegment, _units]; // instance no, road segment, units
             _roadBlocks set [count _roadBlocks, _roadBlockItem];
             
             if (_debug) then {
                 ["Road block created. Number of road blocks: " + str count _roadBlocks] call drn_fnc_CL_ShowDebugTextAllClients;
-                ["drn_DebugMarker_RoadBlocks_" + str _instanceNo, getPos _roadSegment, "Dot", "ColorRed", "Road Block"] call drn_fnc_CL_SetDebugMarkerAllClients;
+                ["drn_DebugMarker_RoadBlocks_" + str _instanceNo, getPos _roadSegment, "hd_dot", "ColorOpfor", "Road Block"] call drn_fnc_CL_SetDebugMarkerAllClients;
             };
         };
     };

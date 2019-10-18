@@ -16,10 +16,10 @@ _useVillagePatrols = false; // working
 _useMilitaryTraffic = false; // working
 _useAmbientInfantry = false; // working
 _useSearchChopper = false; // working
-_useRoadBlocks = false;
+_useRoadBlocks = false; // working
 
 _guardsExist = true;
-_comCenGuardsExist = true;
+_comCenGuardsExist = false;
 _guardsAreArmed = false;
 _guardLivesLong = false;
 
@@ -35,7 +35,7 @@ _debugVillagePatrols = false;
 _debugMilitaryTraffic = false;
 _debugAmbientInfantry = false;
 _debugGarbageCollector = false;
-_debugRoadBlocks = false;
+_debugRoadBlocks = true;
 drn_var_Escape_debugMotorizedSearchGroup = true;
 drn_var_Escape_debugDropChoppers = false;
 drn_var_Escape_debugReinforcementTruck = false;
@@ -633,7 +633,25 @@ if (_useMotorizedSearchGroup) then {
             _roadBlockCount = 1;
         };
         
-        [_playerGroup, drn_var_enemySide, drn_arr_Escape_InfantryTypes, drn_arr_Escape_RoadBlock_MannedVehicleTypes, _roadBlockCount, _enemySpawnDistance, _enemySpawnDistance + 500, 500, 300, _fnc_OnSpawnInfantryGroup, _fnc_OnSpawnMannedVehicle, _debugRoadBlocks] execVM "Scripts\DRN\RoadBlocks\RoadBlocks.sqf";
+        private _noOfInfantryUnits = 4;
+        
+        switch (_enemyFrequency) do
+        {
+            case 1: // 1-3 players
+            {
+                _noOfInfantryUnits = 2;
+            };
+            case 2: // 4-6 players
+            {
+                _noOfInfantryUnits = 3;
+            };
+            default // 7-8 players
+            {
+                _noOfInfantryUnits = 5;
+            };
+        };
+        
+        [_playerGroup, drn_var_enemySide, drn_arr_Escape_InfantryTypes, drn_arr_Escape_RoadBlock_MannedVehicleTypes, _roadBlockCount, _enemySpawnDistance, _enemySpawnDistance + 500, 500, 300, _fnc_OnSpawnInfantryGroup, _fnc_OnSpawnMannedVehicle, _noOfInfantryUnits, _debugRoadBlocks] execVM "Scripts\DRN\RoadBlocks\RoadBlocks.sqf";
         sleep 0.25;
     };
 };

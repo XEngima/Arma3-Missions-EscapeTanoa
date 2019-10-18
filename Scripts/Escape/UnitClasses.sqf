@@ -130,7 +130,7 @@ switch (_enemyFrequency) do {
 drn_arr_Escape_InfantryTypes = ["O_Soldier_LAT_F", "O_Soldier_AR_F", "O_Soldier_AR_F", "O_Soldier_GL_F", "O_support_MG_F", "O_medic_F", "O_Soldier_F", "O_Soldier_F", "O_Soldier_AR_F", "O_Soldier_GL_F", "O_support_MG_F", "O_medic_F", "O_Soldier_F", "O_Soldier_F", "O_Soldier_AR_F", "O_Soldier_GL_F", "O_support_MG_F", "O_medic_F", "O_Soldier_F", "O_Soldier_F", "O_Soldier_AR_F", "O_Soldier_GL_F", "O_support_MG_F", "O_medic_F", "O_Soldier_F", "O_Soldier_F", "O_Soldier_AR_F", "O_Soldier_GL_F", "O_support_MG_F", "O_medic_F", "O_Soldier_F", "O_Soldier_F"];
 
 // Random array. A roadblock has a manned vehicle. This array contains possible manned vehicles (can be of any kind, like cars, armored and statics).
-drn_arr_Escape_RoadBlock_MannedVehicleTypes = ["O_HMG_01_high_F"];
+drn_arr_Escape_RoadBlock_MannedVehicleTypes = ["O_Quadbike_01_F", "O_MRAP_02_F", "O_MRAP_02_hmg_F", "O_MRAP_02_gmg_F", "O_static_AT_F", "O_GMG_01_high_F", "O_HMG_01_F", "O_HMG_01_high_F"];
 
 // Random array. Vehicle classes (preferrably trucks) transporting enemy reinforcements.
 drn_arr_Escape_ReinforcementTruck_vehicleClasses = ["Ural_INS", "UralOpen_INS"];

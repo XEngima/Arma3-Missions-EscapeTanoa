@@ -211,7 +211,7 @@ while {1 == 1} do {
     };
     
     if (_state == "REPORTING") then {
-        if (alive _reportingUnit) then {
+        if (!isNil "_reportingUnit" && {alive _reportingUnit}) then {
             if (diag_tickTime > _reportingStartTime + _timeUntilReportToHQSec) then {
                 
                 _state = "KNOW NOTHING";

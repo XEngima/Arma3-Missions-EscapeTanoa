@@ -1,3 +1,4 @@
+call compile preprocessFileLineNumbers "Engima\Civilians\Init.sqf"; // Added by Engima.Civilians
 call compile preprocessFileLineNumbers "Engima\Traffic\Init.sqf"; // Added by Engima.Traffic
 call compile preprocessFileLineNumbers "Engima\PatrolledAreas\Init.sqf"; // Added by Engima.PatrolledAreas
 call compile preprocessFileLineNumbers "Scripts\DRN\CommonLib\CommonLib.sqf";
@@ -16,12 +17,12 @@ if (!isServer && isNull player) then
 
 // Developer Variables
 
-_showIntro = true;
+_showIntro = false;
 
 // Debug Variables
 
-_showPlayerMapAndCompass = false;
-_playerIsImmortal = false; // Only works for unit p1
+_showPlayerMapAndCompass = true;
+_playerIsImmortal = true; // Only works for unit p1
 
 // Initialization
 

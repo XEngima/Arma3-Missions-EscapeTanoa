@@ -3,7 +3,7 @@ if (!isServer) exitWith {};
 private ["_useEscapeSurprises", "_useRandomStartPos", "_useAmmoDepots", "_useSearchLeader", "_useMotorizedSearchGroup", "_useVillagePatrols", "_useMilitaryTraffic", "_useAmbientInfantry", "_useSearchChopper", "_useRoadBlocks", "_guardsExist", "_guardsAreArmed", "_guardLivesLong"];
 private ["_debugEscapeSurprises", "_debugSearchLeader", "_showGroupDiagnostics", "_debugVillagePatrols", "_debugMilitaryTraffic", "_debugAmbientInfantry", "_debugGarbageCollector", "_debugRoadBlocks"];
 private ["_enemyMinSkill", "_enemyMaxSkill", "_searchChopperSearchTimeMin", "_searchChopperRefuelTimeMin", "_enemySpawnDistance", "_playerGroup", "_enemyFrequency", "_comCenGuardsExist", "_fenceRotateDir", "_scriptHandle"];
-private ["_allowComCentersTooClose", "_debugAmmoAndComPatrols"];
+private ["_allowComCentersTooClose", "_debugAmmoAndComPatrols", "_useCivilians", "_debugCivilians"];
 
 // Developer Variables
 
@@ -17,6 +17,7 @@ _useMilitaryTraffic = false; // working
 _useAmbientInfantry = false; // working
 _useSearchChopper = false; // working
 _useRoadBlocks = false; // working
+_useCivilians = true;
 
 _guardsExist = true;
 _comCenGuardsExist = false;
@@ -31,11 +32,12 @@ drn_var_Escape_timeToHijack = 45; // 60
 _debugEscapeSurprises = true;
 _debugAmmoAndComPatrols = false;
 _debugSearchLeader = false;
-_debugVillagePatrols = false;
+_debugVillagePatrols = true;
 _debugMilitaryTraffic = false;
 _debugAmbientInfantry = false;
 _debugGarbageCollector = false;
 _debugRoadBlocks = false;
+_debugCivilians = true;
 drn_var_Escape_debugMotorizedSearchGroup = false;
 drn_var_Escape_debugDropChoppers = false;
 drn_var_Escape_debugReinforcementTruck = false;
@@ -351,8 +353,8 @@ if (_useMotorizedSearchGroup) then {
 [_playerGroup, 750, _debugGarbageCollector] spawn drn_fnc_CL_RunGarbageCollector;
 
 // Run initialization for scripts that need the players to be gathered at the start position
-[_useVillagePatrols, _useMilitaryTraffic, _useAmbientInfantry, _debugVillagePatrols, _debugMilitaryTraffic, _debugAmbientInfantry, _enemyMinSkill, _enemyMaxSkill, _enemySpawnDistance, _enemyFrequency, _useRoadBlocks, _debugRoadBlocks, _debugAmmoAndComPatrols] spawn {
-    private ["_useVillagePatrols", "_useMilitaryTraffic", "_useAmbientInfantry", "_debugVillagePatrols", "_debugMilitaryTraffic", "_debugAmbientInfantry", "_enemyMinSkill", "_enemyMaxSkill", "_enemySpawnDistance", "_enemyFrequency", "_useRoadBlocks", "_debugRoadBlocks", "_debugAmmoAndComPatrols"];
+[_useVillagePatrols, _useMilitaryTraffic, _useAmbientInfantry, _debugVillagePatrols, _debugMilitaryTraffic, _debugAmbientInfantry, _enemyMinSkill, _enemyMaxSkill, _enemySpawnDistance, _enemyFrequency, _useRoadBlocks, _debugRoadBlocks, _debugAmmoAndComPatrols, _useCivilians, _debugCivilians] spawn {
+    private ["_useVillagePatrols", "_useMilitaryTraffic", "_useAmbientInfantry", "_debugVillagePatrols", "_debugMilitaryTraffic", "_debugAmbientInfantry", "_enemyMinSkill", "_enemyMaxSkill", "_enemySpawnDistance", "_enemyFrequency", "_useRoadBlocks", "_debugRoadBlocks", "_debugAmmoAndComPatrols", "_useCivilians", "_debugCivilians"];
     private ["_fnc_OnSpawnAmbientInfantryGroup", "_scriptHandle", "_areaPerGroup"];
     private ["_playerGroup", "_minEnemiesPerGroup", "_maxEnemiesPerGroup", "_fnc_OnSpawnGroup"];
     
@@ -369,6 +371,8 @@ if (_useMotorizedSearchGroup) then {
     _useRoadBlocks = _this select 10;
     _debugRoadBlocks = _this select 11;
     _debugAmmoAndComPatrols = _this select 12;
+    _useCivilians = _this select 13;
+    _debugCivilians = _this select 14;
     
     waitUntil {[drn_startPos] call drn_fnc_Escape_AllPlayersOnStartPos};
     _playerGroup = group ((call drn_fnc_Escape_GetPlayers) select 0);
@@ -399,19 +403,24 @@ if (_useMotorizedSearchGroup) then {
             } foreach units (_this select 0);
         };
         
+        private _maxNoOfUnitsPerGroup = 2;
+        
 	    switch (_enemyFrequency) do
 	    {
 	        case 1: // 1-2 players
 	        {
-	        	_areaPerGroup = 40000; // 1 gruop
+	        	_areaPerGroup = 50000; // 1 gruop
+	        	_maxNoOfUnitsPerGroup = 2;
 	        };
 	        case 2: // 3-5 players
 	        {
 	        	_areaPerGroup = 40000; // 2 groups
+	        	_maxNoOfUnitsPerGroup = 4;
 	        };
 	        default // 6-8 players
 	        {
-	        	_areaPerGroup = 40000; // 3 group
+	        	_areaPerGroup = 35000; // 3 group
+	        	_maxNoOfUnitsPerGroup = 6;
 	        };
 	    };
 		
@@ -420,10 +429,10 @@ if (_useMotorizedSearchGroup) then {
 			["UNIT_CLASSES", ["O_G_Soldier_F", "O_G_Soldier_lite_F", "O_G_Soldier_SL_F", "O_G_Soldier_TL_F", "O_G_Soldier_AR_F", "O_G_medic_F", "O_G_engineer_F", "O_G_Soldier_exp_F", "O_G_Soldier_GL_F", "O_G_Soldier_M_F", "O_G_Soldier_LAT_F", "O_G_Soldier_A_F", "O_G_officer_F"]],
 			["SIDE", east],
 			["MIN_UNITS_PER_GROUP", 1],
-			["MAX_UNITS_PER_GROUP", 4],
+			["MAX_UNITS_PER_GROUP", _maxNoOfUnitsPerGroup],
 			["SPAWN_DISTANCE", _enemySpawnDistance],
 			["AREA_PER_GROUP", _areaPerGroup],
-			["GROUP_PROBABILITY_OF_PRESENCE", 1],
+			["GROUP_PROBABILITY_OF_PRESENCE", 0.75],
 			["MIN_SKILL", _enemyMinSkill],
 			["MAX_SKILL", _enemyMaxSkill],
 			["ON_GROUP_CREATED", _fnc_OnSpawnGroup],
@@ -561,7 +570,7 @@ if (_useMotorizedSearchGroup) then {
 		
 		// Start an instance of the traffic
 		_parameters spawn ENGIMA_TRAFFIC_StartTraffic;
-        
+
         //[_playerGroup, civilian, drn_arr_Escape_MilitaryTraffic_CivilianVehicleClasses, _vehiclesCount, _enemySpawnDistance, _radius, 0.5, 0.5, _fnc_onSpawnCivilian, _debugMilitaryTraffic] execVM "Scripts\DRN\MilitaryTraffic\MilitaryTraffic.sqf";
         sleep 0.25;
         
@@ -604,6 +613,46 @@ if (_useMotorizedSearchGroup) then {
         sleep 0.25;
     };
     
+		
+	// Walking civilians
+		
+    if (_useCivilians) then {
+        private _fnc_onSpawnCivilian = {
+            params ["_man"];
+            
+        	_man unassignItem "ItemMap";
+            _man removeItem "ItemMap";
+            
+            _man addeventhandler ["killed", {
+            	private _killer = _this select 1;
+            
+                if (_killer in (call drn_fnc_Escape_GetPlayers)) then
+                {
+                    drn_var_Escape_SearchLeader_civilianReporting = true;
+                    publicVariable "drn_var_Escape_SearchLeader_civilianReporting";
+                    _killer addScore -4;
+                    [name _killer + " has killed a civilian."] call drn_fnc_CL_ShowCommandTextAllClients;
+                }
+            }];
+        };
+        
+		private _parameters = [
+			["UNIT_CLASSES", ["C_man_1", "C_man_1_1_F", "C_man_1_2_F", "C_man_1_3_F", "C_man_polo_1_F", "C_man_polo_1_F_afro", "C_man_polo_1_F_euro", "C_man_polo_1_F_asia", "C_man_polo_2_F", "C_man_polo_2_F_afro", "C_man_polo_2_F_euro", "C_man_polo_2_F_asia", "C_man_polo_3_F", "C_man_polo_3_F_afro", "C_man_polo_3_F_euro", "C_man_polo_3_F_asia", "C_man_polo_4_F", "C_man_polo_4_F_afro", "C_man_polo_4_F_euro", "C_man_polo_4_F_asia", "C_man_polo_5_F", "C_man_polo_5_F_afro", "C_man_polo_5_F_euro", "C_man_polo_5_F_asia", "C_man_polo_6_F", "C_man_polo_6_F_afro", "C_man_polo_6_F_euro", "C_man_polo_6_F_asia", "C_man_p_fugitive_F", "C_man_p_fugitive_F_afro", "C_man_p_fugitive_F_euro", "C_man_p_fugitive_F_asia", "C_man_p_beggar_F", "C_man_p_beggar_F_afro", "C_man_p_beggar_F_euro", "C_man_p_beggar_F_asia", "C_man_w_worker_F", "C_scientist_F", "C_man_hunter_1_F", "C_man_p_shorts_1_F", "C_man_p_shorts_1_F_afro", "C_man_p_shorts_1_F_euro", "C_man_p_shorts_1_F_asia", "C_man_shorts_1_F", "C_man_shorts_1_F_afro", "C_man_shorts_1_F_euro", "C_man_shorts_1_F_asia", "C_man_shorts_2_F", "C_man_shorts_2_F_afro", "C_man_shorts_2_F_euro", "C_man_shorts_2_F_asia", "C_man_shorts_3_F", "C_man_shorts_3_F_afro", "C_man_shorts_3_F_euro", "C_man_shorts_3_F_asia", "C_man_shorts_4_F", "C_man_shorts_4_F_afro", "C_man_shorts_4_F_euro", "C_man_shorts_4_F_asia", "C_journalist_F", "C_Orestes", "C_Nikos", "C_Nikos_aged"]],
+			["UNITS_PER_BUILDING", 0.1],
+			["MAX_GROUPS_COUNT", 20],
+			["MIN_SPAWN_DISTANCE", 50],
+			["MAX_SPAWN_DISTANCE", _enemySpawnDistance],
+			["BLACKLIST_MARKERS", []],
+			["HIDE_BLACKLIST_MARKERS", true],
+			["ON_UNIT_SPAWNED_CALLBACK", _fnc_onSpawnCivilian],
+			["ON_UNIT_REMOVE_CALLBACK", { true }],
+			["DEBUG", _debugCivilians]
+		];
+		
+		// Start the script
+		_parameters spawn ENGIMA_CIVILIANS_StartCivilians;
+	};
+		
     if (_useRoadBlocks) then {
         private ["_areaPerRoadBlock", "_maxEnemySpawnDistanceKm", "_roadBlockCount"];
         private ["_fnc_OnSpawnInfantryGroup", "_fnc_OnSpawnMannedVehicle"];

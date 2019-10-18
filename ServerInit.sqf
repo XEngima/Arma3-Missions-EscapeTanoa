@@ -12,7 +12,7 @@ _useEscapeSurprises = true;
 _useAmmoDepots = true; // working
 _useSearchLeader = true; // working
 _useMotorizedSearchGroup = false; // working
-_useVillagePatrols = false; // working
+_useVillagePatrols = true; // working
 _useMilitaryTraffic = false; // working
 _useAmbientInfantry = false; // working
 _useSearchChopper = false; // working
@@ -31,7 +31,7 @@ drn_var_Escape_timeToHijack = 60; // 60
 _debugEscapeSurprises = true;
 _debugAmmoAndComPatrols = false;
 _debugSearchLeader = true;
-_debugVillagePatrols = false;
+_debugVillagePatrols = true;
 _debugMilitaryTraffic = false;
 _debugAmbientInfantry = false;
 _debugGarbageCollector = false;
@@ -427,7 +427,7 @@ if (_useMotorizedSearchGroup) then {
 			["MIN_SKILL", _enemyMinSkill],
 			["MAX_SKILL", _enemyMaxSkill],
 			["ON_GROUP_CREATED", _fnc_OnSpawnGroup],
-			["DEBUG", _debugAmmoAndComPatrols]
+			["DEBUG", _debugVillagePatrols]
 		];
 		
 		_parameters call PATAREAS_PatrolledAreas;

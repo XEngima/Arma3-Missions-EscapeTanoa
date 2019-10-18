@@ -72,7 +72,7 @@ if (!isDedicated) then {
     player setCaptive true;
 };
 
-if (_playerIsImmortal) then {
+if (_playerIsImmortal && {!isNil "p1"}) then {
     p1 allowDamage false;
 };
 

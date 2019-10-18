@@ -7,37 +7,37 @@ private ["_allowComCentersTooClose", "_debugAmmoAndComPatrols", "_useCivilians",
 
 // Developer Variables
 
-_useRandomStartPos = false; // working
-_useEscapeSurprises = true;
+_useRandomStartPos = true; // working
+_useEscapeSurprises = false;
 _useAmmoDepots = true; // working
 _useSearchLeader = true; // working
-_useMotorizedSearchGroup = false; // working
+_useMotorizedSearchGroup = true; // working
 _useVillagePatrols = true; // working
-_useMilitaryTraffic = false; // working
-_useAmbientInfantry = false; // working
-_useSearchChopper = false; // working
-_useRoadBlocks = false; // working
-_useCivilians = true;
+_useMilitaryTraffic = true; // working
+_useAmbientInfantry = true; // working
+_useSearchChopper = true; // working
+_useRoadBlocks = true; // working
+_useCivilians = true; // working
 
 _guardsExist = true;
-_comCenGuardsExist = false;
-_guardsAreArmed = false;
-_guardLivesLong = false;
+_comCenGuardsExist = true;
+_guardsAreArmed = true;
+_guardLivesLong = true;
 
 _allowComCentersTooClose = false;
-drn_var_Escape_timeToHijack = 45; // 60
+drn_var_Escape_timeToHijack = 30; // 60
 
 // Debug Variables
 
-_debugEscapeSurprises = true;
+_debugEscapeSurprises = false;
 _debugAmmoAndComPatrols = false;
 _debugSearchLeader = false;
-_debugVillagePatrols = true;
+_debugVillagePatrols = false;
 _debugMilitaryTraffic = false;
 _debugAmbientInfantry = false;
 _debugGarbageCollector = false;
 _debugRoadBlocks = false;
-_debugCivilians = true;
+_debugCivilians = false;
 drn_var_Escape_debugMotorizedSearchGroup = false;
 drn_var_Escape_debugDropChoppers = false;
 drn_var_Escape_debugReinforcementTruck = false;
@@ -737,6 +737,9 @@ if (_useSearchChopper) then {
     _guard removeItem "ItemCompass";
     _guard unassignItem "ItemGPS";
     _guard removeItem "ItemGPS";
+    
+    _guard linkItem "NVGoggles_OPFOR";
+    
     _guard setSkill _enemyMinSkill + random (_enemyMaxSkill - _enemyMinSkill);
     
     _guard addMagazines [drn_var_Escape_InnerFenceGuardSecondaryWeaponMagazine, floor random 5];
@@ -786,6 +789,7 @@ if (_useSearchChopper) then {
         
         {
             _unit = _x; //(units _guardGroup) select 0;
+            
         	_unit unassignItem "ItemMap";
             _unit removeItem "ItemMap";
         	_unit unassignItem "ItemCompass";
@@ -793,9 +797,8 @@ if (_useSearchChopper) then {
         	_unit unassignItem "ItemGPS";
             _unit removeItem "ItemGPS";
             
-            if (random 100 < 40) then {
-            	_unit assignItem "NVGoggles";
-                _unit addItem "NVGoggles";
+            if (random 100 < 50) then {
+            	_unit linkItem "NVGoggles_OPFOR";
             };
             
             _unit setSkill _enemyMinSkill + random (_enemyMaxSkill - _enemyMinSkill);
@@ -808,7 +811,7 @@ if (_useSearchChopper) then {
             };
         } foreach units _guardGroup;
         
-        [_guardGroup, _marker] execVM "Scripts\DRN\SearchGroup\SearchGroup.sqf";
+        [_guardGroup, _marker] execVM "Engima\SearchPatrol\SearchPatrol.sqf";
         
     } foreach _guardGroups;
     

@@ -13,7 +13,13 @@ private ["_enemyFrequency"];
 _enemyFrequency = _this select 0;
 
 // Random array. Start position guard types.
-drn_arr_Escape_StartPositionGuardTypes = ["O_G_Soldier_F", "O_G_Soldier_lite_F", "O_G_Soldier_SL_F", "O_G_Soldier_TL_F", "O_G_Soldier_AR_F", "O_G_medic_F", "O_G_engineer_F", "O_G_Soldier_exp_F", "O_G_Soldier_GL_F", "O_G_Soldier_M_F", "O_G_Soldier_LAT_F", "O_G_Soldier_A_F", "O_G_officer_F"];
+
+
+// Arma 3 FIA infantry:
+// [/*simple:*/ "O_G_Soldier_F", "O_G_Soldier_lite_F", "O_G_Soldier_A_F", "O_G_medic_F", "O_G_Soldier_GL_F", "O_G_Soldier_SL_F", "O_G_Soldier_TL_F", /*backpacks:*/ "O_G_engineer_F", "O_G_Soldier_exp_F", /*advanced:*/ "O_G_Soldier_M_F", "O_G_officer_F", "O_G_Soldier_LAT_F", "O_G_Soldier_LAT2_F", "O_G_Sharpshooter_F"];
+
+
+drn_arr_Escape_StartPositionGuardTypes = ["O_G_Soldier_F", "O_G_Soldier_lite_F", "O_G_Soldier_A_F", "O_G_medic_F", "O_G_Soldier_GL_F", "O_G_Soldier_SL_F", "O_G_Soldier_TL_F", /*backpacks:*/ "O_G_engineer_F", "O_G_Soldier_exp_F"];
 
 // Inner fence guard's secondary weapon (and corresponding magazine type).
 drn_var_Escape_InnerFenceGuardSecondaryWeapon = "hgun_Pistol_heavy_02_Yorris_F";

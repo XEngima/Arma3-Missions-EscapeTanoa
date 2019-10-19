@@ -8,7 +8,7 @@ private ["_allowComCentersTooClose", "_debugAmmoAndComPatrols", "_useCivilians",
 // Developer Variables
 
 _useRandomStartPos = true; // working
-_useEscapeSurprises = false;
+_useEscapeSurprises = true;
 _useAmmoDepots = true; // working
 _useSearchLeader = true; // working
 _useMotorizedSearchGroup = true; // working
@@ -25,11 +25,11 @@ _guardsAreArmed = true;
 _guardLivesLong = true;
 
 _allowComCentersTooClose = false;
-drn_var_Escape_timeToHijack = 30; // 60
+drn_var_Escape_timeToHijack = 30; // 30
 
 // Debug Variables
 
-_debugEscapeSurprises = false;
+_debugEscapeSurprises = true;
 _debugAmmoAndComPatrols = false;
 _debugSearchLeader = false;
 _debugVillagePatrols = false;
@@ -731,12 +731,9 @@ if (_useSearchChopper) then {
     _guard disableAI "MOVE";
     _guard setDir _fenceRotateDir + 125;
     _guard setVehicleAmmo 0.3 + random 0.7;
-    _guard unassignItem "ItemMap";
-    _guard removeItem "ItemMap";
-    _guard unassignItem "ItemCompass";
-    _guard removeItem "ItemCompass";
-    _guard unassignItem "ItemGPS";
-    _guard removeItem "ItemGPS";
+    _guard unlinkItem "ItemMap";
+    _guard unlinkItem "ItemCompass";
+    _guard unlinkItem "ItemGPS";
     
     _guard linkItem "NVGoggles_OPFOR";
     
@@ -775,7 +772,7 @@ if (_useSearchChopper) then {
             _createNewGroup = false;
         };
         
-        (drn_arr_Escape_StartPositionGuardTypes select floor (random count drn_arr_Escape_StartPositionGuardTypes)) createUnit [_pos, _guardGroup, "", (0.5), "CAPTAIN"];
+        (selectRandom drn_arr_Escape_StartPositionGuardTypes) createUnit [_pos, _guardGroup, "", (0.5), "CAPTAIN"];
         
         if (count units _guardGroup >= 2) then {
             _createNewGroup = true;
@@ -790,12 +787,9 @@ if (_useSearchChopper) then {
         {
             _unit = _x; //(units _guardGroup) select 0;
             
-        	_unit unassignItem "ItemMap";
-            _unit removeItem "ItemMap";
-        	_unit unassignItem "ItemCompass";
-            _unit removeItem "ItemCompass";
-        	_unit unassignItem "ItemGPS";
-            _unit removeItem "ItemGPS";
+        	_unit unlinkItem "ItemMap";
+        	_unit unlinkItem "ItemCompass";
+        	_unit unlinkItem "ItemGPS";
             
             if (random 100 < 50) then {
             	_unit linkItem "NVGoggles_OPFOR";
@@ -842,20 +836,20 @@ if (_useSearchChopper) then {
             
             // If any player have picked up a weapon, escape has started
             {
-                if (!(_x getVariable ["drn_var_initializing", true])) then {
+                //if (!(_x getVariable ["drn_var_initializing", true])) then {
                     if (_x hasWeapon "ItemMap") then {
-                        if (count weapons _x > 4 || count magazines _x > 0) exitWith {
+                        if (count weapons _x > 1 || count magazines _x > 0) exitWith {
                             drn_escapeHasStarted = true;
                             publicVariable "drn_escapeHasStarted";
                         };
                     }
                     else {
-                        if (count weapons _x > 2 || count magazines _x > 0) exitWith {
+                        if (count weapons _x > 0 || count magazines _x > 0) exitWith {
                             drn_escapeHasStarted = true;
                             publicVariable "drn_escapeHasStarted";
                         };
                     };
-                };
+                //};
             } foreach call drn_fnc_Escape_GetPlayers;
             
             sleep 1;

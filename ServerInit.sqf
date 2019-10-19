@@ -734,6 +734,8 @@ if (_useSearchChopper) then {
     _guard unlinkItem "ItemMap";
     _guard unlinkItem "ItemCompass";
     _guard unlinkItem "ItemGPS";
+    _guard removeMagazine "HandGrenade";
+    _guard removeMagazine "MiniGrenade";
     
     _guard linkItem "NVGoggles_OPFOR";
     
@@ -790,6 +792,8 @@ if (_useSearchChopper) then {
         	_unit unlinkItem "ItemMap";
         	_unit unlinkItem "ItemCompass";
         	_unit unlinkItem "ItemGPS";
+		    _unit removeMagazine "HandGrenade";
+		    _unit removeMagazine "MiniGrenade";
             
             if (random 100 < 50) then {
             	_unit linkItem "NVGoggles_OPFOR";
@@ -836,7 +840,7 @@ if (_useSearchChopper) then {
             
             // If any player have picked up a weapon, escape has started
             {
-                //if (!(_x getVariable ["drn_var_initializing", true])) then {
+                if (!(_x getVariable ["drn_var_initializing", true])) then {
                     if (_x hasWeapon "ItemMap") then {
                         if (count weapons _x > 1 || count magazines _x > 0) exitWith {
                             drn_escapeHasStarted = true;
@@ -849,7 +853,7 @@ if (_useSearchChopper) then {
                             publicVariable "drn_escapeHasStarted";
                         };
                     };
-                //};
+                };
             } foreach call drn_fnc_Escape_GetPlayers;
             
             sleep 1;

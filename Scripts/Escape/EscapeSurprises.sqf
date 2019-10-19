@@ -20,7 +20,7 @@ _surprises = [];
 
 _surpriseArgs = [_minEnemySkill, _maxEnemySkill];
 _timeInSek = 20 * 60 + random (60 * 60);
-_timeInSek = 0; //time + (_timeInSek * (0.5 + (4 - _enemyFrequency) / 4));
+_timeInSek = time + (_timeInSek * (0.5 + (4 - _enemyFrequency) / 4));
 _surprise = ["MOTORIZEDSEARCHGROUP", _timeInSek, {[drn_searchAreaMarkerName] call drn_fnc_CL_MarkerExists}, false, _surpriseArgs];
 _surprises set [count _surprises, _surprise];
 diag_log ("ESCAPE SURPRISE: " + str _surprise);

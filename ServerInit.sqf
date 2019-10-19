@@ -120,62 +120,67 @@ if (true) then {
     _chosenComCenIndexes = [];
 
     _distanceBetween = 1500;
-    	
-    while {count _chosenComCenIndexes < 5 && count _chosenComCenIndexes < count drn_arr_communicationCenterMarkers} do {
-        _index = floor random count drn_arr_communicationCenterMarkers;
-        _currentPos = (drn_arr_communicationCenterMarkers select _index) select 0;
-
-        // North west
-        if (count _chosenComCenIndexes == 0) then {
-            while {_currentPos select 0 > (getMarkerPos "centre") select 0 || _currentPos select 1 < (getMarkerPos "centre") select 1} do {
-                _index = floor random count drn_arr_communicationCenterMarkers;
-                _currentPos = (drn_arr_communicationCenterMarkers select _index) select 0;
-            };
-        };
-        // North east
-        if (count _chosenComCenIndexes == 1) then {
-            while {_currentPos select 0 < (getMarkerPos "centre") select 0 || _currentPos select 1 < (getMarkerPos "centre") select 1} do {
-                _index = floor random count drn_arr_communicationCenterMarkers;
-                _currentPos = (drn_arr_communicationCenterMarkers select _index) select 0;
-            };
-        };
-        // South east
-        if (count _chosenComCenIndexes == 2) then {
-            while {_currentPos select 0 < (getMarkerPos "centre") select 0 || _currentPos select 1 > (getMarkerPos "centre") select 1} do {
-                _index = floor random count drn_arr_communicationCenterMarkers;
-                _currentPos = (drn_arr_communicationCenterMarkers select _index) select 0;
-            };
-        };
-        // South west
-        if (count _chosenComCenIndexes == 3) then {
-            while {_currentPos select 0 > (getMarkerPos "centre") select 0 || _currentPos select 1 > (getMarkerPos "centre") select 1} do {
-                _index = floor random count drn_arr_communicationCenterMarkers;
-                _currentPos = (drn_arr_communicationCenterMarkers select _index) select 0;
-            };
-        };
-        
-        if (!(_index in _chosenComCenIndexes)) then {
-            _currentPos = (drn_arr_communicationCenterMarkers select _index) select 0;
-
-            _tooClose = false;
-            
-            if (!_allowComCentersTooClose) then
-            {
+    
+    if (count drn_arr_communicationCenterMarkers >= 5) then {
+	    while {count _chosenComCenIndexes < 5} do {
+	        _index = floor random count drn_arr_communicationCenterMarkers;
+	        _currentPos = (drn_arr_communicationCenterMarkers select _index) select 0;
+	
+	        // North west
+	        if (count _chosenComCenIndexes == 0) then {
+	            while {_currentPos select 0 > (getMarkerPos "centre") select 0 || _currentPos select 1 < (getMarkerPos "centre") select 1} do {
+	                _index = floor random count drn_arr_communicationCenterMarkers;
+	                _currentPos = (drn_arr_communicationCenterMarkers select _index) select 0;
+	            };
+	        };
+	        // North east
+	        if (count _chosenComCenIndexes == 1) then {
+	            while {_currentPos select 0 < (getMarkerPos "centre") select 0 || _currentPos select 1 < (getMarkerPos "centre") select 1} do {
+	                _index = floor random count drn_arr_communicationCenterMarkers;
+	                _currentPos = (drn_arr_communicationCenterMarkers select _index) select 0;
+	            };
+	        };
+	        // South east
+	        if (count _chosenComCenIndexes == 2) then {
+	            while {_currentPos select 0 < (getMarkerPos "centre") select 0 || _currentPos select 1 > (getMarkerPos "centre") select 1} do {
+	                _index = floor random count drn_arr_communicationCenterMarkers;
+	                _currentPos = (drn_arr_communicationCenterMarkers select _index) select 0;
+	            };
+	        };
+	        // South west
+	        if (count _chosenComCenIndexes == 3) then {
+	            while {_currentPos select 0 > (getMarkerPos "centre") select 0 || _currentPos select 1 > (getMarkerPos "centre") select 1} do {
+	                _index = floor random count drn_arr_communicationCenterMarkers;
+	                _currentPos = (drn_arr_communicationCenterMarkers select _index) select 0;
+	            };
+	        };
+	        
+	        if (!(_index in _chosenComCenIndexes)) then {
+	            _currentPos = (drn_arr_communicationCenterMarkers select _index) select 0;
+	
+	            _tooClose = false;
+	            
+	            if (!_allowComCentersTooClose) then
 	            {
-	                _pos = (drn_arr_communicationCenterMarkers select _x) select 0;
-	                if (_pos distance _currentPos < _distanceBetween) then {
-	                    _tooClose = true;
-	                };
-	                if (_useRandomStartPos && _currentPos distance drn_startPos < _distanceBetween) then {
-	                    _tooClose = true;
-	                };
-	            } foreach _chosenComCenIndexes;
-            };
-            
-            if (!_tooClose) then {
-                _chosenComCenIndexes set [count _chosenComCenIndexes, _index];
-            };
-        };
+		            {
+		                _pos = (drn_arr_communicationCenterMarkers select _x) select 0;
+		                if (_pos distance _currentPos < _distanceBetween) then {
+		                    _tooClose = true;
+		                };
+		                if (_useRandomStartPos && _currentPos distance drn_startPos < _distanceBetween) then {
+		                    _tooClose = true;
+		                };
+		            } foreach _chosenComCenIndexes;
+	            };
+	            
+	            if (!_tooClose) then {
+	                _chosenComCenIndexes set [count _chosenComCenIndexes, _index];
+	            };
+	        };
+	    };
+    }
+    else {
+    	_chosenComCenIndexes = drn_arr_communicationCenterMarkers;
     };
 
     // Unmark this if you want communication centers everywhere

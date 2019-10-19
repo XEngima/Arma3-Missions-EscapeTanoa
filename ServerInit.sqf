@@ -8,7 +8,7 @@ private ["_allowComCentersTooClose", "_debugAmmoAndComPatrols", "_useCivilians",
 // Developer Variables
 
 _useRandomStartPos = true; // working
-_useEscapeSurprises = true;
+_useEscapeSurprises = true; // partly working
 _useAmmoDepots = true; // working
 _useSearchLeader = true; // working
 _useMotorizedSearchGroup = true; // working
@@ -29,7 +29,7 @@ drn_var_Escape_timeToHijack = 30; // 30
 
 // Debug Variables
 
-_debugEscapeSurprises = true;
+_debugEscapeSurprises = false;
 _debugAmmoAndComPatrols = false;
 _debugSearchLeader = false;
 _debugVillagePatrols = false;

@@ -16,8 +16,18 @@ _surprises = [];
 
 // A surprise have members [ID, MissionTimeSec, Condition, IsExecuted, Surprice Arguments].
 
+// Motorized Search Group
+
+_surpriseArgs = [_minEnemySkill, _maxEnemySkill];
+_timeInSek = 20 * 60 + random (60 * 60);
+_timeInSek = 0; //time + (_timeInSek * (0.5 + (4 - _enemyFrequency) / 4));
+_surprise = ["MOTORIZEDSEARCHGROUP", _timeInSek, {[drn_searchAreaMarkerName] call drn_fnc_CL_MarkerExists}, false, _surpriseArgs];
+_surprises set [count _surprises, _surprise];
+diag_log ("ESCAPE SURPRISE: " + str _surprise);
+
 // Drop Chopper
 
+/*
 _surpriseArgs = [(_enemyFrequency + 2) + floor random (_enemyFrequency * 2)]; // [NoOfDropUnits]
 _timeInSek = 5 * 60 + random (60 * 60);
 _timeInSek = 0; //time + (_timeInSek * (0.5 + (4 - _enemyFrequency) / 4));
@@ -25,6 +35,7 @@ _condition = {true};
 _surprise = ["DROPCHOPPER", _timeInSek, _condition, false, _surpriseArgs];
 _surprises set [count _surprises, _surprise];
 diag_log ("ESCAPE SURPRISE: " + str _surprise);
+*/
 
 /*
 
@@ -34,15 +45,6 @@ _surpriseArgs = [_minEnemySkill, _maxEnemySkill];
 _timeInSek = 45 * 60 + random (30 * 60);
 _timeInSek = time + (_timeInSek * (0.5 + (4 - _enemyFrequency) / 4));
 _surprise = ["RUSSIANSEARCHCHOPPER", _timeInSek, {[drn_searchAreaMarkerName] call drn_fnc_CL_MarkerExists}, false, _surpriseArgs];
-_surprises set [count _surprises, _surprise];
-diag_log ("ESCAPE SURPRISE: " + str _surprise);
-
-// Motorized Search Group
-
-_surpriseArgs = [_minEnemySkill, _maxEnemySkill];
-_timeInSek = 20 * 60 + random (60 * 60);
-_timeInSek = time + (_timeInSek * (0.5 + (4 - _enemyFrequency) / 4));
-_surprise = ["MOTORIZEDSEARCHGROUP", _timeInSek, {[drn_searchAreaMarkerName] call drn_fnc_CL_MarkerExists}, false, _surpriseArgs];
 _surprises set [count _surprises, _surprise];
 diag_log ("ESCAPE SURPRISE: " + str _surprise);
 

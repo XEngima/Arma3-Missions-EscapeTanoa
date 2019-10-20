@@ -8,18 +8,18 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=261;
+		nextID=264;
 	};
 	class MarkerIDProvider
 	{
-		nextID=26;
+		nextID=27;
 	};
 	class Camera
 	{
-		pos[]={8986.4082,35.158115,10004.176};
-		dir[]={-0.34966189,-0.070465058,-0.93424976};
-		up[]={-0.024705552,0.99750686,-0.066008784};
-		aside[]={-0.93657631,-1.8325227e-007,0.35053319};
+		pos[]={2023.4504,22.141356,3481.8586};
+		dir[]={0.20165861,-0.65536046,-0.72795326};
+		up[]={0.17496078,0.75530839,-0.63158131};
+		aside[]={-0.96374804,-1.016997e-007,-0.2669782};
 	};
 };
 binarizationWanted=0;
@@ -260,7 +260,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=24;
+		items=25;
 		class Item0
 		{
 			dataType="Object";
@@ -982,6 +982,15 @@ class Mission
 			{
 			};
 			id=242;
+		};
+		class Item24
+		{
+			dataType="Marker";
+			position[]={2026.597,12.95,3474.687};
+			name="drn_russianSearchChopperStartPosMarker";
+			type="Empty";
+			angle=343.48398;
+			id=263;
 		};
 	};
 };

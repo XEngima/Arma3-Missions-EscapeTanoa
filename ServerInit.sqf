@@ -29,9 +29,9 @@ drn_var_Escape_timeToHijack = 30; // 30
 
 // Debug Variables
 
-_debugEscapeSurprises = false;
+_debugEscapeSurprises = true;
 _debugAmmoAndComPatrols = false;
-_debugSearchLeader = false;
+_debugSearchLeader = true;
 _debugVillagePatrols = false;
 _debugMilitaryTraffic = false;
 _debugAmbientInfantry = false;

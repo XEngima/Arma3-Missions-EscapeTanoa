@@ -25,6 +25,15 @@ _surprise = ["MOTORIZEDSEARCHGROUP", _timeInSek, {[drn_searchAreaMarkerName] cal
 _surprises set [count _surprises, _surprise];
 diag_log ("ESCAPE SURPRISE: " + str _surprise);
 
+// Russian Search Chopper
+
+_surpriseArgs = [_minEnemySkill, _maxEnemySkill];
+_timeInSek = 45 * 60 + random (30 * 60);
+_timeInSek = time + (_timeInSek * (0.5 + (4 - _enemyFrequency) / 4));
+_surprise = ["RUSSIANSEARCHCHOPPER", _timeInSek, {[drn_searchAreaMarkerName] call drn_fnc_CL_MarkerExists}, false, _surpriseArgs];
+_surprises set [count _surprises, _surprise];
+diag_log ("ESCAPE SURPRISE: " + str _surprise);
+
 // Drop Chopper
 
 /*
@@ -38,15 +47,6 @@ diag_log ("ESCAPE SURPRISE: " + str _surprise);
 */
 
 /*
-
-// Russian Search Chopper
-
-_surpriseArgs = [_minEnemySkill, _maxEnemySkill];
-_timeInSek = 45 * 60 + random (30 * 60);
-_timeInSek = time + (_timeInSek * (0.5 + (4 - _enemyFrequency) / 4));
-_surprise = ["RUSSIANSEARCHCHOPPER", _timeInSek, {[drn_searchAreaMarkerName] call drn_fnc_CL_MarkerExists}, false, _surpriseArgs];
-_surprises set [count _surprises, _surprise];
-diag_log ("ESCAPE SURPRISE: " + str _surprise);
 
 // Reinforcement Truck
 
@@ -158,24 +158,15 @@ while {true} do {
                 if (_surpriseID == "RUSSIANSEARCHCHOPPER") then {
                     private ["_chopper", "_result", "_group"];
                     
-                    _chopper = "Ka52Black" createVehicle getMarkerPos "drn_russianSearchChopperStartPosMarker";
-                    _chopper lock false;
+					private _spawnResult = [getMarkerPos "drn_russianSearchChopperStartPosMarker", 0, "O_Heli_Light_02_dynamicLoadout_F", drn_var_enemySide] call BIS_fnc_spawnVehicle;
+		            _chopper = _spawnResult select 0;
+                    
                     _chopper setVehicleVarName "drn_russianSearchChopper";
                     _chopper call compile format ["%1=_this;", "drn_russianSearchChopper"];
                     
-                    _group = createGroup drn_var_enemySide;
-
-                    "Ins_Soldier_Pilot" createUnit [[0, 0, 30], _group, "", (_minEnemySkill + random (_maxEnemySkill - _minEnemySkill)), "LIEUTENANT"];
-                    "Ins_Soldier_Pilot" createUnit [[0, 0, 30], _group, "", (_minEnemySkill + random (_maxEnemySkill - _minEnemySkill)), "LIEUTENANT"];
-
-                    ((units _group) select 0) assignAsDriver _chopper;
-                    ((units _group) select 0) moveInDriver _chopper;
-                    ((units _group) select 1) assignAsGunner _chopper;
-                    ((units _group) select 1) moveInGunner _chopper;
-                    
                     {
                         _x call drn_fnc_Escape_OnSpawnGeneralSoldierUnit;
-                    } foreach units _group;
+                    } foreach crew _chopper;
                     
                     [_chopper, drn_searchAreaMarkerName, (5 + random 15), (5 + random 15), drn_var_Escape_debugSearchChopper] execVM "Scripts\DRN\SearchChopper\SearchChopper.sqf";
                   

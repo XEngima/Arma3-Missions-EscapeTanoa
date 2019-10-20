@@ -562,7 +562,7 @@ if (_useMotorizedSearchGroup) then {
         
 		private _parameters = [
 			["SIDE", civilian],
-			["VEHICLES", ["C_Offroad_01_F", "C_Offroad_01_repair_F", "C_Quadbike_01_F", "C_Hatchback_01_F", "C_Hatchback_01_sport_F", "C_SUV_01_F", "C_Van_01_transport_F", "C_Van_01_box_F", "C_Van_01_fuel_F"]],
+			["VEHICLES", drn_arr_Escape_MilitaryTraffic_CivilianVehicleClasses],
 			["VEHICLES_COUNT", _vehiclesCount],
 			["MIN_SPAWN_DISTANCE", _enemySpawnDistance],
 			["MAX_SPAWN_DISTANCE", _radius],

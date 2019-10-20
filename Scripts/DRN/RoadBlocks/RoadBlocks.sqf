@@ -143,6 +143,10 @@ _fnc_FindRoadBlockSegment = {
         _tries = _tries + 1;
     };
     
+    if (_tries >= 100) then {
+    	_isOk == false;
+    };
+    
     if (!_isOk) then {
         _result = objNull;
     }

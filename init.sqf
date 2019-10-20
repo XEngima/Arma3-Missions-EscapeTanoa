@@ -17,7 +17,7 @@ if (!isServer && isNull player) then
 
 // Developer Variables
 
-_showIntro = true;
+_showIntro = false;
 
 // Debug Variables
 

@@ -64,19 +64,25 @@ _object = "Land_TinWall_02_l_4m_F" createVehicle _pos;
 _object setPos ([_centerPos, _pos, _rotateDir] call drn_fnc_CL_RotatePosition);
 _object setDir _dir;
 
-/*
-_pos = [(_centerPos select 0) + 4, (_centerPos select 1) + 8, 0];
-_object = "Fence_corrugated_plate" createVehicle _pos;
-_object setPos ([_centerPos, _pos, _rotateDir] call drn_fnc_CL_RotatePosition);
-_object setDir _dir;
-*/
 
 // Bar Gate
-
-_pos = [(_centerPos select 0) + 4, (_centerPos select 1) + 6, 0];
-_object = "Land_BackAlley_01_l_gate_F" createVehicle _pos;
-_object setPos ([_centerPos, _pos, _rotateDir] call drn_fnc_CL_RotatePosition);
+_pos = [(_centerPos select 0) + 2.4, (_centerPos select 1) + 6, 0];
+_object = createVehicle ["Land_GameProofFence_01_l_pole_F", _pos, [], 0, "CAN_COLLIDE"];
 _object setDir (_dir + 180);
+_object setPos ([_centerPos, _pos, _rotateDir] call drn_fnc_CL_RotatePosition);
+_object setPos [(getPos _object) select 0, (getPos _object) select 1, 0.05];
+
+_pos = [(_centerPos select 0) + 5.2, (_centerPos select 1) + 5.9, 100];
+_object = createVehicle ["Land_PipeFence_03_m_gate_r_F", _pos, [], 0, "CAN_COLLIDE"];
+_object setDir (_dir);
+_object setPos ([_centerPos, _pos, _rotateDir] call drn_fnc_CL_RotatePosition);
+_object setPos [(getPos _object) select 0, (getPos _object) select 1, 0.05];
+
+_pos = [(_centerPos select 0) + 5.6, (_centerPos select 1) + 6, 0];
+_object = createVehicle ["Land_GameProofFence_01_l_pole_F", _pos, [], 0, "CAN_COLLIDE"];
+_object setDir (_dir + 180);
+_object setPos ([_centerPos, _pos, _rotateDir] call drn_fnc_CL_RotatePosition);
+_object setPos [(getPos _object) select 0, (getPos _object) select 1, 0.05];
 
 _dir = 90 + _rotateDir;
 

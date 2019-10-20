@@ -8,7 +8,7 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=251;
+		nextID=261;
 	};
 	class MarkerIDProvider
 	{
@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={8996.3555,75.212494,9896.541};
-		dir[]={0.031895243,-0.42576683,0.90427399};
-		up[]={0.015008234,0.90483069,0.4255034};
-		aside[]={0.9993794,1.9193976e-008,-0.035249896};
+		pos[]={8986.4082,35.158115,10004.176};
+		dir[]={-0.34966189,-0.070465058,-0.93424976};
+		up[]={-0.024705552,0.99750686,-0.066008784};
+		aside[]={-0.93657631,-1.8325227e-007,0.35053319};
 	};
 };
 binarizationWanted=0;
@@ -467,7 +467,7 @@ class Mission
 			position[]={2137.1018,12.95,3446.1162};
 			name="drn_searchChopperStartPosMarker";
 			type="Empty";
-			angle=344.85992;
+			angle=344.85977;
 			id=112;
 		};
 		class Item21
@@ -485,7 +485,7 @@ class Mission
 			position[]={2158.6091,12.95,3452.8772};
 			name="drn_dropChopperStartPosMarker";
 			type="Empty";
-			angle=336.21509;
+			angle=336.21497;
 			id=240;
 		};
 		class Item23

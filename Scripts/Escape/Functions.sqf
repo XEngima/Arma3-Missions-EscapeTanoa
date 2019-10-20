@@ -1049,7 +1049,7 @@ drn_fnc_Escape_FindSpawnSegment = {
     
     _spawnDistanceDiff = _maxSpawnDistance - _minSpawnDistance;
     _roadSegment = "NULL";
-    _refUnit = vehicle ((units _referenceGroup) select floor random count units _referenceGroup);
+    _refUnit = vehicle (selectRandom (units _referenceGroup));
 
     _isOk = false;
     _tries = 0;
@@ -1063,27 +1063,32 @@ drn_fnc_Escape_FindSpawnSegment = {
         _roadSegments = [_refPosX, _refPosY] nearRoads (_spawnDistanceDiff);
         
         if (count _roadSegments > 0) then {
-            _roadSegment = _roadSegments select floor random count _roadSegments;
+            _roadSegment = selectRandom _roadSegments;
             
-            // Check if road segment is at spawn distance
-            _tooFarAwayFromAll = true;
-            _tooClose = false;
-            {
-                private ["_tooFarAway"];
-                
-                _tooFarAway = false;
-                
-                if ((vehicle _x) distance (getPos _roadSegment) < _minSpawnDistance) then {
-                    _tooClose = true;
-                };
-                if ((vehicle _x) distance (getPos _roadSegment) > _maxSpawnDistance) then {
-                    _tooFarAway = true;
-                };
-                if (!_tooFarAway) then {
-                    _tooFarAwayFromAll = false;
-                };
-                
-            } foreach units _referenceGroup;
+            if (isOnRoad getPos _roadSegment) then {
+	            // Check if road segment is at spawn distance
+	            _tooFarAwayFromAll = true;
+	            _tooClose = false;
+	            {
+	                private ["_tooFarAway"];
+	                
+	                _tooFarAway = false;
+	                
+	                if ((vehicle _x) distance (getPos _roadSegment) < _minSpawnDistance) then {
+	                    _tooClose = true;
+	                };
+	                if ((vehicle _x) distance (getPos _roadSegment) > _maxSpawnDistance) then {
+	                    _tooFarAway = true;
+	                };
+	                if (!_tooFarAway) then {
+	                    _tooFarAwayFromAll = false;
+	                };
+	                
+	            } foreach units _referenceGroup;
+            }
+            else {
+            	_isOk = false;
+            };
             
             _isOk = true;
             if (_tooClose || _tooFarAwayFromAll) then {
@@ -1095,6 +1100,10 @@ drn_fnc_Escape_FindSpawnSegment = {
             _isOk = false;
             _tries = _tries + 1;
         };
+    };
+    
+    if (_tries >= 25) then {
+    	_isOk = false;
     };
 
     if (!_isOk) then {

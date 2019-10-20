@@ -38,7 +38,7 @@ if (_debug) then {
 };
 
 _fnc_OnDroppingGroup = {
-    [_this, "drn_searchAreaMarker", [0, 0, 0], drn_var_Escape_DebugSearchGroup] execVM "Scripts\DRN\SearchGroup\SearchGroup.sqf";
+    [_this, "drn_searchAreaMarker", [0, 0, 0], drn_var_Escape_DebugSearchGroup] execVM "Engima\SearchPatrol\SearchPatrol.sqf";
 };
 
 [_referenceGroup, _vehicle, _group, _fnc_OnDroppingGroup, _debug] execVM "Scripts\Escape\CivilEnemy.sqf";

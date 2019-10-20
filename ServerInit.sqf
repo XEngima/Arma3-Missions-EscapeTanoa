@@ -43,7 +43,6 @@ drn_var_Escape_debugDropChoppers = false;
 drn_var_Escape_debugReinforcementTruck = false;
 drn_var_Escape_debugSearchChopper = false;
 drn_var_Escape_DebugSearchGroup = false;
-drn_var_Escape_debugCivilEnemy = false;
 
 _showGroupDiagnostics = false;
 

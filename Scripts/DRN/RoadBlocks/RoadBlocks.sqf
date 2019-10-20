@@ -86,6 +86,8 @@ _fnc_FindRoadBlockSegment = {
     
     _isOk = false;
     _tries = 0;
+    _result = objNull;
+    
     while {!_isOk && _tries < 100} do {
         _isOk = true;
         
@@ -94,52 +96,56 @@ _fnc_FindRoadBlockSegment = {
         _refPosY = ((getPos _refUnit) select 1) + (_minSpawnDistance + _spawnDistanceDiff) * cos _dir;
         
         _roadSegments = [_refPosX, _refPosY] nearRoads (_spawnDistanceDiff);
-        _roadSegment = _roadSegments select floor random count _roadSegments;
         
-        // Check if road segment is at spawn distance
-        _tooFarAwayFromAll = true;
-        _tooClose = false;
-        {
-            private ["_tooFarAway"];
-            
-            _tooClose = false;
-            _tooFarAway = false;
-            
-            if ((vehicle _x) distance (getPos _roadSegment) < _minSpawnDistance) then {
-                _tooClose = true;
-            };
-            if ((vehicle _x) distance (getPos _roadSegment) > _maxSpawnDistance) then {
-                _tooFarAway = true;
-            };
-            if (!_tooFarAway) then {
-                _tooFarAwayFromAll = false;
-            };
-        } foreach units _referenceGroup;
-        
-        if (_tooClose || _tooFarAwayFromAll) then {
-            _isOk = false;
+        if (count _roadSegments > 0) then {
+	        _roadSegment = selectRandom _roadSegments;
+	        
+	        // Check if road segment is at spawn distance
+	        _tooFarAwayFromAll = true;
+	        _tooClose = false;
+	        
+	        {
+	            private ["_tooFarAway"];
+	            
+	            _tooClose = false;
+	            _tooFarAway = false;
+	            
+	            if ((vehicle _x) distance (getPos _roadSegment) < _minSpawnDistance) then {
+	                _tooClose = true;
+	            };
+	            if ((vehicle _x) distance (getPos _roadSegment) > _maxSpawnDistance) then {
+	                _tooFarAway = true;
+	            };
+	            if (!_tooFarAway) then {
+	                _tooFarAwayFromAll = false;
+	            };
+	        } foreach units _referenceGroup;
+	        
+	        if (_tooClose || _tooFarAwayFromAll) then {
+	            _isOk = false;
+	        };
+	        
+	        // If road segment is a path (like on Tanoa), do not count it
+	        if (!isOnRoad getPos _roadSegment) then {
+	        	_isOk = false;
+	        };
+	        
+	        // Check if road segment is not close to a house
+	        if ((nearestBuilding _roadSegment) distance _roadSegment < 50) then {
+	            _isOk = false;
+	        };
+	        
+	        // Check if road segment is not too close to another road block
+	        {
+	            private ["_anotherSegment"];
+	            _anotherSegment = _x select 1;
+	            
+	            if (_roadSegment distance _anotherSegment < _minDistanceBetweenRoadBlocks) then {
+	                _isOk = false;
+	            };
+	        } foreach _roadBlocks;
         };
-        
-        // If road segment is a path (like on Tanoa), do not count it
-        if (!isOnRoad getPos _roadSegment) then {
-        	_isOk = false;
-        };
-        
-        // Check if road segment is not close to a house
-        if ((nearestBuilding _roadSegment) distance _roadSegment < 50) then {
-            _isOk = false;
-        };
-        
-        // Check if road segment is not too close to another road block
-        {
-            private ["_anotherSegment"];
-            _anotherSegment = _x select 1;
-            
-            if (_roadSegment distance _anotherSegment < _minDistanceBetweenRoadBlocks) then {
-                _isOk = false;
-            };
-        } foreach _roadBlocks;
-        
+	        
         _tries = _tries + 1;
     };
     
@@ -147,10 +153,7 @@ _fnc_FindRoadBlockSegment = {
     	_isOk == false;
     };
     
-    if (!_isOk) then {
-        _result = objNull;
-    }
-    else {
+    if (_isOk) then {
         _result = _roadSegment;
     };
     

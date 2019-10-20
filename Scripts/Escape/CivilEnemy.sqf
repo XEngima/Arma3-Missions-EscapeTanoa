@@ -28,8 +28,18 @@ _fnc_GetDestinationPos = {
     
     _roadSegments = _referenceUnit nearRoads 1250;
     
-    if (count _roadSegments > 0) then {
-        _destinationPos = getPos (_roadSegments select floor random count _roadSegments);
+    if (count _roadSegments > 0) then
+    {
+        while { count _destinationPos == 0 } do
+        {
+	    	private _destinationSegment = selectRandom _roadSegments;
+	    	
+	    	if (isOnRoad _destinationSegment) then {
+		        _destinationPos = getPos _destinationSegment;
+	    	};
+	    	
+	        sleep 1;
+        };
     };
     
     _destinationPos
@@ -46,7 +56,7 @@ drn_ReinforcementTruck_CurrentEntityNo = drn_ReinforcementTruck_CurrentEntityNo 
 
 if (isNil "drn_var_commonLibInitialized") then {
     [] spawn {
-        while {true} do { player sideChat "Script ReinforcementTruck.sqf needs CommonLib version 1.02"; sleep 5; };
+        while {true} do { player sideChat "Script CivilEnemy.sqf needs CommonLib version 1.02"; sleep 5; };
     };
 };
 
@@ -55,7 +65,6 @@ if (vehicleVarName _vehicle == "") exitWith {
 };
 
 private ["_enemySighted", "_enemyUnit"];
-private ["_waypoint"];
 
 _enemySighted = false;
 
@@ -81,14 +90,14 @@ while {!_enemySighted} do {
     
     if (_debug) then {
         ["drn_CivilianEnemy_DestinationPositionDebugMarker" + str _currentEntityNo] call drn_fnc_CL_DeleteDebugMarkerAllClients;
-        ["drn_CivilianEnemy_DestinationPositionDebugMarker" + str _currentEntityNo, _destinationPos, "Dot", "ColorRed", "CivEn" + str _currentEntityNo + " destination"] call drn_fnc_CL_SetDebugMarkerAllClients;
+        ["drn_CivilianEnemy_DestinationPositionDebugMarker" + str _currentEntityNo, _destinationPos, "hd_dot", "ColorRed", "CivEn" + str _currentEntityNo + " destination"] call drn_fnc_CL_SetDebugMarkerAllClients;
     };
     
     while {(!(_vehicle getVariable "waypointFulfilled")) && !_enemySighted} do {
         
         if (_debug) then {
             ["drn_CivilianEnemy_VehicleDebugMarker" + str _currentEntityNo] call drn_fnc_CL_DeleteDebugMarkerAllClients;
-            ["drn_CivilianEnemy_VehicleDebugMarker" + str _currentEntityNo, getPos _vehicle, "Dot", "ColorRed", "CivEn" + str _currentEntityNo] call drn_fnc_CL_SetDebugMarkerAllClients;
+            ["drn_CivilianEnemy_VehicleDebugMarker" + str _currentEntityNo, getPos _vehicle, "hd_dot", "ColorRed", "CivEn" + str _currentEntityNo] call drn_fnc_CL_SetDebugMarkerAllClients;
         };
         
         sleep 1;
@@ -114,61 +123,5 @@ if (_debug) then {
 _group spawn _fncOnUnloadGroup;
 ["drn_CivilianEnemy_DestinationPositionDebugMarker" + str _currentEntityNo] call drn_fnc_CL_DeleteDebugMarkerAllClients;
 ["drn_CivilianEnemy_VehicleDebugMarker" + str _currentEntityNo] call drn_fnc_CL_DeleteDebugMarkerAllClients;
-
-/*
-if (_debug) then {
-    ["Reinforcement truck moving out..."] call drn_fnc_CL_ShowDebugTextAllClients;
-};
-
-_destinationPos = [];
-while {count _dropPos == 0} do {
-    _destinationPos = [_referenceUnit] call _fnc_GetDestinationPos;
-    sleep 1;
-};
-
-if (count _dropPos > 0) then {
-    
-    _truck setVariable ["reinforcementTruckReturning", false];
-    
-    if (_debug) then {
-        ["drn_ReinforcementTruck_DropPositionDebugMarker" + str _currentEntityNo, _dropPos, "Dot", "ColorRed", "RT" + str _currentEntityNo + " drop pos"] call drn_fnc_CL_SetDebugMarkerAllClients;
-    };
-    
-    while {!(_truck getVariable "reinforcementTruckReturning")} do {
-
-        if (_debug) then {
-            ["drn_ReinforcementTruck_VehicleDebugMarker" + str _currentEntityNo] call drn_fnc_CL_DeleteDebugMarkerAllClients;
-            ["drn_ReinforcementTruck_VehicleDebugMarker" + str _currentEntityNo, getPos _truck, "Dot", "ColorRed", "RT" + str _currentEntityNo] call drn_fnc_CL_SetDebugMarkerAllClients;
-        };
-        
-        // If marker have moved, get a new destination position.
-        if (!([_dropPos, _dropMarker] call drn_fnc_CL_PositionIsInsideMarker)) then {
-            _dropPos = [];
-            while {count _dropPos == 0} do {
-                _dropPos = [_dropMarker] call _fnc_GetDropPosition;
-                sleep 1;
-            };
-
-            [_crewGroup] call _fnc_ClearAllWaypoints;
-            
-            if (_debug) then {
-                ["drn_ReinforcementTruck_DropPositionDebugMarker" + str _currentEntityNo] call drn_fnc_CL_DeleteDebugMarkerAllClients;
-                ["drn_ReinforcementTruck_DropPositionDebugMarker" + str _currentEntityNo, _dropPos, "Dot", "ColorRed", "RT" + str _currentEntityNo + " drop pos"] call drn_fnc_CL_SetDebugMarkerAllClients;
-                ["Reinforcement truck got new intel, and moving to another position..."] call drn_fnc_CL_ShowDebugTextAllClients;
-            };
-        };
-        
-        _waypoint = _crewGroup addWaypoint [_dropPos, 10];
-        _waypoint setWaypointType "MOVE";
-        _waypoint setWaypointBehaviour "SAFE";
-        _waypoint setWaypointSpeed "NORMAL";
-        _waypoint setWaypointStatements ["true", vehicleVarName _truck + " setVariable [""waypointFulfilled"", true];"];
-        _waypoint setWaypointCombatMode "BLUE";
-        
-        sleep 1;
-    };
-};
-*/
-
 
 

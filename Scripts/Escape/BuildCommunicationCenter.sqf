@@ -19,7 +19,7 @@ _fnc_CreateObject = {
     
     _realPos = ([_centerPos, [(_centerPos select 0) + (_relativePos select 0), (_centerPos select 1) + (_relativePos select 1)], _rotateDir] call drn_fnc_CL_RotatePosition);
     _realDir = _relativeDir + _rotateDir;
-    _object = createVehicle [_className, [_realPos select 0, _realPos select 1, 5], [], 0, "CAN_COLLIDE"];
+    _object = createVehicle [_className, [_realPos select 0, _realPos select 1, 1000], [], 0, "CAN_COLLIDE"];
     _object setDir _realDir;
     _object setPos [_realPos select 0, _realPos select 1, 0.05];
     

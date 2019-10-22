@@ -112,7 +112,7 @@ if (_showGroupDiagnostics) then {
 
 // Initialize communication centers
 if (true) then {
-    private ["_instanceNo", "_marker", "_minEnemies", "_maxEnemies", "_chosenComCenIndexes", "_index", "_comCenPositions", "_comCenItem", "_distanceBetween", "_currentPos", "_tooClose", "_pos", "_scriptHandle"];
+    private ["_instanceNo", "_marker", "_chosenComCenIndexes", "_index", "_comCenPositions", "_comCenItem", "_distanceBetween", "_currentPos", "_tooClose", "_pos", "_scriptHandle"];
 
     call compile preprocessFileLineNumbers ("Scripts\Escape\CommunicationCenterMarkers" + worldName + ".sqf");
     
@@ -193,25 +193,6 @@ if (true) then {
     
     _instanceNo = 0;
     
-    switch (_enemyFrequency) do
-    {
-        case 1: // 1-2 players
-        {
-            _minEnemies = 2;
-            _maxEnemies = 4;
-        };
-        case 2: // 3-5 players
-        {
-            _minEnemies = 4;
-            _maxEnemies = 7;
-        };
-        default // 6-8 players
-        {
-            _minEnemies = 7;
-            _maxEnemies = 12;
-        };
-    };
-
     _comCenPositions = [];
     
     {
@@ -242,13 +223,6 @@ if (true) then {
         _instanceNo = _instanceNo + 1;
     } foreach _chosenComCenIndexes;
 
-    if (_comCenGuardsExist) then
-    {
-        // Arma 2 solution        
-        //_scriptHandle = [_playerGroup, "drn_CommunicationCenterPatrolMarker", drn_var_enemySide, "INS", 4, _minEnemies, _maxEnemies, _enemyMinSkill, _enemyMaxSkill, _enemySpawnDistance] execVM "Scripts\DRN\DynamicGuardedLocations\InitGuardedLocations.sqf";
-        //waitUntil {scriptDone _scriptHandle};
-    };
-    
     drn_var_Escape_communicationCenterPositions = _comCenPositions;
     publicVariable "drn_var_Escape_communicationCenterPositions";
     
@@ -263,12 +237,8 @@ if (true) then {
 
 // Initialize ammo depots
 if (_useAmmoDepots) then {
-    [_playerGroup, _enemyFrequency] spawn {
-        private ["_playerGroup", "_enemyFrequency"];
-        private ["_minEnemies", "_maxEnemies", "_bannedPositions", "_scriptHandle", "_ammoDepotPatrolMarker"];
-
-        _playerGroup = _this select 0;
-        _enemyFrequency = _this select 1;
+    [] spawn {
+        private ["_bannedPositions", "_ammoDepotPatrolMarker"];
 
         _bannedPositions = + drn_var_Escape_communicationCenterPositions + [drn_startPos, getMarkerPos "drn_insurgentAirfieldMarker"];
         drn_var_Escape_ammoDepotPositions = _bannedPositions call drn_fnc_Escape_FindAmmoDepotPositions;
@@ -357,9 +327,9 @@ if (_useMotorizedSearchGroup) then {
 [_playerGroup, 750, _debugGarbageCollector] spawn drn_fnc_CL_RunGarbageCollector;
 
 // Run initialization for scripts that need the players to be gathered at the start position
-[_useVillagePatrols, _useMilitaryTraffic, _useAmbientInfantry, _debugVillagePatrols, _debugMilitaryTraffic, _debugAmbientInfantry, _enemyMinSkill, _enemyMaxSkill, _enemySpawnDistance, _enemyFrequency, _useRoadBlocks, _debugRoadBlocks, _debugAmmoAndComPatrols, _useCivilians, _debugCivilians] spawn {
-    private ["_useVillagePatrols", "_useMilitaryTraffic", "_useAmbientInfantry", "_debugVillagePatrols", "_debugMilitaryTraffic", "_debugAmbientInfantry", "_enemyMinSkill", "_enemyMaxSkill", "_enemySpawnDistance", "_enemyFrequency", "_useRoadBlocks", "_debugRoadBlocks", "_debugAmmoAndComPatrols", "_useCivilians", "_debugCivilians"];
-    private ["_fnc_OnSpawnAmbientInfantryGroup", "_scriptHandle", "_areaPerGroup"];
+[_useVillagePatrols, _useMilitaryTraffic, _useAmbientInfantry, _debugVillagePatrols, _debugMilitaryTraffic, _debugAmbientInfantry, _enemyMinSkill, _enemyMaxSkill, _enemySpawnDistance, _enemyFrequency, _useRoadBlocks, _debugRoadBlocks, _useCivilians, _debugCivilians] spawn {
+    private ["_useVillagePatrols", "_useMilitaryTraffic", "_useAmbientInfantry", "_debugVillagePatrols", "_debugMilitaryTraffic", "_debugAmbientInfantry", "_enemyMinSkill", "_enemyMaxSkill", "_enemySpawnDistance", "_enemyFrequency", "_useRoadBlocks", "_debugRoadBlocks", "_useCivilians", "_debugCivilians"];
+    private ["_fnc_OnSpawnAmbientInfantryGroup", "_areaPerGroup"];
     private ["_playerGroup", "_minEnemiesPerGroup", "_maxEnemiesPerGroup", "_fnc_OnSpawnGroup"];
     
     _useVillagePatrols = _this select 0;
@@ -374,9 +344,8 @@ if (_useMotorizedSearchGroup) then {
     _enemyFrequency = _this select 9;
     _useRoadBlocks = _this select 10;
     _debugRoadBlocks = _this select 11;
-    _debugAmmoAndComPatrols = _this select 12;
-    _useCivilians = _this select 13;
-    _debugCivilians = _this select 14;
+    _useCivilians = _this select 12;
+    _debugCivilians = _this select 13;
     
     waitUntil {[drn_startPos] call drn_fnc_Escape_AllPlayersOnStartPos};
     _playerGroup = group ((call drn_fnc_Escape_GetPlayers) select 0);
@@ -453,18 +422,23 @@ if (_useMotorizedSearchGroup) then {
             private ["_unit", "_enemyUnit", "_i"];
             private ["_scriptHandle"];
             
+            scopeName "main";
+            
             _unit = units _this select 0;
             
-            while {!(isNull _unit)} do {
+            while {!(isNull _unit)} do
+            {
                 _enemyUnit = _unit findNearestEnemy (getPos _unit);
-                if (!(isNull _enemyUnit)) exitWith {
+                
+                if (!(isNull _enemyUnit)) then {
                     
                     for [{_i = (count waypoints _this) - 1}, {_i >= 0}, {_i = _i - 1}] do {
                         deleteWaypoint [_this, _i];
                     };
                     
-                    _scriptHandle = [_this, drn_searchAreaMarkerName, (getPos _enemyUnit), drn_var_Escape_DebugSearchGroup] execVM "Scripts\DRN\SearchGroup\SearchGroup.sqf";
+                    _scriptHandle = [_this, drn_searchAreaMarkerName, (getPos _enemyUnit), drn_var_Escape_DebugSearchGroup] execVM "Engima\SearchPatrol\SearchPatrol.sqf";
                     _this setVariable ["drn_scriptHandle", _scriptHandle];
+                    breakOut "main";
                 };
                 
                 sleep 5;
@@ -550,7 +524,7 @@ if (_useMotorizedSearchGroup) then {
             } foreach _crew;
             
             if (random 100 < 20) then {
-                private ["_index", "_weaponItem"];
+                //private ["_index", "_weaponItem"];
                 
                 //_index = floor random count drn_arr_CivilianCarWeapons;
                 //_weaponItem = drn_arr_CivilianCarWeapons select _index;

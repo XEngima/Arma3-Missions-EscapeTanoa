@@ -140,7 +140,7 @@ while {true} do {
                         _group = _this select 0;
                         _dropPos = _this select 1;
                         
-                        [_group, drn_searchAreaMarkerName, _dropPos, drn_var_Escape_DebugSearchGroup] execVM "Scripts\DRN\SearchGroup\SearchGroup.sqf";                        
+                        [_group, drn_searchAreaMarkerName, _dropPos, drn_var_Escape_DebugSearchGroup] execVM "Engima\SearchPatrol\SearchPatrol.sqf";
                     };
                     
                     [getMarkerPos "drn_dropChopperStartPosMarker", drn_var_enemySide, "O_Heli_Light_02_unarmed_F", "O_Pilot_F", _dropUnits, _dropPosition, _minEnemySkill, _maxEnemySkill, _onGroupDropped, drn_var_Escape_debugDropChoppers] execVM "Scripts\Escape\CreateDropChopper.sqf";

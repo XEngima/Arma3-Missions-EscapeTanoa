@@ -67,7 +67,7 @@ for "_i" from 1 to _soldiersCount do {
 } foreach units _group;
 
 _fnc_OnDroppingGroup = {
-    [_this, "drn_searchAreaMarker", [0, 0, 0], drn_var_Escape_DebugSearchGroup] execVM "Scripts\DRN\SearchGroup\SearchGroup.sqf";
+    [_this, "drn_searchAreaMarker", [0, 0, 0], drn_var_Escape_DebugSearchGroup] execVM "Engima\SearchPatrol\SearchPatrol.sqf";
 };
 
 [_vehicle, _cargoGroup, drn_searchAreaMarkerName, true, _fnc_OnDroppingGroup, _debug] execVM "Scripts\DRN\GroupTransport\InsertionTruck\InsertionTruck.sqf";

@@ -205,13 +205,6 @@
                   </ProjectNodeViewModel>
                 </SubNodes>
               </ProjectNodeViewModel>
-              <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="SearchGroup" FileName="Scripts\DRN\SearchGroup">
-                <SubNodes>
-                  <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="SearchGroup.sqf" FileName="Scripts\DRN\SearchGroup\SearchGroup.sqf">
-                    <SubNodes />
-                  </ProjectNodeViewModel>
-                </SubNodes>
-              </ProjectNodeViewModel>
               <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="VillageMarkers" FileName="Scripts\DRN\VillageMarkers">
                 <SubNodes>
                   <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="InitVillageMarkers.sqf" FileName="Scripts\DRN\VillageMarkers\InitVillageMarkers.sqf">

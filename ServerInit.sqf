@@ -7,19 +7,19 @@ private ["_forceComCentersApart", "_debugAmmoAndComPatrols", "_useCivilians", "_
 
 // Developer Variables
 
-_useRandomStartPos = true; // working
-_useEscapeSurprises = true; // partly working
-_useAmmoDepots = true; // working
-_useSearchLeader = true; // working
-_useMotorizedSearchGroup = true; // working
-_useVillagePatrols = true; // working
+_useRandomStartPos = false; // working
+_useEscapeSurprises = false; // partly working
+_useAmmoDepots = false; // working
+_useSearchLeader = false; // working
+_useMotorizedSearchGroup = false; // working
+_useVillagePatrols = false; // working
 _useMilitaryTraffic = true; // working
-_useAmbientInfantry = true; // working
-_useSearchChopper = true; // working
-_useRoadBlocks = true; // working
+_useAmbientInfantry = false; // working
+_useSearchChopper = false; // working
+_useRoadBlocks = false; // working
 _useCivilians = true; // working
 
-_guardsExist = true;
+_guardsExist = false;
 _comCenGuardsExist = true;
 _guardsAreArmed = true;
 _guardLivesLong = true;
@@ -32,11 +32,11 @@ _debugEscapeSurprises = true;
 _debugAmmoAndComPatrols = false;
 _debugSearchLeader = true;
 _debugVillagePatrols = false;
-_debugMilitaryTraffic = false;
+_debugMilitaryTraffic = true;
 _debugAmbientInfantry = false;
 _debugGarbageCollector = false;
 _debugRoadBlocks = false;
-_debugCivilians = false;
+_debugCivilians = true;
 drn_var_Escape_debugMotorizedSearchGroup = false;
 drn_var_Escape_debugDropChoppers = false;
 drn_var_Escape_debugReinforcementTruck = false;
@@ -560,6 +560,25 @@ if (_useMotorizedSearchGroup) then {
             };
         };
         
+		private _onCivilianVehicleCreating = {
+			params ["_args", "_noOfVehicles", "_maxNoOfVehicles"];
+		    
+		    scopeName "main";
+		
+			// Between 7 and 22, spawn all ordinary units
+		    if (daytime > 7 && daytime < 22) then {
+		        true breakOut "main";
+		    };
+		
+			// Early in the morning and late in the evening, spawn half of ordinary units
+		    if (daytime > 4) then {
+		        (_noOfVehicles < _maxNoOfVehicles / 2) breakOut "main";
+		    };
+		
+		    // Between 0 and 4, spawn at maximum one unit
+		    (_noOfVehicles == 0)
+		};
+
 		private _parameters = [
 			["SIDE", civilian],
 			["VEHICLES", drn_arr_Escape_MilitaryTraffic_CivilianVehicleClasses],
@@ -568,6 +587,7 @@ if (_useMotorizedSearchGroup) then {
 			["MAX_SPAWN_DISTANCE", _radius],
 			["MIN_SKILL", 0.4],
 			["MAX_SKILL", 0.6],
+			["ON_UNIT_CREATING", _onCivilianVehicleCreating],
 			["ON_UNIT_CREATED", _fnc_onSpawnCivilian],
 			["DEBUG", _debugMilitaryTraffic]
 		];
@@ -640,6 +660,25 @@ if (_useMotorizedSearchGroup) then {
             }];
         };
         
+		private _onCivilianCreating = {
+			params ["_args", "_noOfVehicles", "_maxNoOfVehicles"];
+		    
+		    scopeName "main";
+		
+			// Between 7 and 22, spawn all ordinary units
+		    if (daytime > 7 && daytime < 22) then {
+		        true breakOut "main";
+		    };
+		
+			// Early in the morning and late in the evening, spawn half of ordinary units
+		    if (daytime > 4) then {
+		        (_noOfVehicles < _maxNoOfVehicles / 2) breakOut "main";
+		    };
+		
+		    // Between 0 and 4, spawn 10% of ordinary units
+		    (_noOfVehicles < _maxNoOfVehicles / 10)
+		};
+		
 		private _parameters = [
 			["UNIT_CLASSES", ["C_man_1", "C_man_1_1_F", "C_man_1_2_F", "C_man_1_3_F", "C_man_polo_1_F", "C_man_polo_1_F_afro", "C_man_polo_1_F_euro", "C_man_polo_1_F_asia", "C_man_polo_2_F", "C_man_polo_2_F_afro", "C_man_polo_2_F_euro", "C_man_polo_2_F_asia", "C_man_polo_3_F", "C_man_polo_3_F_afro", "C_man_polo_3_F_euro", "C_man_polo_3_F_asia", "C_man_polo_4_F", "C_man_polo_4_F_afro", "C_man_polo_4_F_euro", "C_man_polo_4_F_asia", "C_man_polo_5_F", "C_man_polo_5_F_afro", "C_man_polo_5_F_euro", "C_man_polo_5_F_asia", "C_man_polo_6_F", "C_man_polo_6_F_afro", "C_man_polo_6_F_euro", "C_man_polo_6_F_asia", "C_man_p_fugitive_F", "C_man_p_fugitive_F_afro", "C_man_p_fugitive_F_euro", "C_man_p_fugitive_F_asia", "C_man_p_beggar_F", "C_man_p_beggar_F_afro", "C_man_p_beggar_F_euro", "C_man_p_beggar_F_asia", "C_man_w_worker_F", "C_scientist_F", "C_man_hunter_1_F", "C_man_p_shorts_1_F", "C_man_p_shorts_1_F_afro", "C_man_p_shorts_1_F_euro", "C_man_p_shorts_1_F_asia", "C_man_shorts_1_F", "C_man_shorts_1_F_afro", "C_man_shorts_1_F_euro", "C_man_shorts_1_F_asia", "C_man_shorts_2_F", "C_man_shorts_2_F_afro", "C_man_shorts_2_F_euro", "C_man_shorts_2_F_asia", "C_man_shorts_3_F", "C_man_shorts_3_F_afro", "C_man_shorts_3_F_euro", "C_man_shorts_3_F_asia", "C_man_shorts_4_F", "C_man_shorts_4_F_afro", "C_man_shorts_4_F_euro", "C_man_shorts_4_F_asia", "C_journalist_F", "C_Orestes", "C_Nikos", "C_Nikos_aged"]],
 			["UNITS_PER_BUILDING", 0.1],
@@ -648,6 +687,7 @@ if (_useMotorizedSearchGroup) then {
 			["MAX_SPAWN_DISTANCE", _enemySpawnDistance],
 			["BLACKLIST_MARKERS", []],
 			["HIDE_BLACKLIST_MARKERS", true],
+			["ON_UNIT_SPAWNING_CALLBACK", _onCivilianCreating],
 			["ON_UNIT_SPAWNED_CALLBACK", _fnc_onSpawnCivilian],
 			["ON_UNIT_REMOVE_CALLBACK", { true }],
 			["DEBUG", _debugCivilians]

@@ -1,29 +1,22 @@
-call compile preprocessFileLineNumbers "Engima\ParkedVehicles\Init.sqf";
 call compile preprocessFileLineNumbers "Engima\Civilians\Init.sqf"; // Added by Engima.Civilians
 call compile preprocessFileLineNumbers "Engima\Traffic\Init.sqf"; // Added by Engima.Traffic
 call compile preprocessFileLineNumbers "Engima\PatrolledAreas\Init.sqf"; // Added by Engima.PatrolledAreas
 call compile preprocessFileLineNumbers "Scripts\DRN\CommonLib\CommonLib.sqf";
 call compile preprocessFileLineNumbers "Engima\CommonLib\CommonLib.sqf"; // Added by Engima.CommonLib
-private ["_volume", "_dynamicWeather", "_isJipPlayer"];
+private ["_volume", "_dynamicWeather"];
 private ["_showIntro", "_showPlayerMapAndCompass", "_fog", "_playerIsImmortal", "_playersEnteredWorld"];
 
 drn_var_playerSide = west;
 drn_var_enemySide = east;
 
-_isJipPlayer = false;
-if (!isServer && isNull player) then
-{
-    _isJipPlayer = true;
-};
-
 // Developer Variables
 
-_showIntro = false;
+_showIntro = true;
 
 // Debug Variables
 
-_showPlayerMapAndCompass = true;
-_playerIsImmortal = true; // Only works for unit p1
+_showPlayerMapAndCompass = false;
+_playerIsImmortal = false; // Only works for unit p1
 
 // Initialization
 
@@ -83,7 +76,7 @@ call drn_fnc_CL_InitParams;
 
 call compile preprocessFileLineNumbers "Scripts\Escape\Functions.sqf";
 
-[_isJipPlayer] call compile preprocessFileLineNumbers "Briefing.sqf";
+[didJip] call compile preprocessFileLineNumbers "Briefing.sqf";
 
 _dynamicWeather = (paramsArray select 3);
 setTerrainGrid (paramsArray select 4);
@@ -241,7 +234,7 @@ if (!isMultiplayer) then {
 
 // Run start sequence for all players
 if (!isNull player) then {
-    [_volume, _showIntro, _showPlayerMapAndCompass, _isJipPlayer] spawn {
+    [_volume, _showIntro, _showPlayerMapAndCompass, didJip] spawn {
         private ["_volume", "_showIntro", "_showPlayerMapAndCompass", "_isJipPlayer"];
         private ["_marker"];
         
@@ -261,20 +254,13 @@ if (!isNull player) then {
                 _anotherPlayer = (call drn_fnc_Escape_GetPlayers) select 1;
             };
             
-            "drn_arr_JipSpawnPos" addPublicVariableEventHandler {
-                private ["_unitID", "_pos"];
-                
-                _unitID = drn_arr_JipSpawnPos select 0;
-                _pos = drn_arr_JipSpawnPos select 1;
-
-                if (_unitID == str player) then {
-                    player setPos _pos;
-                };
+            if (_anotherPlayer distance drn_startPos > 50) then {
+            	private _pos = getPos _anotherPlayer;
+                player setPos [(_pos select 0) - 5 + random 10, (_pos select 1) - 5 + random 10, 0.1];
+                //player setUnconscious true;
+                player setDamage 0.9;
             };
-            
-            drn_fnc_Escape_AskForJipPos = [str player];
-            publicVariable "drn_fnc_Escape_AskForJipPos";
-            
+
             [] spawn {
                 private ["_marker"];
                 
@@ -380,8 +366,8 @@ if (!isNull player) then {
         enableRadio true;
 
         // Set position again (a fix for the bug that makes players run away after server restart and before fence is built by server)
-        player setPos [(drn_startPos select 0) + (random 4) - 2, (drn_startPos select 1) + (random 6) - 3, 0];
-        sleep 0.1;
+        //player setPos [(drn_startPos select 0) + (random 4) - 2, (drn_startPos select 1) + (random 6) - 3, 0];
+        //sleep 0.1;
         
         player setVariable ["drn_var_initializing", false, true];
         waitUntil {!(isNil "drn_escapeHasStarted")};

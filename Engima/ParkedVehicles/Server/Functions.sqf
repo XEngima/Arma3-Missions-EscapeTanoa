@@ -102,6 +102,8 @@ PARKEDVEHICLES_PlaceVehiclesOnMap = {
 			sleep 0.2;
 		} foreach _buildingClasses;
 		
-		player sideChat (str _debugMarkerIndex) + " vehicles spawned in garages/buildings."
+		if (_debug) then {
+			player sideChat (str _debugMarkerIndex) + " vehicles spawned in garages/buildings."
+		};
 	};
 };

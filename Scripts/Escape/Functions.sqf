@@ -1210,25 +1210,7 @@ drn_fnc_Escape_PopulateVehicle = {
 };
 
 if (isServer) then {
-    "drn_fnc_Escape_AskForJipPos" addPublicVariableEventHandler {
-        private ["_anotherPlayer"];
-        private _unitName = drn_fnc_Escape_AskForJipPos select 0;
-        
-        _anotherPlayer = (call drn_fnc_Escape_GetPlayers) select 0;
-        if (_unitName == str _anotherPlayer) then {
-            _anotherPlayer = (call drn_fnc_Escape_GetPlayers) select 1;
-        };
-        
-        private _pos = [((getPos vehicle _anotherPlayer) select 0) + 3, ((getPos vehicle _anotherPlayer) select 1) + 3, 0];
-        
-        drn_arr_JipSpawnPos = [_unitName, _pos];
-        publicVariable "drn_arr_JipSpawnPos";
-        
-        diag_log ("Server respond to JIP, pos == " + str getPos _anotherPlayer);
-    };
-
     drn_var_Escape_FunctionsInitializedOnServer = true;
     publicVariable "drn_var_Escape_FunctionsInitializedOnServer";
 };
-
     

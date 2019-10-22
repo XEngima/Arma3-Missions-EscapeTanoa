@@ -3,7 +3,7 @@ if (!isServer) exitWith {};
 private ["_useEscapeSurprises", "_useRandomStartPos", "_useAmmoDepots", "_useSearchLeader", "_useMotorizedSearchGroup", "_useVillagePatrols", "_useMilitaryTraffic", "_useAmbientInfantry", "_useSearchChopper", "_useRoadBlocks", "_guardsExist", "_guardsAreArmed", "_guardLivesLong"];
 private ["_debugEscapeSurprises", "_debugSearchLeader", "_showGroupDiagnostics", "_debugVillagePatrols", "_debugMilitaryTraffic", "_debugAmbientInfantry", "_debugGarbageCollector", "_debugRoadBlocks"];
 private ["_enemyMinSkill", "_enemyMaxSkill", "_searchChopperSearchTimeMin", "_searchChopperRefuelTimeMin", "_enemySpawnDistance", "_playerGroup", "_enemyFrequency", "_comCenGuardsExist", "_fenceRotateDir", "_scriptHandle"];
-private ["_allowComCentersTooClose", "_debugAmmoAndComPatrols", "_useCivilians", "_debugCivilians"];
+private ["_forceComCentersApart", "_debugAmmoAndComPatrols", "_useCivilians", "_debugCivilians"];
 
 // Developer Variables
 
@@ -24,8 +24,7 @@ _comCenGuardsExist = true;
 _guardsAreArmed = true;
 _guardLivesLong = true;
 
-_allowComCentersTooClose = false;
-drn_var_Escape_timeToHijack = 30; // 30
+_forceComCentersApart = true;
 
 // Debug Variables
 
@@ -48,6 +47,7 @@ _showGroupDiagnostics = false;
 
 // Game Control Variables, do not edit!
 
+drn_var_Escape_timeToHijack = 30; // 30
 drn_var_playerSide = west;
 drn_var_enemySide = east;
 
@@ -159,7 +159,7 @@ if (true) then {
 	
 	            _tooClose = false;
 	            
-	            if (!_allowComCentersTooClose) then
+	            if (!_forceComCentersApart) then
 	            {
 		            {
 		                _pos = (drn_arr_communicationCenterMarkers select _x) select 0;

@@ -8,7 +8,7 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=281;
+		nextID=317;
 	};
 	class MarkerIDProvider
 	{
@@ -16,47 +16,31 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={8971.166,39.322052,10036.402};
-		dir[]={0.7832188,-0.37924454,-0.4927474};
-		up[]={0.32101876,0.925286,-0.20196302};
-		aside[]={-0.53252941,-3.8475264e-007,-0.84644943};
+		pos[]={8997.8076,45.473499,9994.1318};
+		dir[]={0.094456941,-0.35471156,0.93019772};
+		up[]={0.03583537,0.934973,0.3528994};
+		aside[]={0.99488783,-4.976755e-008,-0.10102639};
 	};
 };
 binarizationWanted=0;
 addons[]=
 {
-	"A3_Structures_F_Exp_Walls_Tin",
 	"A3_Ui_F",
-	"A3_Boat_F_Boat_Armed_01",
 	"A3_Characters_F_Exp"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=4;
+		items=2;
 		class Item0
-		{
-			className="A3_Structures_F_Exp";
-			name="Arma 3 Apex - Buildings and Structures";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
-		};
-		class Item1
 		{
 			className="A3_Ui_F";
 			name="Arma 3 - User Interface";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item2
-		{
-			className="A3_Boat_F";
-			name="Arma 3 Alpha - Boats and Submersibles";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
-		};
-		class Item3
+		class Item1
 		{
 			className="A3_Characters_F_Exp";
 			name="Arma 3 Apex - Characters and Clothing";
@@ -260,23 +244,8 @@ class Mission
 	};
 	class Entities
 	{
-		items=25;
+		items=23;
 		class Item0
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={9063.2373,25.721867,10166.501};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-			};
-			id=26;
-			type="Land_TinWall_02_l_8m_F";
-		};
-		class Item1
 		{
 			dataType="Marker";
 			position[]={9715.2188,53.790001,9853.6816};
@@ -286,7 +255,7 @@ class Mission
 			id=33;
 			atlOffset=-0.00019073486;
 		};
-		class Item2
+		class Item1
 		{
 			dataType="Marker";
 			position[]={6461.1538,0,13269.016};
@@ -295,7 +264,7 @@ class Mission
 			id=90;
 			atlOffset=6.9432898;
 		};
-		class Item3
+		class Item2
 		{
 			dataType="Marker";
 			position[]={14890.896,0,10649.597};
@@ -304,7 +273,7 @@ class Mission
 			id=91;
 			atlOffset=5.9405222;
 		};
-		class Item4
+		class Item3
 		{
 			dataType="Marker";
 			position[]={13797.104,0,7684.814};
@@ -313,7 +282,7 @@ class Mission
 			id=92;
 			atlOffset=5.6086764;
 		};
-		class Item5
+		class Item4
 		{
 			dataType="Marker";
 			position[]={13307.129,0,4034.9636};
@@ -322,7 +291,7 @@ class Mission
 			id=93;
 			atlOffset=2.6304736;
 		};
-		class Item6
+		class Item5
 		{
 			dataType="Marker";
 			position[]={9718.626,0,2599.1274};
@@ -331,7 +300,7 @@ class Mission
 			id=94;
 			atlOffset=1.8160424;
 		};
-		class Item7
+		class Item6
 		{
 			dataType="Marker";
 			position[]={9164.999,0,5856.459};
@@ -340,7 +309,7 @@ class Mission
 			id=95;
 			atlOffset=6.2466846;
 		};
-		class Item8
+		class Item7
 		{
 			dataType="Marker";
 			position[]={4600.2144,0,7899.1626};
@@ -349,7 +318,7 @@ class Mission
 			id=96;
 			atlOffset=5.630312;
 		};
-		class Item9
+		class Item8
 		{
 			dataType="Marker";
 			position[]={4881.2412,0,11451.72};
@@ -358,22 +327,7 @@ class Mission
 			id=97;
 			atlOffset=4.6146321;
 		};
-		class Item10
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={8346.0371,3.3238735,6122.4224};
-			};
-			side="Empty";
-			class Attributes
-			{
-			};
-			id=98;
-			type="B_Boat_Armed_01_minigun_F";
-			atlOffset=9.8649635;
-		};
-		class Item11
+		class Item9
 		{
 			dataType="Marker";
 			position[]={6095.8115,0,13522.306};
@@ -382,7 +336,7 @@ class Mission
 			id=99;
 			atlOffset=29.540413;
 		};
-		class Item12
+		class Item10
 		{
 			dataType="Marker";
 			position[]={15282.715,0,10100.295};
@@ -391,7 +345,7 @@ class Mission
 			id=100;
 			atlOffset=45.387234;
 		};
-		class Item13
+		class Item11
 		{
 			dataType="Marker";
 			position[]={14192.709,0,7401.4316};
@@ -400,7 +354,7 @@ class Mission
 			id=101;
 			atlOffset=23.347094;
 		};
-		class Item14
+		class Item12
 		{
 			dataType="Marker";
 			position[]={13779.154,0,3739.8811};
@@ -409,7 +363,7 @@ class Mission
 			id=102;
 			atlOffset=27.373266;
 		};
-		class Item15
+		class Item13
 		{
 			dataType="Marker";
 			position[]={8979.6465,0,2048.7808};
@@ -418,7 +372,7 @@ class Mission
 			id=103;
 			atlOffset=29.170279;
 		};
-		class Item16
+		class Item14
 		{
 			dataType="Marker";
 			position[]={9040.9346,0,5450.7402};
@@ -427,7 +381,7 @@ class Mission
 			id=104;
 			atlOffset=23.415039;
 		};
-		class Item17
+		class Item15
 		{
 			dataType="Marker";
 			position[]={4200.2158,0,7807.3198};
@@ -436,7 +390,7 @@ class Mission
 			id=105;
 			atlOffset=7.8869085;
 		};
-		class Item18
+		class Item16
 		{
 			dataType="Marker";
 			position[]={4556.3892,0,11114.328};
@@ -445,7 +399,7 @@ class Mission
 			id=106;
 			atlOffset=26.572121;
 		};
-		class Item19
+		class Item17
 		{
 			dataType="Trigger";
 			position[]={14315.084,0,14461.034};
@@ -461,7 +415,7 @@ class Mission
 			type="EmptyDetector";
 			atlOffset=55.466595;
 		};
-		class Item20
+		class Item18
 		{
 			dataType="Marker";
 			position[]={2137.1018,12.95,3446.1162};
@@ -470,7 +424,7 @@ class Mission
 			angle=344.85977;
 			id=112;
 		};
-		class Item21
+		class Item19
 		{
 			dataType="Marker";
 			position[]={9991.2744,60.349998,9747.7754};
@@ -479,7 +433,7 @@ class Mission
 			id=158;
 			atlOffset=-0.00046539307;
 		};
-		class Item22
+		class Item20
 		{
 			dataType="Marker";
 			position[]={2158.6091,12.95,3452.8772};
@@ -488,7 +442,7 @@ class Mission
 			angle=336.21497;
 			id=240;
 		};
-		class Item23
+		class Item21
 		{
 			dataType="Marker";
 			position[]={2026.597,12.95,3474.687};
@@ -497,7 +451,7 @@ class Mission
 			angle=343.48398;
 			id=263;
 		};
-		class Item24
+		class Item22
 		{
 			dataType="Group";
 			side="West";

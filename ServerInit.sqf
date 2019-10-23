@@ -9,20 +9,20 @@ private ["_forceComCentersApart", "_debugAmmoAndComPatrols", "_useCivilians", "_
 
 _useRandomStartPos = false; // working
 _useEscapeSurprises = false; // partly working
-_useAmmoDepots = false; // working
-_useSearchLeader = false; // working
+_useAmmoDepots = true; // working
+_useSearchLeader = true; // working
 _useMotorizedSearchGroup = false; // working
-_useVillagePatrols = false; // working
+_useVillagePatrols = true; // working
 _useMilitaryTraffic = true; // working
 _useAmbientInfantry = true; // working
-_useSearchChopper = false; // working
+_useSearchChopper = true; // working
 _useRoadBlocks = false; // working
 _useCivilians = false; // working
 
-_guardsExist = false;
+_guardsExist = true;
 _comCenGuardsExist = true;
 _guardsAreArmed = true;
-_guardLivesLong = true;
+_guardLivesLong = false;
 
 _forceComCentersApart = true;
 
@@ -31,9 +31,9 @@ _forceComCentersApart = true;
 _debugEscapeSurprises = false;
 _debugAmmoAndComPatrols = false;
 _debugSearchLeader = false;
-_debugVillagePatrols = false;
+_debugVillagePatrols = true;
 _debugMilitaryTraffic = false;
-_debugAmbientInfantry = false;
+_debugAmbientInfantry = true;
 _debugGarbageCollector = false;
 _debugRoadBlocks = false;
 _debugCivilians = false;
@@ -282,8 +282,24 @@ if (_useAmmoDepots) then {
     };
 	
 	private _parameters = [
-		["PATROL_AREAS", drn_var_comCenPatrolMarkers + drn_var_ammoDepotPatrolMarkers],
-		["UNIT_CLASSES", ["O_G_Soldier_F", "O_G_Soldier_lite_F", "O_G_Soldier_SL_F", "O_G_Soldier_TL_F", "O_G_Soldier_AR_F", "O_G_medic_F", "O_G_engineer_F", "O_G_Soldier_exp_F", "O_G_Soldier_GL_F", "O_G_Soldier_M_F", "O_G_Soldier_LAT_F", "O_G_Soldier_A_F", "O_G_officer_F"]],
+		["PATROL_AREAS", drn_var_comCenPatrolMarkers],
+		["UNIT_CLASSES", drn_arr_Escape_InfantryTypesCsatPacificEast],
+		["SIDE", east],
+		["MIN_UNITS_PER_GROUP", 2],
+		["MAX_UNITS_PER_GROUP", 4],
+		["SPAWN_DISTANCE", _enemySpawnDistance],
+		["AREA_PER_GROUP", _areaPerGroup],
+		["GROUP_PROBABILITY_OF_PRESENCE", 1],
+		["MIN_SKILL", _enemyMinSkill],
+		["MAX_SKILL", _enemyMaxSkill],
+		["DEBUG", _debugAmmoAndComPatrols]
+	];
+	
+	_parameters call PATAREAS_PatrolledAreas;
+	
+	_parameters = [
+		["PATROL_AREAS", drn_var_ammoDepotPatrolMarkers],
+		["UNIT_CLASSES", drn_arr_Escape_InfantryTypesParamilitaryGuer],
 		["SIDE", east],
 		["MIN_UNITS_PER_GROUP", 2],
 		["MAX_UNITS_PER_GROUP", 3],
@@ -382,24 +398,24 @@ if (_useMotorizedSearchGroup) then {
 	    {
 	        case 1: // 1-2 players
 	        {
-	        	_areaPerGroup = 50000; // 1 gruop
+	        	_areaPerGroup = 50000;
 	        	_maxNoOfUnitsPerGroup = 2;
 	        };
 	        case 2: // 3-5 players
 	        {
-	        	_areaPerGroup = 40000; // 2 groups
-	        	_maxNoOfUnitsPerGroup = 4;
+	        	_areaPerGroup = 40000;
+	        	_maxNoOfUnitsPerGroup = 5;
 	        };
 	        default // 6-8 players
 	        {
-	        	_areaPerGroup = 35000; // 3 group
-	        	_maxNoOfUnitsPerGroup = 6;
+	        	_areaPerGroup = 35000;
+	        	_maxNoOfUnitsPerGroup = 8;
 	        };
 	    };
 		
 		private _parameters = [
 			["PATROL_AREAS", drn_actualVillageMarkers],
-			["UNIT_CLASSES", ["O_G_Soldier_F", "O_G_Soldier_lite_F", "O_G_Soldier_SL_F", "O_G_Soldier_TL_F", "O_G_Soldier_AR_F", "O_G_medic_F", "O_G_engineer_F", "O_G_Soldier_exp_F", "O_G_Soldier_GL_F", "O_G_Soldier_M_F", "O_G_Soldier_LAT_F", "O_G_Soldier_A_F", "O_G_officer_F"]],
+			["UNIT_CLASSES", drn_arr_Escape_InfantryTypesParamilitaryGuer],
 			["SIDE", east],
 			["MIN_UNITS_PER_GROUP", 1],
 			["MAX_UNITS_PER_GROUP", _maxNoOfUnitsPerGroup],

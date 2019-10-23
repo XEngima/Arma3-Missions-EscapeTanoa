@@ -152,6 +152,11 @@ while {true} do {
         
         _group setVariable ["drn_scriptHandle", _group spawn _fnc_OnSpawnGroup]; // Squint complaining, but is ok.
         
+        // Skill is set in _fnc_OnSpawnUnit, so set it explicitly now afterwards.
+        {
+        	_x setSkill (_minSkill + random (_maxSkill - _minSkill));
+        } foreach units _group;
+        
         // Name group
         sleep random 0.05;
         if (isNil "drn_AmbientInfantry_CurrentEntityNo") then {

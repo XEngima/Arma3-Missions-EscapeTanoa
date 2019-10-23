@@ -339,11 +339,15 @@ if (!isNull player) then {
             sleep 2;
         };
         
-        player unassignItem "ItemGps";
-        player removeItem "ItemGps";
-        player unassignItem "NVGoggles";
-        player removeItem "NVGoggles";
+        player unlinkItem "ItemGps";
+        player unlinkItem "NVGoggles";
+        player unlinkItem "NVGogglesB_blk_F";
+        player unlinkItem "NVGogglesB_grn_F";
+        player unlinkItem "NVGogglesB_gry_F";
         removeBackpack player;
+        removeHeadgear player;
+        removeGoggles player;
+        removeAllItems player;
             
         if (_showPlayerMapAndCompass) then {
             _marker = createMarkerLocal ["drn_startPosMarker", drn_startPos];

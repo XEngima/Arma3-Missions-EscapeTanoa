@@ -52,7 +52,7 @@ if (_soldiersCount > _vehicleMaxCargo) then {
 };
 
 for "_i" from 1 to _soldiersCount do {
-    _infantryType = drn_arr_Escape_InfantryTypes select floor random count drn_arr_Escape_InfantryTypes;
+    _infantryType = selectRandom drn_arr_Escape_InfantryTypesParamilitaryGuer;
     _insurgentSoldier = _cargoGroup createUnit [_infantryType, [0,0,30], [], 0, "FORM"];
     _insurgentSoldier setSkill (_minSkill + random (_maxSkill - _minSkill));
     _insurgentSoldier setRank "LIEUTENANT";

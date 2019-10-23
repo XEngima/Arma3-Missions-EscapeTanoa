@@ -124,7 +124,7 @@ while {true} do {
                     _dropUnits = [];
                     
                     for [{_i = 0}, {_i < _noOfDropUnits}, {_i = _i + 1}] do {
-                        _soldierType = drn_arr_Escape_InfantryTypes select floor (random count drn_arr_Escape_InfantryTypes);
+                        _soldierType = "O_T_Soldier_PG_F";
                         _soldier = _dropGroup createUnit [_soldierType, [0,0,30], [], 0, "FORM"];
                         _soldier setSkill (_minEnemySkill + random (_maxEnemySkill - _minEnemySkill));
                         _soldier setRank "CAPTAIN";
@@ -209,7 +209,7 @@ while {true} do {
                         sleep 1;
                     };
                     
-                    [call drn_fnc_Escape_GetPlayerGroup, getPos _spawnSegment, drn_var_enemySide, drn_arr_Escape_EnemyCivilianCarTypes, drn_arr_Escape_InfantryTypes, _enemyFrequency, _debug] execVM "Scripts\Escape\CreateCivilEnemy.sqf";
+                    [call drn_fnc_Escape_GetPlayerGroup, getPos _spawnSegment, drn_var_enemySide, drn_arr_Escape_EnemyCivilianCarTypes, drn_arr_Escape_InfantryTypesBanditsGuer, _enemyFrequency, _debug] execVM "Scripts\Escape\CreateCivilEnemy.sqf";
                     
                     _surpriseArgs = [_minEnemySkill, _maxEnemySkill];
                     _timeInSek = 15 * 60 + random (45 * 60);

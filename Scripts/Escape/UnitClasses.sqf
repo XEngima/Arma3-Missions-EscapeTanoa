@@ -18,11 +18,13 @@ _enemyFrequency = _this select 0;
 // Arma 3 FIA infantry:
 // [/*simple:*/ "O_G_Soldier_F", "O_G_Soldier_lite_F", "O_G_Soldier_A_F", "O_G_medic_F", "O_G_Soldier_GL_F", "O_G_Soldier_SL_F", "O_G_Soldier_TL_F", /*backpacks:*/ "O_G_engineer_F", "O_G_Soldier_exp_F", /*advanced:*/ "O_G_Soldier_M_F", "O_G_officer_F", "O_G_Soldier_LAT_F", "O_G_Soldier_LAT2_F", "O_G_Sharpshooter_F"];
 
+// Arma 3 
+// [simple: "I_C_Soldier_Para_1_F", "I_C_Soldier_Para_1_F", "I_C_Soldier_Para_1_F", "I_C_Soldier_Para_1_F", "I_C_Soldier_Para_1_F", "I_C_Soldier_Para_1_F", backbacks: "I_C_Soldier_Para_8_F" advanced, "I_C_Soldier_Para_5_F"]
 
-drn_arr_Escape_StartPositionGuardTypes = ["O_G_Soldier_F", "O_G_Soldier_lite_F", "O_G_Soldier_A_F", "O_G_medic_F", "O_G_Soldier_GL_F", "O_G_Soldier_SL_F", "O_G_Soldier_TL_F", /*backpacks:*/ "O_G_engineer_F", "O_G_Soldier_exp_F"];
+drn_arr_Escape_StartPositionGuardTypes = ["I_C_Soldier_Para_1_F", "I_C_Soldier_Para_2_F", "I_C_Soldier_Para_3_F", "I_C_Soldier_Para_4_F", "I_C_Soldier_Para_6_F", "I_C_Soldier_Para_7_F", "I_C_Soldier_Para_8_F"];
 
 // Inner fence guard's secondary weapon (and corresponding magazine type).
-drn_var_Escape_InnerFenceGuardSecondaryWeapon = "hgun_Pistol_heavy_02_Yorris_F";
+drn_var_Escape_InnerFenceGuardSecondaryWeapon = "hgun_Pistol_heavy_02_F";
 drn_var_Escape_InnerFenceGuardSecondaryWeaponMagazine = "6Rnd_45ACP_Cylinder";
 
 // Random array. Civilian vehicle classes for ambient traffic. (Can also be set to a faction name).
@@ -133,7 +135,12 @@ switch (_enemyFrequency) do {
 };
 
 // Random array. General infantry types. E.g. village patrols, ambient infantry, ammo depot guards, communication center guards, etc.
-drn_arr_Escape_InfantryTypes = ["O_Soldier_LAT_F", "O_Soldier_AR_F", "O_Soldier_AR_F", "O_Soldier_GL_F", "O_support_MG_F", "O_medic_F", "O_Soldier_F", "O_Soldier_F", "O_Soldier_AR_F", "O_Soldier_GL_F", "O_support_MG_F", "O_medic_F", "O_Soldier_F", "O_Soldier_F", "O_Soldier_AR_F", "O_Soldier_GL_F", "O_support_MG_F", "O_medic_F", "O_Soldier_F", "O_Soldier_F", "O_Soldier_AR_F", "O_Soldier_GL_F", "O_support_MG_F", "O_medic_F", "O_Soldier_F", "O_Soldier_F", "O_Soldier_AR_F", "O_Soldier_GL_F", "O_support_MG_F", "O_medic_F", "O_Soldier_F", "O_Soldier_F"];
+
+//drn_arr_Escape_InfantryTypes = ["O_Soldier_LAT_F", "O_Soldier_AR_F", "O_Soldier_AR_F", "O_Soldier_GL_F", "O_support_MG_F", "O_medic_F", "O_Soldier_F", "O_Soldier_F", "O_Soldier_AR_F", "O_Soldier_GL_F", "O_support_MG_F", "O_medic_F", "O_Soldier_F", "O_Soldier_F", "O_Soldier_AR_F", "O_Soldier_GL_F", "O_support_MG_F", "O_medic_F", "O_Soldier_F", "O_Soldier_F", "O_Soldier_AR_F", "O_Soldier_GL_F", "O_support_MG_F", "O_medic_F", "O_Soldier_F", "O_Soldier_F", "O_Soldier_AR_F", "O_Soldier_GL_F", "O_support_MG_F", "O_medic_F", "O_Soldier_F", "O_Soldier_F"];
+drn_arr_Escape_InfantryTypesBanditsGuer = ["I_C_Soldier_Bandit_1_F", "I_C_Soldier_Bandit_2_F", "I_C_Soldier_Bandit_3_F", "I_C_Soldier_Bandit_4_F", "I_C_Soldier_Bandit_5_F", "I_C_Soldier_Bandit_6_F", "I_C_Soldier_Bandit_7_F", "I_C_Soldier_Bandit_8_F"];
+drn_arr_Escape_InfantryTypesParamilitaryGuer = ["I_C_Soldier_Para_1_F", "I_C_Soldier_Para_2_F", "I_C_Soldier_Para_3_F", "I_C_Soldier_Para_4_F", "I_C_Soldier_Para_5_F", "I_C_Soldier_Para_6_F", "I_C_Soldier_Para_7_F", "I_C_Soldier_Para_8_F"];
+drn_arr_Escape_InfantryTypesCsatPacificEast = ["O_T_Soldier_A_F", "O_T_Soldier_AAR_F", "O_T_Support_AMG_F", "O_T_Support_AMort_F", "O_T_Soldier_AR_F", "O_T_Medic_F", "O_T_Engineer_F", "O_T_Soldier_Exp_F", "O_T_Soldier_GL_F", "O_T_Support_GMG_F", "O_T_Support_MG_F", "O_T_Support_Mort_F", "O_T_Soldier_M_F", "O_T_soldier_mine_F", "O_T_Officer_F", "O_T_Soldier_Repair_F", "O_T_Soldier_F", "O_T_Soldier_LAT_F", "O_T_Soldier_SL_F"];
+drn_arr_Escape_InfantryTypesCsatPacificViperEast = ["O_V_Soldier_Exp_ghex_F", "O_V_Soldier_JTAC_ghex_F", "O_V_Soldier_M_ghex_F", "O_V_Soldier_ghex_F", "O_V_Soldier_Medic_ghex_F", "O_V_Soldier_LAT_ghex_F", "O_V_Soldier_TL_ghex_F"];
 
 // Random array. A roadblock has a manned vehicle. This array contains possible manned vehicles (can be of any kind, like cars, armored and statics).
 drn_arr_Escape_RoadBlock_MannedVehicleTypes = ["O_Quadbike_01_F", "O_MRAP_02_F", "O_MRAP_02_hmg_F", "O_MRAP_02_gmg_F", "O_static_AT_F", "O_GMG_01_high_F", "O_HMG_01_F", "O_HMG_01_high_F"];
@@ -144,17 +151,17 @@ drn_arr_Escape_ReinforcementTruck_vehicleClasses = ["Ural_INS", "UralOpen_INS"];
 drn_arr_Escape_ReinforcementTruck_vehicleClassesMaxCargo = [14, 14];
 
 // Random array. Motorized search groups are sometimes sent to look for you. This array contains possible class definitions for the vehicles.
-drn_arr_Escape_MotorizedSearchGroup_vehicleClasses = ["O_APC_Wheeled_02_rcws_v2_F", "O_APC_Tracked_02_cannon_F"];
+drn_arr_Escape_MotorizedSearchGroup_vehicleClasses = ["O_T_APC_Wheeled_02_rcws_v2_ghex_F", "O_T_APC_Tracked_02_cannon_ghex_F"];
 // Total cargo motorized search group vehicle. Each element corresponds to a vehicle (array element) in array drn_arr_Escape_MotorizedSearchGroup_vehicleClasses above.
-drn_arr_Escape_MotorizedSearchGroup_vehicleClassesMaxCargo = [7, 5];
+drn_arr_Escape_MotorizedSearchGroup_vehicleClassesMaxCargo = [8, 8];
 
 // A communication center is guarded by vehicles depending on variable _enemyFrequency. 1 = a random light armor. 2 = a random heavy armor. 3 = a random 
 // light *and* a random heavy armor.
 
 // Random array. Light armored vehicles guarding the communication centers.
-drn_arr_ComCenDefence_lightArmorClasses = ["O_MRAP_02_hmg_F", "O_MRAP_02_gmg_F"];
+drn_arr_ComCenDefence_lightArmorClasses = ["O_T_LSV_02_armed_F", "O_T_MRAP_02_hmg_ghex_F", "O_T_MRAP_02_gmg_ghex_F"];
 // Random array. Heavy armored vehicles guarding the communication centers.
-drn_arr_ComCenDefence_heavyArmorClasses = ["O_APC_Wheeled_02_rcws_v2_F", "O_APC_Tracked_02_cannon_F", "O_MBT_02_cannon_F"];
+drn_arr_ComCenDefence_heavyArmorClasses = ["O_T_APC_Wheeled_02_rcws_v2_ghex_F", "O_T_APC_Tracked_02_cannon_ghex_F", "O_T_MBT_02_cannon_ghex_F"];
 
 // A communication center contains two static weapons (in two corners of the communication center).
 // Random array. Possible static weapon types for communication centers.

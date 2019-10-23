@@ -14,10 +14,10 @@ _useSearchLeader = false; // working
 _useMotorizedSearchGroup = false; // working
 _useVillagePatrols = false; // working
 _useMilitaryTraffic = true; // working
-_useAmbientInfantry = false; // working
+_useAmbientInfantry = true; // working
 _useSearchChopper = false; // working
 _useRoadBlocks = false; // working
-_useCivilians = true; // working
+_useCivilians = false; // working
 
 _guardsExist = false;
 _comCenGuardsExist = true;
@@ -28,15 +28,15 @@ _forceComCentersApart = true;
 
 // Debug Variables
 
-_debugEscapeSurprises = true;
+_debugEscapeSurprises = false;
 _debugAmmoAndComPatrols = false;
-_debugSearchLeader = true;
+_debugSearchLeader = false;
 _debugVillagePatrols = false;
-_debugMilitaryTraffic = true;
+_debugMilitaryTraffic = false;
 _debugAmbientInfantry = false;
 _debugGarbageCollector = false;
 _debugRoadBlocks = false;
-_debugCivilians = true;
+_debugCivilians = false;
 drn_var_Escape_debugMotorizedSearchGroup = false;
 drn_var_Escape_debugDropChoppers = false;
 drn_var_Escape_debugReinforcementTruck = false;
@@ -445,7 +445,7 @@ if (_useMotorizedSearchGroup) then {
             };
         };
         
-        private ["_infantryGroupsCount", "_radius", "_groupsPerSqkm"];
+        private ["_infantryGroupsCount", "_infantryGroupsCountViper", "_radius", "_groupsPerSqkm", "_groupsPerSqkmViper", "_minSkillViper", "_maxSkillViper"];
 
         switch (_enemyFrequency) do
         {
@@ -453,26 +453,41 @@ if (_useMotorizedSearchGroup) then {
             {
                 _minEnemiesPerGroup = 2;
                 _maxEnemiesPerGroup = 4;
-                _groupsPerSqkm = 1;
+                
+                _groupsPerSqkm = 0.9;
+                _groupsPerSqkmViper = 0.1;
             };
             case 2: // 3-5 players
             {
                 _minEnemiesPerGroup = 2;
                 _maxEnemiesPerGroup = 7;
-                _groupsPerSqkm = 1.2;
+                
+                _groupsPerSqkm = 1.05;
+                _groupsPerSqkmViper = 0.15;
             };
             default // 6-8 players
             {
                 _minEnemiesPerGroup = 3;
                 _maxEnemiesPerGroup = 10;
-                _groupsPerSqkm = 1.4;
+                
+                _groupsPerSqkm = 1.2;
+                _groupsPerSqkmViper = 0.2;
             };
         };
 
         _radius = (_enemySpawnDistance + 500) / 1000;
         _infantryGroupsCount = round (_groupsPerSqkm * _radius * _radius * 3.141592);
+        _infantryGroupsCountViper = round (_groupsPerSqkmViper * _radius * _radius * 3.141592);
         
-        [_playerGroup, drn_var_enemySide, drn_arr_Escape_InfantryTypes, _infantryGroupsCount, _enemySpawnDistance + 200, _enemySpawnDistance + 500, _minEnemiesPerGroup, _maxEnemiesPerGroup, _enemyMinSkill, _enemyMaxSkill, 750, drn_fnc_Escape_OnSpawnGeneralSoldierUnit, _fnc_OnSpawnAmbientInfantryGroup, _debugAmbientInfantry] execVM "Scripts\DRN\AmbientInfantry\AmbientInfantry.sqf";
+        _minSkillViper = _enemyMinSkill + 0.2;
+        _maxSkillViper = _enemyMaxSkill + 0.2;
+        
+        if (_minSkillViper > 1) then { _minSkillViper = 1; };
+        if (_maxSkillViper > 1) then { _maxSkillViper = 1; };
+        
+        [_playerGroup, drn_var_enemySide, drn_arr_Escape_InfantryTypesBanditsGuer, _infantryGroupsCount, _enemySpawnDistance + 200, _enemySpawnDistance + 500, _minEnemiesPerGroup, _maxEnemiesPerGroup, _enemyMinSkill, _enemyMaxSkill, 750, drn_fnc_Escape_OnSpawnGeneralSoldierUnit, _fnc_OnSpawnAmbientInfantryGroup, _debugAmbientInfantry] execVM "Scripts\DRN\AmbientInfantry\AmbientInfantry.sqf";
+        [_playerGroup, drn_var_enemySide, drn_arr_Escape_InfantryTypesCsatPacificViperEast, _infantryGroupsCountViper, _enemySpawnDistance + 200, _enemySpawnDistance + 500, _minEnemiesPerGroup, _maxEnemiesPerGroup, _minSkillViper, _maxSkillViper, 750, drn_fnc_Escape_OnSpawnGeneralSoldierUnit, _fnc_OnSpawnAmbientInfantryGroup, _debugAmbientInfantry] execVM "Scripts\DRN\AmbientInfantry\AmbientInfantry.sqf";
+        
         sleep 0.25;
     };
     
@@ -715,7 +730,7 @@ if (_useMotorizedSearchGroup) then {
             };
         };
         
-        [_playerGroup, drn_var_enemySide, drn_arr_Escape_InfantryTypes, drn_arr_Escape_RoadBlock_MannedVehicleTypes, _roadBlockCount, _enemySpawnDistance, _enemySpawnDistance + 500, 500, 300, _fnc_OnSpawnInfantryGroup, _fnc_OnSpawnMannedVehicle, _noOfInfantryUnits, _debugRoadBlocks] execVM "Scripts\DRN\RoadBlocks\RoadBlocks.sqf";
+        [_playerGroup, drn_var_enemySide, drn_arr_Escape_InfantryTypesParamilitaryGuer, drn_arr_Escape_RoadBlock_MannedVehicleTypes, _roadBlockCount, _enemySpawnDistance, _enemySpawnDistance + 500, 500, 300, _fnc_OnSpawnInfantryGroup, _fnc_OnSpawnMannedVehicle, _noOfInfantryUnits, _debugRoadBlocks] execVM "Scripts\DRN\RoadBlocks\RoadBlocks.sqf";
         sleep 0.25;
     };
 };

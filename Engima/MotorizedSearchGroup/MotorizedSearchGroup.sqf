@@ -8,7 +8,7 @@ if (!isServer) exitWith {};
 private ["_vehicle", "_searchAreaMarker", "_debug"];
 private ["_maxStationaryTimeSec", "_maxWalkDistanceMeters", "_state", "_searchAreaExists", "_shownMissingSearchAreaMsg", "_searchGroupExists", "_destinationPos", "_group", "_soldiers"];
 private ["_side", "_garbageGroup", "_lastPos", "_stationaryTimeSec", "_useVehicle", "_enemyPos", "_enemySighted", "_waypoint", "_currentEntityNo"];
-private ["_fnc_isMounted", "_fnc_isUnMounted", "_fnc_ClearAllWaypoints", "_fnc_GetKnownEnemyPosition", "_fnc_SetNewState"];
+private ["_fnc_isMounted", "_fnc_getRandomMarkerPos", "_fnc_isUnMounted", "_fnc_ClearAllWaypoints", "_fnc_GetKnownEnemyPosition", "_fnc_SetNewState"];
 
 _maxStationaryTimeSec = 60;
 _maxWalkDistanceMeters = 300;
@@ -17,13 +17,51 @@ _vehicle = _this select 0;
 _searchAreaMarker = _this select 1;
 if (count _this > 2) then {_debug = _this select 2;} else {_debug = false;};
 
-while {isNil "dre_var_CL_CommonLibVersion"} do {
-    player sideChat "Script MotorizedSearchGroup.sqf requires CommonLib v3.0.";
-    sleep 1;
+if (_debug) then {
+    player sideChat "Starting motorized search group script...";
 };
 
-if (_debug) then {
-    ["Starting motorized search group script..."] call dre_fnc_CL_ShowDebugTextAllClients;
+/*
+ * Summary: Gets a random position inside a marker of shape RECTANGLE or ELLIPSE with any angle.
+ * Arguments:
+ *   _markerName: Name of marker to get a random position inside.
+ * Returns: A position (array) inside current marker. If marker doesn't exist, [0, 0, 0] is returned.
+ */
+_fnc_getRandomMarkerPos = {
+    private ["_markerName"];
+    private ["_isInside", "_px", "_py", "_mpx", "_mpy", "_msx", "_msy", "_ma", "_rpx", "_rpy", "_i"];
+    
+    _markerName = _this select 0;
+    
+    _isInside = false;
+    _i = 0;
+    
+    while {!_isInside} do {
+        _mpx = (getMarkerPos _markerName) select 0;
+        _mpy = (getMarkerPos _markerName) select 1;
+        _msx = (getMarkerSize _markerName) select 0;
+        _msy = (getMarkerSize _markerName) select 1;
+        _ma = (markerDir _markerName);
+        
+        _px = _mpx -_msx + random (_msx * 2);
+        _py = _mpy -_msy + random (_msy * 2);
+        
+        //Now, rotate point as marker is rotated
+        _rpx = ( (_px - _mpx) * cos(_ma) ) + ( (_py - _mpy) * sin(_ma) ) + _mpx;
+        _rpy = (-(_px - _mpx) * sin(_ma) ) + ( (_py - _mpy) * cos(_ma) ) + _mpy;
+        
+        if ([_rpx, _rpy, 0] inArea _markerName) then {
+            _isInside = true;
+        };
+
+        _i = _i + 1;
+        if (_i > 1000) exitWith {
+            _rpx = 0;
+            _rpy = 0;
+        };
+    };
+    
+    [_rpx, _rpy, 0]
 };
 
 _fnc_isUnMounted = {
@@ -116,7 +154,7 @@ _fnc_SetNewState = {
     _debug = _this select 1;
     
     if (_debug) then {
-        ["Motorized search group state = " + _state] call dre_fnc_CL_ShowDebugTextAllClients;
+        player sideChat "Motorized search group state = " + _state;
     };
     
     _state
@@ -153,7 +191,7 @@ while {!_searchAreaExists} do {
     }
     else {
         if (_debug && !_shownMissingSearchAreaMsg) then {
-            ["Motorized search group waiting for search area assignment..."] call dre_fnc_CL_ShowDebugTextAllClients;
+            player sideChat "Motorized search group waiting for search area assignment...";
             _shownMissingSearchAreaMsg = true;
         };
     };
@@ -161,7 +199,7 @@ while {!_searchAreaExists} do {
 };
 
 if (_debug) then {
-    ["Search area exists. Motorized search group on its way!"] call dre_fnc_CL_ShowDebugTextAllClients;
+    player sideChat "Search area exists. Motorized search group on its way!";
 };
 
 _searchGroupExists = true;
@@ -178,10 +216,22 @@ if (canMove _vehicle && fuel _vehicle > 0) then {
 
 scopeName "mainScope";
 
-while {_searchGroupExists} do {
-    
-    if (_debug) then {
-        ["dre_MotorizedSearchGroup_VehicleDebugMarker" + str _currentEntityNo, getPos (leader group _vehicle), "mil_dot", "ColorRed", "MSG" + str _currentEntityNo] call dre_fnc_CL_SetDebugMarkerAllClients;
+private _vehicleDebugMarker = "";
+
+if (_debug) then {
+	_vehicleDebugMarker = createMarker ["dre_MotorizedSearchGroup_VehicleDebugMarker" + str _currentEntityNo, getPos vehicle (leader group _vehicle)];
+	_vehicleDebugMarker setMarkerType "mil_dot";
+	_vehicleDebugMarker setMarkerColor "ColorRed";
+	_vehicleDebugMarker setMarkerText "MSG" + str _currentEntityNo;
+};
+
+private _destinationDebugMarker = "";
+
+while {_searchGroupExists} do
+{    
+    if (_debug) then
+    {
+    	_vehicleDebugMarker setMarkerPos getPos (vehicle leader group _vehicle);
     };    
     
     if ((str _lastPos) == (str getPos leader _group)) then {
@@ -196,30 +246,36 @@ while {_searchGroupExists} do {
         [_group] call _fnc_ClearAllWaypoints;
         
         if (_debug) then {
-            ["Motorized search group stationary for long time. Reseting..."] call dre_fnc_CL_ShowDebugTextAllClients;
+            player sideChat "Motorized search group stationary for long time. Reseting...";
         };
         
         _stationaryTimeSec = 0;
         _state = ["READY", _debug] call _fnc_SetNewState;
     };
     
-    if (count _destinationPos > 0) then {
-        if (_state != "ENGAGING" && !([_destinationPos, _searchAreaMarker] call dre_fnc_CL_PositionIsInsideMarker)) then {
+    if (count _destinationPos > 0) then
+    {
+        if (_state != "ENGAGING" && !(_destinationPos inArea _searchAreaMarker)) then
+        {
             [_group] call _fnc_ClearAllWaypoints;
             _state = ["READY", _debug] call _fnc_SetNewState;
             
             if (_debug) then {
-                ["Motorized search group interrupting and following new intel. Reseting..."] call dre_fnc_CL_ShowDebugTextAllClients;
+                player sideChat "Motorized search group interrupting and following new intel. Reseting...";
             };
         };
     };
     
+    _garbageGroup = grpNull;
+    
     {
         if ((!alive _x) || (!canStand _x)) then {
-            _garbageGroup = createGroup _side;
+        	if (isNull _garbageGroup) then {
+        		_garbageGroup = createGroup _side;
+        	};
+        
             _soldiers = _soldiers - [_x];
             [_x] joinSilent _garbageGroup;
-            [_x] call dre_fnc_CL_AddUnitsToGarbageCollector;
             
             if (count units _group == 0) then {
                 deleteGroup _group;
@@ -229,22 +285,57 @@ while {_searchGroupExists} do {
         };
     } foreach _soldiers;
     
-    if ((!(canMove _vehicle) || (fuel _vehicle <= 0)) && _useVehicle) then {
-        private ["_crewGroup"];
-        
+    if (!isNull _garbageGroup) then {
+    	[_garbageGroup, _debug] spawn {
+    		params ["_garbageGroup", "_debug"];
+    		
+    		if (_debug) then {
+    			player sideChat "Unit dead. Starting motorized search group garbage collector.";
+    		};
+    		
+    		while {count units _garbageGroup > 0} do
+    		{
+    			private _units = units _garbageGroup;
+    			
+    			{
+    				private _unit = _x;
+	    			private _closestPlayerDistance = 9999999999;
+    				
+	    			{
+	    				if (_x distance _unit < _closestPlayerDistance) then {
+	    					_closestPlayerDistance = _x distance _unit;
+	    				};
+	    			} foreach call (BIS_fnc_listPlayers);
+	    			
+	    			if (_closestPlayerDistance > 500) then {
+	    				deleteVehicle _unit;
+	    				
+	    				if (_debug) then {
+	    					player sideChat "Garbage collector deleted a motorized search group unit.";
+	    				};
+	    			};
+    			} foreach _units;
+    			
+    			sleep 10;
+    		};
+    		
+    		deleteGroup _garbageGroup;
+    	};
+    };
+    
+    if ((!(canMove _vehicle) || (fuel _vehicle <= 0)) && _useVehicle) then
+    {
         _useVehicle = false;
         
         // Separate soldiers and crew
         [_group] call _fnc_ClearAllWaypoints;
-        _crewGroup = _group;
         _group = createGroup _side;
         _soldiers joinSilent _group;
-        (units _crewGroup) call dre_fnc_CL_AddUnitsToGarbageCollector;
         
         _state = ["BEGIN UNMOUNT", _debug] call _fnc_SetNewState;
         
         if (_debug) then {
-            ["Motorized search group abondoning vehicle..."] call dre_fnc_CL_ShowDebugTextAllClients;
+            player sideChat "Motorized search group abondoning vehicle...";
         };
     };
             
@@ -257,19 +348,27 @@ while {_searchGroupExists} do {
             _useVehicle = true;
         };
         
-		_destinationPos = [_searchAreaMarker] call dre_fnc_CL_GetRandomMarkerPos;
+		_destinationPos = [_searchAreaMarker] call _fnc_getRandomMarkerPos;
 		while {surfaceIsWater _destinationPos} do {
-			_destinationPos = [_searchAreaMarker] call dre_fnc_CL_GetRandomMarkerPos;
+			_destinationPos = [_searchAreaMarker] call _fnc_getRandomMarkerPos;
 		};
         
-        if (_debug) then {
-            ["dre_MotorizedSearchGroup_DestinationDebugMarker" + str _currentEntityNo, _destinationPos, "mil_dot", "ColorRed", "MSG" + str _currentEntityNo + " destination"] call dre_fnc_CL_SetDebugMarkerAllClients;
+        if (_debug) then
+        {
+        	if (_destinationDebugMarker == "") then {
+		    	_destinationDebugMarker = createMarker ["dre_MotorizedSearchGroup_DestinationDebugMarker" + str _currentEntityNo, _destinationPos];
+		    	_destinationDebugMarker setMarkerType "mil_dot";
+		    	_destinationDebugMarker setMarkerColor "ColorRed";
+		    	_destinationDebugMarker setMarkerText "MSG" + str _currentEntityNo + " destination";
+        	};
+        
+	    	_destinationDebugMarker setMarkerPos _destinationPos;
         };
 
         if (count _soldiers > 0) then {
             // If distance is within walk distance            
             if (((leader _group) distance _destinationPos) < _maxWalkDistanceMeters) then {
-            	_vehicle limitSpeed 1;
+            	_vehicle limitSpeed 10;
             	
                 if (!([_soldiers] call _fnc_isUnMounted)) then {
                     _state = ["BEGIN UNMOUNT", _debug] call _fnc_SetNewState;
@@ -343,7 +442,7 @@ while {_searchGroupExists} do {
     };
     
     if (_state == "UNMOUNTING") then {
-    	_vehicle limitSpeed 1;
+    	_vehicle limitSpeed 10;
     	
         if ([_soldiers] call _fnc_isUnMounted) then {
             if (_enemySighted) then {
@@ -408,15 +507,10 @@ while {_searchGroupExists} do {
         _destinationPos = _enemyPos;
         
         if (_debug) then {
-            ["dre_MotorizedSearchGroup_DestinationDebugMarker" + str _currentEntityNo, _destinationPos, "mil_dot", "ColorRed", "MSG" + str _currentEntityNo + " target"] call dre_fnc_CL_SetDebugMarkerAllClients;
-            //["dre_MotorizedSearchGroup_DestinationDebugMarker" + str _currentEntityNo, _destinationPos, "Warning"] call dre_fnc_CL_SetDebugMarkerAllClients;
-            /*
-            if (!isNil "dre_MSG_debugMarker") then {
-                deleteMarkerLocal "dre_MSG_debugMarker";
-            };
-            dre_MSG_debugMarker = createMarkerLocal ["dre_MSG_debugMarker", _destinationPos];
-            "dre_MSG_debugMarker" setMarkerTypeLocal "Warning";
-            */
+	    	private _marker = createMarker ["dre_MotorizedSearchGroup_DestinationDebugMarker" + str _currentEntityNo, _destinationPos];
+	    	_marker setMarkerType "mil_dot";
+	    	_marker setMarkerColor "ColorRed";
+	    	_marker setMarkerText "MSG" + str _currentEntityNo + " target";
         };
         
         [_group] call _fnc_ClearAllWaypoints;
@@ -521,9 +615,9 @@ while {_searchGroupExists} do {
 };
 
 if (_debug) then {
-    ["Motorized search group destroyed. Script exiting."] call dre_fnc_CL_ShowDebugTextAllClients;
-    ["dre_MotorizedSearchGroup_VehicleDebugMarker" + str _currentEntityNo] call dre_fnc_CL_DeleteDebugMarkerAllClients;
-    ["dre_MotorizedSearchGroup_DestinationDebugMarker" + str _currentEntityNo] call dre_fnc_CL_DeleteDebugMarkerAllClients;
+    player sideChat "Motorized search group destroyed. Script exiting.";
+    deleteMarker _vehicleDebugMarker;
+    deleteMarker ("dre_MotorizedSearchGroup_DestinationDebugMarker" + str _currentEntityNo);
 };
 
 

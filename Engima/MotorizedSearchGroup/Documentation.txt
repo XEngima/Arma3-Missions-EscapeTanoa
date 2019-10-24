@@ -8,7 +8,8 @@ randomly across the search area. If the distance from one destination point to a
 but if it's close the units will move by foot. Area may be of any size, and vehicle must have cargo slots for all group
 members excluding crew.
 
-If search area marker does not exist, the group will do nothing. If it starts to exist, the group will start moving.
+If search area marker does not exist, the group will do nothing. If it starts to exist, the group will start moving. If
+search area marker moves, group will mount and travel to marker's new position.
 
 Script works in singleplayer, multiplayer, hosted, dedicated and for JIPs.
 
@@ -37,3 +38,10 @@ Here is a complete list of the parameters and what they do:
 * DEBUG (Boolean): Whether script is running in debug mode or not. In debug mode the vehicle and its destinations will be
   visible on the map.
   Optional. Can be true or false. Default value is false.
+
+--- VERSION HISTORY ---
+
+1.0 First version.
+1.1 Fixed: Vehicle moves too slow when group is unmounted.
+    Remvoed dependency to Engima.CommonLib.
+    Minor fixes and improvements.

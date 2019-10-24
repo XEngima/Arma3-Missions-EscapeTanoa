@@ -1065,10 +1065,12 @@ drn_fnc_Escape_FindSpawnSegment = {
         if (count _roadSegments > 0) then {
             _roadSegment = selectRandom _roadSegments;
             
-            if (isOnRoad getPos _roadSegment) then {
+            if (isOnRoad getPos _roadSegment) then
+            {
 	            // Check if road segment is at spawn distance
-	            _tooFarAwayFromAll = true;
 	            _tooClose = false;
+	            _tooFarAwayFromAll = true;
+	            
 	            {
 	                private ["_tooFarAway"];
 	                
@@ -1085,14 +1087,15 @@ drn_fnc_Escape_FindSpawnSegment = {
 	                };
 	                
 	            } foreach units _referenceGroup;
+            
+	            _isOk = true;
+	            if (_tooClose || _tooFarAwayFromAll) then {
+	                _isOk = false;
+	                _tries = _tries + 1;
+	            };
             }
             else {
             	_isOk = false;
-            };
-            
-            _isOk = true;
-            if (_tooClose || _tooFarAwayFromAll) then {
-                _isOk = false;
                 _tries = _tries + 1;
             };
         }

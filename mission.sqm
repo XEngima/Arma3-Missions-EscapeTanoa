@@ -16,7 +16,7 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={8997.8076,45.473499,9994.1318};
+		pos[]={8998.2266,36.242008,10013.575};
 		dir[]={0.094456941,-0.35471156,0.93019772};
 		up[]={0.03583537,0.934973,0.3528994};
 		aside[]={0.99488783,-4.976755e-008,-0.10102639};
@@ -589,6 +589,7 @@ class Mission
 					class Attributes
 					{
 						name="p7";
+						isPlayable=1;
 					};
 					id=267;
 					type="B_CTRG_Soldier_JTAC_tna_F";
@@ -647,6 +648,7 @@ class Mission
 					class Attributes
 					{
 						name="p8";
+						isPlayable=1;
 					};
 					id=268;
 					type="B_CTRG_Soldier_M_tna_F";

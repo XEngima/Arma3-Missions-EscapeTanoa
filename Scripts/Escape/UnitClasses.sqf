@@ -30,6 +30,8 @@ drn_var_Escape_InnerFenceGuardSecondaryWeaponMagazine = "6Rnd_45ACP_Cylinder";
 // Random array. Civilian vehicle classes for ambient traffic. (Can also be set to a faction name).
 drn_arr_Escape_MilitaryTraffic_CivilianVehicleClasses = ["C_Offroad_01_F", "C_Offroad_01_repair_F", "C_Quadbike_01_F", "C_Hatchback_01_F", "C_Hatchback_01_sport_F", "C_SUV_01_F", "C_Van_01_transport_F", "C_Van_01_box_F", "C_Van_01_fuel_F"];
 
+drn_arr_Escape_WalkingCivilianClasses = ["C_Man_casual_1_F_tanoan", "C_Man_casual_2_F_tanoan", "C_Man_casual_3_F_tanoan", "C_Man_casual_4_F_tanoan", "C_Man_casual_5_F_tanoan", "C_Man_casual_6_F_tanoan", "C_Man_casual_1_F_tanoan", "C_Man_casual_2_F_tanoan", "C_Man_casual_3_F_tanoan", "C_Man_casual_4_F_tanoan", "C_Man_casual_5_F_tanoan", "C_Man_casual_6_F_tanoan", "C_man_sport_1_F_tanoan", "C_man_sport_3_F_tanoan"];
+
 // Random arrays. Enemy vehicle classes for ambient traffic. (Can also be set to a faction name).
 // Variable _enemyFrequency applies to server parameter, and can be one of the values 1 (Few), 2 (Some) or 3 (A lot).
 switch (_enemyFrequency) do {

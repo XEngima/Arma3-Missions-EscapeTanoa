@@ -7,8 +7,8 @@ private ["_forceComCentersApart", "_debugAmmoAndComPatrols", "_useCivilians", "_
 
 // Developer Variables
 
-_useRandomStartPos = false; // working
-_useEscapeSurprises = false; // partly working
+_useRandomStartPos = true; // working
+_useEscapeSurprises = true; // partly working
 _useAmmoDepots = true; // working
 _useSearchLeader = true; // working
 _useMotorizedSearchGroup = true; // working
@@ -16,13 +16,13 @@ _useVillagePatrols = true; // working
 _useMilitaryTraffic = true; // working
 _useAmbientInfantry = true; // working
 _useSearchChopper = true; // working
-_useRoadBlocks = false; // working
-_useCivilians = false; // working
+_useRoadBlocks = true; // working
+_useCivilians = true; // working
 
 _guardsExist = true;
 _comCenGuardsExist = true;
 _guardsAreArmed = true;
-_guardLivesLong = false;
+_guardLivesLong = true;
 
 _forceComCentersApart = true;
 
@@ -31,13 +31,13 @@ _forceComCentersApart = true;
 _debugEscapeSurprises = false;
 _debugAmmoAndComPatrols = false;
 _debugSearchLeader = false;
-_debugVillagePatrols = true;
+_debugVillagePatrols = false;
 _debugMilitaryTraffic = false;
-_debugAmbientInfantry = true;
+_debugAmbientInfantry = false;
 _debugGarbageCollector = false;
 _debugRoadBlocks = false;
 _debugCivilians = false;
-drn_var_Escape_debugMotorizedSearchGroup = true;
+drn_var_Escape_debugMotorizedSearchGroup = false;
 drn_var_Escape_debugDropChoppers = false;
 drn_var_Escape_debugReinforcementTruck = false;
 drn_var_Escape_debugSearchChopper = false;
@@ -730,7 +730,7 @@ if (_useMotorizedSearchGroup) then {
 		};
 		
 		private _parameters = [
-			["UNIT_CLASSES", ["C_man_1", "C_man_1_1_F", "C_man_1_2_F", "C_man_1_3_F", "C_man_polo_1_F", "C_man_polo_1_F_afro", "C_man_polo_1_F_euro", "C_man_polo_1_F_asia", "C_man_polo_2_F", "C_man_polo_2_F_afro", "C_man_polo_2_F_euro", "C_man_polo_2_F_asia", "C_man_polo_3_F", "C_man_polo_3_F_afro", "C_man_polo_3_F_euro", "C_man_polo_3_F_asia", "C_man_polo_4_F", "C_man_polo_4_F_afro", "C_man_polo_4_F_euro", "C_man_polo_4_F_asia", "C_man_polo_5_F", "C_man_polo_5_F_afro", "C_man_polo_5_F_euro", "C_man_polo_5_F_asia", "C_man_polo_6_F", "C_man_polo_6_F_afro", "C_man_polo_6_F_euro", "C_man_polo_6_F_asia", "C_man_p_fugitive_F", "C_man_p_fugitive_F_afro", "C_man_p_fugitive_F_euro", "C_man_p_fugitive_F_asia", "C_man_p_beggar_F", "C_man_p_beggar_F_afro", "C_man_p_beggar_F_euro", "C_man_p_beggar_F_asia", "C_man_w_worker_F", "C_scientist_F", "C_man_hunter_1_F", "C_man_p_shorts_1_F", "C_man_p_shorts_1_F_afro", "C_man_p_shorts_1_F_euro", "C_man_p_shorts_1_F_asia", "C_man_shorts_1_F", "C_man_shorts_1_F_afro", "C_man_shorts_1_F_euro", "C_man_shorts_1_F_asia", "C_man_shorts_2_F", "C_man_shorts_2_F_afro", "C_man_shorts_2_F_euro", "C_man_shorts_2_F_asia", "C_man_shorts_3_F", "C_man_shorts_3_F_afro", "C_man_shorts_3_F_euro", "C_man_shorts_3_F_asia", "C_man_shorts_4_F", "C_man_shorts_4_F_afro", "C_man_shorts_4_F_euro", "C_man_shorts_4_F_asia", "C_journalist_F", "C_Orestes", "C_Nikos", "C_Nikos_aged"]],
+			["UNIT_CLASSES", drn_arr_Escape_WalkingCivilianClasses],
 			["UNITS_PER_BUILDING", 0.07],
 			["MAX_GROUPS_COUNT", 20],
 			["MIN_SPAWN_DISTANCE", 50],

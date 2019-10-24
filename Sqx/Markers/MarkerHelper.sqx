@@ -1,0 +1,81 @@
+/*
+ * Name:	MarkerHelper
+ * Date:	2017-07-17
+ * Version: 1.0
+ * Author:  Engima
+ *
+ * Description:
+ * Contains good to have methods regarding markers.
+ */
+namespace Sqx.Markers
+{
+	public class MarkerHelper
+	{
+		// Gets whether a position is inside any of the provided markers or not.
+		// _position (Array): The position to test.
+		// _markers (Array): The markers to check.
+		// Returns (Boolean): true if the position is inside any of the markers, otherwise false.
+		public static method Boolean PositionInsideAnyMarker("_position" as Array, "_markers" as Array /* of String */) {
+			scopeName "main";
+	
+			{				
+				if (_position inArea _x) then {
+					true breakOut "main";
+				};
+			} foreach _markers;
+			
+			false
+		};
+		
+		// Gets whether a marker exists on the map or not.
+		// _marker (String): Marker name of the marker to test for existance.
+		// Returns (Boolean): true if the marker exists on the map, otherwise false.
+		public static method Boolean MarkerExists("_markerName" as String) {
+			private _exists = false;
+
+			if (((getMarkerPos _markerName) select 0) != 0 || { (getMarkerPos _markerName) select 1 != 0 }) then {
+				_exists = true;
+			};
+			
+			_exists
+		};
+		
+		// Gets a random position inside a marker.
+		// _markerName (String): Name of the marker to get the random position from.
+		// Returns (Array): The random position.
+		public static method Array GetRandomPosInsideMarker("_markerName" as String) {
+			private ["_isInside" as Boolean, "_px" as Scalar, "_py" as Scalar, "_mpx" as Scalar,
+				"_mpy" as Scalar, "_msx" as Scalar, "_msy" as Scalar, "_ma" as Scalar, "_rpx" as Scalar,
+				"_rpy" as Scalar, "_i" as Scalar];
+		    
+		    _isInside = false;
+		    _i = 0;
+		    while {!_isInside} do {
+		        _mpx = (getMarkerPos _markerName) select 0;
+		        _mpy = (getMarkerPos _markerName) select 1;
+		        _msx = (getMarkerSize _markerName) select 0;
+		        _msy = (getMarkerSize _markerName) select 1;
+		        _ma = (markerDir _markerName);
+		        
+		        _px = _mpx -_msx + random (_msx * 2);
+		        _py = _mpy -_msy + random (_msy * 2);
+		        
+		        //Now, rotate point as marker is rotated
+		        _rpx = ( (_px - _mpx) * cos(_ma) ) + ( (_py - _mpy) * sin(_ma) ) + _mpx;
+		        _rpy = (-(_px - _mpx) * sin(_ma) ) + ( (_py - _mpy) * cos(_ma) ) + _mpy;
+		        
+		        if ([_rpx, _rpy, 0] inArea _markerName) then {
+		            _isInside = true;
+		        };
+		
+		        _i = _i + 1;
+		        if (_i > 1000) exitWith {
+		            _rpx = 0;
+		            _rpy = 0;
+		        };
+		    };
+		    
+		    [_rpx, _rpy, 0]
+		};
+	};
+};

@@ -1,0 +1,27 @@
+/*
+ * Name:	WaypointHelper
+ * Date:	2017-07-22
+ * Version: 1.0
+ * Author:  Engima
+ *
+ * Description:
+ * Contains good to have functions regarding waypoints.
+ */
+namespace Sqx.Waypoints
+{
+	public class WaypointHelper
+	{	
+		// Deletes all waypoints from a group.
+		// _group (Group): The group to delete all waypoints from.
+		public static method DeleteAllWaypointsFromGroup {
+			params ["_group" as Group];
+			private ["_waypoints" as Array, "_i" as Scalar];
+			
+			_waypoints = waypoints _group;
+			
+			for [{_i = (count _waypoints) - 1}, {_i >= 0}, {_i = _i - 1}] do {
+				deleteWaypoint [_group, _i];
+			} 
+		};
+	};
+};

@@ -1,0 +1,225 @@
+-----------------------------------------------
+ - ENGIMA'S AMBIENT INFANTRY (VERSION 1.1) -
+-----------------------------------------------
+
+Engima's Ambient Infantry is a script that adds patrolling infantry groups "all over the map" in an Arma 3 mission.
+
+Patrolling groups of different (customizable) sizes and with units of different (customizable) types are spawned in 
+out of sight for the player(s), giving the impression that the units are all over the map. They get a waypoint to a 
+random position on the map, but are removed at a certain (customizable) distance from the nearest player.
+
+Script can run different instances of ambient infantry with different customized behaviors simultaneously. For 
+example, you can run one script that puts enemies on one part of the map, and another that puts friendlies on 
+another part of the map. Or you can runt one instance that puts a lot of units with low skill on the map, and 
+another that puts a few very skilled units on the map (see USING MORE THAN ONE INSTANCE below).
+
+Script works in singleplayer, multiplayer, on hosted server, dedicated server and for JIPs, and on any map.
+
+
+--- VERSION HISTORY ---
+
+1.1:    Made the units a bit more aware of the surroundings by looking around.
+        Fixed: Groups tend to spawn more often behind the players than ahead of them.
+        Fixed: Number of groups sometimes not relative to player area coverage.
+        Fixed: No groups spawning when players start in a blacklisted area.
+1.0.61: Removed faulty documentation entry about ON_GROUP_CREATING.
+1.0.6:  Changed signature for callback ON_GROUP_CREATING.
+1.0.51: Removed accidental default headless client.
+1.0.5:  Added support for headless client.
+1.0.4:  Fixed: Removed forgotten debut output.
+1.0.3:  Fixed: Too long time before units start spawning on a dedicated server.
+        Script now reduces number of groups if players are close to the shore.
+1.0.2:  Added config parameter MIN_SPAWN_DISTANCE_ON_START.
+        Slight performance improvements.
+1.0:    First version.
+
+
+--- CUSTOMIZATION ---
+
+The script can be customized for different behavior. Customize a script by editing the startup parameters. The 
+startup parameters list is an array of key value pairs. A key value pair is a small array where the key object is 
+a string with the name of the parameter setting and the second item is the actual value.
+
+Here is an example that uses a list of all parameters and first saves them in a variable named "_parameters". The 
+function call that starts the traffic is then right beneath. This code is preferrably put into 
+Engima\AmbientInfantry\ConfigAndStart.sqf.
+
+---------------------------------------------------------------------------------------------------------
+// Create an Array variable with all options.
+private _parameters = [
+	["SIDE", east],
+	["UNIT_CLASSES", ["O_G_Soldier_F", "O_G_Soldier_lite_F", "O_G_Soldier_SL_F", "O_G_Soldier_TL_F", "O_G_Soldier_AR_F", "O_G_medic_F", "O_G_engineer_F", "O_G_Soldier_exp_F", "O_G_Soldier_GL_F", "O_G_Soldier_M_F", "O_G_Soldier_LAT_F", "O_G_Soldier_A_F", "O_G_officer_F"]],
+	["MAX_GROUPS_COUNT", 10],
+	["MIN_UNITS_IN_EACH_GROUP", 2],
+	["MAX_UNITS_IN_EACH_GROUP", 4],
+	["MIN_SPAWN_DISTANCE", 800],
+	["MAX_SPAWN_DISTANCE", 1200],
+	["MIN_SPAWN_DISTANCE_ON_START", 100],
+	["MIN_SKILL", 0.4],
+	["MAX_SKILL", 0.6],
+	["BLACKLIST_MARKERS", []],
+	["ON_GROUP_CREATING", { true }],
+	["ON_GROUP_CREATED", {}],
+	["ON_GROUP_REMOVING", {}],
+	["ON_CHECK_RELEASE_GROUP", { false }],
+	["ON_GROUP_RELEASED", {}],
+	["IN_DEBUG_MODE", true]
+];
+
+// Call the function that creates and starts the ambient infantry instance.
+[_parameters] call Engima_AmbientInfantry_Classes_AmbientInfantry_CreateInstance;
+---------------------------------------------------------------------------------------------------------
+
+Here is a complete list of the parameters and what they do:
+
+* SIDE (Side): Which side the spawned groups and units will belong to. Can be east, west, independent or civilian.
+
+* UNIT_CLASSES (Array): Array of unit class names that may be spawned. If you want to see more of one vehicle than 
+  another, then have it occur a couple of more often in the array. The following example will spawn ambient infantry 
+  where 75% of all units are engineers and 25% are officers:
+  Example: ["O_G_engineer_F", "O_G_engineer_F", "O_G_engineer_F", "O_G_officer_F"]
+  
+* MAX_GROUPS_COUNT (Scalar): Maximum number of groups that exists on the map simultaneously for the current ambient
+  infantry instance. The actual number will sometimes be less, e.g. if the script do not find suitable spawn positions 
+  or if part of the player's area is covered with water and blacklist markers.
+  Example: 10
+
+* MIN_UNITS_IN_EACH_GROUP (Scalar): Minimum number of units in each group. The number of units in each group is a
+  random value between MIN_UNITS_IN_EACH_GROUP and MAX_UNITS_IN_EACH_GROUP.
+  Example: 2
+
+* MAX_UNITS_IN_EACH_GROUP (Scalar): Maximum number of units in each group. The number of units in each group is a
+  random value between MIN_UNITS_IN_EACH_GROUP and MAX_UNITS_IN_EACH_GROUP.
+  Example: 8
+
+* MIN_SPAWN_DISTANCE (Scalar): Minimum spawn distance in meters from nearest human player on the map. Should be at 
+  least 100 meters less than MAX_SPAWN_DISTANCE.
+  Example: 800
+
+* MAX_SPAWN_DISTANCE (Scalar): Maximum spawn distance in meters from nearest player on the map. Groups beyond this 
+  distance will be removed. Should be at least 100 meters greater than MIN_SPAWN_DISTANCE.
+  Example: 1200
+  
+* MIN_SPAWN_DISTANCE_ON_START (Scalar): The minimum spawn distance in meters from nearest human player on the map
+  when the script starts. Must be less than or equal to MIN_SPAWN_DISTANCE.
+  Example: 100
+  
+* MIN_SKILL (Scalar): Units' minimum skill. Must be between 0 and 1 inclusively, and less than or equal to 
+  MAX_SKILL. Actual skill of each spawned unit will be a random number between MIN_SKILL and MAX_SKILL.
+  Example: 0.4
+
+* MAX_SKILL (Scalar): Units' maximum skill. Must be between 0 and 1 inclusively, and greather than or equal to 
+  MIN_SKILL. Actual skill of each spawned unit will be a random number between MIN_SKILL and MAX_SKILL.
+  Example: 0.6
+
+* BLACKLIST_MARKERS (Array): A list of marker names for markers that define restricted area for the ambient 
+  infantry instance's groups. The markers need to be of shape RECTANCLE or ELLIPSE. An infantry group that are 
+  routed into a blacklist marker will immediately change its direction and move out of the restricted area.
+  Example: ["RestrictedAreaMarker", "HostpitalMarker", "FriendlyMilitaryBaseMarker"]
+  
+* ON_GROUP_CREATING (Code): Callback that is executed right before a civilian spawns. Parameter 
+  _this is an array with the following items:
+    0 (Array): An array with spawn arguments. This array can be manipulated. Change the first item to spawn on 
+    another position, and change the second parameter to spawn unit of other classes than suggested. The spawn
+    arguments array is specified like this:
+      0 (Array): The position where the unit is suggested to spawn (can be modified).
+      1 (Array): A list with class names for units to spawn (can be modified).
+    1 (Scalar): Number of infantry groups spawned and currently controlled by the script.
+    2 (Scalar): Calculated maximun number of infantry groups that the script will try to spawn (depends on 
+    nearby blacklist markers and how close players are to shore etc.).
+  Return true if you want to go on with the spawn, and false if you want to block the spawn. A return value of
+  type nil (no return value) will be interpreted as true.
+  The example below will lower the number of groups during the night hours.
+  Example:
+    {
+        params ["_args", "_currentGroups", "_maxGroups"];
+        private _goOnWithSpawn = true;
+        
+        if (dayTime < 8 || dayTime > 22) then {
+            _goOnWithSpawn = (_currentGroups < _maxGroups / 2);
+        };
+        
+        _goOnWithSpawn
+    )
+
+* ON_GROUP_CREATED (Code): A callback that is executed right after an ambient infantry group has spawned. Parameter 
+  _this is an array and contains the following sent in parameters: 0 (Group): The group that was spawned. 1 (Scalar):
+  The current instance's number of groups on the map.
+  Example: { hint "Group spawned! The total number of groups is now " + str (_this select 1) + "."; }
+
+* ON_GROUP_REMOVING (Code): A callback that is executed right before an ambient infantry group is removed. Parameter 
+  _this is an array and contains the following sent in parameters: 0 (Group): The group that will be removed. 
+  1 (Scalar): The current instance's number of groups on the map.
+  Example: { hint "Group was removed."; }
+
+* ON_CHECK_RELEASE_GROUP (Code): A callback that is executed on every ambient infantry loop iteration. Parameter 
+  _this is an array and contains the following sent in parameters: 0 (Group): The group that will be removed. 
+  1 (Scalar): The current instance's number of groups on the map. The purpose is to find out if the current group 
+  should still be handled by the script or not. Use this callback and return true if you want to release a unit, 
+  so that it is no longer handled by the Ambient Infantry script. When a group is marked for release after call to
+  this callback, the actual release is then confirmed with the callback ON_GROUP_RELEASED (see below). The default 
+  return value is false.
+  Example: { private _releaseGroup = (random 100 > 99); _releaseGroup }
+
+* ON_GROUP_RELEASED (Code): A callback that is executed when a group has been released from the ambient infantry 
+  script. Parameter _this is an array and contains the following sent in parameters: 0 (Group): The group that has 
+  been released. 1 (Scalar): The current instance's number of groups left on the map, excluding the released group. 
+  After this callback is executed the Ambient Infantry script does no longer care about the released group, and it 
+  will not be removed as other groups when players are far away.
+  Example:
+  { 
+    params ["_group"];
+    private _wp = _group addWaypoint [getPos player];
+    _group setCombatMode "Red";
+  }
+
+* IN_DEBUG_MODE (Boolean): Whether the script is running in debug mode or not. In debug mode all groups are marked 
+  as dots on the map, and some debug text shows when groups are spawning and being removed.
+  Example: false
+
+
+- USING MORE THAN ONE INSTANCE -
+
+To excecute more instances of the script simultaneously, copy the parameters and the starting call command in 
+Engima\AmbientInfantry\ConfigAndStart.sqf and add them at bottom of the ConfigAndStart.sqf.
+
+
+- RUNNING ON HEADLESS CLIENT -
+
+This script can be routed to execute on a headless client. All instances that you define for start in the file
+Engima\AmbientInfantry\ConfigAndStart.sqf will execute on either the server (default) or on a headless client.
+
+To route the execution to a headless client, follow these steps:
+
+1. Create a headless client unit in the Arma 3 editor and give it a name.
+2. Edit the file Engima\AmbientInfantry\HeadlessClient.sqf and assign the variable 
+   Engima_AmbientInfantry_HeadlessClientName the name of your headless client unit.
+   Example: Engima_AmbientInfantry_HeadlessClientName = "HC1";
+3. Have your mission support headless clients.
+
+For more information (for step 3 particulary), see the official and general documentation about headless clients.
+
+
+- A NOTE ON SQX -
+
+This script is programmed in object oriented SQX. After downloading the CPack Engima.AmbientInfantry you will need 
+to compile it into SQF. The only editor (at the time of writing) that has the SQX compiler is TypeSqf. When the
+script is compiled, the output files (.sqx.sqf files) can be executed by Arma 3.
+
+The complete source code for Engima's Ambient Infantry script can be downloaded from 
+https://github.com/XEngima/EngimaAmbientInfantry
+
+- EXPORT SCRIPT TO SQF -
+
+If you prefer another editor, the script is possible to export to SQF. To export it you will first need 
+to compile it. Create a dummy project with an empty mission and compile it. Then copy the compiled files and their 
+folders to your real mission folder. You will need the folders "Engima\AmbientInfantry", "Sqx\Markers" and 
+"Sqx\Waypoints". You will also need the start lines that was added to init.sqf, so copy these over to. If you want 
+to clean up the target version, then remove all the .sqx files from these folders.
+
+Note that the file ConfigAndStart.sqf is *not* an SQX file. Therefore you may change the configuration options even 
+after the export to another editor, and you will not need to go through the same process again (at least not until
+an update arrives).
+
+If you want to set configuration options and run the script in "the SQX way", have a look at the proxy method 
+AmbientInfantry.CreateInstance in the file "Engima\AmbientInfantry\Classes\AmbientInfantry.sqx".

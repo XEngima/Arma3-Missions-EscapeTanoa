@@ -1,0 +1,130 @@
+/*
+ * Name:	Configuration
+ * Date:	2017-07-17
+ * Version: 1.0
+ * Author:  Engima
+ *
+ * Description:
+ * Class that contains a configuration for an ambient infantry instance.
+ */
+namespace Engima.AmbientInfantry.Classes
+{
+	public class Configuration
+	{
+		// Creates a Configuration object and sets defautl values for all options.
+		public constructor {
+			_self.Side = east;
+			_self.UnitClasses = ["O_G_Soldier_F", "O_G_Soldier_lite_F", "O_G_Soldier_SL_F", "O_G_Soldier_TL_F", "O_G_Soldier_AR_F", "O_G_medic_F", "O_G_engineer_F", "O_G_Soldier_exp_F", "O_G_Soldier_GL_F", "O_G_Soldier_M_F", "O_G_Soldier_LAT_F", "O_G_Soldier_A_F", "O_G_officer_F"];
+			_self.MaxGroupsCount = 10;
+			_self.MinUnitsInEachGroup = 2;
+			_self.MaxUnitsInEachGroup = 4;
+			_self.MinSpawnDistance = 800;
+			_self.MaxSpawnDistance = 1200;
+			_self.MinSpawnDistanceOnStart = 100;
+			_self.MinSkill = 0.4;
+			_self.MaxSkill = 0.6;
+			_self.BlacklistMarkers = [];
+			_self.OnGroupCreating = { true };
+			_self.OnGroupCreated = {};
+			_self.OnGroupRemoving = {};
+			_self.OnCheckReleaseGroup = { false };
+			_self.OnGroupReleased = {};
+			_self.InDebugMode = false;
+		};
+		
+		// Gets a value from the parameter list.
+		// _params (Array): A list of value paired parameter names and values.
+		// _key (String): The name of the key for the parameter value to extract.
+		// _defaultValue (Any): The value that is returned if the parameter could not be found.
+		public static method Any GetParamValue {
+			params ["_params" as Array, "_key" as String, ["_defaultValue" as Any, 0]];
+		  	
+		  	private _value = _defaultValue;
+		
+		   	{
+		   		if (_x select 0 == _key) then {
+		   			_value = _x select 1;
+		   		};
+		   	} foreach (_params);
+		    	
+		   	_value
+		};
+		
+		// Gets or sets the site that the spawned groups will belong to.
+		public property Side Side { get; set; };
+		
+		// Gets or sets an array of unit classes that the script can spawn. For each unit a random class name
+		// in this array is selected.
+		public property Array UnitClasses { get; set; };
+		
+		// Gets or sets the maximum number of groups that will be handled by the current Ambient Infantry instance.
+		// The actual number will sometimes be less because of close water and blacklist markers.
+		public property Scalar MaxGroupsCount { get; set; };
+		
+		// Gets or sets the minimum number of units in each group. The number of units will be a random value 
+		// between MinUnitsInEachGroup and MaxUnitsInEachGroup.
+		public property Scalar MinUnitsInEachGroup { get; set; };
+		
+		// Gets or sets the maximum number of units in each group. The number of units will be a random value 
+		// between MinUnitsInEachGroup and MaxUnitsInEachGroup.
+		public property Scalar MaxUnitsInEachGroup { get; set; };
+		
+		// Gets or sets the minimum spawn distance from the closest player. The spawn distance will be a random value 
+		// between MinSpawnDistance and MaxSpawnDistance.
+		public property Scalar MinSpawnDistance { get; set; };
+		
+		// Gets or sets the maximum spawn distance from the closest player. The spawn distance will be a random value 
+		// between MinSpawnDistance and MaxSpawnDistance. When a group gets farther away than this distance from 
+		// neares player it will be removed.
+		public property Scalar MaxSpawnDistance { get; set; };
+		
+		// Gets or sets the minimum spawn distance from the closest player when the script starts. (You may want to
+		// have units closer than MinSpawnDistance when the mission starts.)
+		public property Scalar MinSpawnDistanceOnStart { get; set; };
+		
+		// Gets or sets the minimum skill that the spawned units will have. The skill will be a random value 
+		// between MinSkill and MaxSkill.
+		public property Scalar MinSkill { get; set; };
+		
+		// Gets or sets the maximum skill that the spawned units will have. The skill will be a random value 
+		// between MinSkill and MaxSkill.
+		public property Scalar MaxSkill { get; set; };
+		
+		// Gets or sets an array with markers in which the groups will *not* spawn or be present.
+		public property Array BlacklistMarkers { get; set; };
+		
+		// Gets or sets the function called right before a group and its units has been created.
+		// The list of unit classes that are spawned can be edited in this function.
+		// _unitClasses (Array): The unit classes that will be created.
+		// _groupsCount (Scalar): The total number of groups currently handled.
+		// Returns (Array): The unit classes that will be created. An empty array ([]) will 
+		public property Code OnGroupCreating { get; set; };
+		
+		// Gets or sets the function called right after a group and its units has been created.
+		// _group (Group): The group that was spawned.
+		// _groupsCount (Scalar): The total number of groups currently handled.
+		public property Code OnGroupCreated { get; set; };
+		
+		// Gets or sets the function called right before a group is being removed by the 
+		// Ambient Infantry script.
+		// _group (Group): The group to be removed.
+		// _groupsCount (Scalar): The total number of groups currently handled.
+		public property Code OnGroupRemoving { get; set; };
+		
+		// Gets or sets the function called once every script iteration to check if a group should be 
+		// released from the Ambient Infantry script.
+		// _group (Group): The group to test for release.
+		// _groupsCount (Scalar): The total number of groups currently handled.
+		// Returns (Boolean): true if the group should be released from the Ambient Infantry script,
+		// otherwise false.
+		public property Code OnCheckReleaseGroup { get; set; };
+		
+		// Gets or sets a function called when a group is released from the Ambient Infantry script.
+		// _group (Group): The group that was released.
+		// _groupsCount (Scalar): The total number of groups currently handled.
+		public property Code OnGroupReleased { get; set; };
+		
+		// Gets or sets whether the script should be run i debug mode or not.
+		public property Boolean InDebugMode { get; set; };
+	};
+};

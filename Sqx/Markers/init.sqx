@@ -1,0 +1,2 @@
+call compile preprocessFileLineNumbers "Sqx\Markers\Marker.sqx";
+call compile preprocessFileLineNumbers "Sqx\Markers\MarkerHelper.sqx";

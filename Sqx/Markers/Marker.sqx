@@ -1,0 +1,484 @@
+/*
+ * Name:	Marker
+ * Date:	2017-07-18
+ * Version: 1.0
+ * Author:  Engima
+ *
+ * Description:
+ * Models a marker on the map.
+ */
+namespace Sqx.Markers
+{
+	public class Marker
+	{
+		#region Initializers
+		
+		// Creates a public icon marker.
+		public static method CreateIconMarker {
+			params [
+				"_position" as Array, 
+				["_type" as String, "hd_dot"], 
+				["_color" as String, "ColorBlack"],
+				["_text" as String, ""],
+				["_isVisible" as Boolean, true]
+			];
+			
+			([_position, "ICON", [1, 1], 0, _type, _color, "Solid", _text, 0.4, _isVisible] new Marker)
+		};
+	
+		// Creates a local icon marker.
+		public static method CreateIconMarkerLocal {
+			params [
+				"_position" as Array, 
+				["_type" as String, "hd_dot"], 
+				["_color" as String, "ColorBlack"],
+				["_text" as String, ""],
+				["_isVisible" as Boolean, true]
+			];
+			
+			([_position, "ICON", [1, 1], 0, _type, _color, "Solid", _text, 0.4, _isVisible, "", true] new Marker)
+		};
+	
+		// Creates a public shape marker.
+		public static method CreateShapeMarker {
+			params [
+				"_position" as Array, 
+				["_shape" as String, "RECTANGLE"],
+				["_size" as Array, [50, 50]],
+				["_direction" as Scalar, 0],
+				["_color" as String, "ColorBlack"],
+				["_brush" as String, "Solid"],
+				["_text" as String, ""],
+				["_alpha" as Scalar, 0.4],
+				["_isVisible" as Boolean, true]
+			];
+			
+			([_position, _shape, _size, _direction, "hd_dot", _color, _brush, _text, _alpha, _isVisible] new Marker)
+		};
+		
+		// Creates a local shape marker.
+		public static method CreateShapeMarkerLocal {
+			params [
+				"_position" as Array, 
+				["_shape" as String, "RECTANGLE"],
+				["_size" as Array, [50, 50]],
+				["_direction" as Scalar, 0],
+				["_color" as String, "ColorBlack"],
+				["_brush" as String, "Solid"],
+				["_text" as String, ""],
+				["_alpha" as Scalar, 0.4],
+				["_isVisible" as Boolean, true]
+			];
+			
+			([_position, _shape, _size, _direction, "hd_dot", _color, _brush, _text, _alpha, _isVisible, "", true] new Marker)
+		};
+		
+		// Creates a public marker using an existing marker.
+		public static method CreateMarkerFromMarker {
+			params ["_marker" as String, ["_isVisible" as Boolean, true], ["_name" as String, ""]];
+			
+			([
+				getMarkerPos _marker,
+				markerShape _marker,
+				markerSize _marker,
+				markerDir _marker,
+				markerType _marker,
+				markerColor _marker,
+				markerBrush _marker,
+				markerText _marker,
+				markerAlpha _marker,
+				_isVisible,
+				_name,
+				true
+			] new Marker)
+		};
+
+		// Creates a local marker object using an existing marker.
+		public static method CreateMarkerFromMarkerLocal {
+			params ["_marker" as String, ["_isVisible" as Boolean, true], ["_name" as String, ""]];
+			
+			([
+				getMarkerPos _marker,
+				markerShape _marker,
+				markerSize _marker,
+				markerDir _marker,
+				markerType _marker,
+				markerColor _marker,
+				markerBrush _marker,
+				markerText _marker,
+				markerAlpha _marker,
+				_isVisible,
+				_name,
+				false
+			] new Marker)
+		};
+
+		#endregion
+
+		#region Constructor
+
+		// Creates a Marker object.
+		// _position (Array): The marker's position.
+		// _shape (String): The shape of the marker ("RECTANGLE" or "ICON").
+		// _size (Array): The size of the marker. E.g. [1, 1].
+		// _direction (Scalar): The marker's direction.
+		// _type (String): The marker type (only relevant if _shape is "ICON").
+		// _color (String): The marker's color. Applies to Arma 3's colors, e.g. "ColorBlack".
+		// _brush (String): The marker's brush (e.g. "Solid").
+		// _text (String): The marker's text.
+		// _alpha (Scalar): The marker's alpha.
+		// _isVisible (Boolean): true to make the marker visible on the map.
+		// _name (String): The marker name of the marker.
+		// _isLocal (Boolean): Whether the marker is to be local or public.
+		public constructor(
+				"_position" as Array, 
+				["_shape" as String, "ICON"],
+				["_size" as Array, [1, 1]],
+				["_direction" as Scalar, 0],
+				["_type" as String, "hd_dot"], 
+				["_color" as String, "ColorBlack"], 
+				["_brush" as String, "Solid"], 
+				["_text" as String, ""], 
+				["_alpha" as Scalar, 0.4], 
+				["_isVisible" as Boolean, true], 
+				["_name" as String, ""],
+				["_isLocal" as Boolean, false])
+		{
+			if (isNil "Sqx_Markers_Marker_CurrentId") then {
+				Sqx_Markers_Marker_CurrentId = 1;
+			};
+			
+			// Generate a name if not an explicit name will be used.
+			if (_name == "") then {
+				_name = "Sqx_Markers_Marker_" + str Sqx_Markers_Marker_CurrentId;
+				Sqx_Markers_Marker_CurrentId = Sqx_Markers_Marker_CurrentId + 1;
+			};
+			
+			_self.Name = _name;
+			_self.Position = _position;
+			_self.IsVisible = _isVisible;
+			_self.IsBlinking = false;
+			
+			_self.Shape = _shape;
+			_self.Size = _size;
+			_self.Direction = _direction;
+			_self.Type = _type;
+			_self.Color = _color;
+			_self.Brush = _brush;
+			_self.Text = _text;
+			_self.Alpha = _alpha;
+			_self.IsLocal = _isLocal;
+			
+			_self.Tag = objNull;
+			
+			if (_self.IsVisible) then {
+				call _self.Draw;
+			};
+		};
+		
+		#endregion
+		
+		#region Properties
+		
+		// Gets the marker name that is assigned.
+		public property String Name { get; private set; };
+		
+		// Gets the marker's position.
+		public property Array Position { get; private set; };
+		
+		// Gets the marker's shape.
+		public property String Shape { get; private set; };
+		
+		// Gets the marker's size.
+		public property Array Size { get; private set; };
+		
+		// Gets the marker's direction.
+		public property Scalar Direction { get; private set; };
+		
+		// Gets the marker's type.
+		public property String Type { get; private set; };
+		
+		// Gets the marker's color.
+		public property String Color { get; private set; };
+		
+		// Gets the marker's brush.
+		public property String Brush { get; private set; };
+		
+		// Gets the marker's text.
+		public property String Text { get; private set; };
+		
+		// Gets the marker's alpha.
+		public property Scalar Alpha { get; private set; };
+		
+		// Gets whether the marker is local or not.
+		public property Boolean IsLocal { get; private set; };
+		
+		// Gets whether the marker is visible or invisible.
+		public property Boolean IsVisible { get; private set; };
+		
+		// Gets or sets a tag. The tag kan be any value or object that is associated with the marker.
+		public property Any Tag { get; set; };
+		
+		// Gets whether the marker is blinking or not.
+		public property Boolean IsBlinking { get; private set; };
+
+		#endregion
+		
+		#region Methods
+
+		// Draws the current marker on the map.
+		private method Draw {
+			private _name = _self.Name;
+			
+			if (_self.IsLocal) then {
+				createMarkerLocal [_name, _self.Position];
+				_name setMarkerShapeLocal _self.Shape;
+				_name setMarkerSizeLocal _self.Size;
+				_name setMarkerDirLocal _self.Direction;
+				_name setMarkerTypeLocal _self.Type;
+				_name setMarkerColorLocal _self.Color;
+				_name setMarkerBrushLocal _self.Brush;
+				_name setMarkerTextLocal _self.Text;
+				_name setMarkerAlphaLocal _self.Alpha;
+			}
+			else {
+				createMarker [_name, _self.Position];
+				_name setMarkerShape _self.Shape;
+				_name setMarkerSize _self.Size;
+				_name setMarkerDir _self.Direction;
+				_name setMarkerType _self.Type;
+				_name setMarkerColor _self.Color;
+				_name setMarkerBrush _self.Brush;
+				_name setMarkerText _self.Text;
+				_name setMarkerAlpha _self.Alpha;
+			};
+		};
+		
+		// Makes the marker appear on the map.
+		public method Show {
+			if (!_self.IsVisible) then {
+				_self.IsVisible = true;
+				call _self.Draw;
+			};
+		};
+		
+		// Makes the marker on the map invisible.
+		public method Hide {
+			if (_self.IsVisible) then {
+				if (_self.IsLocal) then {
+					deleteMarkerLocal _self.Name;
+				}
+				else {
+					deleteMarker _self.Name;
+				};
+				
+				_self.IsVisible = false;
+				_self.IsBlinking = false;
+			};
+		};
+		
+		// Makes the marker start blinking.
+		// _interval (Scalar): Blink interval in seconds.
+		public method StartBlinking("_interval" as Scalar) {
+			if (!_self.IsBlinking) then {
+				_self.IsBlinking = true;
+				[_interval] spawn _self.DoBlink;
+			};
+		};
+		
+		// Has the marker stop blinking.
+		public method StopBlinking {
+			_self.IsBlinking = false;
+			
+			if (_self.IsVisible) then {
+				call _self.Draw;
+			};
+		};
+		
+		// Performs the blinking.
+		// _interval (Scalar): Blink interval in seconds.
+		private method DoBlink("_interval" as Scalar) {
+			private _blinkVisible = true;
+		
+			while { _self.IsBlinking } do {
+				if (_blinkVisible) then {
+					if (_self.IsLocal) then {
+						deleteMarkerLocal _self.Name;
+					}
+					else {
+						deleteMarker _self.Name;
+					};
+				}
+				else {
+					call _self.Draw;
+				};
+				
+				_blinkVisible = !_blinkVisible;
+				sleep _interval;
+			};
+		};
+		
+		#endregion
+		
+		#region Setters
+		
+		// Sets (updates) the marker's position.
+		// _position (Array): The marker's new position.
+		public method SetPosition("_position" as Array) {
+			if (!(_position isEqualTo _self.Position)) then {
+				_self.Position = _position;
+				
+				if (_self.IsVisible) then {
+					if (_self.IsLocal) then {
+						(_self.Name) setMarkerPosLocal _position;
+					}
+					else {
+						(_self.Name) setMarkerPos _position;
+					};
+				};
+			};
+		};
+		
+		// Sets (updates) the marker's shape.
+		// _shape (Array): The marker's new shape.
+		public method SetShape("_shape" as String) {
+			if (!(_shape isEqualTo _self.Shape)) then {
+				_self.Shape = _shape;
+				
+				if (_self.IsVisible) then {
+					if (_self.IsLocal) then {
+						(_self.Name) setMarkerShapeLocal _shape;
+					}
+					else {
+						(_self.Name) setMarkerShape _shape;
+					};
+				};
+			};
+		};
+		
+		// Sets (updates) the marker's size.
+		// _size (Array): The marker's new size.
+		public method SetSize("_size" as Array) {
+			if (!(_size isEqualTo _self.Size)) then {
+				_self.Size = _size;
+				
+				if (_self.IsVisible) then {
+					if (_self.IsLocal) then {
+						(_self.Name) setMarkerSizeLocal _size;
+					}
+					else {
+						(_self.Name) setMarkerSize _size;
+					};
+				};
+			};
+		};
+		
+		// Sets (updates) the marker's direction.
+		// _direction (Scalar): The marker's new direction.
+		public method SetDirection("_direction" as Scalar) {
+			if (!(_direction isEqualTo _self.Direction)) then {
+				_self.Direction = _direction;
+				
+				if (_self.IsVisible) then {
+					if (_self.IsLocal) then {
+						(_self.Name) setMarkerDirLocal _direction;
+					}
+					else {
+						(_self.Name) setMarkerDir _direction;
+					};
+				};
+			};
+		};
+		
+		// Sets (updates) the marker's type.
+		// _type (String): The new marker type.
+		public method SetType("_type" as String)
+		{
+			if (!(_type isEqualTo _self.Type)) then {
+				_self.Type = _type;
+				
+				if (_self.IsVisible) then {
+					if (_self.IsLocal) then {
+						(_self.Name) setMarkerTypeLocal _type;
+					}
+					else {
+						(_self.Name) setMarkerType _type;
+					};
+				};
+			};
+		};
+		
+		// Sets (updates) the marker's color.
+		// _type (String): The new color of the marker.
+		public method SetColor("_color" as String)
+		{
+			if (!(_color isEqualTo _self.Color)) then {
+				_self.Color = _color;
+				
+				if (_self.IsVisible) then {
+					if (_self.IsLocal) then {
+						(_self.Name) setMarkerColorLocal _color;
+					}
+					else {
+						(_self.Name) setMarkerColor _color;
+					};
+				};
+			};
+		};
+		
+		// Sets (updates) the marker's brush.
+		// _brush (String): The new marker brush.
+		public method SetBrush("_brush" as String)
+		{
+			if (!(_brush isEqualTo _self.Brush)) then {
+				_self.Brush = _brush;
+				
+				if (_self.IsVisible) then {
+					if (_self.IsLocal) then {
+						(_self.Name) setMarkerBrushLocal _brush;
+					}
+					else {
+						(_self.Name) setMarkerBrush _brush;
+					};
+				};
+			};
+		};
+		
+		// Sets (updates) the marker's text.
+		// _text (String): The new marker text.
+		public method SetText("_text" as String)
+		{
+			if (!(_text isEqualTo _self.Text)) then {
+				_self.Text = _text;
+				
+				if (_self.IsVisible) then {
+					if (_self.IsLocal) then {
+						(_self.Name) setMarkerTextLocal _text;
+					}
+					else {
+						(_self.Name) setMarkerText _text;
+					};
+				};
+			};
+		};
+		
+		// Sets (updates) the marker's alpha.
+		// _alpha (Scalar): The marker's new alpha.
+		public method SetAlpha("_alpha" as Scalar) {
+			if (!(_alpha isEqualTo _self.Alpha)) then {
+				_self.Alpha = _alpha;
+				
+				if (_self.IsVisible) then {
+					if (_self.IsLocal) then {
+						(_self.Name) setMarkerAlphaLocal _alpha;
+					}
+					else {
+						(_self.Name) setMarkerAlpha _alpha;
+					};
+				};
+			};
+		};
+		
+		#endregion
+	};
+};

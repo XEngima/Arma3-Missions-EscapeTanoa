@@ -4,6 +4,41 @@
     <SubNodes>
       <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Engima" FileName="Engima">
         <SubNodes>
+          <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="AmbientInfantry" FileName="Engima\AmbientInfantry">
+            <SubNodes>
+              <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Classes" FileName="Engima\AmbientInfantry\Classes">
+                <SubNodes>
+                  <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="AmbientInfantry.sqx" FileName="Engima\AmbientInfantry\Classes\AmbientInfantry.sqx">
+                    <SubNodes />
+                  </ProjectNodeViewModel>
+                  <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="Configuration.sqx" FileName="Engima\AmbientInfantry\Classes\Configuration.sqx">
+                    <SubNodes />
+                  </ProjectNodeViewModel>
+                  <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="Helper.sqx" FileName="Engima\AmbientInfantry\Classes\Helper.sqx">
+                    <SubNodes />
+                  </ProjectNodeViewModel>
+                  <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="InfantryGroup.sqx" FileName="Engima\AmbientInfantry\Classes\InfantryGroup.sqx">
+                    <SubNodes />
+                  </ProjectNodeViewModel>
+                  <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="PlayerPosition.sqx" FileName="Engima\AmbientInfantry\Classes\PlayerPosition.sqx">
+                    <SubNodes />
+                  </ProjectNodeViewModel>
+                </SubNodes>
+              </ProjectNodeViewModel>
+              <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="ConfigAndStart.sqf" FileName="Engima\AmbientInfantry\ConfigAndStart.sqf">
+                <SubNodes />
+              </ProjectNodeViewModel>
+              <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="Documentation.txt" FileName="Engima\AmbientInfantry\Documentation.txt">
+                <SubNodes />
+              </ProjectNodeViewModel>
+              <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="HeadlessClient.sqf" FileName="Engima\AmbientInfantry\HeadlessClient.sqf">
+                <SubNodes />
+              </ProjectNodeViewModel>
+              <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="Init.sqx" FileName="Engima\AmbientInfantry\Init.sqx">
+                <SubNodes />
+              </ProjectNodeViewModel>
+            </SubNodes>
+          </ProjectNodeViewModel>
           <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Civilians" FileName="Engima\Civilians">
             <SubNodes>
               <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Common" FileName="Engima\Civilians\Common">
@@ -283,6 +318,33 @@
           </ProjectNodeViewModel>
         </SubNodes>
       </ProjectNodeViewModel>
+      <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Sqx" FileName="Sqx">
+        <SubNodes>
+          <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Markers" FileName="Sqx\Markers">
+            <SubNodes>
+              <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="init.sqx" FileName="Sqx\Markers\init.sqx">
+                <SubNodes />
+              </ProjectNodeViewModel>
+              <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="Marker.sqx" FileName="Sqx\Markers\Marker.sqx">
+                <SubNodes />
+              </ProjectNodeViewModel>
+              <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="MarkerHelper.sqx" FileName="Sqx\Markers\MarkerHelper.sqx">
+                <SubNodes />
+              </ProjectNodeViewModel>
+            </SubNodes>
+          </ProjectNodeViewModel>
+          <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Waypoints" FileName="Sqx\Waypoints">
+            <SubNodes>
+              <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="Init.sqx" FileName="Sqx\Waypoints\Init.sqx">
+                <SubNodes />
+              </ProjectNodeViewModel>
+              <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="WaypointHelper.sqx" FileName="Sqx\Waypoints\WaypointHelper.sqx">
+                <SubNodes />
+              </ProjectNodeViewModel>
+            </SubNodes>
+          </ProjectNodeViewModel>
+        </SubNodes>
+      </ProjectNodeViewModel>
       <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="briefing.sqf" FileName="briefing.sqf">
         <SubNodes />
       </ProjectNodeViewModel>
@@ -319,5 +381,13 @@
     <string>Public variable 'drn_DynamicWeather_WeatherTargetValue' may be used before being assigned a value.</string>
     <string>Public variable 'drn_DynamicWeather_WindX' may be used before being assigned a value.</string>
     <string>Public variable 'drn_DynamicWeather_WindZ' may be used before being assigned a value.</string>
+    <string>Public variable 'drn_fnc_CL_PositionIsInsideMarker' may be used before being assigned a value.</string>
+    <string>Public variable 'drn_fnc_CL_ShowCommandTextLocal' may be used before being assigned a value.</string>
+    <string>Public variable 'drn_fnc_CL_ShowTitleTextLocal' may be used before being assigned a value.</string>
+    <string>Public variable 'drn_fnc_CL_AddScoreServer' may be used before being assigned a value.</string>
+    <string>Public variable 'drn_fnc_CL_ShowDebugTextAllClients' may be used before being assigned a value.</string>
+    <string>Public variable 'drn_fnc_CL_ShowDebugTextLocal' may be used before being assigned a value.</string>
+    <string>Public variable 'drn_fnc_CL_SetDebugMarkerLocal' may be used before being assigned a value.</string>
+    <string>Public variable 'drn_fnc_CL_DeleteDebugMarkerLocal' may be used before being assigned a value.</string>
   </FilteredAnalyzerResultItems>
 </Project>

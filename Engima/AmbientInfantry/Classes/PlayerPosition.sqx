@@ -1,0 +1,26 @@
+/*
+ * Name:	PlayerPosition
+ * Date:	2017-08-06
+ * Version: 1.0
+ * Author:  Engima
+ *
+ * Description:
+ * Models a player position, with the actual position and the presumed near future position.
+ */
+namespace Engima.AmbientInfantry.Classes
+{
+	public class PlayerPosition
+	{
+		// Creates a PlayerPosition object.
+		public constructor {
+			params ["_position" as Array, "_aheadPosition" as Array];
+			
+			_self.Position = _position;
+			_self.AheadPosition = _aheadPosition;
+		};
+		
+		public property Array Position { get; private set; };
+		
+		public property Array AheadPosition { get; private set; };
+	};
+};

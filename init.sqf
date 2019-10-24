@@ -1,3 +1,6 @@
+call compile preprocessFileLineNumbers "Engima\AmbientInfantry\Init.sqx.sqf"; // Added by Engima.AmbientInfantry
+call compile preprocessFileLineNumbers "Sqx\Waypoints\Init.sqx.sqf"; // Added by Sqx.Waypoints
+call compile preprocessFileLineNumbers "Sqx\Markers\Init.sqx.sqf"; // Added by Sqx.Markers
 call compile preprocessFileLineNumbers "Engima\Civilians\Init.sqf"; // Added by Engima.Civilians
 call compile preprocessFileLineNumbers "Engima\Traffic\Init.sqf"; // Added by Engima.Traffic
 call compile preprocessFileLineNumbers "Engima\PatrolledAreas\Init.sqf"; // Added by Engima.PatrolledAreas

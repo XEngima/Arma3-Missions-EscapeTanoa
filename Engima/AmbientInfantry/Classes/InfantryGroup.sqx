@@ -1,0 +1,188 @@
+/*
+ * Name:	InfantryGroup
+ * Date:	2017-07-17
+ * Version: 1.0
+ * Author:  Engima
+ *
+ * Description:
+ * Class that models an infantry group.
+ */
+using Sqx.Markers;
+using Sqx.Waypoints;
+
+namespace Engima.AmbientInfantry.Classes
+{
+	public class InfantryGroup
+	{
+		private fields ["_mConfiguration" as Configuration, "_mMarker" as Marker];
+	
+		// Creates a InfantryGroup object.
+		// _group (Group): The infantry group.
+		public constructor {
+			params ["_group" as Group, "_configuration" as Configuration];
+
+			_self.MovingOutFromRestrictedArea = false;
+			
+			_self.Group = _group;
+			_mConfiguration = _configuration;
+			_mMarker = classNull;
+
+			if (_mConfiguration.InDebugMode) then {
+				private _color = "ColorCivilian";
+				
+				if (side _self.Group == opfor) then {
+					_color = "ColorOpfor";
+				};
+				if (side _self.Group == blufor) then {
+					_color = "ColorBlufor";
+				};
+				if (side _self.Group == resistance) then {
+					_color = "ColorGuer";
+				};
+				
+				//_mMarker = [getPos (units _group select 0), "hd_dot", _color] new Marker;
+				_mMarker = [getPos (units _group select 0), "hd_dot", _color, "Ambient Infantry"] call Marker.CreateIconMarker;
+			};
+			
+			[units _group select 0] spawn InfantryGroup.MoveGroup;
+		};
+		
+		// Gets the actual group.
+		public property Group Group { get; private set; };
+		
+		// Gets the groups position (from the latest position update).
+		public property Array Position { get; private set; };
+		
+		public property Boolean MovingOutFromRestrictedArea { get; private set; };
+		
+		public method CheckEnteredRestrictedArea {
+			private _position = call _self.UpdatePosition;
+			private _inRestrictedArea = [_position, _mConfiguration.BlacklistMarkers] call MarkerHelper.PositionInsideAnyMarker;
+			
+			// If in restricted area, change direction.
+			if (_inRestrictedArea) then
+			{
+				if (!_self.MovingOutFromRestrictedArea) then
+				{
+					[(_self.Group)] call WaypointHelper.DeleteAllWaypointsFromGroup;
+					
+					private _steps = 8;
+					private _distance = 50;
+					private _startDir = floor random 360;
+					private _clockwise = selectRandom [-1, 1];
+					
+					for "_i" from 0 to _steps - 1 do {
+						scopeName "forLoop";
+						
+						private _dir = _startDir + _clockwise * _i * (360 / _steps);
+						private _x = (_position select 0) + _distance * sin _dir;
+						private _y = (_position select 1) + _distance * cos _dir;
+						
+						if (!([[_x, _y], _mConfiguration.BlacklistMarkers] call MarkerHelper.PositionInsideAnyMarker)) then {
+							_self.MovingOutFromRestrictedArea = true;
+							[units _self.Group select 0, [_x, _y]] spawn InfantryGroup.MoveGroup;
+							breakOut "forLoop";
+						};
+					};
+				};
+			}
+			else {
+				if (_self.MovingOutFromRestrictedArea) then {
+					_self.MovingOutFromRestrictedArea = false;
+				};
+			};
+		};
+		
+		// Moves a group to a random position on the map. If it reaches its destination, it will move to a new 
+		// destination.
+		// _unit: One of the units in the group.
+		public static method MoveGroup
+		{
+			params ["_unit" as Object, ["_sentInDestinationPos" as Array, []]];
+			
+			private ["_destinationPos" as Array];
+			private ["_waypoint" as Array, "_waypointFormations" as Array, "_formation" as String, "_combatMode" as String];
+			
+			private _group = group _unit;
+			
+			if (count _sentInDestinationPos > 0) then {
+				_destinationPos = +_sentInDestinationPos;
+			}
+			else {
+				private _x = (getPos _unit) select 0;
+				private _y = (getPos _unit) select 1;
+			    _destinationPos = [_x - 1500 + random 3000, _y - 1500 + random 3000];
+				while { surfaceIsWater _destinationPos } do {
+			    	_destinationPos = [_x - 1500 + random 3000, _y - 1500 + random 3000];
+				};
+			};
+			
+			_waypointFormations = ["COLUMN", "STAG COLUMN", "FILE", "DIAMOND"];
+			_formation = selectRandom _waypointFormations;
+			_combatMode = selectRandom ["BLUE", "GREEN", "WHITE", "YELLOW", "RED"];
+			
+			_waypoint = _group addWaypoint [_destinationPos, 0];
+			_waypoint setWaypointCompletionRadius 50;
+
+			_waypoint setWaypointStatements ["true", "_nil = [" + vehicleVarName _unit + "] spawn Engima_AmbientInfantry_Classes_InfantryGroup_MoveGroup;"];
+			_group setBehaviour "SAFE";
+			_group setSpeedMode "LIMITED";
+			_group setFormation _formation;
+			_group setCombatMode _combatMode;
+		};
+		
+		// Updates the groups' position and, if in debug mode, updates the marker position
+		// Returns (Array): The updated position.
+		public method Array UpdatePosition {
+			private _position = getPos (units (_self.Group) select 0);
+			
+			_self.Position = _position;
+			
+			if (_mConfiguration.InDebugMode) then {
+				[_position] call _mMarker.SetPosition;
+			};
+			
+			_position
+		};
+		
+		private method DoLookAround {
+			private _group = _self.Group;
+		
+			sleep random 10;
+			
+			if (!isNull _group) then {
+				private _units = units _group;
+				private _unit = selectRandom _units;
+				private _angle = random 360;
+				private _y = 100 * cos _angle;
+				private _x = 100 * sin _angle;
+				
+				private _lookAtPos = [(getPos _unit select 0) + _y, (getPos _unit select 1) + _x, 0];
+				_unit lookAt _lookAtPos;
+				
+				sleep 5;
+				if (!isNull _unit) then {
+					_unit lookAt objNull;
+				};
+			};
+		};
+		
+		public method LookAround {
+			[] spawn _self.DoLookAround;
+		};
+		
+		// Disposes the infantry group and cleans up all used resources.
+		public method Dispose {
+			{
+				deleteVehicle _x;
+			} foreach units _self.Group as Object;
+			
+			deleteGroup _self.Group;
+			_self.Group = grpNull;
+			
+			if (!isNull _mMarker) then {
+				call _mMarker.Hide;
+			};
+		};
+	};
+};

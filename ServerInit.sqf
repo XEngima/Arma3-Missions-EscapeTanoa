@@ -111,14 +111,17 @@ if (_showGroupDiagnostics) then {
 };
 
 // Initialize communication centers
-if (true) then {
+[_comCenGuardsExist, _forceComCentersApart, _playerGroup, _enemySpawnDistance, _enemyFrequency] spawn {
+	params ["_comCenGuardsExist", "_forceComCentersApart", "_playerGroup", "_enemySpawnDistance", "_enemyFrequency"];
     private ["_instanceNo", "_marker", "_chosenComCenIndexes", "_index", "_comCenPositions", "_comCenItem", "_distanceBetween", "_currentPos", "_tooClose", "_pos", "_scriptHandle"];
+
+	sleep 15; // Lazy initialization.
 
     call compile preprocessFileLineNumbers ("Scripts\Escape\CommunicationCenterMarkers" + worldName + ".sqf");
     
     _chosenComCenIndexes = [];
 
-    _distanceBetween = 1500;
+    _distanceBetween = 1200;
     
     if (count drn_arr_communicationCenterMarkers >= 5) then {
 	    while {count _chosenComCenIndexes < 5} do {
@@ -159,14 +162,15 @@ if (true) then {
 	
 	            _tooClose = false;
 	            
-	            if (!_forceComCentersApart) then
+	            if (_forceComCentersApart) then
 	            {
 		            {
 		                _pos = (drn_arr_communicationCenterMarkers select _x) select 0;
+		                
 		                if (_pos distance _currentPos < _distanceBetween) then {
 		                    _tooClose = true;
 		                };
-		                if (_useRandomStartPos && _currentPos distance drn_startPos < _distanceBetween) then {
+		                if (_currentPos distance drn_startPos < _distanceBetween) then {
 		                    _tooClose = true;
 		                };
 		            } foreach _chosenComCenIndexes;
@@ -217,7 +221,7 @@ if (true) then {
         _marker = createMarkerLocal ["drn_CommunicationCenterPatrolMarker" + str _instanceNo, _pos];
         _marker setMarkerShapeLocal "ELLIPSE";
         _marker setMarkerAlpha 0;
-        _marker setMarkerSizeLocal [30, 30];
+        _marker setMarkerSizeLocal [35, 35];
         drn_var_comCenPatrolMarkers pushBack _marker;
         
         _instanceNo = _instanceNo + 1;
@@ -239,6 +243,8 @@ if (true) then {
 if (_useAmmoDepots) then {
     [] spawn {
         private ["_bannedPositions", "_ammoDepotPatrolMarker"];
+        
+		sleep 25; // Lazy initialization.
 
         _bannedPositions = + drn_var_Escape_communicationCenterPositions + [drn_startPos, getMarkerPos "drn_insurgentAirfieldMarker"];
         drn_var_Escape_ammoDepotPositions = _bannedPositions call drn_fnc_Escape_FindAmmoDepotPositions;
@@ -263,7 +269,7 @@ if (_useAmmoDepots) then {
 	params ["_enemySpawnDistance", "_enemyMinSkill", "_enemyMaxSkill", "_debugAmmoAndComPatrols", "_enemyFrequency"];
 	private ["_areaPerGroup"];
 	
-	waitUntil { drn_var_ammoDepotsInitialized && drn_var_comCentersInitialized };
+	waitUntil { sleep 10; drn_var_ammoDepotsInitialized && drn_var_comCentersInitialized };
 	
     switch (_enemyFrequency) do
     {
@@ -315,7 +321,9 @@ if (_useAmmoDepots) then {
 };
 
 // Initialize search leader
-if (_useSearchLeader) then {
+if (_useSearchLeader) then
+{
+	sleep 5;
     [drn_searchAreaMarkerName, _debugSearchLeader] execVM "Scripts\Escape\SearchLeader.sqf";
 };
 
@@ -325,6 +333,8 @@ if (_useMotorizedSearchGroup) then {
         private ["_enemyFrequency", "_enemyMinSkill", "_enemyMaxSkill"];
         private ["_spawnSegment"];
         
+		sleep 10; // Lazy initialization.
+
         _enemyFrequency = _this select 0;
         _enemyMinSkill = _this select 1;
         _enemyMaxSkill = _this select 2;
@@ -364,9 +374,13 @@ if (_useMotorizedSearchGroup) then {
     _debugCivilians = _this select 13;
     
     waitUntil {[drn_startPos] call drn_fnc_Escape_AllPlayersOnStartPos};
+    
     _playerGroup = group ((call drn_fnc_Escape_GetPlayers) select 0);
     
     if (_useVillagePatrols) then {
+    
+		sleep 7; // Lazy initialization.
+
         switch (_enemyFrequency) do
         {
             case 1: // 1-2 players
@@ -434,6 +448,8 @@ if (_useMotorizedSearchGroup) then {
     // Initialize ambient infantry groups
     if (_useAmbientInfantry) then
     {
+		sleep 7; // Lazy initialization.
+
         _fnc_OnSpawnAmbientInfantryGroup = {
         	params ["_group"];
             private ["_unit", "_enemyUnit", "_i"];
@@ -529,6 +545,8 @@ if (_useMotorizedSearchGroup) then {
 		// Call the function that creates and starts the ambient infantry instance.
 		[_parameters] call Engima_AmbientInfantry_Classes_AmbientInfantry_CreateInstance;
         
+        sleep 2;
+        
 		_parameters = [
 			["SIDE", independent],
 			["UNIT_CLASSES", drn_arr_Escape_InfantryTypesCsatPacificViperEast],
@@ -556,6 +574,8 @@ if (_useMotorizedSearchGroup) then {
     if (_useMilitaryTraffic) then {
         private ["_vehiclesPerSqkm", "_radius", "_vehiclesCount", "_fnc_onSpawnCivilian"];
         
+		sleep 7; // Lazy initialization.
+
         // Civilian traffic
         
         switch (_enemyFrequency) do
@@ -644,6 +664,8 @@ if (_useMotorizedSearchGroup) then {
 		
 		// Start an instance of the traffic
 		_parameters spawn ENGIMA_TRAFFIC_StartTraffic;
+		
+		sleep 3;
 
         //[_playerGroup, civilian, drn_arr_Escape_MilitaryTraffic_CivilianVehicleClasses, _vehiclesCount, _enemySpawnDistance, _radius, 0.5, 0.5, _fnc_onSpawnCivilian, _debugMilitaryTraffic] execVM "Scripts\DRN\MilitaryTraffic\MilitaryTraffic.sqf";
         sleep 0.25;
@@ -690,7 +712,10 @@ if (_useMotorizedSearchGroup) then {
 		
 	// Walking civilians
 		
-    if (_useCivilians) then {
+    if (_useCivilians) then
+    {
+		sleep 7; // Lazy initialization.
+
         private _fnc_onSpawnCivilian = {
             params ["_man"];
             
@@ -747,10 +772,13 @@ if (_useMotorizedSearchGroup) then {
 		_parameters spawn ENGIMA_CIVILIANS_StartCivilians;
 	};
 		
-    if (_useRoadBlocks) then {
+    if (_useRoadBlocks) then
+    {
         private ["_areaPerRoadBlock", "_maxEnemySpawnDistanceKm", "_roadBlockCount"];
         private ["_fnc_OnSpawnInfantryGroup", "_fnc_OnSpawnMannedVehicle"];
         
+		sleep 7; // Lazy initialization.
+
         _fnc_OnSpawnInfantryGroup = {{_x call drn_fnc_Escape_OnSpawnGeneralSoldierUnit;} foreach units _this;};
         _fnc_OnSpawnMannedVehicle = {{_x call drn_fnc_Escape_OnSpawnGeneralSoldierUnit;} foreach (_this select 1);};
         
@@ -909,8 +937,8 @@ if (_useSearchChopper) then {
     
     sleep 0.5;
     
-    drn_startPos = _startPos;
-    publicVariable "drn_startPos";
+//    drn_startPos = _startPos;
+//    publicVariable "drn_startPos";
     
     // Start thread that waits for escape to start
     [_guardGroups, _startPos] spawn {
@@ -973,7 +1001,7 @@ if (_useSearchChopper) then {
     };
     
     if (_guardLivesLong) then {
-        sleep (25 + floor (random 20));
+        sleep (20 + floor (random 15));
     }
     else {
         sleep 10;
@@ -982,6 +1010,4 @@ if (_useSearchChopper) then {
     // Guard passes out
     _guard setDamage 1;
 };
-
-
 

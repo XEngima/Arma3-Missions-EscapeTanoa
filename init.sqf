@@ -264,6 +264,7 @@ if (!isNull player) then {
                 player setDamage 0.9;
             };
 
+/*
             [] spawn {
                 private ["_marker"];
                 
@@ -272,7 +273,7 @@ if (!isNull player) then {
                 
                 for "_i" from 0 to (count drn_var_Escape_communicationCenterPositions) - 1 do {
                     _marker = createMarkerLocal ["drn_Escape_ComCenJipMarker" + str _i, (drn_var_Escape_communicationCenterPositions select _i)];
-                    _marker setMarkerType "mil_flag";
+                    _marker setMarkerTypeLocal "mil_flag";
                 };
                 
                 // Ammo depot markers
@@ -280,15 +281,16 @@ if (!isNull player) then {
                 
                 for "_i" from 0 to (count drn_var_Escape_ammoDepotPositions) - 1 do {
                     _marker = createMarkerLocal ["drn_Escape_AmmoDepotJipMarker" + str _i, (drn_var_Escape_ammoDepotPositions select _i)];
-                    _marker setMarkerType "Depot";
+                    _marker setMarkerTypeLocal "Depot";
                 };
                 
                 // Extraction marker
                 if (!isNil "drn_var_Escape_ExtractionMarkerPos") then {
                     _marker = createMarkerLocal ["drn_visibleGoalJipMarker", drn_var_Escape_ExtractionMarkerPos];
-                    _marker setMarkerType "Faction_US";
+                    _marker setMarkerTypeLocal "Faction_US";
                 };
             };
+*/
         }
         else {
             sleep 1;

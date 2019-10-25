@@ -235,6 +235,13 @@ if (!isMultiplayer) then {
     } foreach units group player;
 };
 
+// Add end event handler
+
+"drn_var_Escape_MissionEndResult" addPublicVariableEventHandler {
+	[drn_var_Escape_MissionEndResult] call drn_fnc_Escape_PlayEndScene;
+};
+
+
 // Run start sequence for all players
 if (!isNull player) then {
     [_volume, _showIntro, _showPlayerMapAndCompass, didJip] spawn {

@@ -389,5 +389,6 @@
     <string>Public variable 'drn_fnc_CL_ShowDebugTextLocal' may be used before being assigned a value.</string>
     <string>Public variable 'drn_fnc_CL_SetDebugMarkerLocal' may be used before being assigned a value.</string>
     <string>Public variable 'drn_fnc_CL_DeleteDebugMarkerLocal' may be used before being assigned a value.</string>
+    <string>Public variable 'drn_var_Escape_MissionEndResult' may be used before being assigned a value.</string>
   </FilteredAnalyzerResultItems>
 </Project>

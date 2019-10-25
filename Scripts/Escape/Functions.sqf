@@ -1212,8 +1212,12 @@ drn_fnc_Escape_PopulateVehicle = {
     _group
 };
 
+drn_fnc_Escape_PlayEndScene = {
+	params ["_missionEndResult"];
+	["END1", _missionEndResult] call BIS_fnc_endMission;
+};
+
 if (isServer) then {
     drn_var_Escape_FunctionsInitializedOnServer = true;
     publicVariable "drn_var_Escape_FunctionsInitializedOnServer";
 };
-    

@@ -51,7 +51,7 @@ sleep 10;
 
 ["Task complete: Rendesvouz with allied forces."] call drn_fnc_CL_ShowTitleTextAllClients;
 
-sleep 25;
+sleep 5;
 
 ["drn_rendesvouzTasks", "SUCCEEDED"] call drn_SetTaskStateOnAllMachines;
 drn_var_Escape_MissionComplete = true;

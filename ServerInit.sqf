@@ -76,6 +76,12 @@ _enemySpawnDistance = (paramsArray select 5);
 
 drn_searchAreaMarkerName = "drn_searchAreaMarker";
 
+// Create end triggers
+private _endTrigger = createTrigger["EmptyDetector", [0, 0, 0]];
+_endTrigger setTriggerActivation["NONE", "PRESENT", false];
+_endTrigger setTriggerTimeout [3, 3, 3, true];
+_endTrigger setTriggerStatements["drn_var_Escape_MissionComplete || {({ alive _x && (lifeState _x) != 'INCAPACITATED' } count (call drn_fnc_Escape_GetPlayers)) == 0}", "drn_var_Escape_MissionEndResult = drn_var_Escape_MissionComplete; publicVariable 'drn_var_Escape_MissionEndResult'; [drn_var_Escape_MissionEndResult] call drn_fnc_Escape_PlayEndScene;", ""];
+
 // Choose a start position
 if (_useRandomStartPos) then {
     drn_startPos = [] call drn_fnc_Escape_FindGoodPos;

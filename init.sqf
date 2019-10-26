@@ -339,7 +339,7 @@ if (!isNull player) then {
         1 fadeSound _volume;
         
         if (_showIntro && !_isJipPlayer) then {
-            sleep 2;
+            sleep 1;
         };
         
         player unlinkItem "ItemGps";
@@ -383,9 +383,15 @@ if (!isNull player) then {
             _x setCaptive false;
             _x enableAI "MOVE";
         } foreach units group player;
+        
+        // Set action on all hackable comcenter items (the power generator)
+        
+        waitUntil { !isNil "drn_arr_HackableComCenterItems" };
+        
+        {
+			_x addAction ["Hijack communication center", "Scripts\Escape\Hijack.sqf"];
+        } foreach drn_arr_HackableComCenterItems;
     };
 };
 
 if (true) exitWith {};
-
-

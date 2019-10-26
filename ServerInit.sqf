@@ -194,6 +194,7 @@ if (true) then {
     _instanceNo = 0;
     
     _comCenPositions = [];
+    drn_arr_HackableComCenterItems = [];
     
     {
         private ["_index"];
@@ -222,6 +223,8 @@ if (true) then {
         
         _instanceNo = _instanceNo + 1;
     } foreach _chosenComCenIndexes;
+    
+    publicVariable "drn_arr_HackableComCenterItems";
 
     drn_var_Escape_communicationCenterPositions = _comCenPositions;
     publicVariable "drn_var_Escape_communicationCenterPositions";

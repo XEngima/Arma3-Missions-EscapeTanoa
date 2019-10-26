@@ -1,3 +1,4 @@
+call compile preprocessFileLineNumbers "Engima\ReviveFix\Init.sqf";
 call compile preprocessFileLineNumbers "Engima\AmbientInfantry\Init.sqx.sqf"; // Added by Engima.AmbientInfantry
 call compile preprocessFileLineNumbers "Sqx\Waypoints\Init.sqx.sqf"; // Added by Sqx.Waypoints
 call compile preprocessFileLineNumbers "Sqx\Markers\Init.sqx.sqf"; // Added by Sqx.Markers

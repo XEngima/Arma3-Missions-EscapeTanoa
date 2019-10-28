@@ -185,7 +185,7 @@ _dir = 90;
 _pos = [0, -7];
 _dir = 0;
 _powerGenerator = ["Land_PowerGenerator_F", _pos, _dir, _centerPos, _rotateDir] call _fnc_CreateObject;
-_powerGenerator addAction ["Hijack communication center", "Scripts\Escape\Hijack.sqf"];
+drn_arr_HackableComCenterItems pushBack _powerGenerator;
 
 // Antennas
 

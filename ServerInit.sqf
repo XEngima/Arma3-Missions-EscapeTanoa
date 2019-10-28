@@ -7,24 +7,24 @@ private ["_forceComCentersApart", "_debugAmmoAndComPatrols", "_useCivilians", "_
 
 // Developer Variables
 
-_useRandomStartPos = false; // working
-_useEscapeSurprises = false; // partly working
-_useAmmoDepots = false; // working
-_useSearchLeader = false; // working
-_useMotorizedSearchGroup = false; // working
-_useVillagePatrols = false; // working
-_useMilitaryTraffic = false; // working
-_useAmbientInfantry = false; // working
-_useSearchChopper = false; // working
-_useRoadBlocks = false; // working
-_useCivilians = false; // working
+_useRandomStartPos = true; // working
+_useEscapeSurprises = true; // partly working
+_useAmmoDepots = true; // working
+_useSearchLeader = true; // working
+_useMotorizedSearchGroup = true; // working
+_useVillagePatrols = true; // working
+_useMilitaryTraffic = true; // working
+_useAmbientInfantry = true; // working
+_useSearchChopper = true; // working
+_useRoadBlocks = true; // working
+_useCivilians = true; // working
 
-_guardsExist = false;
-_comCenGuardsExist = false;
-_guardsAreArmed = false;
-_guardLivesLong = false;
+_guardsExist = true;
+_comCenGuardsExist = true;
+_guardsAreArmed = true;
+_guardLivesLong = true;
 
-_forceComCentersApart = false;
+_forceComCentersApart = true;
 
 // Debug Variables
 
@@ -189,13 +189,13 @@ if (_showGroupDiagnostics) then {
     };
 
     // Unmark this if you want communication centers everywhere
-
+/*
     private _i = 0;
     {
         _chosenComCenIndexes set [_i, _i];
         _i = _i + 1;
     } foreach drn_arr_communicationCenterMarkers;
-
+*/
     
     _instanceNo = 0;
     
@@ -252,7 +252,7 @@ if (_useAmmoDepots) then {
     [] spawn {
         private ["_bannedPositions", "_ammoDepotPatrolMarker"];
         
-		sleep 25; // Lazy initialization.
+		waitUntil { sleep 3; !isNil "drn_var_Escape_communicationCenterPositions" };
 
         _bannedPositions = + drn_var_Escape_communicationCenterPositions + [drn_startPos, getMarkerPos "drn_insurgentAirfieldMarker"];
         drn_var_Escape_ammoDepotPositions = _bannedPositions call drn_fnc_Escape_FindAmmoDepotPositions;
@@ -672,11 +672,6 @@ if (_useMotorizedSearchGroup) then {
 		
 		// Start an instance of the traffic
 		_parameters spawn ENGIMA_TRAFFIC_StartTraffic;
-		
-		sleep 3;
-
-        //[_playerGroup, civilian, drn_arr_Escape_MilitaryTraffic_CivilianVehicleClasses, _vehiclesCount, _enemySpawnDistance, _radius, 0.5, 0.5, _fnc_onSpawnCivilian, _debugMilitaryTraffic] execVM "Scripts\DRN\MilitaryTraffic\MilitaryTraffic.sqf";
-        sleep 0.25;
         
         // Enemy military traffic
         
@@ -1009,7 +1004,7 @@ if (_useSearchChopper) then {
     };
     
     if (_guardLivesLong) then {
-        sleep (20 + floor (random 15));
+        sleep (30 + floor (random 20));
     }
     else {
         sleep 10;

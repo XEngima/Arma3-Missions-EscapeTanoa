@@ -14,7 +14,7 @@ drn_var_enemySide = east;
 
 // Developer Variables
 
-_showIntro = false;
+_showIntro = true;
 
 // Debug Variables
 

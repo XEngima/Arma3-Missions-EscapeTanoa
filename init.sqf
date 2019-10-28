@@ -14,12 +14,12 @@ drn_var_enemySide = east;
 
 // Developer Variables
 
-_showIntro = true;
+_showIntro = false;
 
 // Debug Variables
 
-_showPlayerMapAndCompass = false;
-_playerIsImmortal = false; // Only works for unit p1
+_showPlayerMapAndCompass = true;
+_playerIsImmortal = true; // Only works for unit p1
 
 // Initialization
 
@@ -376,6 +376,17 @@ if (!isNull player) then {
         //player setPos [(drn_startPos select 0) + (random 4) - 2, (drn_startPos select 1) + (random 6) - 3, 0];
         //sleep 0.1;
         
+        [] spawn {
+	        // Set action on all hackable comcenter items (the power generator)
+	        
+	        waitUntil { !isNil "drn_arr_HackableComCenterItems" };
+	        waitUntil { !isNil "drn_HackableComCenterItemsArrayFilled" };
+	        
+	        {
+				_x addAction ["Hijack communication center", "Scripts\Escape\Hijack.sqf"];
+	        } foreach drn_arr_HackableComCenterItems;
+        };
+        
         player setVariable ["drn_var_initializing", false, true];
         waitUntil {!(isNil "drn_escapeHasStarted")};
         
@@ -383,14 +394,6 @@ if (!isNull player) then {
             _x setCaptive false;
             _x enableAI "MOVE";
         } foreach units group player;
-        
-        // Set action on all hackable comcenter items (the power generator)
-        
-        waitUntil { !isNil "drn_arr_HackableComCenterItems" };
-        
-        {
-			_x addAction ["Hijack communication center", "Scripts\Escape\Hijack.sqf"];
-        } foreach drn_arr_HackableComCenterItems;
     };
 };
 

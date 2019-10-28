@@ -8,7 +8,7 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=333;
+		nextID=334;
 	};
 	class MarkerIDProvider
 	{
@@ -245,7 +245,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=23;
+		items=24;
 		class Item0
 		{
 			dataType="Marker";
@@ -277,11 +277,11 @@ class Mission
 		class Item3
 		{
 			dataType="Marker";
-			position[]={13797.104,0,7684.814};
+			position[]={13766.176,0,7699.4976};
 			name="drn_Escape_ExtractionPos3";
 			type="Empty";
 			id=92;
-			atlOffset=5.6086764;
+			atlOffset=3.2473192;
 		};
 		class Item4
 		{
@@ -936,6 +936,22 @@ class Mission
 			{
 			};
 			id=264;
+		};
+		class Item23
+		{
+			dataType="Trigger";
+			position[]={14729.575,0.03445816,8300.7188};
+			class Attributes
+			{
+				onActivation="player setPos drn_extractionPos;";
+				sizeA=0;
+				sizeB=0;
+				repeatable=1;
+				activationBy="ALPHA";
+			};
+			id=333;
+			type="EmptyDetector";
+			atlOffset=22.077999;
 		};
 	};
 };

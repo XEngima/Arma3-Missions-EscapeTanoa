@@ -19,8 +19,8 @@ _showIntro = true;
 
 // Debug Variables
 
-_showPlayerMapAndCompass = false;
-_playerIsImmortal = false; // Only works for unit p1
+_showPlayerMapAndCompass = true;
+_playerIsImmortal = true; // Only works for unit p1
 
 // Initialization
 
@@ -80,7 +80,9 @@ call drn_fnc_CL_InitParams;
 
 call compile preprocessFileLineNumbers "Scripts\Escape\Functions.sqf";
 
-[didJip] call compile preprocessFileLineNumbers "Briefing.sqf";
+if (!isNull player) then {
+	[didJip] call compile preprocessFileLineNumbers "Briefing.sqf";
+};
 
 _dynamicWeather = (paramsArray select 3);
 setTerrainGrid (paramsArray select 4);
@@ -340,7 +342,7 @@ if (!isNull player) then {
         1 fadeSound _volume;
         
         if (_showIntro && !_isJipPlayer) then {
-            sleep 2;
+            sleep 1;
         };
         
         player unlinkItem "ItemGps";
@@ -377,6 +379,17 @@ if (!isNull player) then {
         //player setPos [(drn_startPos select 0) + (random 4) - 2, (drn_startPos select 1) + (random 6) - 3, 0];
         //sleep 0.1;
         
+        [] spawn {
+	        // Set action on all hackable comcenter items (the power generator)
+	        
+	        waitUntil { !isNil "drn_arr_HackableComCenterItems" };
+	        waitUntil { !isNil "drn_HackableComCenterItemsArrayFilled" };
+	        
+	        {
+				_x addAction ["Hijack communication center", "Scripts\Escape\Hijack.sqf"];
+	        } foreach drn_arr_HackableComCenterItems;
+        };
+        
         player setVariable ["drn_var_initializing", false, true];
         waitUntil {!(isNil "drn_escapeHasStarted")};
         
@@ -388,5 +401,3 @@ if (!isNull player) then {
 };
 
 if (true) exitWith {};
-
-

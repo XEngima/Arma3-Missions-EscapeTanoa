@@ -272,6 +272,9 @@ if (!isNull player) then {
                 player setPos [(_pos select 0) - 5 + random 10, (_pos select 1) - 5 + random 10, 0.1];
                 //player setUnconscious true;
                 player setDamage 0.9;
+            }
+            else {
+                player setPos [(drn_startPos select 0) + (random 4) - 2, (drn_startPos select 1) + (random 6) - 3, 0];
             };
 
             [] spawn {

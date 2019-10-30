@@ -1,5 +1,5 @@
 // Event handler that fires when player respawns. A player respawns when healed by someone (and not
-// when hit.
+// when hit).
 player addEventHandler ["Respawn", {
 	player allowDamage true;
 	ENGIMA_RESPAWNFIX_playerIsIncapacitated = false;

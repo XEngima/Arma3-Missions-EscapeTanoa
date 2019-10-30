@@ -6,7 +6,7 @@ private ["_spawnMarkerName", "_extractionMarkerName", "_extractionMarkerName2", 
 _extractionPointNo = _this select 0;
 _spawnMarkerName = "drn_Escape_ExtracionBoatSpawnPos" + str _extractionPointNo;
 _extractionMarkerName = "drn_Escape_ExtractionPos" + str _extractionPointNo;
-_extractionMarkerName2 = "drn_Escape_ExtractionPos" + str _extractionPointNo + "_1";
+_extractionMarkerName2 = "drn_Escape_ExtractionPos" + str _extractionPointNo;
 
 _result = [[((getMarkerPos _spawnMarkerName) select 0) + 15, ((getMarkerPos _spawnMarkerName) select 1) + 10, 0], 0, "B_Boat_Armed_01_minigun_F", drn_var_playerSide] call BIS_fnc_spawnVehicle;
 _boat1 = _result select 0;
@@ -51,7 +51,7 @@ sleep 10;
 
 ["Task complete: Rendesvouz with allied forces."] call drn_fnc_CL_ShowTitleTextAllClients;
 
-sleep 25;
+sleep 5;
 
 ["drn_rendesvouzTasks", "SUCCEEDED"] call drn_SetTaskStateOnAllMachines;
 drn_var_Escape_MissionComplete = true;

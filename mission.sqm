@@ -8,7 +8,7 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=333;
+		nextID=334;
 	};
 	class MarkerIDProvider
 	{
@@ -16,7 +16,7 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={8998.2266,36.242008,10013.575};
+		pos[]={8999.0859,37.06813,10010.856};
 		dir[]={0.094456941,-0.35471156,0.93019772};
 		up[]={0.03583537,0.934973,0.3528994};
 		aside[]={0.99488783,-4.976755e-008,-0.10102639};
@@ -277,11 +277,11 @@ class Mission
 		class Item3
 		{
 			dataType="Marker";
-			position[]={13797.104,0,7684.814};
+			position[]={13766.176,0,7699.4976};
 			name="drn_Escape_ExtractionPos3";
 			type="Empty";
 			id=92;
-			atlOffset=5.6086764;
+			atlOffset=3.2473192;
 		};
 		class Item4
 		{
@@ -402,22 +402,6 @@ class Mission
 		};
 		class Item17
 		{
-			dataType="Trigger";
-			position[]={14315.084,0,14461.034};
-			class Attributes
-			{
-				condition="drn_var_Escape_MissionComplete";
-				sizeA=0;
-				sizeB=0;
-				timeout[]={3,3,3};
-				type="END1";
-			};
-			id=109;
-			type="EmptyDetector";
-			atlOffset=55.466595;
-		};
-		class Item18
-		{
 			dataType="Marker";
 			position[]={2137.1018,12.95,3446.1162};
 			name="drn_searchChopperStartPosMarker";
@@ -425,7 +409,7 @@ class Mission
 			angle=344.85977;
 			id=112;
 		};
-		class Item19
+		class Item18
 		{
 			dataType="Marker";
 			position[]={9991.2744,60.349998,9747.7754};
@@ -434,7 +418,7 @@ class Mission
 			id=158;
 			atlOffset=-0.00046539307;
 		};
-		class Item20
+		class Item19
 		{
 			dataType="Marker";
 			position[]={2158.6091,12.95,3452.8772};
@@ -443,7 +427,7 @@ class Mission
 			angle=336.21497;
 			id=240;
 		};
-		class Item21
+		class Item20
 		{
 			dataType="Marker";
 			position[]={2026.597,12.95,3474.687};
@@ -452,7 +436,7 @@ class Mission
 			angle=343.48398;
 			id=263;
 		};
-		class Item22
+		class Item21
 		{
 			dataType="Group";
 			side="West";
@@ -936,6 +920,22 @@ class Mission
 			{
 			};
 			id=264;
+		};
+		class Item22
+		{
+			dataType="Trigger";
+			position[]={14729.575,0.03445816,8300.7188};
+			class Attributes
+			{
+				onActivation="player setPos drn_extractionPos;";
+				sizeA=0;
+				sizeB=0;
+				repeatable=1;
+				activationBy="ALPHA";
+			};
+			id=333;
+			type="EmptyDetector";
+			atlOffset=22.077999;
 		};
 	};
 };

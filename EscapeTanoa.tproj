@@ -132,6 +132,26 @@
               </ProjectNodeViewModel>
             </SubNodes>
           </ProjectNodeViewModel>
+          <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="ReviveFix" FileName="Engima\ReviveFix">
+            <SubNodes>
+              <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Code" FileName="Engima\ReviveFix\Code">
+                <SubNodes>
+                  <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="EventHandlers.sqf" FileName="Engima\ReviveFix\Code\EventHandlers.sqf">
+                    <SubNodes />
+                  </ProjectNodeViewModel>
+                  <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="Functions.sqf" FileName="Engima\ReviveFix\Code\Functions.sqf">
+                    <SubNodes />
+                  </ProjectNodeViewModel>
+                </SubNodes>
+              </ProjectNodeViewModel>
+              <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="Config.sqf" FileName="Engima\ReviveFix\Config.sqf">
+                <SubNodes />
+              </ProjectNodeViewModel>
+              <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="Init.sqf" FileName="Engima\ReviveFix\Init.sqf">
+                <SubNodes />
+              </ProjectNodeViewModel>
+            </SubNodes>
+          </ProjectNodeViewModel>
           <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="SearchPatrol" FileName="Engima\SearchPatrol">
             <SubNodes>
               <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="SearchPatrol.sqf" FileName="Engima\SearchPatrol\SearchPatrol.sqf">
@@ -389,5 +409,6 @@
     <string>Public variable 'drn_fnc_CL_ShowDebugTextLocal' may be used before being assigned a value.</string>
     <string>Public variable 'drn_fnc_CL_SetDebugMarkerLocal' may be used before being assigned a value.</string>
     <string>Public variable 'drn_fnc_CL_DeleteDebugMarkerLocal' may be used before being assigned a value.</string>
+    <string>Public variable 'drn_var_Escape_MissionEndResult' may be used before being assigned a value.</string>
   </FilteredAnalyzerResultItems>
 </Project>

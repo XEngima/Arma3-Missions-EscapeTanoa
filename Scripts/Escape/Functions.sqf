@@ -466,7 +466,7 @@ drn_fnc_Escape_BuildAmmoDepot = {
 	// Weapon boxes
 	
 	"Box_East_Ammo_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
-	"Box_T_East_Wps_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
+	"Box_East_Wps_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
 	"Box_CSAT_Equip_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
 	"Box_East_AmmoOrd_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
 	"Box_East_Grenades_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
@@ -1212,8 +1212,12 @@ drn_fnc_Escape_PopulateVehicle = {
     _group
 };
 
+drn_fnc_Escape_PlayEndScene = {
+	params ["_missionEndResult"];
+	["END1", _missionEndResult] call BIS_fnc_endMission;
+};
+
 if (isServer) then {
     drn_var_Escape_FunctionsInitializedOnServer = true;
     publicVariable "drn_var_Escape_FunctionsInitializedOnServer";
 };
-    

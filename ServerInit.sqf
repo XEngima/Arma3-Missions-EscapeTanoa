@@ -8,21 +8,21 @@ private ["_forceComCentersApart", "_debugAmmoAndComPatrols", "_useCivilians", "_
 // Developer Variables
 
 _useRandomStartPos = true; // working
-_useEscapeSurprises = true; // partly working
-_useAmmoDepots = true; // working
-_useSearchLeader = true; // working
-_useMotorizedSearchGroup = true; // working
-_useVillagePatrols = true; // working
-_useMilitaryTraffic = true; // working
-_useAmbientInfantry = true; // working
-_useSearchChopper = true; // working
-_useRoadBlocks = true; // working
-_useCivilians = true; // working
+_useEscapeSurprises = false; // partly working
+_useAmmoDepots = false; // working
+_useSearchLeader = false; // working
+_useMotorizedSearchGroup = false; // working
+_useVillagePatrols = false; // working
+_useMilitaryTraffic = false; // working
+_useAmbientInfantry = false; // working
+_useSearchChopper = false; // working
+_useRoadBlocks = false; // working
+_useCivilians = false; // working
 
 _guardsExist = true;
 _comCenGuardsExist = true;
 _guardsAreArmed = true;
-_guardLivesLong = true;
+_guardLivesLong = false;
 
 _forceComCentersApart = true;
 
@@ -48,6 +48,7 @@ _showGroupDiagnostics = false;
 // Game Control Variables, do not edit!
 
 drn_var_Escape_timeToHijack = 30; // 30
+
 drn_var_playerSide = west;
 drn_var_enemySide = east;
 
@@ -60,6 +61,7 @@ drn_var_Escape_AllPlayersDead = false;
 drn_var_Escape_MissionComplete = false;
 publicVariable "drn_var_Escape_AllPlayersDead";
 publicVariable "drn_var_Escape_MissionComplete";
+publicVariable "drn_var_Escape_timeToHijack";
 
 _enemyMinSkill = (paramsArray select 0) / 5;
 _enemyMaxSkill = (paramsArray select 0) / 5 + 0.2;
@@ -75,6 +77,12 @@ _enemyFrequency = (paramsArray select 1);
 _enemySpawnDistance = (paramsArray select 5);
 
 drn_searchAreaMarkerName = "drn_searchAreaMarker";
+
+// Create end triggers
+private _endTrigger = createTrigger["EmptyDetector", [0, 0, 0]];
+_endTrigger setTriggerActivation["NONE", "PRESENT", false];
+_endTrigger setTriggerTimeout [3, 3, 3, true];
+_endTrigger setTriggerStatements["drn_var_Escape_MissionComplete || {({ alive _x && (lifeState _x) != 'INCAPACITATED' } count (call drn_fnc_Escape_GetPlayers)) == 0}", "drn_var_Escape_MissionEndResult = drn_var_Escape_MissionComplete; publicVariable 'drn_var_Escape_MissionEndResult'; [drn_var_Escape_MissionEndResult] call drn_fnc_Escape_PlayEndScene;", ""];
 
 // Choose a start position
 if (_useRandomStartPos) then {
@@ -111,14 +119,17 @@ if (_showGroupDiagnostics) then {
 };
 
 // Initialize communication centers
-if (true) then {
+[_comCenGuardsExist, _forceComCentersApart, _playerGroup, _enemySpawnDistance, _enemyFrequency] spawn {
+	params ["_comCenGuardsExist", "_forceComCentersApart", "_playerGroup", "_enemySpawnDistance", "_enemyFrequency"];
     private ["_instanceNo", "_marker", "_chosenComCenIndexes", "_index", "_comCenPositions", "_comCenItem", "_distanceBetween", "_currentPos", "_tooClose", "_pos", "_scriptHandle"];
+
+	sleep 15; // Lazy initialization.
 
     call compile preprocessFileLineNumbers ("Scripts\Escape\CommunicationCenterMarkers" + worldName + ".sqf");
     
     _chosenComCenIndexes = [];
 
-    _distanceBetween = 1500;
+    _distanceBetween = 1200;
     
     if (count drn_arr_communicationCenterMarkers >= 5) then {
 	    while {count _chosenComCenIndexes < 5} do {
@@ -159,14 +170,15 @@ if (true) then {
 	
 	            _tooClose = false;
 	            
-	            if (!_forceComCentersApart) then
+	            if (_forceComCentersApart) then
 	            {
 		            {
 		                _pos = (drn_arr_communicationCenterMarkers select _x) select 0;
+		                
 		                if (_pos distance _currentPos < _distanceBetween) then {
 		                    _tooClose = true;
 		                };
-		                if (_useRandomStartPos && _currentPos distance drn_startPos < _distanceBetween) then {
+		                if (_currentPos distance drn_startPos < _distanceBetween) then {
 		                    _tooClose = true;
 		                };
 		            } foreach _chosenComCenIndexes;
@@ -183,17 +195,18 @@ if (true) then {
     };
 
     // Unmark this if you want communication centers everywhere
-    /*
-    _i = 0;
+
+    private _i = 0;
     {
         _chosenComCenIndexes set [_i, _i];
         _i = _i + 1;
     } foreach drn_arr_communicationCenterMarkers;
-    */
+
     
     _instanceNo = 0;
     
     _comCenPositions = [];
+    drn_arr_HackableComCenterItems = [];
     
     {
         private ["_index"];
@@ -217,11 +230,16 @@ if (true) then {
         _marker = createMarkerLocal ["drn_CommunicationCenterPatrolMarker" + str _instanceNo, _pos];
         _marker setMarkerShapeLocal "ELLIPSE";
         _marker setMarkerAlpha 0;
-        _marker setMarkerSizeLocal [30, 30];
+        _marker setMarkerSizeLocal [35, 35];
         drn_var_comCenPatrolMarkers pushBack _marker;
         
         _instanceNo = _instanceNo + 1;
     } foreach _chosenComCenIndexes;
+    
+    publicVariable "drn_arr_HackableComCenterItems";
+    
+    drn_HackableComCenterItemsArrayFilled = true;
+    publicVariable "drn_HackableComCenterItemsArrayFilled";
 
     drn_var_Escape_communicationCenterPositions = _comCenPositions;
     publicVariable "drn_var_Escape_communicationCenterPositions";
@@ -239,6 +257,8 @@ if (true) then {
 if (_useAmmoDepots) then {
     [] spawn {
         private ["_bannedPositions", "_ammoDepotPatrolMarker"];
+        
+		waitUntil { sleep 3; !isNil "drn_var_Escape_communicationCenterPositions" };
 
         _bannedPositions = + drn_var_Escape_communicationCenterPositions + [drn_startPos, getMarkerPos "drn_insurgentAirfieldMarker"];
         drn_var_Escape_ammoDepotPositions = _bannedPositions call drn_fnc_Escape_FindAmmoDepotPositions;
@@ -263,7 +283,7 @@ if (_useAmmoDepots) then {
 	params ["_enemySpawnDistance", "_enemyMinSkill", "_enemyMaxSkill", "_debugAmmoAndComPatrols", "_enemyFrequency"];
 	private ["_areaPerGroup"];
 	
-	waitUntil { drn_var_ammoDepotsInitialized && drn_var_comCentersInitialized };
+	waitUntil { sleep 10; drn_var_ammoDepotsInitialized && drn_var_comCentersInitialized };
 	
     switch (_enemyFrequency) do
     {
@@ -315,7 +335,9 @@ if (_useAmmoDepots) then {
 };
 
 // Initialize search leader
-if (_useSearchLeader) then {
+if (_useSearchLeader) then
+{
+	sleep 5;
     [drn_searchAreaMarkerName, _debugSearchLeader] execVM "Scripts\Escape\SearchLeader.sqf";
 };
 
@@ -325,6 +347,8 @@ if (_useMotorizedSearchGroup) then {
         private ["_enemyFrequency", "_enemyMinSkill", "_enemyMaxSkill"];
         private ["_spawnSegment"];
         
+		sleep 10; // Lazy initialization.
+
         _enemyFrequency = _this select 0;
         _enemyMinSkill = _this select 1;
         _enemyMaxSkill = _this select 2;
@@ -364,9 +388,13 @@ if (_useMotorizedSearchGroup) then {
     _debugCivilians = _this select 13;
     
     waitUntil {[drn_startPos] call drn_fnc_Escape_AllPlayersOnStartPos};
+    
     _playerGroup = group ((call drn_fnc_Escape_GetPlayers) select 0);
     
     if (_useVillagePatrols) then {
+    
+		sleep 7; // Lazy initialization.
+
         switch (_enemyFrequency) do
         {
             case 1: // 1-2 players
@@ -434,6 +462,8 @@ if (_useMotorizedSearchGroup) then {
     // Initialize ambient infantry groups
     if (_useAmbientInfantry) then
     {
+		sleep 7; // Lazy initialization.
+
         _fnc_OnSpawnAmbientInfantryGroup = {
         	params ["_group"];
             private ["_unit", "_enemyUnit", "_i"];
@@ -529,6 +559,8 @@ if (_useMotorizedSearchGroup) then {
 		// Call the function that creates and starts the ambient infantry instance.
 		[_parameters] call Engima_AmbientInfantry_Classes_AmbientInfantry_CreateInstance;
         
+        sleep 2;
+        
 		_parameters = [
 			["SIDE", independent],
 			["UNIT_CLASSES", drn_arr_Escape_InfantryTypesCsatPacificViperEast],
@@ -556,6 +588,8 @@ if (_useMotorizedSearchGroup) then {
     if (_useMilitaryTraffic) then {
         private ["_vehiclesPerSqkm", "_radius", "_vehiclesCount", "_fnc_onSpawnCivilian"];
         
+		sleep 7; // Lazy initialization.
+
         // Civilian traffic
         
         switch (_enemyFrequency) do
@@ -644,9 +678,6 @@ if (_useMotorizedSearchGroup) then {
 		
 		// Start an instance of the traffic
 		_parameters spawn ENGIMA_TRAFFIC_StartTraffic;
-
-        //[_playerGroup, civilian, drn_arr_Escape_MilitaryTraffic_CivilianVehicleClasses, _vehiclesCount, _enemySpawnDistance, _radius, 0.5, 0.5, _fnc_onSpawnCivilian, _debugMilitaryTraffic] execVM "Scripts\DRN\MilitaryTraffic\MilitaryTraffic.sqf";
-        sleep 0.25;
         
         // Enemy military traffic
         
@@ -690,7 +721,10 @@ if (_useMotorizedSearchGroup) then {
 		
 	// Walking civilians
 		
-    if (_useCivilians) then {
+    if (_useCivilians) then
+    {
+		sleep 7; // Lazy initialization.
+
         private _fnc_onSpawnCivilian = {
             params ["_man"];
             
@@ -747,10 +781,13 @@ if (_useMotorizedSearchGroup) then {
 		_parameters spawn ENGIMA_CIVILIANS_StartCivilians;
 	};
 		
-    if (_useRoadBlocks) then {
+    if (_useRoadBlocks) then
+    {
         private ["_areaPerRoadBlock", "_maxEnemySpawnDistanceKm", "_roadBlockCount"];
         private ["_fnc_OnSpawnInfantryGroup", "_fnc_OnSpawnMannedVehicle"];
         
+		sleep 7; // Lazy initialization.
+
         _fnc_OnSpawnInfantryGroup = {{_x call drn_fnc_Escape_OnSpawnGeneralSoldierUnit;} foreach units _this;};
         _fnc_OnSpawnMannedVehicle = {{_x call drn_fnc_Escape_OnSpawnGeneralSoldierUnit;} foreach (_this select 1);};
         
@@ -909,8 +946,8 @@ if (_useSearchChopper) then {
     
     sleep 0.5;
     
-    drn_startPos = _startPos;
-    publicVariable "drn_startPos";
+//    drn_startPos = _startPos;
+//    publicVariable "drn_startPos";
     
     // Start thread that waits for escape to start
     [_guardGroups, _startPos] spawn {
@@ -973,7 +1010,7 @@ if (_useSearchChopper) then {
     };
     
     if (_guardLivesLong) then {
-        sleep (25 + floor (random 20));
+        sleep (30 + floor (random 20));
     }
     else {
         sleep 10;
@@ -982,6 +1019,4 @@ if (_useSearchChopper) then {
     // Guard passes out
     _guard setDamage 1;
 };
-
-
 

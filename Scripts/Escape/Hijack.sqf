@@ -5,8 +5,8 @@ _generatorTrailer = _this select 0;
 _unit = _this select 1;
 
 _count = drn_var_Escape_timeToHijack;
-if (typeOf _unit == "FR_AC") then {
-	_count = 10;
+if (typeOf _unit == "B_CTRG_Soldier_Exp_tna_F") then {
+	_count = 5;
 };
 
 while { _count > 0 && _unit distance _generatorTrailer < 3 } do

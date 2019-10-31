@@ -27,6 +27,9 @@ drn_arr_Escape_StartPositionGuardTypes = ["I_C_Soldier_Para_1_F", "I_C_Soldier_P
 drn_var_Escape_InnerFenceGuardSecondaryWeapon = "hgun_Pistol_heavy_02_F";
 drn_var_Escape_InnerFenceGuardSecondaryWeaponMagazine = "6Rnd_45ACP_Cylinder";
 
+// The type of unit that hijacts fastest
+drn_var_Escape_EngineerType = "";
+
 // Random array. Civilian vehicle classes for ambient traffic. (Can also be set to a faction name).
 drn_arr_Escape_MilitaryTraffic_CivilianVehicleClasses = ["C_Offroad_01_F", "C_Offroad_01_repair_F", "C_Quadbike_01_F", "C_Hatchback_01_F", "C_Hatchback_01_sport_F", "C_SUV_01_F", "C_Van_01_transport_F", "C_Van_01_box_F", "C_Van_01_fuel_F"];
 

@@ -220,7 +220,7 @@ _dir = 0;
 // Flag
 _pos = [0, 10];
 _dir = 0;
-["Flag_CSAT_F", _pos, _dir, _centerPos, _rotateDir] call _fnc_CreateObject;
+[drn_var_Escape_ComCenterFlag, _pos, _dir, _centerPos, _rotateDir] call _fnc_CreateObject;
 
 if (count _staticWeaponClasses > 0) then {
     // Statics

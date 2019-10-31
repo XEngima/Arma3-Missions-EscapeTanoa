@@ -7,7 +7,7 @@ private ["_forceComCentersApart", "_debugAmmoAndComPatrols", "_useCivilians", "_
 
 // Developer Variables
 
-_useRandomStartPos = false; // working
+_useRandomStartPos = true; // working
 _useEscapeSurprises = false; // partly working
 _useAmmoDepots = false; // working
 _useSearchLeader = false; // working
@@ -94,6 +94,13 @@ else {
 };
 publicVariable "drn_startPos";
 
+drn_var_comCenPatrolMarkers = [];
+drn_var_ammoDepotPatrolMarkers = [];
+drn_actualVillageMarkers = [];
+    
+call compile preprocessFileLineNumbers "Scripts\DRN\VillageMarkers\InitVillageMarkers.sqf";
+[_enemyFrequency] call compile preprocessFileLineNumbers "Scripts\Escape\UnitClasses.sqf";
+
 // Build start position
 _fenceRotateDir = random 360;
 _scriptHandle = [drn_startPos, _fenceRotateDir] execVM "Scripts\Escape\BuildStartPos.sqf";
@@ -103,12 +110,6 @@ sleep 0.25;
 drn_fenceIsCreated = true;
 publicVariable "drn_fenceIsCreated";
 
-drn_var_comCenPatrolMarkers = [];
-drn_var_ammoDepotPatrolMarkers = [];
-drn_actualVillageMarkers = [];
-    
-call compile preprocessFileLineNumbers "Scripts\DRN\VillageMarkers\InitVillageMarkers.sqf";
-[_enemyFrequency] call compile preprocessFileLineNumbers "Scripts\Escape\UnitClasses.sqf";
 _playerGroup = group ((call drn_fnc_Escape_GetPlayers) select 0);
 
 if (_useEscapeSurprises) then {

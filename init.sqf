@@ -319,7 +319,7 @@ if (!isNull player) then {
 */			    
                 ["<t size='0.9'>" + "Engima" + "</t>",0.02,0.1,2,-1,0,3010] spawn bis_fnc_dynamicText;
                 sleep 1;
-                ["<t size='0.9'>" + "author of the very first ""Escape Chernarus""" + "</t>",0.02,0.2,2,-1,0,3011] spawn bis_fnc_dynamicText;
+                ["<t size='0.9'>" + "Author of the very first Escape mission - ""Escape Chernarus""" + "</t>",0.02,0.2,2,-1,0,3011] spawn bis_fnc_dynamicText;
                 sleep 2;
                 ["<t size='0.9'>" + "proudly presents" + "</t>",0.02,0.3,2,-1,0,3012] spawn bis_fnc_dynamicText;
             };

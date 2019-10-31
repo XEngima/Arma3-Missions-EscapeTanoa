@@ -384,12 +384,12 @@ drn_fnc_Escape_BuildAmmoDepot = {
     // Flagga   
     
     _pos = [(_middlePos select 0) + 3.2, (_middlePos select 1) - 6.5, 0];
-    _object = "Flag_CSAT_F" createVehicle _pos;
+    _object = drn_var_Escape_AmmoDepotFlag createVehicle _pos;
     _object setPos _pos;
     _object setDir 90;
     
     _pos = [(_middlePos select 0) - 3, (_middlePos select 1) - 6.3, 0];
-    _object = "Flag_CSAT_F" createVehicle _pos;
+    _object = drn_var_Escape_AmmoDepotFlag createVehicle _pos;
     _object setPos _pos;
     _object setDir 90;
     

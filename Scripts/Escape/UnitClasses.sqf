@@ -30,6 +30,11 @@ drn_var_Escape_InnerFenceGuardSecondaryWeaponMagazine = "6Rnd_45ACP_Cylinder";
 // The type of unit that hijacts fastest
 drn_var_Escape_EngineerType = "B_CTRG_Soldier_Exp_tna_F";
 
+// Flags
+drn_var_Escape_PrisonFlagType = "Flag_Syndikat_F";
+drn_var_Escape_AmmoDepotFlag = "Flag_Syndikat_F";
+drn_var_Escape_ComCenterFlag = "Flag_CSAT_F";
+
 // Random array. Civilian vehicle classes for ambient traffic. (Can also be set to a faction name).
 drn_arr_Escape_MilitaryTraffic_CivilianVehicleClasses = ["C_Offroad_01_F", "C_Offroad_01_repair_F", "C_Quadbike_01_F", "C_Hatchback_01_F", "C_Hatchback_01_sport_F", "C_SUV_01_F", "C_Van_01_transport_F", "C_Van_01_box_F", "C_Van_01_fuel_F"];
 
@@ -215,6 +220,7 @@ drn_arr_Escape_AmmoDepot_ParkedVehicleClasses = ["O_T_MRAP_02_ghex_F", "O_T_Quad
 // Index 4: Array of magazine classnames. Magazines of these types are present if weapon exists.
 // Index 5: Number of magazines per weapon that exists.
 
+/*
 // Weapons and ammo in the basic weapons box
 drn_arr_AmmoDepotBasicWeapons = [];
 // Insurgent weapons
@@ -314,3 +320,4 @@ drn_arr_CivilianCarWeapons set [count drn_arr_CivilianCarWeapons, ["RPG18", "RPG
 drn_arr_CivilianCarWeapons set [count drn_arr_CivilianCarWeapons, ["Igla", "Igla", 1]];
 drn_arr_CivilianCarWeapons set [count drn_arr_CivilianCarWeapons, ["Put", "PipeBomb", 2]];
 drn_arr_CivilianCarWeapons set [count drn_arr_CivilianCarWeapons, ["Throw", "HandGrenade_East", 5]];
+*/

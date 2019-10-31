@@ -85,7 +85,6 @@ if (!isNull player) then {
 };
 
 _dynamicWeather = (paramsArray select 3);
-setTerrainGrid (paramsArray select 4);
 
 switch (_dynamicWeather) do {
     case 0: { execVM "Scripts\Escape\StaticWeatherEffects.sqf"; }; // Dynamic weather off

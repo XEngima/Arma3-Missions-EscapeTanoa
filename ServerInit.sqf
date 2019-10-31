@@ -75,7 +75,7 @@ _searchChopperRefuelTimeMin = (5 + random 10);
 //waituntil {!isnil "bis_fnc_init"};
 
 _enemyFrequency = (paramsArray select 1);
-_enemySpawnDistance = (paramsArray select 5);
+_enemySpawnDistance = (paramsArray select 4);
 
 drn_searchAreaMarkerName = "drn_searchAreaMarker";
 

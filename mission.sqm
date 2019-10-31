@@ -53,7 +53,7 @@ randomSeed=14160686;
 class ScenarioData
 {
 	author="Engima";
-	overviewText="Captured behind enemy lines. Take the first opportunity to escape the prison and find a way to rendezvous with NATO forces.";
+	overviewText="Captured behind enemy lines. Take the first opportunity to escape and find a way back to your allies.";
 	overViewPicture="Escape.jpg";
 	overViewPictureLocked="Escape.jpg";
 	onLoadMission="Captured behind enemy lines. Take the first opportunity to escape the prison and find a way to rendezvous with NATO forces.";

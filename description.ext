@@ -9,13 +9,13 @@ class Header
 onLoadMission = "ESCAPE 2.0 - TANOA (BY ENGIMA)";
 OnLoadMissionTime = FALSE;
 
-// description.ext settings for revive
-///////////////////////////////////////////////////////////////////////////////////////////
-//respawn = "BASE";
-//respawndelay = 4;
+overviewText = "Captured behind enemy lines!";
+overviewTextLocked = "Take the first opportunity to escape and find a way back to your allies.";
+overviewPicture = "Escape.jpg";
+author = "Engima";
+
 disabledAI = 1;
 
-///////////////////////////////////////////////////////////////////////////////////////////
 class Params
 {
         class EnemySkill
@@ -50,17 +50,9 @@ class Params
 		texts[]={"Off", "On (Start clear)", "On (Start random)"};
 		default = 1;
 	};
-	class Grass
-	{	
-		// paramsArray[4]
-		title="Grass";
-		values[]={50,25,12,6,2};
-		texts[]={"No Grass", "Proximity", "Normal", "Far", "Very Far"};
-		default = 12;
-	};
 	class EnemySpawnDistance
 	{
-		// paramsArray[5]
+		// paramsArray[4]
 		title="Enemy Spawn Distance";
 		values[]={800,1050,1300};
 		texts[]={"Short (better performance)", "Medium", "Far (for good rigs)"};

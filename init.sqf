@@ -15,12 +15,12 @@ drn_var_enemySide = east;
 
 // Developer Variables
 
-_showIntro = true;
+_showIntro = false;
 
 // Debug Variables
 
-_showPlayerMapAndCompass = false;
-_playerIsImmortal = false; // Only works for unit p1
+_showPlayerMapAndCompass = true;
+_playerIsImmortal = true; // Only works for unit p1
 
 // Initialization
 
@@ -324,10 +324,8 @@ if (!isNull player) then {
                 ["<t size='0.9'>" + "proudly presents" + "</t>",0.02,0.3,2,-1,0,3012] spawn bis_fnc_dynamicText;
             };
             
-            if (isMultiplayer) then {
-                player setPos [(drn_startPos select 0) + (random 4) - 2, (drn_startPos select 1) + (random 6) - 3, 0];
-            }
-            else {
+            player setPos [(drn_startPos select 0) + (random 4) - 2, (drn_startPos select 1) + (random 6) - 3, 0];
+            if (!isMultiplayer) then {
                 {
                 	if (!isPlayer _x) then {
                 		deleteVehicle _x;

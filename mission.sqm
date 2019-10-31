@@ -17,9 +17,9 @@ class EditorData
 	class Camera
 	{
 		pos[]={8999.0859,37.06813,10010.856};
-		dir[]={-0.043123845,-0.31886008,0.94682872};
-		up[]={-0.014507587,0.94779861,0.31853306};
-		aside[]={0.99897105,-9.7912562e-008,0.045498349};
+		dir[]={0.0074181235,-0.3272019,0.94493729};
+		up[]={0.0025693185,0.94492912,0.32726279};
+		aside[]={0.99997878,1.2449163e-008,-0.0078507401};
 	};
 };
 binarizationWanted=0;
@@ -245,7 +245,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=23;
+		items=22;
 		class Item0
 		{
 			dataType="Marker";
@@ -331,11 +331,11 @@ class Mission
 		class Item9
 		{
 			dataType="Marker";
-			position[]={6095.8115,0,13522.306};
+			position[]={6001.8564,0,13698.475};
 			name="drn_Escape_ExtracionBoatSpawnPos1";
 			type="Empty";
 			id=99;
-			atlOffset=29.540413;
+			atlOffset=46.583294;
 		};
 		class Item10
 		{
@@ -349,20 +349,20 @@ class Mission
 		class Item11
 		{
 			dataType="Marker";
-			position[]={14192.709,0,7401.4316};
+			position[]={14333.643,0,7190.0259};
 			name="drn_Escape_ExtracionBoatSpawnPos3";
 			type="Empty";
 			id=101;
-			atlOffset=23.347094;
+			atlOffset=28.08906;
 		};
 		class Item12
 		{
 			dataType="Marker";
-			position[]={13779.154,0,3739.8811};
+			position[]={13787.348,0,3625.1653};
 			name="drn_Escape_ExtracionBoatSpawnPos4";
 			type="Empty";
 			id=102;
-			atlOffset=27.373266;
+			atlOffset=25.40218;
 		};
 		class Item13
 		{
@@ -376,29 +376,29 @@ class Mission
 		class Item14
 		{
 			dataType="Marker";
-			position[]={9040.9346,0,5450.7402};
+			position[]={9057.3223,0,5368.8008};
 			name="drn_Escape_ExtracionBoatSpawnPos6";
 			type="Empty";
 			id=104;
-			atlOffset=23.415039;
+			atlOffset=23.541126;
 		};
 		class Item15
 		{
 			dataType="Marker";
-			position[]={4200.2158,0,7807.3198};
+			position[]={4735.4673,0,6868.7456};
 			name="drn_Escape_ExtracionBoatSpawnPos7";
 			type="Empty";
 			id=105;
-			atlOffset=7.8869085;
+			atlOffset=26.346891;
 		};
 		class Item16
 		{
 			dataType="Marker";
-			position[]={4556.3892,0,11114.328};
+			position[]={4403.7114,0,11043.859};
 			name="drn_Escape_ExtracionBoatSpawnPos8";
 			type="Empty";
 			id=106;
-			atlOffset=26.572121;
+			atlOffset=25.785994;
 		};
 		class Item17
 		{
@@ -920,22 +920,6 @@ class Mission
 			{
 			};
 			id=264;
-		};
-		class Item22
-		{
-			dataType="Trigger";
-			position[]={14729.575,0.03445816,8300.7188};
-			class Attributes
-			{
-				onActivation="player setPos drn_extractionPos;";
-				sizeA=0;
-				sizeB=0;
-				repeatable=1;
-				activationBy="ALPHA";
-			};
-			id=333;
-			type="EmptyDetector";
-			atlOffset=22.077999;
 		};
 	};
 };

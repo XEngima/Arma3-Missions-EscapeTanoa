@@ -7,31 +7,31 @@ private ["_forceComCentersApart", "_debugAmmoAndComPatrols", "_useCivilians", "_
 
 // Developer Variables
 
-_useRandomStartPos = true; // working
+_useRandomStartPos = false; // working
 _useEscapeSurprises = false; // partly working
 _useAmmoDepots = false; // working
-_useSearchLeader = false; // working
+_useSearchLeader = true; // working
 _useMotorizedSearchGroup = false; // working
 _useVillagePatrols = false; // working
 _useMilitaryTraffic = false; // working
 _useAmbientInfantry = false; // working
-_useSearchChopper = false; // working
+_useSearchChopper = true; // working
 _useRoadBlocks = false; // working
 _useCivilians = false; // working
 
-_guardsExist = false;
+_guardsExist = true;
 _comCenGuardsExist = false;
 _guardsAreArmed = false;
 _guardLivesLong = false;
 
-_forceComCentersApart = false;
-drn_var_onlyPutComCentersOnFewPlaces = false;
+_forceComCentersApart = true;
+drn_var_onlyPutComCentersOnFewPlaces = true;
 
 // Debug Variables
 
 _debugEscapeSurprises = false;
 _debugAmmoAndComPatrols = false;
-_debugSearchLeader = false;
+_debugSearchLeader = true;
 _debugVillagePatrols = false;
 _debugMilitaryTraffic = false;
 _debugAmbientInfantry = false;
@@ -41,7 +41,7 @@ _debugCivilians = false;
 drn_var_Escape_debugMotorizedSearchGroup = false;
 drn_var_Escape_debugDropChoppers = false;
 drn_var_Escape_debugReinforcementTruck = false;
-drn_var_Escape_debugSearchChopper = false;
+drn_var_Escape_debugSearchChopper = true;
 drn_var_Escape_DebugSearchGroup = false;
 
 _showGroupDiagnostics = false;

@@ -82,6 +82,8 @@ _gunner1 moveInTurret [_chopper, [0]];
 
 {
     _x call drn_fnc_Escape_OnSpawnGeneralSoldierUnit;
+    _x setSkill 1;
+    _x setSkill 1;
 } foreach units _group;
 
 [_chopper, _searchAreaMarker, _searchTimeMin, _refuelTimeMin, _debug] execVM "Scripts\DRN\SearchChopper\SearchChopper.sqf";

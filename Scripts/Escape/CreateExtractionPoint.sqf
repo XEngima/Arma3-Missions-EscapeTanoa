@@ -5,9 +5,6 @@ private ["_markerNo", "_markerName", "_trigger"];
 _markerNo = _this select 0;
 _markerName = "drn_Escape_ExtractionPos" + str _markerNo;
 
-drn_extractionPos = getMarkerPos _markerName;
-publicVariable "drn_extractionPos";
-
 _trigger = createTrigger["EmptyDetector", getMarkerPos _markerName];
 _trigger triggerAttachVehicle [(call drn_fnc_Escape_GetPlayers) select 0];
 _trigger setTriggerArea[100, 100, 0, false];

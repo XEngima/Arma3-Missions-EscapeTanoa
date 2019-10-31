@@ -5,7 +5,7 @@ _generatorTrailer = _this select 0;
 _unit = _this select 1;
 
 _count = drn_var_Escape_timeToHijack;
-if (typeOf _unit == "B_CTRG_Soldier_Exp_tna_F") then {
+if (typeOf _unit == drn_var_Escape_EngineerType) then {
 	_count = 5;
 };
 

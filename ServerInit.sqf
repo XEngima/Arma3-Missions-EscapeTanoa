@@ -7,24 +7,25 @@ private ["_forceComCentersApart", "_debugAmmoAndComPatrols", "_useCivilians", "_
 
 // Developer Variables
 
-_useRandomStartPos = true; // working
-_useEscapeSurprises = true; // partly working
-_useAmmoDepots = true; // working
-_useSearchLeader = true; // working
-_useMotorizedSearchGroup = true; // working
-_useVillagePatrols = true; // working
-_useMilitaryTraffic = true; // working
-_useAmbientInfantry = true; // working
-_useSearchChopper = true; // working
-_useRoadBlocks = true; // working
-_useCivilians = true; // working
+_useRandomStartPos = false; // working
+_useEscapeSurprises = false; // partly working
+_useAmmoDepots = false; // working
+_useSearchLeader = false; // working
+_useMotorizedSearchGroup = false; // working
+_useVillagePatrols = false; // working
+_useMilitaryTraffic = false; // working
+_useAmbientInfantry = false; // working
+_useSearchChopper = false; // working
+_useRoadBlocks = false; // working
+_useCivilians = false; // working
 
-_guardsExist = true;
-_comCenGuardsExist = true;
-_guardsAreArmed = true;
-_guardLivesLong = true;
+_guardsExist = false;
+_comCenGuardsExist = false;
+_guardsAreArmed = false;
+_guardLivesLong = false;
 
-_forceComCentersApart = true;
+_forceComCentersApart = false;
+drn_var_onlyPutComCentersOnFewPlaces = false;
 
 // Debug Variables
 
@@ -195,13 +196,14 @@ if (_showGroupDiagnostics) then {
     };
 
     // Unmark this if you want communication centers everywhere
-/*
-    private _i = 0;
-    {
-        _chosenComCenIndexes set [_i, _i];
-        _i = _i + 1;
-    } foreach drn_arr_communicationCenterMarkers;
-*/
+
+	if (!drn_var_onlyPutComCentersOnFewPlaces) then {
+	    private _i = 0;
+	    {
+	        _chosenComCenIndexes set [_i, _i];
+	        _i = _i + 1;
+	    } foreach drn_arr_communicationCenterMarkers;
+	};
     
     _instanceNo = 0;
     

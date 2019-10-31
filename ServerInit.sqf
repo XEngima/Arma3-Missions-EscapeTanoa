@@ -22,7 +22,7 @@ _useCivilians = false; // working
 _guardsExist = true;
 _comCenGuardsExist = false;
 _guardsAreArmed = false;
-_guardLivesLong = false;
+_guardLivesLong = true;
 
 _forceComCentersApart = true;
 drn_var_onlyPutComCentersOnFewPlaces = true;
@@ -31,7 +31,7 @@ drn_var_onlyPutComCentersOnFewPlaces = true;
 
 _debugEscapeSurprises = false;
 _debugAmmoAndComPatrols = false;
-_debugSearchLeader = true;
+_debugSearchLeader = false;
 _debugVillagePatrols = false;
 _debugMilitaryTraffic = false;
 _debugAmbientInfantry = false;
@@ -41,7 +41,7 @@ _debugCivilians = false;
 drn_var_Escape_debugMotorizedSearchGroup = false;
 drn_var_Escape_debugDropChoppers = false;
 drn_var_Escape_debugReinforcementTruck = false;
-drn_var_Escape_debugSearchChopper = true;
+drn_var_Escape_debugSearchChopper = false;
 drn_var_Escape_DebugSearchGroup = false;
 
 _showGroupDiagnostics = false;

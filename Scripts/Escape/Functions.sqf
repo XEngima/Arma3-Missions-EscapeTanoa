@@ -461,17 +461,30 @@ drn_fnc_Escape_BuildAmmoDepot = {
     
     // Weapons
     
-    private ["_weapons", "_weaponMagazines", "_box", "_weaponCount"];
+    //private ["_weapons", "_weaponMagazines", "_box", "_weaponCount"];
 
 	// Weapon boxes
 	
-	"Box_East_Ammo_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
-	"Box_East_Wps_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
-	"Box_CSAT_Equip_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
-	"Box_East_AmmoOrd_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
-	"Box_East_Grenades_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
 	"Box_East_WpsLaunch_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
-	"Box_East_WpsSpecial_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
+	
+	if (random 100 < 75) then {
+		"Box_East_Ammo_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
+	};
+	if (random 100 < 75) then {
+		"Box_East_Wps_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
+	};
+	if (random 100 < 75) then {
+		"Box_CSAT_Equip_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
+	};
+	if (random 100 < 75) then {
+		"Box_East_AmmoOrd_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
+	};
+	if (random 100 < 75) then {
+		"Box_East_Grenades_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
+	};
+	if (random 100 < 75) then {
+		"Box_East_WpsSpecial_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
+	};
 
 /*
     // Basic Weapon Box

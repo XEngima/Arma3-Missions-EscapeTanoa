@@ -44,8 +44,9 @@ PARKEDVEHICLES_GetBuildingDefinition = {
 PARKEDVEHICLES_PlaceVehiclesOnMap = {
 	_this spawn {
 		private _buildingClasses = [_this, "BUILDING_TYPES", ["Land_FuelStation_02_workshop_F"]] call PARKEDVEHICLES_GetParamValue;
-		private _vehicleClasses = [_this, "UNIT_CLASSES", ["C_Offroad_01_F", "C_Offroad_01_repair_F", "C_Quadbike_01_F", "C_Hatchback_01_F", "C_Hatchback_01_sport_F", "C_SUV_01_F", "C_Van_01_transport_F", "C_Van_01_box_F", "C_Van_01_fuel_F"]] call PARKEDVEHICLES_GetParamValue;
+		private _vehicleClasses = [_this, "VEHICLE_CLASSES", ["C_Offroad_01_F", "C_Offroad_01_repair_F", "C_Quadbike_01_F", "C_Hatchback_01_F", "C_Hatchback_01_sport_F", "C_SUV_01_F", "C_Van_01_transport_F", "C_Van_01_box_F", "C_Van_01_fuel_F"]] call PARKEDVEHICLES_GetParamValue;
 		private _probabilityOfPresence = [_this, "PROBABILITY_OF_PRESENCE", 1] call PARKEDVEHICLES_GetParamValue;
+		private _onVehicleSpawned = [_this, "ON_VEHICLE_CREATED", {}] call PARKEDVEHICLES_GetParamValue;
 		private _debug = [_this, "DEBUG", false] call PARKEDVEHICLES_GetParamValue;
 		
 		sleep 1;
@@ -107,13 +108,16 @@ PARKEDVEHICLES_PlaceVehiclesOnMap = {
 							_vehicle setPos _spawnPos;
 							
 							// Monitor vehicle health
-							[_vehicle, _buildingClass, _vehicleClass, _spawnPos, _debug] spawn {
-								params ["_vehicle", "_buildingClass", "_vehicleClass", "_spawnPos", "_debug"];
+							[_vehicle, _buildingClass, _vehicleClass, _spawnPos, _onVehicleSpawned, _debug] spawn {
+								params ["_vehicle", "_buildingClass", "_vehicleClass", "_spawnPos", "_onVehicleSpawned", "_debug"];
 								
 								sleep 1;
 								
 								// If vehicle exploded or flew away upon spawn
-								if (!alive _vehicle || _vehicle distance _spawnPos > 3) then {
+								if (alive _vehicle && _vehicle distance _spawnPos < 3) then {
+									[_vehicle] call _onVehicleSpawned;
+								}
+								else {
 									private _msg = "Vehicle class " + _vehicleClass + " destroyed when put in building class " + _buildingClass + " on " + worldName + " at " + (str _spawnPos) + ".";
 									diag_log _msg;
 									

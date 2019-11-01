@@ -1,19 +1,34 @@
-// 0: Building type name.
-// 1: Building position.
-// 2: Building position offset, on format [x, y, z];
-// 3: Vehicle rotation on building position - relative the building.
+/*
+ * GarageDefinitions.sqf
+ *
+ * A garage definition tells the script how to spawn a vehicle in relation to it. The garage definitions
+ * array below is an array with garage definitions. A garage definition is in itself an array with the
+ * following items (at the following indexes):
+ *
+ * 0: The class name of the building.
+ * 1: The building position index. Use a scalar from 0 and up to set a building position as reference.
+ *    Set -1 to use the building itself as reference (like if the building does not have any building
+ *    positions.
+ * 2: Reference position offset on format [x, y, z]. Relative the building position (or the building),
+ *    how much is necessary to tweak the position to get the vehicle exactly correct at position?
+ *    Example: Value [0, 1, 0] will put the vehicle on position, but move it one meter deeper into the
+ *             building (building seen from "behind").
+ * 3: The rotation angle of the vehicle, relative the building.
+ *
+ * The function PARKEDVEHICLES_InvestigateClosestBuilding can help when creating new garage definitions.
+ */
 
 PARKEDVEHICLES_GarageDefinitions = [
+	/* Altis and Stratis */
+	["Land_i_Garage_V1_F", 2, [-0.5, -1, 0], 90],
+	["Land_MilOffices_V1_F", -1, [-7, 11, 0.1], 270],
+	["Land_FuelStation_Shed_F", 0, [0, 0, 0.1], 0],
+	
 	/* Tanoa */
 	["Land_FuelStation_02_workshop_F", 5, [0.1, 3, 0.6], 180],
 	["Land_GarageShelter_01_F", 2, [-0.1, 1.5, 0], 180],
 	["Land_i_Shed_Ind_F", 2, [0, 2.5, 0], 270],
 	["Land_FuelStation_01_shop_F", -1, [0, -8, 0], 270],
 	["Land_Supermarket_01_F", -1, [9, -4, 0], 0],
-	["Land_House_Big_03_F", 4, [2, -1, 0], 90],
-	
-	/* Stratis */
-	["Land_i_Garage_V1_F", 2, [-0.5, -1, 0], 90],
-	["Land_MilOffices_V1_F", -1, [-7, 11, 0.1], 270],
-	["Land_FuelStation_Shed_F", 0, [0, 0, 0.1], 0]
+	["Land_House_Big_03_F", 4, [2, -1, 0], 90]
 ];

@@ -94,9 +94,9 @@
           </ProjectNodeViewModel>
           <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="ParkedVehicles" FileName="Engima\ParkedVehicles">
             <SubNodes>
-              <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Server" FileName="Engima\ParkedVehicles\Server">
+              <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Code" FileName="Engima\ParkedVehicles\Code">
                 <SubNodes>
-                  <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="Functions.sqf" FileName="Engima\ParkedVehicles\Server\Functions.sqf">
+                  <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="Functions.sqf" FileName="Engima\ParkedVehicles\Code\Functions.sqf">
                     <SubNodes />
                   </ProjectNodeViewModel>
                 </SubNodes>
@@ -374,9 +374,6 @@
       <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="init.sqf" FileName="init.sqf">
         <SubNodes />
       </ProjectNodeViewModel>
-      <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="initserver.sqf" FileName="initserver.sqf">
-        <SubNodes />
-      </ProjectNodeViewModel>
       <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="mission.original.sqm" FileName="mission.original.sqm">
         <SubNodes />
       </ProjectNodeViewModel>
@@ -410,5 +407,6 @@
     <string>Public variable 'drn_fnc_CL_SetDebugMarkerLocal' may be used before being assigned a value.</string>
     <string>Public variable 'drn_fnc_CL_DeleteDebugMarkerLocal' may be used before being assigned a value.</string>
     <string>Public variable 'drn_var_Escape_MissionEndResult' may be used before being assigned a value.</string>
+    <string>Public variable 'p1' may be used before being assigned a value.</string>
   </FilteredAnalyzerResultItems>
 </Project>

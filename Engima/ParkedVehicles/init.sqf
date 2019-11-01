@@ -1,3 +1,5 @@
-call compile preprocessFileLineNumbers "Engima\ParkedVehicles\Server\Functions.sqf";
+PARKEDVEHICLES_UniqueMarkerNo = 0;
+
+call compile preprocessFileLineNumbers "Engima\ParkedVehicles\Code\Functions.sqf";
 call compile preprocessFileLineNumbers "Engima\ParkedVehicles\GarageDefinitions.sqf";
 call compile preprocessFileLineNumbers "Engima\ParkedVehicles\ConfigAndStart.sqf";

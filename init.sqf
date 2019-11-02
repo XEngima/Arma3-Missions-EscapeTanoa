@@ -19,7 +19,7 @@ _showIntro = true;
 
 // Debug Variables
 
-_showPlayerMapAndCompass = true;
+_showPlayerMapAndCompass = false;
 _playerIsImmortal = false; // Only works for unit p1
 
 // Initialization

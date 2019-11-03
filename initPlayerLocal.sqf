@@ -1,3 +1,9 @@
+// Stop players' characters from calling out orders (that can reveal directions and positions).
+
+0 fadeRadio 0;
+enableRadio false;
+enableSentences false;
+
 // Remove the "Move map to player location" button on the map.
 
 [] spawn {

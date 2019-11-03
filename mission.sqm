@@ -227,7 +227,7 @@ class Mission
 	appId=395180;
 	class Intel
 	{
-		briefingName="ESCAPE TANOA";
+		briefingName="CO 08 ESCAPE TANOA BY ENGIMA 2.0";
 		resistanceWest=0;
 		resistanceEast=1;
 		timeOfChanges=1800.0002;

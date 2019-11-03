@@ -81,9 +81,7 @@ switch (_enemyFrequency) do {
         	"O_T_MRAP_02_ghex_F", // Unarmed
         	"O_T_Quadbike_01_ghex_F",
         	"O_T_LSV_02_unarmed_F",
-        	"I_C_Van_02_vehicle_F",
         	"I_C_Van_01_transport_F",
-        	"I_C_Van_02_transport_F",
         	"I_C_Offroad_02_unarmed_F",
         	"O_T_Truck_03_device_ghex_F", // Trucks
         	"O_T_Truck_03_ammo_ghex_F",
@@ -122,9 +120,7 @@ switch (_enemyFrequency) do {
         	"O_T_MRAP_02_ghex_F", // Unarmed
         	"O_T_Quadbike_01_ghex_F",
         	"O_T_LSV_02_unarmed_F",
-        	"I_C_Van_02_vehicle_F",
         	"I_C_Van_01_transport_F",
-        	"I_C_Van_02_transport_F",
         	"I_C_Offroad_02_unarmed_F",
         	"O_T_Truck_03_device_ghex_F", // Trucks
         	"O_T_Truck_03_ammo_ghex_F",

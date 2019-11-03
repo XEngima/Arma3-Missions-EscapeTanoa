@@ -965,7 +965,7 @@ if (_useSearchChopper) then {
             // If any member of the group is to far away from fence, then escape has started
             {
                 if (!(_x getVariable ["drn_var_initializing", true])) then {
-                    if ((_x distance _startPos) > 8 && (_x distance _startPos) < 150) exitWith {
+                    if ((_x distance _startPos) > 9 && (_x distance _startPos) < 150) exitWith {
                         drn_escapeHasStarted = true;
                         publicVariable "drn_escapeHasStarted";
                     };

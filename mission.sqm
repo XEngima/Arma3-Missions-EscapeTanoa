@@ -54,6 +54,7 @@ class ScenarioData
 {
 	author="Engima";
 	overviewText="Captured behind enemy lines. Take the first opportunity to escape and find a way back to your allies.";
+	overviewTextLocked="Captured behind enemy lines. Take the first opportunity to escape the prison and find a way to rendezvous with NATO forces.";
 	overViewPicture="Escape.jpg";
 	overViewPictureLocked="Escape.jpg";
 	onLoadMission="Captured behind enemy lines. Take the first opportunity to escape the prison and find a way to rendezvous with NATO forces.";
@@ -226,7 +227,7 @@ class Mission
 	appId=395180;
 	class Intel
 	{
-		briefingName="ESCAPE TANOA";
+		briefingName="CO 08 ESCAPE TANOA";
 		resistanceWest=0;
 		resistanceEast=1;
 		timeOfChanges=1800.0002;

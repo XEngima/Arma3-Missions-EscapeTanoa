@@ -19,7 +19,7 @@ _showIntro = true;
 
 // Debug Variables
 
-_showPlayerMapAndCompass = false;
+_showPlayerMapAndCompass = true;
 _playerIsImmortal = false; // Only works for unit p1
 
 // Initialization
@@ -317,9 +317,9 @@ if (!isNull player) then {
 			    ] spawn BIS_fnc_typeText;
 */			    
                 ["<t size='0.9'>" + "Engima" + "</t>",0.02,0.1,2,-1,0,3010] spawn bis_fnc_dynamicText;
-                sleep 1;
-                ["<t size='0.9'>" + "Author of the very first Escape mission - ""Escape Chernarus""" + "</t>",0.02,0.2,2,-1,0,3011] spawn bis_fnc_dynamicText;
-                sleep 2;
+                sleep 1.5;
+                ["<t size='0.7'>" + "Author of the very first Escape mission - ""Escape Chernarus"" (Arma 2)" + "</t>",0.02,0.2,2,-1,0,3011] spawn bis_fnc_dynamicText;
+                sleep 1.5;
                 ["<t size='0.9'>" + "proudly presents" + "</t>",0.02,0.3,2,-1,0,3012] spawn bis_fnc_dynamicText;
             };
             
@@ -343,11 +343,8 @@ if (!isNull player) then {
                 sleep 2;
             
                 ["<t size='1.5'>" + "Escape Tanoa" + "</t>",0.02,0.4,2,-1,0,3013] spawn bis_fnc_dynamicText;
+                sleep 1;
                 
-                0 cutText ["", "BLACK FADED"];
-                sleep 2.75;
-                
-                0 cutText ["", "BLACK FADED"];
                 ["Somewhere on Tanoa", str (date select 2) + "/" + str (date select 1) + "/" + str (date select 0) + " " + str (date select 3) + ":00"] spawn BIS_fnc_infoText;
             };
         };

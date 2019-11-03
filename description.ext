@@ -6,7 +6,7 @@ class Header
   maxPlayers = 8;
 };
 
-onLoadMission = "ESCAPE TANOA";
+onLoadMission = "ESCAPE TANOA BY ENGIMA 2.0";
 OnLoadMissionTime = FALSE;
 
 overviewText = "Captured behind enemy lines!";

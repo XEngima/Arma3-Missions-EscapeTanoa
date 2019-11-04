@@ -29,6 +29,7 @@ drn_var_Escape_InnerFenceGuardSecondaryWeaponMagazine = "6Rnd_45ACP_Cylinder";
 
 // The type of unit that hijacts fastest
 drn_var_Escape_EngineerType = "B_CTRG_Soldier_Exp_tna_F";
+publicVariable "drn_var_Escape_EngineerType";
 
 // Flags
 drn_var_Escape_PrisonFlagType = "Flag_Syndikat_F";

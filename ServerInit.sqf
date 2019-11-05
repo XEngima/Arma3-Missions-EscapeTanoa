@@ -2,7 +2,7 @@ if (!isServer) exitWith {};
 
 private ["_useEscapeSurprises", "_useRandomStartPos", "_useAmmoDepots", "_useSearchLeader", "_useMotorizedSearchGroup", "_useVillagePatrols", "_useMilitaryTraffic", "_useAmbientInfantry", "_useSearchChopper", "_useRoadBlocks", "_guardsExist", "_guardsAreArmed", "_guardLivesLong"];
 private ["_debugEscapeSurprises", "_debugSearchLeader", "_showGroupDiagnostics", "_debugVillagePatrols", "_debugMilitaryTraffic", "_debugAmbientInfantry", "_debugGarbageCollector", "_debugRoadBlocks"];
-private ["_enemyMinSkill", "_enemyMaxSkill", "_searchChopperSearchTimeMin", "_searchChopperRefuelTimeMin", "_enemySpawnDistance", "_playerGroup", "_enemyFrequency", "_comCenGuardsExist", "_fenceRotateDir", "_scriptHandle"];
+private ["_enemyMinSkill", "_enemyMaxSkill", "_searchChopperSearchTimeMin", "_searchChopperRefuelTimeMin", "_playerGroup", "_comCenGuardsExist", "_fenceRotateDir", "_scriptHandle"];
 private ["_forceComCentersApart", "_debugAmmoAndComPatrols", "_useCivilians", "_debugCivilians"];
 
 // Developer Variables
@@ -64,20 +64,70 @@ publicVariable "drn_var_Escape_AllPlayersDead";
 publicVariable "drn_var_Escape_MissionComplete";
 publicVariable "drn_var_Escape_timeToHijack";
 
-_enemyMinSkill = (paramsArray select 0) / 5;
-_enemyMaxSkill = (paramsArray select 0) / 5 + 0.2;
-drn_var_Escape_enemyMinSkill = _enemyMinSkill;
-drn_var_Escape_enemyMaxSkill = _enemyMaxSkill;
-
 _searchChopperSearchTimeMin = (5 + random 10);
 _searchChopperRefuelTimeMin = (5 + random 10);
 
 //waituntil {!isnil "bis_fnc_init"};
 
-_enemyFrequency = (paramsArray select 1);
-_enemySpawnDistance = (paramsArray select 4);
+// Parameters
+
+private _useSavedSettings = (paramsArray select 0) == 0;
+
+if (_useSavedSettings) then {
+	drn_MissionParam_enemySkill = profileNamespace getVariable ["MissionParam_Engima_EscapeTanoa_EnemySkill", (paramsArray select 1)];
+	drn_MissionParam_enemyFrequency = profileNamespace getVariable ["MissionParam_Engima_EscapeTanoa_EnemyFrequency", (paramsArray select 2)];
+	drn_MissionParam_timeOfDay = profileNamespace getVariable ["MissionParam_Engima_EscapeTanoa_TimeOfDay", (paramsArray select 3)];
+	drn_MissionParam_dynamicWeather = profileNamespace getVariable ["MissionParam_Engima_EscapeTanoa_Weather", (paramsArray select 4)];
+	drn_MissionParam_enemySpawnDistance = profileNamespace getVariable ["MissionParam_Engima_EscapeTanoa_EnemySpawnDistance", (paramsArray select 5)];
+}
+else {
+	drn_MissionParam_enemySkill = paramsArray select 1;
+	drn_MissionParam_enemyFrequency = paramsArray select 2;
+	drn_MissionParam_timeOfDay = paramsArray select 3;
+	drn_MissionParam_dynamicWeather = paramsArray select 4;
+	drn_MissionParam_enemySpawnDistance = paramsArray select 5;
+};
+
+publicVariable "drn_MissionParam_enemySkill";
+publicVariable "drn_MissionParam_enemyFrequency";
+publicVariable "drn_MissionParam_timeOfDay";
+publicVariable "drn_MissionParam_dynamicWeather";
+publicVariable "drn_MissionParam_enemySpawnDistance";
+
+profileNamespace setVariable ["MissionParam_Engima_EscapeTanoa_EnemySkill", drn_MissionParam_enemySkill];
+profileNamespace setVariable ["MissionParam_Engima_EscapeTanoa_EnemyFrequency", drn_MissionParam_enemyFrequency];
+profileNamespace setVariable ["MissionParam_Engima_EscapeTanoa_TimeOfDay", drn_MissionParam_timeOfDay];
+profileNamespace setVariable ["MissionParam_Engima_EscapeTanoa_Weather", drn_MissionParam_dynamicWeather];
+profileNamespace setVariable ["MissionParam_Engima_EscapeTanoa_EnemySpawnDistance", drn_MissionParam_enemySpawnDistance];
+
+saveProfileNamespace;
+
+drn_missionParametrsInitialized = true;
+publicVariable "drn_missionParametrsInitialized";
+
+_enemyMinSkill = drn_MissionParam_enemySkill / 5;
+_enemyMaxSkill = drn_MissionParam_enemySkill / 5 + 0.2;
+drn_var_Escape_enemyMinSkill = _enemyMinSkill;
+drn_var_Escape_enemyMaxSkill = _enemyMaxSkill;
 
 drn_searchAreaMarkerName = "drn_searchAreaMarker";
+
+drn_var_Escape_hoursSkipped = 0;
+
+if (isMultiplayer) then {
+    private ["_hour"];
+    
+    if (drn_MissionParam_timeOfDay == 24) then {
+        _hour = floor random 24;
+    }
+    else {
+        _hour = drn_MissionParam_timeOfDay;
+    };
+    
+    drn_var_Escape_hoursSkipped = _hour - (date select 3);
+    publicVariable "drn_var_Escape_hoursSkipped";
+    setDate [date select 0, date select 1, date select 2, _hour, 0];
+};
 
 // Create end triggers
 private _endTrigger = createTrigger["EmptyDetector", [0, 0, 0]];
@@ -99,7 +149,7 @@ drn_var_ammoDepotPatrolMarkers = [];
 drn_actualVillageMarkers = [];
     
 call compile preprocessFileLineNumbers "Scripts\DRN\VillageMarkers\InitVillageMarkers.sqf";
-[_enemyFrequency] call compile preprocessFileLineNumbers "Scripts\Escape\UnitClasses.sqf";
+[drn_MissionParam_enemyFrequency] call compile preprocessFileLineNumbers "Scripts\Escape\UnitClasses.sqf";
 
 // Build start position
 _fenceRotateDir = random 360;
@@ -113,7 +163,7 @@ publicVariable "drn_fenceIsCreated";
 _playerGroup = group ((call drn_fnc_Escape_GetPlayers) select 0);
 
 if (_useEscapeSurprises) then {
-    [_enemyMinSkill, _enemyMaxSkill, _enemyFrequency, _debugEscapeSurprises] execVM "Scripts\Escape\EscapeSurprises.sqf";
+    [_enemyMinSkill, _enemyMaxSkill, drn_MissionParam_enemyFrequency, _debugEscapeSurprises] execVM "Scripts\Escape\EscapeSurprises.sqf";
 };
 
 if (_showGroupDiagnostics) then {
@@ -121,7 +171,7 @@ if (_showGroupDiagnostics) then {
 };
 
 // Initialize communication centers
-[_comCenGuardsExist, _forceComCentersApart, _playerGroup, _enemySpawnDistance, _enemyFrequency] spawn {
+[_comCenGuardsExist, _forceComCentersApart, _playerGroup, drn_MissionParam_enemySpawnDistance, drn_MissionParam_enemyFrequency] spawn {
 	params ["_comCenGuardsExist", "_forceComCentersApart", "_playerGroup", "_enemySpawnDistance", "_enemyFrequency"];
     private ["_instanceNo", "_marker", "_chosenComCenIndexes", "_index", "_comCenPositions", "_comCenItem", "_distanceBetween", "_currentPos", "_tooClose", "_pos", "_scriptHandle"];
 
@@ -282,7 +332,7 @@ if (_useAmmoDepots) then {
 
 // Put guards at ammo depots and communication centers
 
-[_enemySpawnDistance, _enemyMinSkill, _enemyMaxSkill, _debugAmmoAndComPatrols, _enemyFrequency] spawn {
+[drn_MissionParam_enemySpawnDistance, _enemyMinSkill, _enemyMaxSkill, _debugAmmoAndComPatrols, drn_MissionParam_enemyFrequency] spawn {
 	params ["_enemySpawnDistance", "_enemyMinSkill", "_enemyMaxSkill", "_debugAmmoAndComPatrols", "_enemyFrequency"];
 	private ["_areaPerGroup"];
 	
@@ -346,7 +396,7 @@ if (_useSearchLeader) then
 
 // Create motorized search group
 if (_useMotorizedSearchGroup) then {
-    [_enemyFrequency, _enemyMinSkill, _enemyMaxSkill] spawn {
+    [drn_MissionParam_enemyFrequency, _enemyMinSkill, _enemyMaxSkill] spawn {
         private ["_enemyFrequency", "_enemyMinSkill", "_enemyMaxSkill"];
         private ["_spawnSegment"];
         
@@ -370,7 +420,7 @@ if (_useMotorizedSearchGroup) then {
 [_playerGroup, 750, _debugGarbageCollector] spawn drn_fnc_CL_RunGarbageCollector;
 
 // Run initialization for scripts that need the players to be gathered at the start position
-[_useVillagePatrols, _useMilitaryTraffic, _useAmbientInfantry, _debugVillagePatrols, _debugMilitaryTraffic, _debugAmbientInfantry, _enemyMinSkill, _enemyMaxSkill, _enemySpawnDistance, _enemyFrequency, _useRoadBlocks, _debugRoadBlocks, _useCivilians, _debugCivilians] spawn {
+[_useVillagePatrols, _useMilitaryTraffic, _useAmbientInfantry, _debugVillagePatrols, _debugMilitaryTraffic, _debugAmbientInfantry, _enemyMinSkill, _enemyMaxSkill, drn_MissionParam_enemySpawnDistance, drn_MissionParam_enemyFrequency, _useRoadBlocks, _debugRoadBlocks, _useCivilians, _debugCivilians] spawn {
     private ["_useVillagePatrols", "_useMilitaryTraffic", "_useAmbientInfantry", "_debugVillagePatrols", "_debugMilitaryTraffic", "_debugAmbientInfantry", "_enemyMinSkill", "_enemyMaxSkill", "_enemySpawnDistance", "_enemyFrequency", "_useRoadBlocks", "_debugRoadBlocks", "_useCivilians", "_debugCivilians"];
     private ["_fnc_OnSpawnAmbientInfantryGroup", "_areaPerGroup"];
     private ["_playerGroup", "_minEnemiesPerGroup", "_maxEnemiesPerGroup", "_fnc_OnSpawnGroup"];
@@ -844,7 +894,7 @@ if (_useSearchChopper) then {
 };
 
 // Spawn creation of start position settings
-[drn_startPos, _enemyMinSkill, _enemyMaxSkill, _guardsAreArmed, _guardsExist, _guardLivesLong, _enemyFrequency, _fenceRotateDir] spawn {
+[drn_startPos, _enemyMinSkill, _enemyMaxSkill, _guardsAreArmed, _guardsExist, _guardLivesLong, drn_MissionParam_enemyFrequency, _fenceRotateDir] spawn {
     private ["_startPos", "_enemyMinSkill", "_enemyMaxSkill", "_guardsAreArmed", "_guardsExist", "_guardLivesLong", "_enemyFrequency", "_fenceRotateDir"];
     private ["_i", "_guard", "_guardGroup", "_marker", "_guardCount", "_guardGroups", "_unit", "_createNewGroup", "_guardPos"];
     

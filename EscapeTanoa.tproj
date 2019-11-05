@@ -374,9 +374,6 @@
       <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="init.sqf" FileName="init.sqf">
         <SubNodes />
       </ProjectNodeViewModel>
-      <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="mission.original.sqm" FileName="mission.original.sqm">
-        <SubNodes />
-      </ProjectNodeViewModel>
       <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="mission.sqm" FileName="mission.sqm">
         <SubNodes />
       </ProjectNodeViewModel>

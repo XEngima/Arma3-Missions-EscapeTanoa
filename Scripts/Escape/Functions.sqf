@@ -85,8 +85,6 @@ drn_fnc_Escape_RemoveAi = {
 			deleteVehicle p8;
 		};
 	};
-
-	drn_players
 };
 
 drn_fnc_Escape_OnSpawnGeneralSoldierUnit = {

@@ -23,6 +23,8 @@ _playerIsImmortal = false; // Only works for unit p1
 
 // Initialization
 
+call compile preprocessFileLineNumbers "Scripts\Escape\Functions.sqf";
+
 if (isServer) then {
     execVM "ServerInit.sqf";
     if (isDedicated) exitWith {};
@@ -64,8 +66,6 @@ if (_playerIsImmortal && {!isNil "p1"}) then {
 // Initialization
 drn_arr_JipSpawnPos = [];
 call drn_fnc_CL_InitParams;
-
-call compile preprocessFileLineNumbers "Scripts\Escape\Functions.sqf";
 
 if (!isNull player) then {
 	[didJip] call compile preprocessFileLineNumbers "Briefing.sqf";

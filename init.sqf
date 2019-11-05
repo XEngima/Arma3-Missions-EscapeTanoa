@@ -7,8 +7,7 @@ call compile preprocessFileLineNumbers "Engima\Traffic\Init.sqf"; // Added by En
 call compile preprocessFileLineNumbers "Engima\PatrolledAreas\Init.sqf"; // Added by Engima.PatrolledAreas
 call compile preprocessFileLineNumbers "Scripts\DRN\CommonLib\CommonLib.sqf";
 call compile preprocessFileLineNumbers "Engima\CommonLib\CommonLib.sqf"; // Added by Engima.CommonLib
-private ["_volume", "_dynamicWeather"];
-private ["_showIntro", "_showPlayerMapAndCompass", "_fog", "_playerIsImmortal", "_playersEnteredWorld"];
+private ["_volume", "_showIntro", "_showPlayerMapAndCompass", "_fog", "_playerIsImmortal", "_playersEnteredWorld"];
 
 drn_var_playerSide = west;
 drn_var_enemySide = east;
@@ -24,6 +23,15 @@ _playerIsImmortal = false; // Only works for unit p1
 
 // Initialization
 
+call compile preprocessFileLineNumbers "Scripts\Escape\Functions.sqf";
+
+if (isServer) then {
+    execVM "ServerInit.sqf";
+    if (isDedicated) exitWith {};
+};
+
+waitUntil { !isNil "drn_missionParametrsInitialized" };
+
 drn_var_Escape_firstPreloadDone = false;
 drn_var_Escape_playerEnteredWorld = false;
 
@@ -36,25 +44,6 @@ drn_var_Escape_playerEnteredWorld = false;
 		};
 	};
 }] call BIS_fnc_addStackedEventHandler;
-
-if (isServer) then {
-    drn_var_Escape_hoursSkipped = 0;
-    
-    if (isMultiplayer) then {
-        private ["_hour"];
-        
-        if (paramsArray select 2 == 24) then {
-            _hour = floor random 24;
-        }
-        else {
-            _hour = paramsArray select 2;
-        };
-        
-        drn_var_Escape_hoursSkipped = _hour - (date select 3);
-        publicVariable "drn_var_Escape_hoursSkipped";
-        setDate [date select 0, date select 1, date select 2, _hour, 0];
-    };
-};
 
 _volume = soundVolume;
 enableSaving [false, false];
@@ -78,15 +67,11 @@ if (_playerIsImmortal && {!isNil "p1"}) then {
 drn_arr_JipSpawnPos = [];
 call drn_fnc_CL_InitParams;
 
-call compile preprocessFileLineNumbers "Scripts\Escape\Functions.sqf";
-
 if (!isNull player) then {
 	[didJip] call compile preprocessFileLineNumbers "Briefing.sqf";
 };
 
-_dynamicWeather = (paramsArray select 3);
-
-switch (_dynamicWeather) do {
+switch (drn_MissionParam_dynamicWeather) do {
     case 0: { execVM "Scripts\Escape\StaticWeatherEffects.sqf"; }; // Dynamic weather off
     case 1: { [0.01, 0.1, 0, [random 8, random 8]] execVM "Scripts\DRN\DynamicWeatherEffects\DynamicWeatherEffects.sqf"; }; // Dynamic weather (start clear)
     default {
@@ -100,13 +85,6 @@ switch (_dynamicWeather) do {
         
         [_fog] execVM "Scripts\DRN\DynamicWeatherEffects\DynamicWeatherEffects.sqf";
     };
-};
-
-// Server Initialization
-
-if (isServer) then {
-    execVM "ServerInit.sqf";
-    if (isDedicated) exitWith {};
 };
 
 waitUntil {drn_var_Escape_playerEnteredWorld};

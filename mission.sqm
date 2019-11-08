@@ -8,14 +8,14 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=30;
+		nextID=42;
 	};
 	class Camera
 	{
-		pos[]={10829.977,24.7222,6416.0645};
-		dir[]={-0.0044495175,-0.99994999,0.0089553008};
-		up[]={-0.44493929,0.00999978,0.89550501};
-		aside[]={0.89554977,0,0.44496155};
+		pos[]={13735.026,25.570593,16759.697};
+		dir[]={0.083171554,-0.40172794,-0.91202152};
+		up[]={0.036484845,0.9157511,-0.40008092};
+		aside[]={-0.99590462,4.496178e-008,-0.090821519};
 	};
 };
 binarizationWanted=0;
@@ -196,7 +196,7 @@ class Mission
 			name="drn_Escape_ExtracionBoatSpawnPos5";
 			type="Empty";
 			id=13;
-			atlOffset=36.939713;
+			atlOffset=36.939705;
 		};
 		class Item14
 		{
@@ -690,7 +690,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={13735.636,15.016919,16740.217};
+						position[]={13735.636,15.016783,16740.217};
 					};
 					side="West";
 					flags=5;
@@ -701,7 +701,7 @@ class Mission
 					};
 					id=29;
 					type="B_CTRG_Soldier_TL_tna_F";
-					atlOffset=0.033136368;
+					atlOffset=0.032999992;
 					class CustomAttributes
 					{
 						class Attribute0

@@ -14,14 +14,7 @@ _enemyFrequency = _this select 0;
 
 // Random array. Start position guard types.
 
-
-// Arma 3 FIA infantry:
-// [/*simple:*/ "O_G_Soldier_F", "O_G_Soldier_lite_F", "O_G_Soldier_A_F", "O_G_medic_F", "O_G_Soldier_GL_F", "O_G_Soldier_SL_F", "O_G_Soldier_TL_F", /*backpacks:*/ "O_G_engineer_F", "O_G_Soldier_exp_F", /*advanced:*/ "O_G_Soldier_M_F", "O_G_officer_F", "O_G_Soldier_LAT_F", "O_G_Soldier_LAT2_F", "O_G_Sharpshooter_F"];
-
-// Arma 3 
-// [simple: "I_C_Soldier_Para_1_F", "I_C_Soldier_Para_1_F", "I_C_Soldier_Para_1_F", "I_C_Soldier_Para_1_F", "I_C_Soldier_Para_1_F", "I_C_Soldier_Para_1_F", backbacks: "I_C_Soldier_Para_8_F" advanced, "I_C_Soldier_Para_5_F"]
-
-drn_arr_Escape_StartPositionGuardTypes = ["I_C_Soldier_Para_1_F", "I_C_Soldier_Para_2_F", "I_C_Soldier_Para_3_F", "I_C_Soldier_Para_4_F", "I_C_Soldier_Para_6_F", "I_C_Soldier_Para_7_F", "I_C_Soldier_Para_8_F"];
+drn_arr_Escape_StartPositionGuardTypes = ["I_Soldier_A_F", "I_support_AMG_F", "I_support_AMort_F", "I_medic_F", "I_engineer_F", "I_Soldier_exp_F", "I_Soldier_GL_F", "I_support_GMG_F", "I_support_MG_F", "I_support_Mort_F", "I_officer_F", "I_Soldier_repair_F", "I_Soldier_SL_F", "I_Soldier_TL_F", /* Riflemen */ "I_soldier_F", "I_Soldier_lite_F", /* Riflemen */ "I_soldier_F", "I_Soldier_lite_F", /* Riflemen */ "I_soldier_F", "I_Soldier_lite_F"];
 
 // Inner fence guard's secondary weapon (and corresponding magazine type).
 drn_var_Escape_InnerFenceGuardSecondaryWeapon = "hgun_Pistol_heavy_02_F";
@@ -32,8 +25,8 @@ drn_var_Escape_EngineerType = "B_CTRG_Soldier_Exp_tna_F";
 publicVariable "drn_var_Escape_EngineerType";
 
 // Flags
-drn_var_Escape_PrisonFlagType = "Flag_Syndikat_F";
-drn_var_Escape_AmmoDepotFlag = "Flag_Syndikat_F";
+drn_var_Escape_PrisonFlagType = "Flag_AAF_F";
+drn_var_Escape_AmmoDepotFlag = "Flag_AAF_F";
 drn_var_Escape_ComCenterFlag = "Flag_CSAT_F";
 
 // Random array. Civilian vehicle classes for ambient traffic. (Can also be set to a faction name).
@@ -165,10 +158,10 @@ switch (_enemyFrequency) do {
 // Random array. General infantry types. E.g. village patrols, ambient infantry, ammo depot guards, communication center guards, etc.
 
 //drn_arr_Escape_InfantryTypes = ["O_Soldier_LAT_F", "O_Soldier_AR_F", "O_Soldier_AR_F", "O_Soldier_GL_F", "O_support_MG_F", "O_medic_F", "O_Soldier_F", "O_Soldier_F", "O_Soldier_AR_F", "O_Soldier_GL_F", "O_support_MG_F", "O_medic_F", "O_Soldier_F", "O_Soldier_F", "O_Soldier_AR_F", "O_Soldier_GL_F", "O_support_MG_F", "O_medic_F", "O_Soldier_F", "O_Soldier_F", "O_Soldier_AR_F", "O_Soldier_GL_F", "O_support_MG_F", "O_medic_F", "O_Soldier_F", "O_Soldier_F", "O_Soldier_AR_F", "O_Soldier_GL_F", "O_support_MG_F", "O_medic_F", "O_Soldier_F", "O_Soldier_F"];
-drn_arr_Escape_InfantryTypesBanditsGuer = ["I_C_Soldier_Bandit_1_F", "I_C_Soldier_Bandit_2_F", "I_C_Soldier_Bandit_3_F", "I_C_Soldier_Bandit_4_F", "I_C_Soldier_Bandit_5_F", "I_C_Soldier_Bandit_6_F", "I_C_Soldier_Bandit_7_F", "I_C_Soldier_Bandit_8_F"];
-drn_arr_Escape_InfantryTypesParamilitaryGuer = ["I_C_Soldier_Para_1_F", "I_C_Soldier_Para_2_F", "I_C_Soldier_Para_3_F", "I_C_Soldier_Para_4_F", "I_C_Soldier_Para_5_F", "I_C_Soldier_Para_6_F", "I_C_Soldier_Para_7_F", "I_C_Soldier_Para_8_F"];
-drn_arr_Escape_InfantryTypesCsatPacificEast = ["O_T_Soldier_A_F", "O_T_Soldier_AAR_F", "O_T_Support_AMG_F", "O_T_Support_AMort_F", "O_T_Soldier_AR_F", "O_T_Medic_F", "O_T_Engineer_F", "O_T_Soldier_Exp_F", "O_T_Soldier_GL_F", "O_T_Support_GMG_F", "O_T_Support_MG_F", "O_T_Support_Mort_F", "O_T_Soldier_M_F", "O_T_soldier_mine_F", "O_T_Officer_F", "O_T_Soldier_Repair_F", "O_T_Soldier_F", "O_T_Soldier_LAT_F", "O_T_Soldier_SL_F"];
-drn_arr_Escape_InfantryTypesCsatPacificViperEast = ["O_V_Soldier_Exp_ghex_F", "O_V_Soldier_JTAC_ghex_F", "O_V_Soldier_M_ghex_F", "O_V_Soldier_ghex_F", "O_V_Soldier_Medic_ghex_F", "O_V_Soldier_LAT_ghex_F", "O_V_Soldier_TL_ghex_F"];
+drn_arr_Escape_InfantryTypesBanditsGuer = ["I_Soldier_A_F", "I_support_AMG_F", "I_support_AMort_F", "I_medic_F", "I_engineer_F", "I_Soldier_exp_F", "I_Soldier_GL_F", "I_support_GMG_F", "I_support_MG_F", "I_support_Mort_F", "I_officer_F", "I_Soldier_repair_F", "I_Soldier_SL_F", "I_Soldier_TL_F", /* Advanced */ "I_Soldier_LAT_F", "I_Soldier_M_F ", /* Riflemen */ "I_soldier_F", "I_Soldier_lite_F", /* Riflemen */ "I_soldier_F", "I_Soldier_lite_F", /* Riflemen */ "I_soldier_F", "I_Soldier_lite_F"];
+drn_arr_Escape_InfantryTypesParamilitaryGuer = drn_arr_Escape_InfantryTypesBanditsGuer;
+drn_arr_Escape_InfantryTypesCsatPacificEast = ["O_Soldier_A_F", "O_Soldier_AAR_F", "O_support_AMG_F", "O_support_AMort_F", "O_engineer_F", "O_soldier_exp_F", "O_Soldier_GL_F", "O_support_GMG_F", "O_support_MG_F", "O_support_Mort_F", "O_soldier_M_F", "O_officer_F", "O_soldier_repair_F", "O_Soldier_LAT_F", "O_Soldier_SL_F", "O_Soldier_TL_F", /* Riflemen */ "O_Soldier_F", "O_Soldier_lite_F", /* Riflemen */ "O_Soldier_F", "O_Soldier_lite_F", /* Riflemen */ "O_Soldier_F", "O_Soldier_lite_F"];
+drn_arr_Escape_InfantryTypesCsatPacificViperEast = drn_arr_Escape_InfantryTypesCsatPacificEast;
 
 // Random array. A roadblock has a manned vehicle. This array contains possible manned vehicles (can be of any kind, like cars, armored and statics).
 drn_arr_Escape_RoadBlock_MannedVehicleTypes = ["O_T_MRAP_02_gmg_ghex_F", "O_T_MRAP_02_hmg_ghex_F", "O_T_LSV_02_AT_F", "O_T_LSV_02_armed_F", "I_C_Offroad_02_LMG_F", "I_C_Offroad_02_AT_F", "O_static_AT_F", "O_GMG_01_high_F", "O_HMG_01_F", "O_HMG_01_high_F"];

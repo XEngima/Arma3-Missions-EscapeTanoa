@@ -12,15 +12,6 @@ private ["_enemyFrequency"];
 
 _enemyFrequency = _this select 0;
 
-// Random array. Start position guard types.
-
-
-// Arma 3 FIA infantry:
-// [/*simple:*/ "O_G_Soldier_F", "O_G_Soldier_lite_F", "O_G_Soldier_A_F", "O_G_medic_F", "O_G_Soldier_GL_F", "O_G_Soldier_SL_F", "O_G_Soldier_TL_F", /*backpacks:*/ "O_G_engineer_F", "O_G_Soldier_exp_F", /*advanced:*/ "O_G_Soldier_M_F", "O_G_officer_F", "O_G_Soldier_LAT_F", "O_G_Soldier_LAT2_F", "O_G_Sharpshooter_F"];
-
-// Arma 3 
-// [simple: "I_C_Soldier_Para_1_F", "I_C_Soldier_Para_1_F", "I_C_Soldier_Para_1_F", "I_C_Soldier_Para_1_F", "I_C_Soldier_Para_1_F", "I_C_Soldier_Para_1_F", backbacks: "I_C_Soldier_Para_8_F" advanced, "I_C_Soldier_Para_5_F"]
-
 drn_arr_Escape_StartPositionGuardTypes = ["I_C_Soldier_Para_1_F", "I_C_Soldier_Para_2_F", "I_C_Soldier_Para_3_F", "I_C_Soldier_Para_4_F", "I_C_Soldier_Para_6_F", "I_C_Soldier_Para_7_F", "I_C_Soldier_Para_8_F"];
 
 // Inner fence guard's secondary weapon (and corresponding magazine type).
@@ -51,6 +42,34 @@ switch (_enemyFrequency) do {
         	"O_T_LSV_02_unarmed_F",
         	"I_C_Van_01_transport_F",
         	"I_C_Offroad_02_unarmed_F",
+        	"O_T_MRAP_02_ghex_F", // Unarmed
+        	"O_T_Quadbike_01_ghex_F",
+        	"O_T_LSV_02_unarmed_F",
+        	"I_C_Van_01_transport_F",
+        	"I_C_Offroad_02_unarmed_F",
+        	"O_T_MRAP_02_ghex_F", // Unarmed
+        	"O_T_Quadbike_01_ghex_F",
+        	"O_T_LSV_02_unarmed_F",
+        	"I_C_Van_01_transport_F",
+        	"I_C_Offroad_02_unarmed_F",
+        	"O_T_MRAP_02_ghex_F", // Unarmed
+        	"O_T_Quadbike_01_ghex_F",
+        	"O_T_LSV_02_unarmed_F",
+        	"I_C_Van_01_transport_F",
+        	"I_C_Offroad_02_unarmed_F",
+        	"O_T_Truck_03_device_ghex_F", // Trucks
+        	"O_T_Truck_03_ammo_ghex_F",
+        	"O_T_Truck_03_fuel_ghex_F",
+        	"O_T_Truck_03_medical_ghex_F",
+        	"O_T_Truck_03_repair_ghex_F",
+        	"O_T_Truck_03_transport_ghex_F",
+        	"O_T_Truck_03_covered_ghex_F",
+        	"O_T_Truck_02_Ammo_F",
+        	"O_T_Truck_02_fuel_F",
+        	"O_T_Truck_02_Medical_F",
+        	"O_T_Truck_02_Box_F",
+        	"O_T_Truck_02_transport_F",
+        	"O_T_Truck_02_F",
         	"O_T_Truck_03_device_ghex_F", // Trucks
         	"O_T_Truck_03_ammo_ghex_F",
         	"O_T_Truck_03_fuel_ghex_F",
@@ -84,6 +103,34 @@ switch (_enemyFrequency) do {
         	"O_T_LSV_02_unarmed_F",
         	"I_C_Van_01_transport_F",
         	"I_C_Offroad_02_unarmed_F",
+        	"O_T_MRAP_02_ghex_F", // Unarmed
+        	"O_T_Quadbike_01_ghex_F",
+        	"O_T_LSV_02_unarmed_F",
+        	"I_C_Van_01_transport_F",
+        	"I_C_Offroad_02_unarmed_F",
+        	"O_T_MRAP_02_ghex_F", // Unarmed
+        	"O_T_Quadbike_01_ghex_F",
+        	"O_T_LSV_02_unarmed_F",
+        	"I_C_Van_01_transport_F",
+        	"I_C_Offroad_02_unarmed_F",
+        	"O_T_MRAP_02_ghex_F", // Unarmed
+        	"O_T_Quadbike_01_ghex_F",
+        	"O_T_LSV_02_unarmed_F",
+        	"I_C_Van_01_transport_F",
+        	"I_C_Offroad_02_unarmed_F",
+        	"O_T_Truck_03_device_ghex_F", // Trucks
+        	"O_T_Truck_03_ammo_ghex_F",
+        	"O_T_Truck_03_fuel_ghex_F",
+        	"O_T_Truck_03_medical_ghex_F",
+        	"O_T_Truck_03_repair_ghex_F",
+        	"O_T_Truck_03_transport_ghex_F",
+        	"O_T_Truck_03_covered_ghex_F",
+        	"O_T_Truck_02_Ammo_F",
+        	"O_T_Truck_02_fuel_F",
+        	"O_T_Truck_02_Medical_F",
+        	"O_T_Truck_02_Box_F",
+        	"O_T_Truck_02_transport_F",
+        	"O_T_Truck_02_F",
         	"O_T_Truck_03_device_ghex_F", // Trucks
         	"O_T_Truck_03_ammo_ghex_F",
         	"O_T_Truck_03_fuel_ghex_F",
@@ -142,17 +189,6 @@ switch (_enemyFrequency) do {
         	"O_T_LSV_02_armed_F",
         	"I_C_Offroad_02_LMG_F",
         	"I_C_Offroad_02_AT_F",
-        	"O_T_MRAP_02_gmg_ghex_F", // Cars with weapons
-        	"O_T_MRAP_02_hmg_ghex_F",
-        	"O_T_LSV_02_AT_F",
-        	"O_T_LSV_02_armed_F",
-        	"I_C_Offroad_02_LMG_F",
-        	"I_C_Offroad_02_AT_F",
-        	"O_T_APC_Tracked_02_AA_ghex_F", // Heavy armor
-        	"O_T_APC_Tracked_02_cannon_ghex_F",
-        	"O_T_APC_Wheeled_02_rcws_v2_ghex_F",
-        	"O_T_MBT_02_arty_ghex_F",
-        	"O_T_MBT_02_cannon_ghex_F",
         	"O_T_APC_Tracked_02_AA_ghex_F", // Heavy armor
         	"O_T_APC_Tracked_02_cannon_ghex_F",
         	"O_T_APC_Wheeled_02_rcws_v2_ghex_F",

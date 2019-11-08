@@ -21,7 +21,7 @@ drn_var_Escape_InnerFenceGuardSecondaryWeapon = "hgun_Pistol_heavy_02_F";
 drn_var_Escape_InnerFenceGuardSecondaryWeaponMagazine = "6Rnd_45ACP_Cylinder";
 
 // The type of unit that hijacts fastest
-drn_var_Escape_EngineerType = "B_CTRG_Soldier_Exp_tna_F";
+drn_var_Escape_EngineerType = "B_engineer_F";
 publicVariable "drn_var_Escape_EngineerType";
 
 // Flags
@@ -30,127 +30,163 @@ drn_var_Escape_AmmoDepotFlag = "Flag_AAF_F";
 drn_var_Escape_ComCenterFlag = "Flag_CSAT_F";
 
 // Random array. Civilian vehicle classes for ambient traffic. (Can also be set to a faction name).
-drn_arr_Escape_MilitaryTraffic_CivilianVehicleClasses = ["C_Offroad_01_F", "C_Offroad_01_repair_F", "C_Quadbike_01_F", "C_Hatchback_01_F", "C_Hatchback_01_sport_F", "C_SUV_01_F", "C_Van_01_transport_F", "C_Van_01_box_F", "C_Van_01_fuel_F"];
+drn_arr_Escape_MilitaryTraffic_CivilianVehicleClasses = ["C_Offroad_01_F", "C_Offroad_01_repair_F", "C_Quadbike_01_F", "C_Hatchback_01_F", "C_Hatchback_01_sport_F", "C_SUV_01_F", "C_Truck_02_transport_F", "C_Truck_02_box_F", "C_Truck_02_fuel_F"];
 
-drn_arr_Escape_WalkingCivilianClasses = ["C_Man_casual_1_F_tanoan", "C_Man_casual_2_F_tanoan", "C_Man_casual_3_F_tanoan", "C_Man_casual_4_F_tanoan", "C_Man_casual_5_F_tanoan", "C_Man_casual_6_F_tanoan", "C_Man_casual_1_F_tanoan", "C_Man_casual_2_F_tanoan", "C_Man_casual_3_F_tanoan", "C_Man_casual_4_F_tanoan", "C_Man_casual_5_F_tanoan", "C_Man_casual_6_F_tanoan", "C_man_sport_1_F_tanoan", "C_man_sport_3_F_tanoan"];
+drn_arr_Escape_WalkingCivilianClasses = ["C_man_p_beggar_F", "C_man_polo_1_F", "C_man_polo_2_F", "C_man_polo_3_F", "C_man_polo_4_F", "C_man_polo_5_F", "C_man_polo_6_F", "C_man_shorts_1_F", "C_man_1_1_F", "C_man_1_2_F", "C_man_1_3_F", "C_man_p_fugitive_F", "C_man_p_shorts_1_F", "C_man_hunter_1_F", "C_man_shorts_2_F", "C_man_shorts_3_F", "C_man_shorts_4_F", "C_man_w_worker_F"];
 
 // Random arrays. Enemy vehicle classes for ambient traffic. (Can also be set to a faction name).
 // Variable _enemyFrequency applies to server parameter, and can be one of the values 1 (Few), 2 (Some) or 3 (A lot).
 switch (_enemyFrequency) do {
     case 1: {
         drn_arr_Escape_MilitaryTraffic_EnemyVehicleClasses = [
-        	"O_T_MRAP_02_ghex_F", // Unarmed
-        	"O_T_Quadbike_01_ghex_F",
-        	"O_T_LSV_02_unarmed_F",
-        	"I_C_Van_01_transport_F",
-        	"I_C_Offroad_02_unarmed_F",
-        	"O_T_Truck_03_device_ghex_F", // Trucks
-        	"O_T_Truck_03_ammo_ghex_F",
-        	"O_T_Truck_03_fuel_ghex_F",
-        	"O_T_Truck_03_medical_ghex_F",
-        	"O_T_Truck_03_repair_ghex_F",
-        	"O_T_Truck_03_transport_ghex_F",
-        	"O_T_Truck_03_covered_ghex_F",
-        	"O_T_Truck_02_Ammo_F",
-        	"O_T_Truck_02_fuel_F",
-        	"O_T_Truck_02_Medical_F",
-        	"O_T_Truck_02_Box_F",
-        	"O_T_Truck_02_transport_F",
-        	"O_T_Truck_02_F",
-        	"O_T_MRAP_02_gmg_ghex_F", // Cars with weapons
-        	"O_T_MRAP_02_hmg_ghex_F",
-        	"O_T_LSV_02_AT_F",
-        	"O_T_LSV_02_armed_F",
-        	"I_C_Offroad_02_LMG_F",
-        	"I_C_Offroad_02_AT_F",
-        	"O_T_APC_Tracked_02_AA_ghex_F", // Heavy armor
-        	"O_T_APC_Tracked_02_cannon_ghex_F",
-        	"O_T_APC_Wheeled_02_rcws_v2_ghex_F",
-        	"O_T_MBT_02_arty_ghex_F",
-        	"O_T_MBT_02_cannon_ghex_F"
+        	"O_MRAP_02_F", // Unarmed
+        	"O_Quadbike_01_F",
+        	"I_Quadbike_01_F",
+        	"I_MRAP_03_F",
+        	"O_MRAP_02_F", // Unarmed
+        	"O_Quadbike_01_F",
+        	"I_Quadbike_01_F",
+        	"I_MRAP_03_F",
+        	"O_MRAP_02_F", // Unarmed
+        	"O_Quadbike_01_F",
+        	"I_Quadbike_01_F",
+        	"I_MRAP_03_F",
+        	"O_MRAP_02_F", // Unarmed
+        	"O_Quadbike_01_F",
+        	"I_Quadbike_01_F",
+        	"I_MRAP_03_F",
+        	"O_Truck_03_device_F", // Trucks
+        	"O_Truck_03_ammo_F",
+        	"O_Truck_03_medical_F",
+        	"O_Truck_03_repair_F",
+        	"O_Truck_03_transport_F",
+        	"O_Truck_03_covered_F",
+        	"I_Truck_02_ammo_F",
+        	"I_Truck_02_fuel_F",
+        	"I_Truck_02_medical_F",
+        	"I_Truck_02_box_F",
+        	"I_Truck_02_transport_F",
+        	"I_Truck_02_covered_F",
+        	"O_Truck_03_device_F", // Trucks
+        	"O_Truck_03_ammo_F",
+        	"O_Truck_03_medical_F",
+        	"O_Truck_03_repair_F",
+        	"O_Truck_03_transport_F",
+        	"O_Truck_03_covered_F",
+        	"I_Truck_02_ammo_F",
+        	"I_Truck_02_fuel_F",
+        	"I_Truck_02_medical_F",
+        	"I_Truck_02_box_F",
+        	"I_Truck_02_transport_F",
+        	"I_Truck_02_covered_F",
+        	"O_MRAP_02_gmg_F", // Cars with weapons
+        	"O_MRAP_02_hmg_F",
+        	"I_MRAP_03_gmg_F",
+        	"I_MRAP_03_hmg_F",
+        	"O_APC_Tracked_02_cannon_F", // Heavy armor
+        	"O_APC_Wheeled_02_rcws_v2_F",
+        	"O_MBT_02_cannon_F",
+        	"O_MBT_02_arty_F",
+        	"I_APC_Wheeled_03_cannon_F",
+        	"I_APC_tracked_03_cannon_F",
+        	"I_MBT_03_cannon_F",
+        	"I_Truck_02_MRL_F"
         ];
     };
     case 2: {
         drn_arr_Escape_MilitaryTraffic_EnemyVehicleClasses = [
-        	"O_T_MRAP_02_ghex_F", // Unarmed
-        	"O_T_Quadbike_01_ghex_F",
-        	"O_T_LSV_02_unarmed_F",
-        	"I_C_Van_01_transport_F",
-        	"I_C_Offroad_02_unarmed_F",
-        	"O_T_Truck_03_device_ghex_F", // Trucks
-        	"O_T_Truck_03_ammo_ghex_F",
-        	"O_T_Truck_03_fuel_ghex_F",
-        	"O_T_Truck_03_medical_ghex_F",
-        	"O_T_Truck_03_repair_ghex_F",
-        	"O_T_Truck_03_transport_ghex_F",
-        	"O_T_Truck_03_covered_ghex_F",
-        	"O_T_Truck_02_Ammo_F",
-        	"O_T_Truck_02_fuel_F",
-        	"O_T_Truck_02_Medical_F",
-        	"O_T_Truck_02_Box_F",
-        	"O_T_Truck_02_transport_F",
-        	"O_T_Truck_02_F",
-        	"O_T_MRAP_02_gmg_ghex_F", // Cars with weapons
-        	"O_T_MRAP_02_hmg_ghex_F",
-        	"O_T_LSV_02_AT_F",
-        	"O_T_LSV_02_armed_F",
-        	"I_C_Offroad_02_LMG_F",
-        	"I_C_Offroad_02_AT_F",
-        	"O_T_MRAP_02_gmg_ghex_F", // Cars with weapons
-        	"O_T_MRAP_02_hmg_ghex_F",
-        	"O_T_LSV_02_AT_F",
-        	"O_T_LSV_02_armed_F",
-        	"I_C_Offroad_02_LMG_F",
-        	"I_C_Offroad_02_AT_F",
-        	"O_T_APC_Tracked_02_AA_ghex_F", // Heavy armor
-        	"O_T_APC_Tracked_02_cannon_ghex_F",
-        	"O_T_APC_Wheeled_02_rcws_v2_ghex_F",
-        	"O_T_MBT_02_arty_ghex_F",
-        	"O_T_MBT_02_cannon_ghex_F"
+        	"O_MRAP_02_F", // Unarmed
+        	"O_Quadbike_01_F",
+        	"I_Quadbike_01_F",
+        	"I_MRAP_03_F",
+        	"O_MRAP_02_F", // Unarmed
+        	"O_Quadbike_01_F",
+        	"I_Quadbike_01_F",
+        	"I_MRAP_03_F",
+        	"O_MRAP_02_F", // Unarmed
+        	"O_Quadbike_01_F",
+        	"I_Quadbike_01_F",
+        	"I_MRAP_03_F",
+        	"O_MRAP_02_F", // Unarmed
+        	"O_Quadbike_01_F",
+        	"I_Quadbike_01_F",
+        	"I_MRAP_03_F",
+        	"O_Truck_03_device_F", // Trucks
+        	"O_Truck_03_ammo_F",
+        	"O_Truck_03_medical_F",
+        	"O_Truck_03_repair_F",
+        	"O_Truck_03_transport_F",
+        	"O_Truck_03_covered_F",
+        	"I_Truck_02_ammo_F",
+        	"I_Truck_02_fuel_F",
+        	"I_Truck_02_medical_F",
+        	"I_Truck_02_box_F",
+        	"I_Truck_02_transport_F",
+        	"I_Truck_02_covered_F",
+        	"O_Truck_03_device_F", // Trucks
+        	"O_Truck_03_ammo_F",
+        	"O_Truck_03_medical_F",
+        	"O_Truck_03_repair_F",
+        	"O_Truck_03_transport_F",
+        	"O_Truck_03_covered_F",
+        	"I_Truck_02_ammo_F",
+        	"I_Truck_02_fuel_F",
+        	"I_Truck_02_medical_F",
+        	"I_Truck_02_box_F",
+        	"I_Truck_02_transport_F",
+        	"I_Truck_02_covered_F",
+        	"O_MRAP_02_gmg_F", // Cars with weapons
+        	"O_MRAP_02_hmg_F",
+        	"I_MRAP_03_gmg_F",
+        	"I_MRAP_03_hmg_F",
+        	"O_MRAP_02_gmg_F", // Cars with weapons
+        	"O_MRAP_02_hmg_F",
+        	"I_MRAP_03_gmg_F",
+        	"I_MRAP_03_hmg_F",
+        	"O_APC_Tracked_02_cannon_F", // Heavy armor
+        	"O_APC_Wheeled_02_rcws_v2_F",
+        	"O_MBT_02_cannon_F",
+        	"O_MBT_02_arty_F",
+        	"I_APC_Wheeled_03_cannon_F",
+        	"I_APC_tracked_03_cannon_F",
+        	"I_MBT_03_cannon_F",
+        	"I_Truck_02_MRL_F"
         ];
     };
     default {
         drn_arr_Escape_MilitaryTraffic_EnemyVehicleClasses = [
-        	"O_T_MRAP_02_ghex_F", // Unarmed
-        	"O_T_Quadbike_01_ghex_F",
-        	"O_T_LSV_02_unarmed_F",
-        	"I_C_Van_01_transport_F",
-        	"I_C_Offroad_02_unarmed_F",
-        	"O_T_Truck_03_device_ghex_F", // Trucks
-        	"O_T_Truck_03_ammo_ghex_F",
-        	"O_T_Truck_03_fuel_ghex_F",
-        	"O_T_Truck_03_medical_ghex_F",
-        	"O_T_Truck_03_repair_ghex_F",
-        	"O_T_Truck_03_transport_ghex_F",
-        	"O_T_Truck_03_covered_ghex_F",
-        	"O_T_Truck_02_Ammo_F",
-        	"O_T_Truck_02_fuel_F",
-        	"O_T_Truck_02_Medical_F",
-        	"O_T_Truck_02_Box_F",
-        	"O_T_Truck_02_transport_F",
-        	"O_T_Truck_02_F",
-        	"O_T_MRAP_02_gmg_ghex_F", // Cars with weapons
-        	"O_T_MRAP_02_hmg_ghex_F",
-        	"O_T_LSV_02_AT_F",
-        	"O_T_LSV_02_armed_F",
-        	"I_C_Offroad_02_LMG_F",
-        	"I_C_Offroad_02_AT_F",
-        	"O_T_MRAP_02_gmg_ghex_F", // Cars with weapons
-        	"O_T_MRAP_02_hmg_ghex_F",
-        	"O_T_LSV_02_AT_F",
-        	"O_T_LSV_02_armed_F",
-        	"I_C_Offroad_02_LMG_F",
-        	"I_C_Offroad_02_AT_F",
-        	"O_T_APC_Tracked_02_AA_ghex_F", // Heavy armor
-        	"O_T_APC_Tracked_02_cannon_ghex_F",
-        	"O_T_APC_Wheeled_02_rcws_v2_ghex_F",
-        	"O_T_MBT_02_arty_ghex_F",
-        	"O_T_MBT_02_cannon_ghex_F",
-        	"O_T_APC_Tracked_02_AA_ghex_F", // Heavy armor
-        	"O_T_APC_Tracked_02_cannon_ghex_F",
-        	"O_T_APC_Wheeled_02_rcws_v2_ghex_F",
-        	"O_T_MBT_02_arty_ghex_F",
-        	"O_T_MBT_02_cannon_ghex_F"
+        	"O_MRAP_02_F", // Unarmed
+        	"O_Quadbike_01_F",
+        	"I_Quadbike_01_F",
+        	"I_MRAP_03_F",
+        	"O_MRAP_02_F", // Unarmed
+        	"O_Quadbike_01_F",
+        	"I_Quadbike_01_F",
+        	"I_MRAP_03_F",
+        	"O_Truck_03_device_F", // Trucks
+        	"O_Truck_03_ammo_F",
+        	"O_Truck_03_medical_F",
+        	"O_Truck_03_repair_F",
+        	"O_Truck_03_transport_F",
+        	"O_Truck_03_covered_F",
+        	"I_Truck_02_ammo_F",
+        	"I_Truck_02_fuel_F",
+        	"I_Truck_02_medical_F",
+        	"I_Truck_02_box_F",
+        	"I_Truck_02_transport_F",
+        	"I_Truck_02_covered_F",
+        	"O_MRAP_02_gmg_F", // Cars with weapons
+        	"O_MRAP_02_hmg_F",
+        	"I_MRAP_03_gmg_F",
+        	"I_MRAP_03_hmg_F",
+        	"O_APC_Tracked_02_cannon_F", // Heavy armor
+        	"O_APC_Wheeled_02_rcws_v2_F",
+        	"O_MBT_02_cannon_F",
+        	"O_MBT_02_arty_F",
+        	"I_APC_Wheeled_03_cannon_F",
+        	"I_APC_tracked_03_cannon_F",
+        	"I_MBT_03_cannon_F",
+        	"I_Truck_02_MRL_F"
         ];
     };
 };

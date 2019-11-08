@@ -237,6 +237,18 @@ drn_arr_Escape_AmmoDepot_StaticWeaponClasses = ["O_HMG_01_high_F"];
 drn_arr_Escape_AmmoDepot_ParkedVehicleClasses = [/* Unarmed */ "O_MRAP_02_F", "O_Quadbike_01_F", /* Unarmed */ "O_MRAP_02_F", "O_Quadbike_01_F", /* Unarmed */ "O_MRAP_02_F", "O_Quadbike_01_F", /* Armed */ "O_MRAP_02_gmg_F", "O_MRAP_02_hmg_F"];
 
 // The following arrays define weapons and ammo contained at the ammo depots
+
+drn_Escape_AmmoDepot_LauncherBoxClassName = "Box_East_WpsLaunch_F";
+
+drn_arr_Escape_AmmoDepot_OtherWeaponBoxesClassNames = [
+	"Box_East_Ammo_F",
+	"Box_East_Wps_F",
+	"Box_CSAT_Equip_F",
+	"Box_East_AmmoOrd_F",
+	"Box_East_Grenades_F",
+	"Box_East_WpsSpecial_F"
+];
+
 // Index 0: Weapon classname.
 // Index 1: Weapon's probability of presence (in percent, 0-100).
 // Index 2: If weapon exists, crate contains at minimum this number of weapons of current class.

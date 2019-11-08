@@ -12,10 +12,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={13754.193,22.515266,16740.182};
-		dir[]={-0.90723318,-0.37458608,-0.19143389};
-		up[]={-0.36652097,0.9271906,-0.077338964};
-		aside[]={-0.20646586,-1.5844125e-007,0.9784711};
+		pos[]={10829.977,24.7222,6416.0645};
+		dir[]={-0.0044495175,-0.99994999,0.0089553008};
+		up[]={-0.44493929,0.00999978,0.89550501};
+		aside[]={0.89554977,0,0.44496155};
 	};
 };
 binarizationWanted=0;
@@ -86,145 +86,144 @@ class Mission
 		class Item1
 		{
 			dataType="Marker";
-			position[]={7184.3608,-46.490234,23164.773};
+			position[]={7359.5913,-9.4818687,23159.42};
 			name="drn_Escape_ExtractionPos1";
 			type="Empty";
 			id=1;
-			atlOffset=-32.039497;
 		};
 		class Item2
 		{
 			dataType="Marker";
-			position[]={26941.416,59.402344,20600.074};
+			position[]={23136.389,30.015869,24319.98};
 			name="drn_Escape_ExtractionPos2";
 			type="Empty";
 			id=2;
-			atlOffset=59.043262;
+			atlOffset=40.875038;
 		};
 		class Item3
 		{
 			dataType="Marker";
-			position[]={25160.045,3.2473183,18799.145};
+			position[]={25752.363,1.2075195,19457.475};
 			name="drn_Escape_ExtractionPos3";
 			type="Empty";
 			id=3;
-			atlOffset=4.5254626;
+			atlOffset=9.8812523;
 		};
 		class Item4
 		{
 			dataType="Marker";
-			position[]={23059.357,46.735123,7008.3325};
+			position[]={22316.406,46.662731,8645.6777};
 			name="drn_Escape_ExtractionPos4";
 			type="Empty";
 			id=4;
-			atlOffset=27.387156;
+			atlOffset=63.519051;
 		};
 		class Item5
 		{
 			dataType="Marker";
-			position[]={18513.23,-31.805908,5791.3887};
+			position[]={16778.758,-10.202295,8932.501};
 			name="drn_Escape_ExtractionPos5";
 			type="Empty";
 			id=5;
-			atlOffset=28.088402;
 		};
 		class Item6
 		{
 			dataType="Marker";
-			position[]={10380.697,0,6121.0713};
+			position[]={10822.136,0,6416.8633};
 			name="drn_Escape_ExtractionPos6";
 			type="Empty";
 			id=6;
-			atlOffset=43.762882;
+			atlOffset=6.2151699;
 		};
 		class Item7
 		{
 			dataType="Marker";
-			position[]={2915.6821,34.649784,17685.475};
+			position[]={2916.52,-6.0253906,18200.98};
 			name="drn_Escape_ExtractionPos7";
 			type="Empty";
 			id=7;
+			atlOffset=1.1738515;
 		};
 		class Item8
 		{
 			dataType="Marker";
-			position[]={15153.32,-81.742996,24028.871};
+			position[]={14876.843,-5.5805664,23321.436};
 			name="drn_Escape_ExtractionPos8";
 			type="Empty";
 			id=8;
-			atlOffset=18.29744;
+			atlOffset=2.7077389;
 		};
 		class Item9
 		{
 			dataType="Marker";
-			position[]={6834.5034,42.074883,24114.092};
+			position[]={6959.5313,41.764648,24009.064};
 			name="drn_Escape_ExtracionBoatSpawnPos1";
 			type="Empty";
 			id=9;
-			atlOffset=189.63663;
+			atlOffset=177.23616;
 		};
 		class Item10
 		{
 			dataType="Marker";
-			position[]={27333.234,-33.27607,20050.773};
+			position[]={21806.924,-33.479187,24864.475};
 			name="drn_Escape_ExtracionBoatSpawnPos2";
 			type="Empty";
 			id=10;
-			atlOffset=98.489967;
+			atlOffset=149.4957;
 		};
 		class Item11
 		{
 			dataType="Marker";
-			position[]={25727.512,-89.09063,18289.672};
+			position[]={26736.354,-89.261475,19004.537};
 			name="drn_Escape_ExtracionBoatSpawnPos3";
 			type="Empty";
 			id=11;
-			atlOffset=29.36721;
+			atlOffset=64.418335;
 		};
 		class Item12
 		{
 			dataType="Marker";
-			position[]={23539.576,-64.272888,6598.5347};
+			position[]={23428.686,-64.565262,9162.3574};
 			name="drn_Escape_ExtracionBoatSpawnPos4";
 			type="Empty";
 			id=12;
-			atlOffset=50.158844;
+			atlOffset=117.80591;
 		};
 		class Item13
 		{
 			dataType="Marker";
-			position[]={17774.25,-100.85647,5241.042};
+			position[]={16019.533,-101.00269,7892.2388};
 			name="drn_Escape_ExtracionBoatSpawnPos5";
 			type="Empty";
 			id=13;
-			atlOffset=55.442635;
+			atlOffset=36.939713;
 		};
 		class Item14
 		{
 			dataType="Marker";
-			position[]={10273.021,116.68222,5633.4131};
+			position[]={10831.907,116.62354,5203.1519};
 			name="drn_Escape_ExtracionBoatSpawnPos6";
 			type="Empty";
 			id=14;
-			atlOffset=220.03546;
+			atlOffset=242.66705;
 		};
 		class Item15
 		{
 			dataType="Marker";
-			position[]={3050.9341,-53.080879,16655.057};
+			position[]={2062.3682,-53.318027,18191.113};
 			name="drn_Escape_ExtracionBoatSpawnPos7";
 			type="Empty";
 			id=15;
-			atlOffset=64.680702;
+			atlOffset=71.355225;
 		};
 		class Item16
 		{
 			dataType="Marker";
-			position[]={14675.79,37.358727,23621.012};
+			position[]={14762.4,34.300781,23318.674};
 			name="drn_Escape_ExtracionBoatSpawnPos8";
 			type="Empty";
 			id=16;
-			atlOffset=39.468784;
+			atlOffset=42.320412;
 		};
 		class Item17
 		{

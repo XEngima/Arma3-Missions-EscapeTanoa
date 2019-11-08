@@ -243,7 +243,6 @@ drn_Escape_AmmoDepot_LauncherBoxClassName = "Box_East_WpsLaunch_F";
 drn_arr_Escape_AmmoDepot_OtherWeaponBoxesClassNames = [
 	"Box_East_Ammo_F",
 	"Box_East_Wps_F",
-	"Box_CSAT_Equip_F",
 	"Box_East_AmmoOrd_F",
 	"Box_East_Grenades_F",
 	"Box_East_WpsSpecial_F"

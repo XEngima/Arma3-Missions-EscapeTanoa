@@ -208,33 +208,33 @@ drn_arr_Escape_ReinforcementTruck_vehicleClasses = ["Ural_INS", "UralOpen_INS"];
 drn_arr_Escape_ReinforcementTruck_vehicleClassesMaxCargo = [14, 14];
 
 // Random array. Motorized search groups are sometimes sent to look for you. This array contains possible class definitions for the vehicles.
-drn_arr_Escape_MotorizedSearchGroup_vehicleClasses = ["O_T_APC_Wheeled_02_rcws_v2_ghex_F", "O_T_APC_Tracked_02_cannon_ghex_F"];
+drn_arr_Escape_MotorizedSearchGroup_vehicleClasses = ["I_APC_tracked_03_cannon_F"];
 // Total cargo motorized search group vehicle. Each element corresponds to a vehicle (array element) in array drn_arr_Escape_MotorizedSearchGroup_vehicleClasses above.
-drn_arr_Escape_MotorizedSearchGroup_vehicleClassesMaxCargo = [8, 8];
+drn_arr_Escape_MotorizedSearchGroup_vehicleClassesMaxCargo = [8];
 
 // A communication center is guarded by vehicles depending on variable _enemyFrequency. 1 = a random light armor. 2 = a random heavy armor. 3 = a random 
 // light *and* a random heavy armor.
 
 // Random array. Light armored vehicles guarding the communication centers.
-drn_arr_ComCenDefence_lightArmorClasses = ["O_T_LSV_02_armed_F", "O_T_MRAP_02_hmg_ghex_F", "O_T_MRAP_02_gmg_ghex_F"];
+drn_arr_ComCenDefence_lightArmorClasses = ["O_MRAP_02_gmg_F", "O_MRAP_02_hmg_F"];
 // Random array. Heavy armored vehicles guarding the communication centers.
-drn_arr_ComCenDefence_heavyArmorClasses = ["O_T_APC_Wheeled_02_rcws_v2_ghex_F", "O_T_APC_Tracked_02_cannon_ghex_F", "O_T_MBT_02_cannon_ghex_F"];
+drn_arr_ComCenDefence_heavyArmorClasses = ["O_APC_Tracked_02_cannon_F", "O_APC_Wheeled_02_rcws_v2_F", "O_MBT_02_cannon_F"];
 
 // A communication center contains two static weapons (in two corners of the communication center).
 // Random array. Possible static weapon types for communication centers.
 drn_arr_ComCenStaticWeapons = ["O_HMG_01_high_F"];
 // A communication center have two parked and empty vehicles of the following possible types.
-drn_arr_ComCenParkedVehicles = ["O_T_MRAP_02_ghex_F", "O_T_Quadbike_01_ghex_F", "O_T_LSV_02_unarmed_F", "I_C_Van_02_vehicle_F", "I_C_Van_01_transport_F", "I_C_Van_02_transport_F", "I_C_Offroad_02_unarmed_F", "O_T_MRAP_02_ghex_F", "O_T_Quadbike_01_ghex_F", "O_T_LSV_02_unarmed_F", "I_C_Van_02_vehicle_F", "I_C_Van_01_transport_F", "I_C_Van_02_transport_F", "I_C_Offroad_02_unarmed_F", "O_T_MRAP_02_gmg_ghex_F", "O_T_MRAP_02_hmg_ghex_F", "O_T_LSV_02_AT_F", "O_T_LSV_02_armed_F", "I_C_Offroad_02_LMG_F", "I_C_Offroad_02_AT_F"];
+drn_arr_ComCenParkedVehicles = ["O_MRAP_02_F", "O_Quadbike_01_F", "O_MRAP_02_gmg_F", "O_MRAP_02_hmg_F"];
 
 // Random array. Enemies sometimes use civilian vehicles in their unconventional search for players. The following car types may be used.
 drn_arr_Escape_EnemyCivilianCarTypes = ["C_Offroad_01_F", "C_Hatchback_01_F", "C_Hatchback_01_sport_F", "C_SUV_01_F", "C_Offroad_01_F", "C_Hatchback_01_F", "C_Hatchback_01_sport_F", "C_SUV_01_F", "C_Van_01_transport_F"];
 
 // Vehicles, weapons and ammo at ammo depots
 
-// Random array. An ammo depot contains one static weapon of the followin types:
+// Random array. An ammo depot contains one static weapon of the following types:
 drn_arr_Escape_AmmoDepot_StaticWeaponClasses = ["O_HMG_01_high_F"];
 // An ammo depot have one parked and empty vehicle of the following possible types.
-drn_arr_Escape_AmmoDepot_ParkedVehicleClasses = ["O_T_MRAP_02_ghex_F", "O_T_Quadbike_01_ghex_F", "O_T_LSV_02_unarmed_F", "I_C_Van_02_vehicle_F", "I_C_Van_01_transport_F", "I_C_Van_02_transport_F", "I_C_Offroad_02_unarmed_F", "O_T_MRAP_02_ghex_F", "O_T_Quadbike_01_ghex_F", "O_T_LSV_02_unarmed_F", "I_C_Van_02_vehicle_F", "I_C_Van_01_transport_F", "I_C_Van_02_transport_F", "I_C_Offroad_02_unarmed_F", "O_T_MRAP_02_gmg_ghex_F", "O_T_MRAP_02_hmg_ghex_F", "O_T_LSV_02_AT_F", "O_T_LSV_02_armed_F", "I_C_Offroad_02_LMG_F", "I_C_Offroad_02_AT_F"];
+drn_arr_Escape_AmmoDepot_ParkedVehicleClasses = [/* Unarmed */ "O_MRAP_02_F", "O_Quadbike_01_F", /* Unarmed */ "O_MRAP_02_F", "O_Quadbike_01_F", /* Unarmed */ "O_MRAP_02_F", "O_Quadbike_01_F", /* Armed */ "O_MRAP_02_gmg_F", "O_MRAP_02_hmg_F"];
 
 // The following arrays define weapons and ammo contained at the ammo depots
 // Index 0: Weapon classname.

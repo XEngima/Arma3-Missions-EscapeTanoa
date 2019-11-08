@@ -265,6 +265,9 @@
                   <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="InitVillageMarkers.sqf" FileName="Scripts\DRN\VillageMarkers\InitVillageMarkers.sqf">
                     <SubNodes />
                   </ProjectNodeViewModel>
+                  <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="VillageMarkersAltis.sqf" FileName="Scripts\DRN\VillageMarkers\VillageMarkersAltis.sqf">
+                    <SubNodes />
+                  </ProjectNodeViewModel>
                   <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="VillageMarkersChernarus.sqf" FileName="Scripts\DRN\VillageMarkers\VillageMarkersChernarus.sqf">
                     <SubNodes />
                   </ProjectNodeViewModel>
@@ -284,6 +287,9 @@
                 <SubNodes />
               </ProjectNodeViewModel>
               <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="CivilEnemy.sqf" FileName="Scripts\Escape\CivilEnemy.sqf">
+                <SubNodes />
+              </ProjectNodeViewModel>
+              <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="CommunicationCenterMarkersAltis.sqf" FileName="Scripts\Escape\CommunicationCenterMarkersAltis.sqf">
                 <SubNodes />
               </ProjectNodeViewModel>
               <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="CommunicationCenterMarkersChernarus.sqf" FileName="Scripts\Escape\CommunicationCenterMarkersChernarus.sqf">

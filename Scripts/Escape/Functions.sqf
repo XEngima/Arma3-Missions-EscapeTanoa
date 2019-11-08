@@ -145,7 +145,7 @@ drn_fnc_Escape_FindGoodPos = {
             _roadSegments = _startPos nearRoads 12;
             
             if ((count _result > 0) && (count _roadSegments == 0) && (!surfaceIsWater _startPos)) then {
-                if (_startPos distance [10735,8511] < 5500) then {
+                if (worldName != "Tanoa" || _startPos distance [10735,8511] < 5500) then { // On Tanoa you do not want to start on any of the small westly islands.
 	                if (((nearestBuilding _startPos) distance _startPos) > 50) then {
 	                    _isOk = true;
 	                };

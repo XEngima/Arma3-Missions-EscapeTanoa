@@ -200,7 +200,7 @@ drn_arr_Escape_InfantryTypesCsatPacificEast = ["O_Soldier_A_F", "O_Soldier_AAR_F
 drn_arr_Escape_InfantryTypesCsatPacificViperEast = drn_arr_Escape_InfantryTypesCsatPacificEast;
 
 // Random array. A roadblock has a manned vehicle. This array contains possible manned vehicles (can be of any kind, like cars, armored and statics).
-drn_arr_Escape_RoadBlock_MannedVehicleTypes = ["O_T_MRAP_02_gmg_ghex_F", "O_T_MRAP_02_hmg_ghex_F", "O_T_LSV_02_AT_F", "O_T_LSV_02_armed_F", "I_C_Offroad_02_LMG_F", "I_C_Offroad_02_AT_F", "O_static_AT_F", "O_GMG_01_high_F", "O_HMG_01_F", "O_HMG_01_high_F"];
+drn_arr_Escape_RoadBlock_MannedVehicleTypes = ["I_MRAP_03_gmg_F", "I_MRAP_03_F", "I_MRAP_03_hmg_F", "I_HMG_01_high_F", "I_GMG_01_high_F", "I_MBT_03_cannon_F", "I_GMG_01_F"];
 
 // Random array. Vehicle classes (preferrably trucks) transporting enemy reinforcements.
 drn_arr_Escape_ReinforcementTruck_vehicleClasses = ["Ural_INS", "UralOpen_INS"];

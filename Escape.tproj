@@ -204,16 +204,6 @@
         <SubNodes>
           <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="DRN" FileName="Scripts\DRN">
             <SubNodes>
-              <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="AmbientInfantry" FileName="Scripts\DRN\AmbientInfantry">
-                <SubNodes>
-                  <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="AmbientInfantry.sqf" FileName="Scripts\DRN\AmbientInfantry\AmbientInfantry.sqf">
-                    <SubNodes />
-                  </ProjectNodeViewModel>
-                  <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="MoveInfantryGroup.sqf" FileName="Scripts\DRN\AmbientInfantry\MoveInfantryGroup.sqf">
-                    <SubNodes />
-                  </ProjectNodeViewModel>
-                </SubNodes>
-              </ProjectNodeViewModel>
               <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="CommonLib" FileName="Scripts\DRN\CommonLib">
                 <SubNodes>
                   <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="CommonLib.sqf" FileName="Scripts\DRN\CommonLib\CommonLib.sqf">

@@ -14,12 +14,12 @@ drn_var_enemySide = east;
 
 // Developer Variables
 
-_showIntro = true;
+_showIntro = false;
 
 // Debug Variables
 
-_showPlayerMapAndCompass = false;
-_playerIsImmortal = false; // Only works for unit p1
+_showPlayerMapAndCompass = true;
+_playerIsImmortal = true; // Only works for unit p1
 
 // Initialization
 
@@ -329,16 +329,6 @@ if (!isNull player) then {
 
         1 fadeSound _volume;
         
-        player unlinkItem "ItemGps";
-        player unlinkItem "NVGoggles";
-        player unlinkItem "NVGogglesB_blk_F";
-        player unlinkItem "NVGogglesB_grn_F";
-        player unlinkItem "NVGogglesB_gry_F";
-        removeBackpack player;
-        removeHeadgear player;
-        removeGoggles player;
-        removeAllItems player;
-        
         if (_showPlayerMapAndCompass) then {
             _marker = createMarkerLocal ["drn_startPosMarker", drn_startPos];
             _marker setMarkerType "mil_dot";
@@ -351,10 +341,18 @@ if (!isNull player) then {
             player addWeapon "ItemCompass";
         }
         else {
-            player unassignItem "ItemMap";
-            player removeItem "ItemMap";
-            player unassignItem "ItemCompass";
-            player removeItem "ItemCompass";
+	        player unlinkItem "ItemGps";
+	        player unlinkItem "NVGoggles";
+	        player unlinkItem "NVGogglesB_blk_F";
+	        player unlinkItem "NVGogglesB_grn_F";
+	        player unlinkItem "NVGogglesB_gry_F";
+	        removeBackpack player;
+	        removeHeadgear player;
+	        removeGoggles player;
+	        removeAllItems player;
+	        
+            player unlinkItem "ItemMap";
+            player unlinkItem "ItemCompass";
         };
 
         if (_showIntro && !_isJipPlayer) then {

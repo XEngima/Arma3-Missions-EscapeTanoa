@@ -7,22 +7,22 @@ private ["_forceComCentersApart", "_debugAmmoAndComPatrols", "_useCivilians", "_
 
 // Developer Variables
 
-_useRandomStartPos = true; // working
-_useEscapeSurprises = true; // partly working
-_useAmmoDepots = true; // working
-_useSearchLeader = true; // working
-_useMotorizedSearchGroup = true; // working
-_useVillagePatrols = true; // working
-_useMilitaryTraffic = true; // working
-_useAmbientInfantry = true; // working
-_useSearchChopper = true; // working
-_useRoadBlocks = true; // working
-_useCivilians = true; // working
+_useRandomStartPos = false;
+_useEscapeSurprises = false;
+_useAmmoDepots = false;
+_useSearchLeader = false;
+_useMotorizedSearchGroup = false;
+_useVillagePatrols = false;
+_useMilitaryTraffic = false;
+_useAmbientInfantry = true;
+_useSearchChopper = false;
+_useRoadBlocks = false;
+_useCivilians = false;
 
-_guardsExist = true;
-_comCenGuardsExist = true;
-_guardsAreArmed = true;
-_guardLivesLong = true;
+_guardsExist = false;
+_comCenGuardsExist = false;
+_guardsAreArmed = false;
+_guardLivesLong = false;
 
 _forceComCentersApart = true;
 drn_var_onlyPutComCentersOnFewPlaces = true;
@@ -34,7 +34,7 @@ _debugAmmoAndComPatrols = false;
 _debugSearchLeader = false;
 _debugVillagePatrols = false;
 _debugMilitaryTraffic = false;
-_debugAmbientInfantry = false;
+_debugAmbientInfantry = true;
 _debugGarbageCollector = false;
 _debugRoadBlocks = false;
 _debugCivilians = false;
@@ -583,6 +583,9 @@ if (_useMotorizedSearchGroup) then {
         _infantryGroupsCount = round (_groupsPerSqkm * _radius * _radius * 3.141592);
         _infantryGroupsCountViper = round (_groupsPerSqkmViper * _radius * _radius * 3.141592);
         
+        player sideChat "_radius: " + str _radius + ", _groupsPerSqkm: " + str _groupsPerSqkm + ", _infantryGroupsCount: " + str _infantryGroupsCount;
+        diag_log ("_radius: " + str _radius + ", _groupsPerSqkm: " + str _groupsPerSqkm + ", _infantryGroupsCount: " + str _infantryGroupsCount);
+        
         _minSkillViper = _enemyMinSkill + 0.2;
         _maxSkillViper = _enemyMaxSkill + 0.2;
         
@@ -606,14 +609,16 @@ if (_useMotorizedSearchGroup) then {
 			["BLACKLIST_MARKERS", []],
 			["ON_GROUP_CREATED", _fnc_OnSpawnAmbientInfantryGroup],
 			["ON_GROUP_REMOVED", {}],
-			["IN_DEBUG_MODE", _debugAmbientInfantry]
+			["IN_DEBUG_MODE", true]
 		];
+		
+		sleep 10;
 		
 		// Call the function that creates and starts the ambient infantry instance.
 		[_parameters] call Engima_AmbientInfantry_Classes_AmbientInfantry_CreateInstance;
         
         sleep 2;
-        
+/*        
 		_parameters = [
 			["SIDE", independent],
 			["UNIT_CLASSES", drn_arr_Escape_InfantryTypesCsatPacificViperEast],
@@ -633,7 +638,7 @@ if (_useMotorizedSearchGroup) then {
 		
 		// Call the function that creates and starts the ambient infantry instance.
 		[_parameters] call Engima_AmbientInfantry_Classes_AmbientInfantry_CreateInstance;
-        
+*/        
         sleep 0.25;
     };
     

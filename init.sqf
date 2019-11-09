@@ -262,7 +262,7 @@ if (!isNull player) then {
                 sleep 1.5;
                 ["<t size='0.8'>" + "Author of the very first Escape mission - ""Escape Chernarus"" (Arma 2)" + "</t>",0.02,0.2,2,-1,0,3011] spawn bis_fnc_dynamicText;
                 sleep 1.5;
-                ["<t size='0.8'>" + "proudly presents" + "</t>",0.02,0.3,2,-1,0,3012] spawn bis_fnc_dynamicText;
+                ["<t size='0.8'>" + "presents" + "</t>",0.02,0.3,2,-1,0,3012] spawn bis_fnc_dynamicText;
             };
             
             player setPos [(drn_startPos select 0) + (random 4) - 2, (drn_startPos select 1) + (random 6) - 3, 0];

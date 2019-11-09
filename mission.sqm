@@ -49,9 +49,15 @@ randomSeed=6746835;
 class ScenarioData
 {
 	author="Engima";
+	overviewText="Captured behind enemy lines. Take the first opportunity to escape and find a way back to your allies.";
+	overviewTextLocked="Captured behind enemy lines. Take the first opportunity to escape and find a way back to your allies.";
 	overViewPicture="Escape.jpg";
 	overViewPictureLocked="Escape.jpg";
+	onLoadMission="Captured behind enemy lines. Take the first opportunity to escape and find a way back to your allies.";
 	loadScreen="Escape.jpg";
+	showGPS=0;
+	showUAVFeed=0;
+	saving=0;
 	disabledAI=1;
 	joinUnassigned=0;
 	class Header
@@ -220,6 +226,8 @@ class Mission
 	class Intel
 	{
 		briefingName="ESCAPE ALTIS BY ENGIMA";
+		resistanceWest=0;
+		resistanceEast=1;
 		timeOfChanges=1800.0002;
 		startWeather=0.75216275;
 		startWind=0.1;

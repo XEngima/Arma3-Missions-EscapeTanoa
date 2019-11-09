@@ -323,7 +323,7 @@ if (!isNull player) then {
             sleep 1;
         };
         
-        enableRadio true;
+        //enableRadio true;
 
         // Set position again (a fix for the bug that makes players run away after server restart and before fence is built by server)
         //player setPos [(drn_startPos select 0) + (random 4) - 2, (drn_startPos select 1) + (random 6) - 3, 0];

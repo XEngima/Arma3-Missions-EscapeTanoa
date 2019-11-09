@@ -7,22 +7,22 @@ private ["_forceComCentersApart", "_debugAmmoAndComPatrols", "_useCivilians", "_
 
 // Developer Variables
 
-_useRandomStartPos = false;
-_useEscapeSurprises = false;
-_useAmmoDepots = false;
-_useSearchLeader = false;
-_useMotorizedSearchGroup = false;
-_useVillagePatrols = false;
-_useMilitaryTraffic = false;
+_useRandomStartPos = true;
+_useEscapeSurprises = true;
+_useAmmoDepots = true;
+_useSearchLeader = true;
+_useMotorizedSearchGroup = true;
+_useVillagePatrols = true;
+_useMilitaryTraffic = true;
 _useAmbientInfantry = true;
-_useSearchChopper = false;
-_useRoadBlocks = false;
-_useCivilians = false;
+_useSearchChopper = true;
+_useRoadBlocks = true;
+_useCivilians = true;
 
-_guardsExist = false;
-_comCenGuardsExist = false;
-_guardsAreArmed = false;
-_guardLivesLong = false;
+_guardsExist = true;
+_comCenGuardsExist = true;
+_guardsAreArmed = true;
+_guardLivesLong = true;
 
 _forceComCentersApart = true;
 drn_var_onlyPutComCentersOnFewPlaces = true;
@@ -34,7 +34,7 @@ _debugAmmoAndComPatrols = false;
 _debugSearchLeader = false;
 _debugVillagePatrols = false;
 _debugMilitaryTraffic = false;
-_debugAmbientInfantry = true;
+_debugAmbientInfantry = false;
 _debugGarbageCollector = false;
 _debugRoadBlocks = false;
 _debugCivilians = false;
@@ -519,34 +519,10 @@ if (_useMotorizedSearchGroup) then {
 
         _fnc_OnSpawnAmbientInfantryGroup = {
         	params ["_group"];
-            private ["_unit", "_enemyUnit", "_i"];
-            private ["_scriptHandle"];
-            
-            scopeName "main";
-            
-            _unit = (units _group) select 0;
             
             {
             	_x call drn_fnc_Escape_OnSpawnGeneralSoldierUnit;
             } foreach units _group;
-            
-            while {!(isNull _unit)} do
-            {
-                _enemyUnit = _unit findNearestEnemy (getPos _unit);
-                
-                if (!(isNull _enemyUnit)) then {
-                    
-                    for [{_i = (count waypoints _group) - 1}, {_i >= 0}, {_i = _i - 1}] do {
-                        deleteWaypoint [_group, _i];
-                    };
-                    
-                    _scriptHandle = [_group, drn_searchAreaMarkerName, (getPos _enemyUnit), drn_var_Escape_DebugSearchGroup] execVM "Engima\SearchPatrol\SearchPatrol.sqf";
-                    _group setVariable ["drn_scriptHandle", _scriptHandle];
-                    breakOut "main";
-                };
-                
-                sleep 5;
-            };
         };
         
         private ["_infantryGroupsCount", "_infantryGroupsCountViper", "_radius", "_groupsPerSqkm", "_groupsPerSqkmViper", "_minSkillViper", "_maxSkillViper"];
@@ -558,7 +534,7 @@ if (_useMotorizedSearchGroup) then {
                 _minEnemiesPerGroup = 2;
                 _maxEnemiesPerGroup = 4;
                 
-                _groupsPerSqkm = 0.9;
+                _groupsPerSqkm = 0.7;
                 _groupsPerSqkmViper = 0.1;
             };
             case 2: // 3-5 players
@@ -566,7 +542,7 @@ if (_useMotorizedSearchGroup) then {
                 _minEnemiesPerGroup = 2;
                 _maxEnemiesPerGroup = 7;
                 
-                _groupsPerSqkm = 1.05;
+                _groupsPerSqkm = 0.9;
                 _groupsPerSqkmViper = 0.15;
             };
             default // 6-8 players
@@ -574,7 +550,7 @@ if (_useMotorizedSearchGroup) then {
                 _minEnemiesPerGroup = 3;
                 _maxEnemiesPerGroup = 10;
                 
-                _groupsPerSqkm = 1.2;
+                _groupsPerSqkm = 1.1;
                 _groupsPerSqkmViper = 0.2;
             };
         };
@@ -592,8 +568,39 @@ if (_useMotorizedSearchGroup) then {
         if (_minSkillViper > 1) then { _minSkillViper = 1; };
         if (_maxSkillViper > 1) then { _maxSkillViper = 1; };
         
-        //[_playerGroup, drn_var_enemySide, drn_arr_Escape_InfantryTypesBanditsGuer, _infantryGroupsCount, _enemySpawnDistance + 200, _enemySpawnDistance + 500, _minEnemiesPerGroup, _maxEnemiesPerGroup, _enemyMinSkill, _enemyMaxSkill, 750, drn_fnc_Escape_OnSpawnGeneralSoldierUnit, _fnc_OnSpawnAmbientInfantryGroup, _debugAmbientInfantry] execVM "Scripts\DRN\AmbientInfantry\AmbientInfantry.sqf";
-        //[_playerGroup, drn_var_enemySide, drn_arr_Escape_InfantryTypesCsatPacificViperEast, _infantryGroupsCountViper, _enemySpawnDistance + 200, _enemySpawnDistance + 500, _minEnemiesPerGroup, _maxEnemiesPerGroup, _minSkillViper, _maxSkillViper, 750, drn_fnc_Escape_OnSpawnGeneralSoldierUnit, _fnc_OnSpawnAmbientInfantryGroup, _debugAmbientInfantry] execVM "Scripts\DRN\AmbientInfantry\AmbientInfantry.sqf";
+        private _fnc_OnCheckReleaseAmbientInfantryGroup = {
+        	params ["_group", "_groupsCount"];
+        	
+        	scopeName "main";
+        	
+        	private _unit = (units _group) select 0;
+            private _enemyUnit = _unit findNearestEnemy (getPos _unit);
+            
+            if (!isNull _enemyUnit) then
+            {
+            	_group setVariable ["NearestEnemyUnit", _enemyUnit];
+            	player sideChat "Ambient infantry releasing!";
+            	true breakOut "main";
+            };
+            
+            false
+        };
+        
+        private _fnc_OnReleasedAmbientInfantryGroup = {
+        	params ["_group", "_groupsCount"];
+        	private ["_i", "_enemyUnit"];
+        	
+            for [{_i = (count waypoints _group) - 1}, {_i >= 0}, {_i = _i - 1}] do {
+                deleteWaypoint [_group, _i];
+            };
+            
+            _enemyUnit = _group getVariable ["NearestEnemyUnit", objNull];
+            
+            if (!isNull _enemyUnit) then {
+	            [_group, drn_searchAreaMarkerName, (getPos _enemyUnit), drn_var_Escape_DebugSearchGroup] execVM "Engima\SearchPatrol\SearchPatrol.sqf";
+	        	player sideChat "Ambient infantry released!";
+            };
+        };
         
 		private _parameters = [
 			["SIDE", independent],
@@ -609,7 +616,9 @@ if (_useMotorizedSearchGroup) then {
 			["BLACKLIST_MARKERS", []],
 			["ON_GROUP_CREATED", _fnc_OnSpawnAmbientInfantryGroup],
 			["ON_GROUP_REMOVED", {}],
-			["IN_DEBUG_MODE", true]
+			["ON_CHECK_RELEASE_GROUP", _fnc_OnCheckReleaseAmbientInfantryGroup],
+			["ON_GROUP_RELEASED", _fnc_OnReleasedAmbientInfantryGroup],
+			["IN_DEBUG_MODE", _debugAmbientInfantry]
 		];
 		
 		sleep 10;
@@ -618,7 +627,7 @@ if (_useMotorizedSearchGroup) then {
 		[_parameters] call Engima_AmbientInfantry_Classes_AmbientInfantry_CreateInstance;
         
         sleep 2;
-/*        
+        
 		_parameters = [
 			["SIDE", independent],
 			["UNIT_CLASSES", drn_arr_Escape_InfantryTypesCsatPacificViperEast],
@@ -633,12 +642,14 @@ if (_useMotorizedSearchGroup) then {
 			["BLACKLIST_MARKERS", []],
 			["ON_GROUP_CREATED", _fnc_OnSpawnAmbientInfantryGroup],
 			["ON_GROUP_REMOVED", {}],
+			["ON_CHECK_RELEASE_GROUP", _fnc_OnCheckReleaseAmbientInfantryGroup],
+			["ON_GROUP_RELEASED", _fnc_OnReleasedAmbientInfantryGroup],
 			["IN_DEBUG_MODE", _debugAmbientInfantry]
 		];
 		
 		// Call the function that creates and starts the ambient infantry instance.
 		[_parameters] call Engima_AmbientInfantry_Classes_AmbientInfantry_CreateInstance;
-*/        
+
         sleep 0.25;
     };
     

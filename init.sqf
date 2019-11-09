@@ -7,6 +7,7 @@ call compile preprocessFileLineNumbers "Engima\Traffic\Init.sqf"; // Added by En
 call compile preprocessFileLineNumbers "Engima\PatrolledAreas\Init.sqf"; // Added by Engima.PatrolledAreas
 call compile preprocessFileLineNumbers "Scripts\DRN\CommonLib\CommonLib.sqf";
 call compile preprocessFileLineNumbers "Engima\CommonLib\CommonLib.sqf"; // Added by Engima.CommonLib
+
 private ["_volume", "_showIntro", "_showPlayerMapAndCompass", "_fog", "_playerIsImmortal", "_playersEnteredWorld"];
 
 drn_var_playerSide = west;
@@ -14,12 +15,12 @@ drn_var_enemySide = east;
 
 // Developer Variables
 
-_showIntro = false;
+_showIntro = true;
 
 // Debug Variables
 
-_showPlayerMapAndCompass = true;
-_playerIsImmortal = true; // Only works for unit p1
+_showPlayerMapAndCompass = false;
+_playerIsImmortal = false; // Only works for unit p1
 
 // Initialization
 
@@ -253,52 +254,15 @@ if (!isNull player) then {
             else {
                 player setPos [(drn_startPos select 0) + (random 4) - 2, (drn_startPos select 1) + (random 6) - 3, 0];
             };
-
-/*
-            [] spawn {
-                private ["_marker"];
-                
-                // Communication center markers
-                waitUntil {!isNil "drn_var_Escape_communicationCenterPositions"};
-                
-                for "_i" from 0 to (count drn_var_Escape_communicationCenterPositions) - 1 do {
-                    _marker = createMarkerLocal ["drn_Escape_ComCenJipMarker" + str _i, (drn_var_Escape_communicationCenterPositions select _i)];
-                    _marker setMarkerTypeLocal "mil_flag";
-                };
-                
-                // Ammo depot markers
-                waitUntil {!isNil "drn_var_Escape_ammoDepotPositions"};
-                
-                for "_i" from 0 to (count drn_var_Escape_ammoDepotPositions) - 1 do {
-                    _marker = createMarkerLocal ["drn_Escape_AmmoDepotJipMarker" + str _i, (drn_var_Escape_ammoDepotPositions select _i)];
-                    _marker setMarkerTypeLocal "Depot";
-                };
-                
-                // Extraction marker
-                if (!isNil "drn_var_Escape_ExtractionMarkerPos") then {
-                    _marker = createMarkerLocal ["drn_visibleGoalJipMarker", drn_var_Escape_ExtractionMarkerPos];
-                    _marker setMarkerTypeLocal "Faction_US";
-                };
-            };
-*/
         }
         else {
             sleep 1;
             if (_showIntro) then {
-/*
-			    [
-			    	[
-			    		["CAMP ROGAIN,", "<t align = 'center' shadow = '1' size = '0.7' font='PuristaBold'>%1</t>"],
-			    		["RESUPPLY POINT", "<t align = 'center' shadow = '1' size = '0.7'>%1</t><br/>"],
-			    		["10 MINUTES LATER ...", "<t align = 'center' shadow = '1' size = '1.0'>%1</t>", 15]
-			    	]
-			    ] spawn BIS_fnc_typeText;
-*/			    
-                ["<t size='0.9'>" + "Engima" + "</t>",0.02,0.1,2,-1,0,3010] spawn bis_fnc_dynamicText;
+                ["<t size='0.8'>" + "Engima" + "</t>",0.02,0.1,2,-1,0,3010] spawn bis_fnc_dynamicText;
                 sleep 1.5;
-                ["<t size='0.7'>" + "Author of the very first Escape mission - ""Escape Chernarus"" (Arma 2)" + "</t>",0.02,0.2,2,-1,0,3011] spawn bis_fnc_dynamicText;
+                ["<t size='0.8'>" + "Author of the very first Escape mission - ""Escape Chernarus"" (Arma 2)" + "</t>",0.02,0.2,2,-1,0,3011] spawn bis_fnc_dynamicText;
                 sleep 1.5;
-                ["<t size='0.9'>" + "proudly presents" + "</t>",0.02,0.3,2,-1,0,3012] spawn bis_fnc_dynamicText;
+                ["<t size='0.8'>" + "proudly presents" + "</t>",0.02,0.3,2,-1,0,3012] spawn bis_fnc_dynamicText;
             };
             
             player setPos [(drn_startPos select 0) + (random 4) - 2, (drn_startPos select 1) + (random 6) - 3, 0];

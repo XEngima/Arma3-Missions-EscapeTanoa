@@ -13,9 +13,9 @@ class EditorData
 	class Camera
 	{
 		pos[]={13736.588,21.315327,16704.563};
-		dir[]={0.46154034,-0.27579644,-0.84325916};
-		up[]={0.13243209,0.96120971,-0.24196324};
-		aside[]={-0.87728012,4.2468309e-007,-0.48015893};
+		dir[]={-0.045237679,-0.067334019,0.99679327};
+		up[]={-0.0030540321,0.99772769,0.067323714};
+		aside[]={0.99906182,1.4660236e-007,0.045339003};
 	};
 };
 binarizationWanted=0;
@@ -49,16 +49,182 @@ randomSeed=6746835;
 class ScenarioData
 {
 	author="Engima";
+	overViewPicture="Escape.jpg";
+	overViewPictureLocked="Escape.jpg";
+	loadScreen="Escape.jpg";
+	disabledAI=1;
+	joinUnassigned=0;
+	class Header
+	{
+		gameType="Coop";
+		minPlayers=1;
+		maxPlayers=8;
+	};
+};
+class CustomAttributes
+{
+	class Category0
+	{
+		name="Multiplayer";
+		class Attribute0
+		{
+			property="ReviveForceRespawnDelay";
+			expression="false";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"SCALAR"
+						};
+					};
+					value=10;
+				};
+			};
+		};
+		class Attribute1
+		{
+			property="ReviveBleedOutDelay";
+			expression="false";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"SCALAR"
+						};
+					};
+					value=300;
+				};
+			};
+		};
+		class Attribute2
+		{
+			property="ReviveDelay";
+			expression="false";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"SCALAR"
+						};
+					};
+					value=20.563976;
+				};
+			};
+		};
+		class Attribute3
+		{
+			property="ReviveMedicSpeedMultiplier";
+			expression="false";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"SCALAR"
+						};
+					};
+					value=3;
+				};
+			};
+		};
+		class Attribute4
+		{
+			property="RespawnTemplates";
+			expression="true";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"ARRAY"
+						};
+					};
+					class value
+					{
+						items=2;
+						class Item0
+						{
+							class data
+							{
+								class type
+								{
+									type[]=
+									{
+										"STRING"
+									};
+								};
+								value="EndMission";
+							};
+						};
+						class Item1
+						{
+							class data
+							{
+								class type
+								{
+									type[]=
+									{
+										"STRING"
+									};
+								};
+								value="None";
+							};
+						};
+					};
+				};
+			};
+		};
+		class Attribute5
+		{
+			property="ReviveMode";
+			expression="false";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"SCALAR"
+						};
+					};
+					value=1;
+				};
+			};
+		};
+		nAttributes=6;
+	};
 };
 class Mission
 {
+	assetType="Free";
 	class Intel
 	{
+		briefingName="ESCAPE ALTIS BY ENGIMA";
 		timeOfChanges=1800.0002;
-		startWeather=0.30000001;
+		startWeather=0.75216275;
 		startWind=0.1;
 		startWaves=0.1;
-		forecastWeather=0.30000001;
+		forecastWeather=0.75;
 		forecastWind=0.1;
 		forecastWaves=0.1;
 		forecastLightnings=0.1;

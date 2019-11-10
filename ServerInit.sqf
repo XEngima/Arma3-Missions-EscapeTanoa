@@ -390,8 +390,12 @@ if (_useAmmoDepots) then {
 // Initialize search leader
 if (_useSearchLeader) then
 {
-	sleep 5;
-    [drn_searchAreaMarkerName, _debugSearchLeader] execVM "Scripts\Escape\SearchLeader.sqf";
+	[_debugSearchLeader] spawn {
+		params ["_debugSearchLeader"];
+		
+		sleep 5;
+	    [drn_searchAreaMarkerName, _debugSearchLeader] execVM "Scripts\Escape\SearchLeader.sqf";
+	};
 };
 
 // Create motorized search group

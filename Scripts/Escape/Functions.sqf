@@ -145,7 +145,7 @@ drn_fnc_Escape_FindGoodPos = {
             _roadSegments = _startPos nearRoads 12;
             
             if ((count _result > 0) && (count _roadSegments == 0) && (!surfaceIsWater _startPos)) then {
-                if (_startPos distance [10735,8511] < 5500) then {
+                if (worldName != "Tanoa" || _startPos distance [10735,8511] < 5500) then { // On Tanoa you do not want to start on any of the small westly islands.
 	                if (((nearestBuilding _startPos) distance _startPos) > 50) then {
 	                    _isOk = true;
 	                };
@@ -462,27 +462,14 @@ drn_fnc_Escape_BuildAmmoDepot = {
     //private ["_weapons", "_weaponMagazines", "_box", "_weaponCount"];
 
 	// Weapon boxes
+	drn_Escape_AmmoDepot_LauncherBoxClassName createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
 	
-	"Box_East_WpsLaunch_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
-	
-	if (random 100 < 75) then {
-		"Box_East_Ammo_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
-	};
-	if (random 100 < 75) then {
-		"Box_East_Wps_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
-	};
-	if (random 100 < 75) then {
-		"Box_CSAT_Equip_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
-	};
-	if (random 100 < 75) then {
-		"Box_East_AmmoOrd_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
-	};
-	if (random 100 < 75) then {
-		"Box_East_Grenades_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
-	};
-	if (random 100 < 75) then {
-		"Box_East_WpsSpecial_F" createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
-	};
+	// Other weapon boxes
+	{
+		if (random 100 < 75) then {
+			_x createVehicle [(_middlePos select 0) - 2.5 + random 5, (_middlePos select 1) - 2.5 + random 5, 0];
+		};
+	} foreach drn_arr_Escape_AmmoDepot_OtherWeaponBoxesClassNames;
 
 /*
     // Basic Weapon Box

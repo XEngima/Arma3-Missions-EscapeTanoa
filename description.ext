@@ -6,12 +6,11 @@ class Header
   maxPlayers = 8;
 };
 
-onLoadMission = "ESCAPE TANOA BY ENGIMA 2.0";
+onLoadMission = "ESCAPE TANOA 2.1 BY ENGIMA";
 OnLoadMissionTime = FALSE;
 
 overviewText = "Captured behind enemy lines!";
 overviewTextLocked = "Take the first opportunity to escape and find a way back to your allies.";
-overviewPicture = "Escape.jpg";
 author = "Engima";
 
 disabledAI = 1;

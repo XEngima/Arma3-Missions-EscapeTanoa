@@ -1,0 +1,17 @@
+drn_arr_communicationCenterMarkers = [];
+drn_arr_communicationCenterMarkers set [0, [[6003.54,12598.3,0], 310.505, "RECTANGLE", [20,20]]];
+drn_arr_communicationCenterMarkers set [1, [[7225.57,14157.3,0], 350.399, "RECTANGLE", [20,20]]];
+drn_arr_communicationCenterMarkers set [2, [[12331.1,17726.6,0], 63.56, "RECTANGLE", [20,20]]];
+drn_arr_communicationCenterMarkers set [3, [[6560.77,20143.4,0], 179.707, "RECTANGLE", [20,20]]];
+drn_arr_communicationCenterMarkers set [4, [[9172.13,21599.2,0], 57.235, "RECTANGLE", [20,20]]];
+drn_arr_communicationCenterMarkers set [5, [[15643.6,19794,0], 147.381, "RECTANGLE", [20,20]]];
+drn_arr_communicationCenterMarkers set [6, [[15387.7,19211.9,0], 143.76, "RECTANGLE", [20,20]]];
+drn_arr_communicationCenterMarkers set [7, [[20342.6,18377.3,0], 319.086, "RECTANGLE", [20,20]]];
+drn_arr_communicationCenterMarkers set [8, [[23774.4,21838.8,0], 330.665, "RECTANGLE", [20,20]]];
+drn_arr_communicationCenterMarkers set [9, [[21473,10945.6,0], 9.403, "RECTANGLE", [20,20]]];
+drn_arr_communicationCenterMarkers set [10, [[16671.7,10923.4,0], 137.01, "RECTANGLE", [20,20]]];
+drn_arr_communicationCenterMarkers set [11, [[19611.3,8490.16,0], 159.59, "RECTANGLE", [20,20]]];
+drn_arr_communicationCenterMarkers set [12, [[11595.3,13009,0], 232.321, "RECTANGLE", [20,20]]];
+drn_arr_communicationCenterMarkers set [13, [[17565.8,15449.8,0], 180, "RECTANGLE", [20,20]]];
+drn_arr_communicationCenterMarkers set [14, [[10520.8,8127.19,0], 131.376, "RECTANGLE", [20,20]]];
+drn_arr_communicationCenterMarkers set [15, [[21588.7,13532.9,0], 103.259, "RECTANGLE", [20,20]]];

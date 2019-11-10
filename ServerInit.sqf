@@ -7,25 +7,25 @@ private ["_forceComCentersApart", "_debugAmmoAndComPatrols", "_useCivilians", "_
 
 // Developer Variables
 
-_useRandomStartPos = false;
-_useEscapeSurprises = false;
-_useAmmoDepots = false;
-_useSearchLeader = false;
-_useMotorizedSearchGroup = false;
-_useVillagePatrols = false;
-_useMilitaryTraffic = false;
-_useAmbientInfantry = false;
-_useSearchChopper = false;
-_useRoadBlocks = false;
-_useCivilians = false;
+_useRandomStartPos = true;
+_useEscapeSurprises = true;
+_useAmmoDepots = true;
+_useSearchLeader = true;
+_useMotorizedSearchGroup = true;
+_useVillagePatrols = true;
+_useMilitaryTraffic = true;
+_useAmbientInfantry = true;
+_useSearchChopper = true;
+_useRoadBlocks = true;
+_useCivilians = true;
 
 _guardsExist = true;
-_comCenGuardsExist = false;
-_guardsAreArmed = false;
-_guardLivesLong = false;
+_comCenGuardsExist = true;
+_guardsAreArmed = true;
+_guardLivesLong = true;
 
-_forceComCentersApart = false;
-drn_var_onlyPutComCentersOnFewPlaces = false;
+_forceComCentersApart = true;
+drn_var_onlyPutComCentersOnFewPlaces = true;
 
 // Debug Variables
 

@@ -231,7 +231,7 @@ drn_arr_ComCenDefence_heavyArmorClasses = ["O_T_APC_Wheeled_02_rcws_v2_ghex_F", 
 // Random array. Possible static weapon types for communication centers.
 drn_arr_ComCenStaticWeapons = ["O_HMG_01_high_F"];
 // A communication center have two parked and empty vehicles of the following possible types.
-drn_arr_ComCenParkedVehicles = ["O_T_MRAP_02_ghex_F", "O_T_Quadbike_01_ghex_F", "O_T_LSV_02_unarmed_F", "I_C_Van_02_vehicle_F", "I_C_Van_01_transport_F", "I_C_Van_02_transport_F", "I_C_Offroad_02_unarmed_F", "O_T_MRAP_02_ghex_F", "O_T_Quadbike_01_ghex_F", "O_T_LSV_02_unarmed_F", "I_C_Van_02_vehicle_F", "I_C_Van_01_transport_F", "I_C_Van_02_transport_F", "I_C_Offroad_02_unarmed_F", "O_T_MRAP_02_gmg_ghex_F", "O_T_MRAP_02_hmg_ghex_F", "O_T_LSV_02_AT_F", "O_T_LSV_02_armed_F", "I_C_Offroad_02_LMG_F", "I_C_Offroad_02_AT_F"];
+drn_arr_ComCenParkedVehicles = ["O_T_MRAP_02_ghex_F", "O_T_Quadbike_01_ghex_F", "O_T_LSV_02_unarmed_F", "I_C_Van_01_transport_F", "I_C_Offroad_02_unarmed_F", "O_T_MRAP_02_ghex_F", "O_T_Quadbike_01_ghex_F", "O_T_LSV_02_unarmed_F", "I_C_Van_01_transport_F", "I_C_Offroad_02_unarmed_F", "O_T_MRAP_02_gmg_ghex_F", "O_T_MRAP_02_hmg_ghex_F", "O_T_LSV_02_AT_F", "O_T_LSV_02_armed_F", "I_C_Offroad_02_LMG_F", "I_C_Offroad_02_AT_F"];
 
 // Random array. Enemies sometimes use civilian vehicles in their unconventional search for players. The following car types may be used.
 drn_arr_Escape_EnemyCivilianCarTypes = ["C_Offroad_01_F", "C_Hatchback_01_F", "C_Hatchback_01_sport_F", "C_SUV_01_F", "C_Offroad_01_F", "C_Hatchback_01_F", "C_Hatchback_01_sport_F", "C_SUV_01_F", "C_Van_01_transport_F"];
@@ -241,7 +241,7 @@ drn_arr_Escape_EnemyCivilianCarTypes = ["C_Offroad_01_F", "C_Hatchback_01_F", "C
 // Random array. An ammo depot contains one static weapon of the followin types:
 drn_arr_Escape_AmmoDepot_StaticWeaponClasses = ["O_HMG_01_high_F"];
 // An ammo depot have one parked and empty vehicle of the following possible types.
-drn_arr_Escape_AmmoDepot_ParkedVehicleClasses = ["O_T_MRAP_02_ghex_F", "O_T_Quadbike_01_ghex_F", "O_T_LSV_02_unarmed_F", "I_C_Van_02_vehicle_F", "I_C_Van_01_transport_F", "I_C_Van_02_transport_F", "I_C_Offroad_02_unarmed_F", "O_T_MRAP_02_ghex_F", "O_T_Quadbike_01_ghex_F", "O_T_LSV_02_unarmed_F", "I_C_Van_02_vehicle_F", "I_C_Van_01_transport_F", "I_C_Van_02_transport_F", "I_C_Offroad_02_unarmed_F", "O_T_MRAP_02_gmg_ghex_F", "O_T_MRAP_02_hmg_ghex_F", "O_T_LSV_02_AT_F", "O_T_LSV_02_armed_F", "I_C_Offroad_02_LMG_F", "I_C_Offroad_02_AT_F"];
+drn_arr_Escape_AmmoDepot_ParkedVehicleClasses = ["O_T_MRAP_02_ghex_F", "O_T_Quadbike_01_ghex_F", "O_T_LSV_02_unarmed_F", "I_C_Van_01_transport_F", "I_C_Offroad_02_unarmed_F", "O_T_MRAP_02_ghex_F", "O_T_Quadbike_01_ghex_F", "O_T_LSV_02_unarmed_F", "I_C_Van_01_transport_F", "I_C_Offroad_02_unarmed_F", "O_T_MRAP_02_gmg_ghex_F", "O_T_MRAP_02_hmg_ghex_F", "O_T_LSV_02_AT_F", "O_T_LSV_02_armed_F", "I_C_Offroad_02_LMG_F", "I_C_Offroad_02_AT_F"];
 
 // The following arrays define weapons and ammo contained at the ammo depots
 

@@ -11,7 +11,6 @@ OnLoadMissionTime = FALSE;
 
 overviewText = "Captured behind enemy lines!";
 overviewTextLocked = "Take the first opportunity to escape and find a way back to your allies.";
-overviewPicture = "Escape.jpg";
 author = "Engima";
 
 disabledAI = 1;

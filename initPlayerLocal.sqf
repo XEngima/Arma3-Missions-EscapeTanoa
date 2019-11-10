@@ -1,5 +1,7 @@
 // Stop players' characters from calling out orders (that can reveal directions and positions).
 
+waitUntil { !isNull player };
+
 0 fadeRadio 0;
 enableRadio false;
 enableSentences false;

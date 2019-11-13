@@ -6,7 +6,10 @@ class Header
   maxPlayers = 8;
 };
 
-onLoadMission = "ESCAPE ALTIS 2.1 BY ENGIMA";
+respawn = "BASE";
+respawnButton = 0;
+
+onLoadMission = "ESCAPE ALTIS 2.2 BY ENGIMA";
 OnLoadMissionTime = FALSE;
 
 overviewText = "Captured behind enemy lines!";

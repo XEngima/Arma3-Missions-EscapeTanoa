@@ -8,7 +8,11 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=143;
+		nextID=144;
+	};
+	class MarkerIDProvider
+	{
+		nextID=1;
 	};
 	class Camera
 	{
@@ -246,7 +250,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=22;
+		items=23;
 		class Item0
 		{
 			dataType="Marker";
@@ -928,6 +932,15 @@ class Mission
 			{
 			};
 			id=54;
+		};
+		class Item22
+		{
+			dataType="Marker";
+			position[]={13733.753,14.927,16742.23};
+			name="respawn_west";
+			type="Empty";
+			id=143;
+			atlOffset=0.00046348572;
 		};
 	};
 };

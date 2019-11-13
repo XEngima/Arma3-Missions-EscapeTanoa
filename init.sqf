@@ -8,7 +8,7 @@ call compile preprocessFileLineNumbers "Engima\PatrolledAreas\Init.sqf"; // Adde
 call compile preprocessFileLineNumbers "Scripts\DRN\CommonLib\CommonLib.sqf";
 call compile preprocessFileLineNumbers "Engima\CommonLib\CommonLib.sqf"; // Added by Engima.CommonLib
 
-private ["_volume", "_showIntro", "_showPlayerMapAndCompass", "_fog", "_playerIsImmortal", "_playersEnteredWorld"];
+private ["_volume", "_showIntro", "_fog", "_playerIsImmortal", "_playersEnteredWorld"];
 
 drn_var_playerSide = west;
 drn_var_enemySide = east;
@@ -19,7 +19,7 @@ _showIntro = true;
 
 // Debug Variables
 
-_showPlayerMapAndCompass = false;
+drn_showPlayerMapAndCompass = false;
 _playerIsImmortal = false; // Only works for unit p1
 
 // Initialization
@@ -175,12 +175,6 @@ waitUntil {!isNil "drn_var_Escape_FunctionsInitializedOnServer"};
 
 // Player Initialization
 
-removeAllWeapons player;
-removeAllItems player;
-player addWeapon "ItemRadio";
-player addWeapon "ItemWatch";
-player addWeapon "ItemMap";
-
 drn_fnc_Escape_DisableLeaderSetWaypoints = {
     if (!visibleMap) exitwith {};
     
@@ -200,16 +194,6 @@ if (isMultiplayer) then {
 
 if (!isMultiplayer) then {
     {
-        /*
-        _x setCaptive true;
-        
-        removeAllWeapons _x;
-        removeAllItems _x;
-        _x addWeapon "ItemRadio";
-        _x addWeapon "ItemWatch";
-        _x addWeapon "ItemMap";
-        */
-        
         if (_x != p1) then {
             deleteVehicle _x;
         };
@@ -222,112 +206,119 @@ if (!isMultiplayer) then {
 	[drn_var_Escape_MissionEndResult] call drn_fnc_Escape_PlayEndScene;
 };
 
+drn_fnc_InitializePlayerUnit = {
+    params ["_showIntro", "_showPlayerMapAndCompass", "_isJipPlayer"];
+    private ["_marker"];
+    
+	removeAllWeapons player;
+	removeAllItems player;
+	player addWeapon "ItemRadio";
+	player addWeapon "ItemWatch";
+	player addWeapon "ItemMap";
+	
+    if (_isJipPlayer) then {
+        private ["_anotherPlayer"];
+        
+        _anotherPlayer = (call drn_fnc_Escape_GetPlayers) select 0;
+        if (player == _anotherPlayer) then {
+            _anotherPlayer = (call drn_fnc_Escape_GetPlayers) select 1;
+        };
+        
+        if (_anotherPlayer distance drn_startPos > 50) then {
+        	private _pos = getPos _anotherPlayer;
+            player setPos [(_pos select 0) - 10 + random 20, (_pos select 1) - 10 + random 20, 0.1];
+            player setDamage 0.9;
+        }
+        else {
+            player setPos [(drn_startPos select 0) + (random 4) - 2, (drn_startPos select 1) + (random 6) - 3, 0];
+        };
+    }
+    else {
+        sleep 1;
+        if (_showIntro) then {
+            ["<t size='0.8'>" + "Engima" + "</t>",0.02,0.1,2,-1,0,3010] spawn bis_fnc_dynamicText;
+            sleep 1.5;
+            ["<t size='0.8'>" + "Author of the very first Escape mission - ""Escape Chernarus"" (Arma 2)" + "</t>",0.02,0.2,2,-1,0,3011] spawn bis_fnc_dynamicText;
+            sleep 1.5;
+            ["<t size='0.8'>" + "presents" + "</t>",0.02,0.3,2,-1,0,3012] spawn bis_fnc_dynamicText;
+        };
+        
+        player setPos [(drn_startPos select 0) + (random 4) - 2, (drn_startPos select 1) + (random 6) - 3, 0];
+        if (!isMultiplayer) then {
+            {
+            	if (!isPlayer _x) then {
+            		deleteVehicle _x;
+            	};
+            } foreach units group player;
+        };
+        
+        while {!([drn_startPos] call drn_fnc_Escape_AllPlayersOnStartPos) && !isNil "drn_escapeHasStarted"} do {
+            sleep 0.1;
+        };
+        
+        if (_showIntro) then {            
+            0 cutText ["", "BLACK FADED"];
+            sleep 2;
+        
+            ["<t size='1.5'>" + "Escape Tanoa" + "</t>",0.02,0.4,2,-1,0,3013] spawn bis_fnc_dynamicText;
+            sleep 1;
+            
+            ["Somewhere on Tanoa", str (date select 2) + "/" + str (date select 1) + "/" + str (date select 0) + " " + str (date select 3) + ":00"] spawn BIS_fnc_infoText;
+        };
+    };
+
+    if (_showPlayerMapAndCompass) then {
+        _marker = createMarkerLocal ["drn_startPosMarker", drn_startPos];
+        _marker setMarkerType "mil_dot";
+        _marker setMarkerColor "ColorOpfor";
+        _marker setMarkerText "Prison";
+        
+        player assignItem "ItemMap";
+        player addWeapon "ItemMap";
+        player assignItem "ItemCompass";
+        player addWeapon "ItemCompass";
+    }
+    else {
+        player unlinkItem "ItemGps";
+        player unlinkItem "NVGoggles";
+        player unlinkItem "NVGogglesB_blk_F";
+        player unlinkItem "NVGogglesB_grn_F";
+        player unlinkItem "NVGogglesB_gry_F";
+        removeBackpack player;
+        removeHeadgear player;
+        removeGoggles player;
+        removeAllItems player;
+        
+        player unlinkItem "ItemMap";
+        player unlinkItem "ItemCompass";
+    };
+};
 
 // Run start sequence for all players
-if (!isNull player) then {
-    [_volume, _showIntro, _showPlayerMapAndCompass, didJip] spawn {
-        private ["_volume", "_showIntro", "_showPlayerMapAndCompass", "_isJipPlayer"];
-        private ["_marker"];
-        
-        _volume = _this select 0;
-        _showIntro = _this select 1;
-        _showPlayerMapAndCompass = _this select 2;
-        _isJipPlayer = _this select 3;
+if (!isNull player) then
+{
+	player addEventHandler ["Respawn", {
+		params ["_unit", "_corpse"];
+		hint "respawned";
+		
+		[] spawn {
+		    [false, drn_showPlayerMapAndCompass, true] call drn_fnc_InitializePlayerUnit;
+		};
+	}];
+
+    [_volume, _showIntro, drn_showPlayerMapAndCompass, didJip] spawn {
+        params ["_volume", "_showIntro", "_showPlayerMapAndCompass", "_isJipPlayer"];
         
         waitUntil {!(isNil "drn_startPos")};
         waitUntil {!(isNil "drn_fenceIsCreated")};
         
-        if (_isJipPlayer) then {
-            private ["_anotherPlayer"];
-            
-            _anotherPlayer = (call drn_fnc_Escape_GetPlayers) select 0;
-            if (player == _anotherPlayer) then {
-                _anotherPlayer = (call drn_fnc_Escape_GetPlayers) select 1;
-            };
-            
-            if (_anotherPlayer distance drn_startPos > 50) then {
-            	private _pos = getPos _anotherPlayer;
-                player setPos [(_pos select 0) - 5 + random 10, (_pos select 1) - 5 + random 10, 0.1];
-                //player setUnconscious true;
-                player setDamage 0.9;
-            }
-            else {
-                player setPos [(drn_startPos select 0) + (random 4) - 2, (drn_startPos select 1) + (random 6) - 3, 0];
-            };
-        }
-        else {
-            sleep 1;
-            if (_showIntro) then {
-                ["<t size='0.8'>" + "Engima" + "</t>",0.02,0.1,2,-1,0,3010] spawn bis_fnc_dynamicText;
-                sleep 1.5;
-                ["<t size='0.8'>" + "Author of the very first Escape mission - ""Escape Chernarus"" (Arma 2)" + "</t>",0.02,0.2,2,-1,0,3011] spawn bis_fnc_dynamicText;
-                sleep 1.5;
-                ["<t size='0.8'>" + "presents" + "</t>",0.02,0.3,2,-1,0,3012] spawn bis_fnc_dynamicText;
-            };
-            
-            player setPos [(drn_startPos select 0) + (random 4) - 2, (drn_startPos select 1) + (random 6) - 3, 0];
-            if (!isMultiplayer) then {
-                {
-                	if (!isPlayer _x) then {
-                		deleteVehicle _x;
-                	};
-//                    _x setPos [(drn_startPos select 0) + (random 4) - 2, (drn_startPos select 1) + (random 6) - 3, 0];
-//                    _x disableAI "MOVE";
-                } foreach units group player;
-            };
-            
-            while {!([drn_startPos] call drn_fnc_Escape_AllPlayersOnStartPos) && !isNil "drn_escapeHasStarted"} do {
-                sleep 0.1;
-            };
-            
-            if (_showIntro) then {            
-                0 cutText ["", "BLACK FADED"];
-                sleep 2;
-            
-                ["<t size='1.5'>" + "Escape Tanoa" + "</t>",0.02,0.4,2,-1,0,3013] spawn bis_fnc_dynamicText;
-                sleep 1;
-                
-                ["Somewhere on Tanoa", str (date select 2) + "/" + str (date select 1) + "/" + str (date select 0) + " " + str (date select 3) + ":00"] spawn BIS_fnc_infoText;
-            };
-        };
+        [_showIntro, _showPlayerMapAndCompass, _isJipPlayer] call drn_fnc_InitializePlayerUnit;
 
         1 fadeSound _volume;
         
-        if (_showPlayerMapAndCompass) then {
-            _marker = createMarkerLocal ["drn_startPosMarker", drn_startPos];
-            _marker setMarkerType "mil_dot";
-            _marker setMarkerColor "ColorOpfor";
-            _marker setMarkerText "Prison";
-            
-            player assignItem "ItemMap";
-            player addWeapon "ItemMap";
-            player assignItem "ItemCompass";
-            player addWeapon "ItemCompass";
-        }
-        else {
-	        player unlinkItem "ItemGps";
-	        player unlinkItem "NVGoggles";
-	        player unlinkItem "NVGogglesB_blk_F";
-	        player unlinkItem "NVGogglesB_grn_F";
-	        player unlinkItem "NVGogglesB_gry_F";
-	        removeBackpack player;
-	        removeHeadgear player;
-	        removeGoggles player;
-	        removeAllItems player;
-	        
-            player unlinkItem "ItemMap";
-            player unlinkItem "ItemCompass";
-        };
-
         if (_showIntro && !_isJipPlayer) then {
             sleep 1;
         };
-        
-        //enableRadio true;
-
-        // Set position again (a fix for the bug that makes players run away after server restart and before fence is built by server)
-        //player setPos [(drn_startPos select 0) + (random 4) - 2, (drn_startPos select 1) + (random 6) - 3, 0];
-        //sleep 0.1;
         
         [] spawn {
 	        // Set action on all hackable comcenter items (the power generator)

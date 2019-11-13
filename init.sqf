@@ -299,7 +299,6 @@ if (!isNull player) then
 {
 	player addEventHandler ["Respawn", {
 		params ["_unit", "_corpse"];
-		hint "respawned";
 		
 		[] spawn {
 		    [false, drn_showPlayerMapAndCompass, true] call drn_fnc_InitializePlayerUnit;

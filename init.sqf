@@ -260,10 +260,10 @@ drn_fnc_InitializePlayerUnit = {
             0 cutText ["", "BLACK FADED"];
             sleep 2;
         
-            ["<t size='1.5'>" + "Escape Tanoa" + "</t>",0.02,0.4,2,-1,0,3013] spawn bis_fnc_dynamicText;
+            ["<t size='1.5'>" + "Escape " + worldName + "</t>",0.02,0.4,2,-1,0,3013] spawn bis_fnc_dynamicText;
             sleep 1;
             
-            ["Somewhere on Tanoa", str (date select 2) + "/" + str (date select 1) + "/" + str (date select 0) + " " + str (date select 3) + ":00"] spawn BIS_fnc_infoText;
+            ["Somewhere on " + worldName, str (date select 2) + "/" + str (date select 1) + "/" + str (date select 0) + " " + str (date select 3) + ":00"] spawn BIS_fnc_infoText;
         };
     };
 

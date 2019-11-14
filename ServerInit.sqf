@@ -74,11 +74,11 @@ _searchChopperRefuelTimeMin = (5 + random 10);
 private _useSavedSettings = (paramsArray select 0) == 0;
 
 if (_useSavedSettings) then {
-	drn_MissionParam_enemySkill = profileNamespace getVariable ["MissionParam_Engima_EscapeTanoa_EnemySkill", (paramsArray select 1)];
-	drn_MissionParam_enemyFrequency = profileNamespace getVariable ["MissionParam_Engima_EscapeTanoa_EnemyFrequency", (paramsArray select 2)];
-	drn_MissionParam_timeOfDay = profileNamespace getVariable ["MissionParam_Engima_EscapeTanoa_TimeOfDay", (paramsArray select 3)];
-	drn_MissionParam_dynamicWeather = profileNamespace getVariable ["MissionParam_Engima_EscapeTanoa_Weather", (paramsArray select 4)];
-	drn_MissionParam_enemySpawnDistance = profileNamespace getVariable ["MissionParam_Engima_EscapeTanoa_EnemySpawnDistance", (paramsArray select 5)];
+	drn_MissionParam_enemySkill = profileNamespace getVariable ["MissionParam_Engima_Escape_EnemySkill", (paramsArray select 1)];
+	drn_MissionParam_enemyFrequency = profileNamespace getVariable ["MissionParam_Engima_Escape_EnemyFrequency", (paramsArray select 2)];
+	drn_MissionParam_timeOfDay = profileNamespace getVariable ["MissionParam_Engima_Escape_TimeOfDay", (paramsArray select 3)];
+	drn_MissionParam_dynamicWeather = profileNamespace getVariable ["MissionParam_Engima_Escape_Weather", (paramsArray select 4)];
+	drn_MissionParam_enemySpawnDistance = profileNamespace getVariable ["MissionParam_Engima_Escape_EnemySpawnDistance", (paramsArray select 5)];
 }
 else {
 	drn_MissionParam_enemySkill = paramsArray select 1;
@@ -94,11 +94,11 @@ publicVariable "drn_MissionParam_timeOfDay";
 publicVariable "drn_MissionParam_dynamicWeather";
 publicVariable "drn_MissionParam_enemySpawnDistance";
 
-profileNamespace setVariable ["MissionParam_Engima_EscapeTanoa_EnemySkill", drn_MissionParam_enemySkill];
-profileNamespace setVariable ["MissionParam_Engima_EscapeTanoa_EnemyFrequency", drn_MissionParam_enemyFrequency];
-profileNamespace setVariable ["MissionParam_Engima_EscapeTanoa_TimeOfDay", drn_MissionParam_timeOfDay];
-profileNamespace setVariable ["MissionParam_Engima_EscapeTanoa_Weather", drn_MissionParam_dynamicWeather];
-profileNamespace setVariable ["MissionParam_Engima_EscapeTanoa_EnemySpawnDistance", drn_MissionParam_enemySpawnDistance];
+profileNamespace setVariable ["MissionParam_Engima_Escape_EnemySkill", drn_MissionParam_enemySkill];
+profileNamespace setVariable ["MissionParam_Engima_Escape_EnemyFrequency", drn_MissionParam_enemyFrequency];
+profileNamespace setVariable ["MissionParam_Engima_Escape_TimeOfDay", drn_MissionParam_timeOfDay];
+profileNamespace setVariable ["MissionParam_Engima_Escape_Weather", drn_MissionParam_dynamicWeather];
+profileNamespace setVariable ["MissionParam_Engima_Escape_EnemySpawnDistance", drn_MissionParam_enemySpawnDistance];
 
 saveProfileNamespace;
 

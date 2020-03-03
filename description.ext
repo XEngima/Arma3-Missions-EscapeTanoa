@@ -9,7 +9,7 @@ class Header
 respawn = "BASE";
 respawnButton = 0;
 
-onLoadMission = "ESCAPE ALTIS 2.2 BY ENGIMA";
+onLoadMission = "ESCAPE MALDEN 2.2 BY ENGIMA";
 OnLoadMissionTime = FALSE;
 
 overviewText = "Captured behind enemy lines!";

@@ -150,6 +150,13 @@ drn_fnc_Escape_FindGoodPos = {
 	                    _isOk = true;
 	                };
 	            };
+	            
+	            // On Malden we don't want a start pos on the north west or the south east islands, whichd are covered with markers.
+	            if (worldName == "Malden") then {
+	            	if (_startPos inArea "escape_blacklist_startmarker_1" || _startPos inArea "escape_blacklist_startmarker_2") then {
+	            		_isOk = false;
+	            	};
+	            };
             };
         };
         

@@ -8,11 +8,11 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=144;
+		nextID=146;
 	};
 	class MarkerIDProvider
 	{
-		nextID=1;
+		nextID=2;
 	};
 	class Camera
 	{
@@ -250,7 +250,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=22;
+		items=24;
 		class Item0
 		{
 			dataType="Marker";
@@ -941,6 +941,29 @@ class Mission
 			type="Empty";
 			id=143;
 			atlOffset=79.514221;
+		};
+		class Item22
+		{
+			dataType="Marker";
+			position[]={1100.7792,-0.94447845,11748.43};
+			name="escape_blacklist_startmarker_1";
+			markerType="RECTANGLE";
+			type="rectangle";
+			a=1000;
+			b=1000;
+			id=144;
+		};
+		class Item23
+		{
+			dataType="Marker";
+			position[]={10666.878,-11.384538,4510.9863};
+			name="escape_blacklist_startmarker_2";
+			markerType="RECTANGLE";
+			type="rectangle";
+			a=2000;
+			b=4000;
+			id=145;
+			atlOffset=-31.791004;
 		};
 	};
 };

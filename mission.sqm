@@ -8,11 +8,11 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=341;
+		nextID=342;
 	};
 	class MarkerIDProvider
 	{
-		nextID=27;
+		nextID=28;
 	};
 	class Camera
 	{
@@ -57,7 +57,6 @@ class ScenarioData
 	overViewPicture="Escape.jpg";
 	showGPS=0;
 	saving=0;
-	respawn=1;
 	class Header
 	{
 		gameType="Escape";
@@ -163,7 +162,7 @@ class CustomAttributes
 					};
 					class value
 					{
-						items=2;
+						items=1;
 						class Item0
 						{
 							class data
@@ -175,21 +174,7 @@ class CustomAttributes
 										"STRING"
 									};
 								};
-								value="EndMission";
-							};
-						};
-						class Item1
-						{
-							class data
-							{
-								class type
-								{
-									type[]=
-									{
-										"STRING"
-									};
-								};
-								value="Spectator";
+								value="None";
 							};
 						};
 					};
@@ -249,7 +234,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=22;
+		items=23;
 		class Item0
 		{
 			dataType="Marker";
@@ -924,6 +909,15 @@ class Mission
 			{
 			};
 			id=264;
+		};
+		class Item22
+		{
+			dataType="Marker";
+			position[]={8998.6211,31.745001,10023.583};
+			name="respawn_west";
+			type="Empty";
+			id=341;
+			atlOffset=0.00033760071;
 		};
 	};
 };

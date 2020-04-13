@@ -261,6 +261,9 @@
                   <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="VillageMarkersChernarus.sqf" FileName="Scripts\DRN\VillageMarkers\VillageMarkersChernarus.sqf">
                     <SubNodes />
                   </ProjectNodeViewModel>
+                  <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="VillageMarkersMalden.sqf" FileName="Scripts\DRN\VillageMarkers\VillageMarkersMalden.sqf">
+                    <SubNodes />
+                  </ProjectNodeViewModel>
                   <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="VillageMarkersTanoa.sqf" FileName="Scripts\DRN\VillageMarkers\VillageMarkersTanoa.sqf">
                     <SubNodes />
                   </ProjectNodeViewModel>
@@ -283,6 +286,9 @@
                 <SubNodes />
               </ProjectNodeViewModel>
               <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="CommunicationCenterMarkersChernarus.sqf" FileName="Scripts\Escape\CommunicationCenterMarkersChernarus.sqf">
+                <SubNodes />
+              </ProjectNodeViewModel>
+              <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="CommunicationCenterMarkersMalden.sqf" FileName="Scripts\Escape\CommunicationCenterMarkersMalden.sqf">
                 <SubNodes />
               </ProjectNodeViewModel>
               <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="CommunicationCenterMarkersTanoa.sqf" FileName="Scripts\Escape\CommunicationCenterMarkersTanoa.sqf">

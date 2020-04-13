@@ -229,7 +229,7 @@ class Mission
 	assetType="Free";
 	class Intel
 	{
-		briefingName="ESCAPE ALTIS BY ENGIMA";
+		briefingName="ESCAPE MALDEN BY ENGIMA";
 		resistanceWest=0;
 		resistanceEast=1;
 		timeOfChanges=1800.0002;

@@ -8,18 +8,14 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=342;
-	};
-	class MarkerIDProvider
-	{
-		nextID=28;
+		nextID=30;
 	};
 	class Camera
 	{
-		pos[]={8999.1074,37.029537,10010.968};
-		dir[]={0.0074181235,-0.3272019,0.94493729};
-		up[]={0.0025693185,0.94492912,0.32726279};
-		aside[]={0.99997878,1.2449163e-008,-0.0078507401};
+		pos[]={9425.5742,345.33621,14905.651};
+		dir[]={-0.41064453,-0.17364821,-0.89510757};
+		up[]={-0.072407715,0.98480767,-0.15783162};
+		aside[]={-0.908916,0,0.41697937};
 	};
 };
 binarizationWanted=0;
@@ -49,188 +45,30 @@ class AddonsMetaData
 		};
 	};
 };
-randomSeed=14160686;
+randomSeed=13766037;
 class ScenarioData
 {
 	author="Engima";
-	overviewText="Captured behind enemy lines. Take the first opportunity to escape and find a way back to your allies.";
-	overViewPicture="Escape.jpg";
-	showGPS=0;
-	saving=0;
-	class Header
-	{
-		gameType="Escape";
-		minPlayers=1;
-		maxPlayers=8;
-	};
-};
-class CustomAttributes
-{
-	class Category0
-	{
-		name="Multiplayer";
-		class Attribute0
-		{
-			property="ReviveForceRespawnDelay";
-			expression="false";
-			class Value
-			{
-				class data
-				{
-					class type
-					{
-						type[]=
-						{
-							"SCALAR"
-						};
-					};
-					value=10;
-				};
-			};
-		};
-		class Attribute1
-		{
-			property="ReviveBleedOutDelay";
-			expression="false";
-			class Value
-			{
-				class data
-				{
-					class type
-					{
-						type[]=
-						{
-							"SCALAR"
-						};
-					};
-					value=300;
-				};
-			};
-		};
-		class Attribute2
-		{
-			property="ReviveDelay";
-			expression="false";
-			class Value
-			{
-				class data
-				{
-					class type
-					{
-						type[]=
-						{
-							"SCALAR"
-						};
-					};
-					value=10.433945;
-				};
-			};
-		};
-		class Attribute3
-		{
-			property="ReviveMedicSpeedMultiplier";
-			expression="false";
-			class Value
-			{
-				class data
-				{
-					class type
-					{
-						type[]=
-						{
-							"SCALAR"
-						};
-					};
-					value=3;
-				};
-			};
-		};
-		class Attribute4
-		{
-			property="RespawnTemplates";
-			expression="true";
-			class Value
-			{
-				class data
-				{
-					class type
-					{
-						type[]=
-						{
-							"ARRAY"
-						};
-					};
-					class value
-					{
-						items=1;
-						class Item0
-						{
-							class data
-							{
-								class type
-								{
-									type[]=
-									{
-										"STRING"
-									};
-								};
-								value="None";
-							};
-						};
-					};
-				};
-			};
-		};
-		class Attribute5
-		{
-			property="ReviveMode";
-			expression="false";
-			class Value
-			{
-				class data
-				{
-					class type
-					{
-						type[]=
-						{
-							"SCALAR"
-						};
-					};
-					value=1;
-				};
-			};
-		};
-		nAttributes=6;
-	};
 };
 class Mission
 {
-	appId=395180;
 	class Intel
 	{
-		briefingName="ESCAPE TANOA BY ENGIMA";
-		resistanceWest=0;
-		resistanceEast=1;
 		timeOfChanges=1800.0002;
-		startWeather=0.75216275;
-		startFog=0.019161042;
+		startWeather=0.25;
 		startWind=0.1;
 		startWaves=0.1;
-		forecastWeather=0.75216275;
+		forecastWeather=0.25;
 		forecastWind=0.1;
 		forecastWaves=0.1;
 		forecastLightnings=0.1;
-		rainForced=1;
-		windForced=1;
-		year=2035;
-		month=6;
-		day=6;
-		hour=12;
-		minute=0;
-		startFogBase=-30.389099;
-		forecastFogBase=-47.634644;
-		startFogDecay=0.1;
-		forecastFogDecay=0.1;
+		year=2008;
+		month=10;
+		day=11;
+		hour=9;
+		minute=20;
+		startFogDecay=0.014;
+		forecastFogDecay=0.014;
 	};
 	class Entities
 	{
@@ -238,182 +76,182 @@ class Mission
 		class Item0
 		{
 			dataType="Marker";
-			position[]={6461.1538,0,13269.016};
+			position[]={4229.8657,419.77551,14136.307};
 			name="drn_Escape_ExtractionPos1";
 			type="Empty";
-			id=90;
-			atlOffset=6.9432898;
+			id=0;
+			atlOffset=6.9432983;
 		};
 		class Item1
 		{
 			dataType="Marker";
-			position[]={14890.896,0,10649.597};
+			position[]={12659.608,84.924889,11516.887};
 			name="drn_Escape_ExtractionPos2";
 			type="Empty";
-			id=91;
-			atlOffset=5.9405222;
+			id=1;
+			atlOffset=5.9405212;
 		};
 		class Item2
 		{
 			dataType="Marker";
-			position[]={13766.176,0,7699.4976};
+			position[]={11534.888,182.03664,8566.7881};
 			name="drn_Escape_ExtractionPos3";
 			type="Empty";
-			id=92;
-			atlOffset=3.2473192;
+			id=2;
+			atlOffset=3.2473145;
 		};
 		class Item3
 		{
 			dataType="Marker";
-			position[]={13307.129,0,4034.9636};
+			position[]={11075.841,282.12939,4902.2539};
 			name="drn_Escape_ExtractionPos4";
 			type="Empty";
-			id=93;
-			atlOffset=2.6304736;
+			id=3;
+			atlOffset=2.6304626;
 		};
 		class Item4
 		{
 			dataType="Marker";
-			position[]={9718.626,0,2599.1274};
+			position[]={7487.3379,7.8160424,3466.418};
 			name="drn_Escape_ExtractionPos5";
 			type="Empty";
-			id=94;
+			id=4;
 			atlOffset=1.8160424;
 		};
 		class Item5
 		{
 			dataType="Marker";
-			position[]={9164.999,0,5856.459};
+			position[]={6933.7109,298.33133,6723.7495};
 			name="drn_Escape_ExtractionPos6";
 			type="Empty";
-			id=95;
-			atlOffset=6.2466846;
+			id=5;
+			atlOffset=6.2466736;
 		};
 		class Item6
 		{
 			dataType="Marker";
-			position[]={4600.2144,0,7899.1626};
+			position[]={2368.9263,297.78552,8766.4531};
 			name="drn_Escape_ExtractionPos7";
 			type="Empty";
-			id=96;
-			atlOffset=5.630312;
+			id=6;
+			atlOffset=5.6303101;
 		};
 		class Item7
 		{
 			dataType="Marker";
-			position[]={4881.2412,0,11451.72};
+			position[]={2649.9531,221.54843,12319.01};
 			name="drn_Escape_ExtractionPos8";
 			type="Empty";
-			id=97;
-			atlOffset=4.6146321;
+			id=7;
+			atlOffset=4.6146393;
 		};
 		class Item8
 		{
 			dataType="Marker";
-			position[]={6001.8564,0,13698.475};
+			position[]={3770.5684,575.94946,14565.766};
 			name="drn_Escape_ExtracionBoatSpawnPos1";
 			type="Empty";
-			id=99;
-			atlOffset=46.583294;
+			id=8;
+			atlOffset=46.583313;
 		};
 		class Item9
 		{
 			dataType="Marker";
-			position[]={15282.715,0,10100.295};
+			position[]={13051.427,71.699081,10967.586};
 			name="drn_Escape_ExtracionBoatSpawnPos2";
 			type="Empty";
-			id=100;
+			id=9;
 			atlOffset=45.387234;
 		};
 		class Item10
 		{
 			dataType="Marker";
-			position[]={14333.643,0,7190.0259};
+			position[]={12102.354,148.37384,8057.3164};
 			name="drn_Escape_ExtracionBoatSpawnPos3";
 			type="Empty";
-			id=101;
-			atlOffset=28.08906;
+			id=10;
+			atlOffset=28.089058;
 		};
 		class Item11
 		{
 			dataType="Marker";
-			position[]={13787.348,0,3625.1653};
+			position[]={11556.06,219.82675,4492.4561};
 			name="drn_Escape_ExtracionBoatSpawnPos4";
 			type="Empty";
-			id=102;
-			atlOffset=25.40218;
+			id=11;
+			atlOffset=25.402176;
 		};
 		class Item12
 		{
 			dataType="Marker";
-			position[]={8979.6465,0,2048.7808};
+			position[]={6748.3584,35.401058,2916.0713};
 			name="drn_Escape_ExtracionBoatSpawnPos5";
 			type="Empty";
-			id=103;
-			atlOffset=29.170279;
+			id=12;
+			atlOffset=29.170277;
 		};
 		class Item13
 		{
 			dataType="Marker";
-			position[]={9057.3223,0,5368.8008};
+			position[]={6826.0342,345.04703,6236.0913};
 			name="drn_Escape_ExtracionBoatSpawnPos6";
 			type="Empty";
-			id=104;
-			atlOffset=23.541126;
+			id=13;
+			atlOffset=23.541138;
 		};
 		class Item14
 		{
 			dataType="Marker";
-			position[]={4735.4673,0,6868.7456};
+			position[]={2504.1792,391.99057,7736.0361};
 			name="drn_Escape_ExtracionBoatSpawnPos7";
 			type="Empty";
-			id=105;
-			atlOffset=26.346891;
+			id=14;
+			atlOffset=26.346893;
 		};
 		class Item15
 		{
 			dataType="Marker";
-			position[]={4403.7114,0,11043.859};
+			position[]={2172.4233,265.69052,11911.15};
 			name="drn_Escape_ExtracionBoatSpawnPos8";
 			type="Empty";
-			id=106;
-			atlOffset=25.785994;
+			id=15;
+			atlOffset=25.785995;
 		};
 		class Item16
 		{
 			dataType="Marker";
-			position[]={2137.1018,12.95,3446.1162};
+			position[]={4639.8218,339,10267.328};
 			name="drn_searchChopperStartPosMarker";
 			type="Empty";
-			angle=344.85977;
-			id=112;
+			angle=237.33267;
+			id=16;
 		};
 		class Item17
 		{
 			dataType="Marker";
-			position[]={9991.2744,60.349998,9747.7754};
+			position[]={7079.2104,148.97192,8326.1064};
 			name="centre";
 			type="Empty";
-			id=158;
-			atlOffset=-0.00046539307;
+			id=17;
+			atlOffset=-177.60269;
 		};
 		class Item18
 		{
 			dataType="Marker";
-			position[]={2158.6091,12.95,3452.8772};
+			position[]={4603.8359,339,10334.058};
 			name="drn_dropChopperStartPosMarker";
 			type="Empty";
-			angle=336.21497;
-			id=240;
+			angle=238.8968;
+			id=18;
 		};
 		class Item19
 		{
 			dataType="Marker";
-			position[]={2026.597,12.95,3474.687};
+			position[]={4560.314,339,10405.841};
 			name="drn_russianSearchChopperStartPosMarker";
 			type="Empty";
-			angle=343.48398;
-			id=263;
+			angle=236.78333;
+			id=19;
 		};
 		class Item20
 		{
@@ -427,7 +265,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={8997.4551,31.909407,10021.823};
+						position[]={6766.167,342.44275,10889.114};
 					};
 					side="West";
 					flags=7;
@@ -436,7 +274,7 @@ class Mission
 						name="p4";
 						isPlayable=1;
 					};
-					id=265;
+					id=21;
 					type="B_CTRG_Soldier_AR_tna_F";
 					class CustomAttributes
 					{
@@ -486,7 +324,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={8999.8232,31.918674,10021.672};
+						position[]={6768.5352,342.41809,10888.962};
 					};
 					side="West";
 					flags=5;
@@ -495,7 +333,7 @@ class Mission
 						name="p5";
 						isPlayable=1;
 					};
-					id=266;
+					id=22;
 					type="B_CTRG_Soldier_Exp_tna_F";
 					class CustomAttributes
 					{
@@ -545,7 +383,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={8999.1553,32.185715,10018.386};
+						position[]={6767.8672,342.44437,10885.677};
 					};
 					side="West";
 					flags=5;
@@ -554,7 +392,7 @@ class Mission
 						name="p7";
 						isPlayable=1;
 					};
-					id=267;
+					id=23;
 					type="B_CTRG_Soldier_JTAC_tna_F";
 					class CustomAttributes
 					{
@@ -604,7 +442,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={9000.0049,32.245602,10017.489};
+						position[]={6768.7168,342.43906,10884.78};
 					};
 					side="West";
 					flags=5;
@@ -613,7 +451,7 @@ class Mission
 						name="p8";
 						isPlayable=1;
 					};
-					id=268;
+					id=24;
 					type="B_CTRG_Soldier_M_tna_F";
 					class CustomAttributes
 					{
@@ -663,7 +501,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={8996.4473,32.205017,10018.052};
+						position[]={6765.1592,342.48676,10885.343};
 					};
 					side="West";
 					flags=5;
@@ -672,7 +510,7 @@ class Mission
 						name="p6";
 						isPlayable=1;
 					};
-					id=269;
+					id=25;
 					type="B_CTRG_Soldier_M_tna_F";
 					class CustomAttributes
 					{
@@ -722,7 +560,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={8994.3584,31.762712,10023.464};
+						position[]={6763.0703,342.45959,10890.755};
 					};
 					side="West";
 					flags=5;
@@ -731,7 +569,7 @@ class Mission
 						name="p3";
 						isPlayable=1;
 					};
-					id=270;
+					id=26;
 					type="B_CTRG_Soldier_Medic_tna_F";
 					class CustomAttributes
 					{
@@ -781,7 +619,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={8998.8467,31.573563,10026.176};
+						position[]={6767.5586,342.41959,10893.466};
 					};
 					side="West";
 					flags=5;
@@ -790,7 +628,7 @@ class Mission
 						name="p2";
 						isPlayable=1;
 					};
-					id=271;
+					id=27;
 					type="B_CTRG_Soldier_tna_F";
 					class CustomAttributes
 					{
@@ -840,7 +678,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={8996.2715,31.546457,10026.276};
+						position[]={6764.9834,342.44678,10893.567};
 					};
 					side="West";
 					flags=5;
@@ -849,7 +687,7 @@ class Mission
 						name="p1";
 						isPlayer=1;
 					};
-					id=272;
+					id=28;
 					type="B_CTRG_Soldier_TL_tna_F";
 					class CustomAttributes
 					{
@@ -898,16 +736,16 @@ class Mission
 			class Attributes
 			{
 			};
-			id=264;
+			id=20;
 		};
 		class Item21
 		{
 			dataType="Marker";
-			position[]={8998.6211,31.745001,10023.583};
+			position[]={6767.333,342.42429,10890.873};
 			name="respawn_west";
 			type="Empty";
-			id=341;
-			atlOffset=0.00033760071;
+			id=29;
+			atlOffset=0.00033569336;
 		};
 	};
 };

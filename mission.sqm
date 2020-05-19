@@ -208,7 +208,7 @@ class Mission
 	appId=395180;
 	class Intel
 	{
-		briefingName="ESCAPE CHERNARUS BY ENGIMA";
+		briefingName="ESCAPE TANOA BY ENGIMA";
 		resistanceWest=0;
 		resistanceEast=1;
 		timeOfChanges=1800.0002;

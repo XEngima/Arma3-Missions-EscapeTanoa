@@ -9,8 +9,10 @@ class Header
 respawn = "BASE";
 respawnButton = 0;
 
-onLoadMission = "ESCAPE CHERNARUS 2.2 BY ENGIMA";
-OnLoadMissionTime = FALSE;
+onLoadMission = "ESCAPE TANOA 2.2 BY ENGIMA";
+onLoadName = "Escape Tanoa";
+briefingName = "Escape Tanoa";
+OnLoadMissionTime = false;
 
 overviewText = "Captured behind enemy lines!";
 overviewTextLocked = "Take the first opportunity to escape and find a way back to your allies.";

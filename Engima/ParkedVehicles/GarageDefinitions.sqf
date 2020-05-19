@@ -30,5 +30,14 @@ PARKEDVEHICLES_GarageDefinitions = [
 	["Land_i_Shed_Ind_F", 2, [0, 2.5, 0], 270],
 	["Land_FuelStation_01_shop_F", -1, [0, -8, 0], 270],
 	["Land_Supermarket_01_F", -1, [9, -4, 0], 0],
-	["Land_House_Big_03_F", 4, [2, -1, 0], 90]
+	["Land_House_Big_03_F", 4, [2, -1, 0], 90],
+	
+	/* Chernarus */
+	["Land_Barn_Metal",-1,[0,-1,0.01],90],
+	["Land_Shed_Ind02",-1,[8,-4,0.01],0],
+	["Land_A_FuelStation_Shed",-1,[-3,-1.4,0.01],175],
+	["Land_Farm_Cowshed_a",-1,[2,-8,0.01],270],
+	["Land_Ind_Pec_02",-1,[-0.45,0.41,0.01],180], // Huge
+	["Land_HouseV_1I4",-1,[-5.5,-5,0.01],0],
+	["Land_HouseV_1L2",-1,[-7,-2,0.01],180]
 ];

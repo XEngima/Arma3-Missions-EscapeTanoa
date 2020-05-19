@@ -745,7 +745,7 @@ class Mission
 			name="respawn_west";
 			type="Empty";
 			id=29;
-			atlOffset=-1.0090942;
+			atlOffset=-1.0090332;
 		};
 	};
 };

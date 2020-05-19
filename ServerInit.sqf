@@ -29,20 +29,20 @@ drn_var_onlyPutComCentersOnFewPlaces = true;
 
 // Debug Variables
 
-_debugEscapeSurprises = true;
-_debugAmmoAndComPatrols = true;
-_debugSearchLeader = true;
-_debugVillagePatrols = true;
-_debugMilitaryTraffic = true;
-_debugAmbientInfantry = true;
-_debugGarbageCollector = true;
-_debugRoadBlocks = true;
-_debugCivilians = true;
-drn_var_Escape_debugMotorizedSearchGroup = true;
-drn_var_Escape_debugDropChoppers = true;
-drn_var_Escape_debugReinforcementTruck = true;
-drn_var_Escape_debugSearchChopper = true;
-drn_var_Escape_DebugSearchGroup = true;
+_debugEscapeSurprises = false;
+_debugAmmoAndComPatrols = false;
+_debugSearchLeader = false;
+_debugVillagePatrols = false;
+_debugMilitaryTraffic = false;
+_debugAmbientInfantry = false;
+_debugGarbageCollector = false;
+_debugRoadBlocks = false;
+_debugCivilians = false;
+drn_var_Escape_debugMotorizedSearchGroup = false;
+drn_var_Escape_debugDropChoppers = false;
+drn_var_Escape_debugReinforcementTruck = false;
+drn_var_Escape_debugSearchChopper = false;
+drn_var_Escape_DebugSearchGroup = false;
 
 _showGroupDiagnostics = false;
 

@@ -19,12 +19,14 @@
  */
 
 PARKEDVEHICLES_GarageDefinitions = [
-	/* Altis and Stratis */
+	/* Primary Altis, Stratis and Malden */
 	["Land_i_Garage_V1_F", 2, [-0.5, -1, 0], 90],
 	["Land_MilOffices_V1_F", -1, [-7, 11, 0.1], 270],
 	["Land_FuelStation_Shed_F", 0, [0, 0, 0.1], 0],
+	["Land_i_Stone_HouseBig_V2_F", -1, [6.5, -1, 0], 180],
+	["Land_i_Stone_HouseSmall_V2_F", -1, [0, -7, 0], 90],
 	
-	/* Tanoa */
+	/* Primary Tanoa */
 	["Land_FuelStation_02_workshop_F", 5, [0.1, 3, 0.6], 180],
 	["Land_GarageShelter_01_F", 2, [-0.1, 1.5, 0], 180],
 	["Land_i_Shed_Ind_F", 2, [0, 2.5, 0], 270],

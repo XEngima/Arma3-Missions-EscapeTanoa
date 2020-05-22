@@ -15,11 +15,11 @@ drn_var_enemySide = east;
 
 // Developer Variables
 
-_showIntro = true;
+_showIntro = false;
 
 // Debug Variables
 
-drn_showPlayerMapAndCompass = false;
+drn_showPlayerMapAndCompass = true;
 _playerIsImmortal = false; // Only works for unit p1
 
 // Initialization

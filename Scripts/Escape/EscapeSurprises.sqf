@@ -37,7 +37,7 @@ diag_log ("ESCAPE SURPRISE: " + str _surprise);
 // Enemies in a civilian car
 
 _surpriseArgs = [_minEnemySkill, _maxEnemySkill];
-_timeInSek = 0 * 60 + random (60 * 60);
+_timeInSek = 0 * 60 + random (90 * 60);
 _timeInSek = time + (_timeInSek * (0.5 + (4 - _enemyFrequency) / 4));
 _surprise = ["CIVILIANENEMY", _timeInSek, {[drn_searchAreaMarkerName] call drn_fnc_CL_MarkerExists}, false, _surpriseArgs];
 _surprises set [count _surprises, _surprise];
@@ -45,15 +45,13 @@ diag_log ("ESCAPE SURPRISE: " + str _surprise);
 
 // Drop Chopper
 
-/*
 _surpriseArgs = [(_enemyFrequency + 2) + floor random (_enemyFrequency * 2)]; // [NoOfDropUnits]
 _timeInSek = 5 * 60 + random (60 * 60);
-_timeInSek = 0; //time + (_timeInSek * (0.5 + (4 - _enemyFrequency) / 4));
-_condition = {true};
+//_timeInSek = 0; //time + (_timeInSek * (0.5 + (4 - _enemyFrequency) / 4));
+_condition = { true };
 _surprise = ["DROPCHOPPER", _timeInSek, _condition, false, _surpriseArgs];
 _surprises set [count _surprises, _surprise];
 diag_log ("ESCAPE SURPRISE: " + str _surprise);
-*/
 
 /*
 
@@ -114,8 +112,8 @@ while {true} do {
                 };
                 
                 if (_surpriseID == "DROPCHOPPER") then {
-                    private ["_noOfDropUnits", "_noOfDropUnits"];
-                    private ["_dropUnitTypeArray", "_dropGroup", "_soldierType", "_soldier", "_dropUnits", "_i", "_dropPosition"];
+                    private ["_noOfDropUnits"];
+                    private ["_dropGroup", "_soldierType", "_soldier", "_dropUnits", "_i", "_dropPosition"];
                     private ["_onGroupDropped"];
                     
                     _noOfDropUnits = _surpriseArgs select 0;
@@ -124,7 +122,7 @@ while {true} do {
                     _dropUnits = [];
                     
                     for [{_i = 0}, {_i < _noOfDropUnits}, {_i = _i + 1}] do {
-                        _soldierType = "O_T_Soldier_PG_F";
+                        _soldierType = selectRandom drn_arr_Escape_InfantryTypesParamilitaryGuer;
                         _soldier = _dropGroup createUnit [_soldierType, [0,0,30], [], 0, "FORM"];
                         _soldier setSkill (_minEnemySkill + random (_maxEnemySkill - _minEnemySkill));
                         _soldier setRank "CAPTAIN";
@@ -143,7 +141,7 @@ while {true} do {
                         [_group, drn_searchAreaMarkerName, _dropPos, drn_var_Escape_DebugSearchGroup] execVM "Engima\SearchPatrol\SearchPatrol.sqf";
                     };
                     
-                    [getMarkerPos "drn_dropChopperStartPosMarker", drn_var_enemySide, "O_Heli_Light_02_unarmed_F", "O_Pilot_F", _dropUnits, _dropPosition, _minEnemySkill, _maxEnemySkill, _onGroupDropped, drn_var_Escape_debugDropChoppers] execVM "Scripts\Escape\CreateDropChopper.sqf";
+                    [getMarkerPos "drn_dropChopperStartPosMarker", drn_var_enemySide, "O_Heli_Light_02_unarmed_F", "O_Pilot_F", _dropGroup, _dropPosition, _minEnemySkill, _maxEnemySkill, _onGroupDropped, drn_var_Escape_debugDropChoppers] execVM "Scripts\Escape\CreateDropChopper.sqf";
                     
                     // Create next drop chopper
                     _surpriseArgs = [(_enemyFrequency + 2) + floor random (_enemyFrequency * 2)]; // [NoOfDropUnits]
@@ -156,7 +154,7 @@ while {true} do {
                 };
                 
                 if (_surpriseID == "RUSSIANSEARCHCHOPPER") then {
-                    private ["_chopper", "_result", "_group"];
+                    private ["_chopper"];
                     
 					private _spawnResult = [getMarkerPos "drn_russianSearchChopperStartPosMarker", 0, "O_Heli_Light_02_dynamicLoadout_F", drn_var_enemySide] call BIS_fnc_spawnVehicle;
 		            _chopper = _spawnResult select 0;
@@ -180,7 +178,7 @@ while {true} do {
                 };
                 
                 if (_surpriseID == "REINFORCEMENTTRUCK") then {
-                    private ["_enemyMinSkill", "_enemyMaxSkill", "_playerPos"];
+                    private ["_enemyMinSkill", "_enemyMaxSkill"];
                     
                     _enemyMinSkill = _surpriseArgs select 0;
                     _enemyMaxSkill = _surpriseArgs select 1;

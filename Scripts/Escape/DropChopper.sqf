@@ -1,9 +1,9 @@
 if (!isServer) exitWith {};
 
-private ["_chopper", "_dropPosition", "_onGroupDropped", "_debug", "_group", "_waypoint", "_dropUnits"];
+private ["_chopper", "_dropPosition", "_onGroupDropped", "_debug", "_group", "_waypoint", "_dropGroup"];
 
 _chopper = _this select 0;
-_dropUnits = _this select 1;
+_dropGroup = _this select 1;
 _dropPosition = _this select 2;
 if (count _this > 3) then {_onGroupDropped = _this select 3;} else {_onGroupDropped = {};};
 if (count _this > 4) then {_debug = _this select 4;} else {_debug = false;};
@@ -22,11 +22,11 @@ if (vehicleVarName _chopper == "") exitWith {
 _chopper setVariable ["waypointFulfilled", false];
 _chopper setVariable ["missionCompleted", false];
 
-[_chopper, _dropUnits, _dropPosition, _onGroupDropped, _debug] spawn {
-	private ["_chopper", "_dropUnits", "_dropPosition", "_onGroupDropped", "_debug", "_i", "_dropGroup"];
+[_chopper, _dropGroup, _dropPosition, _onGroupDropped, _debug] spawn {
+	private ["_chopper", "_dropGroup", "_dropPosition", "_onGroupDropped", "_debug"];
     
     _chopper = _this select 0;
-    _dropUnits = _this select 1;
+    _dropGroup = _this select 1;
     _dropPosition = _this select 2;
     _onGroupDropped = _this select 3;
     _debug = _this select 4;
@@ -39,36 +39,15 @@ _chopper setVariable ["missionCompleted", false];
 		player sideChat "Drop chopper dropping cargo...";
 	};
 
-    _dropGroup = createGroup drn_var_enemySide;
-    _i = 0;
+	_chopper land "GET OUT";
+	
+	waitUntil { ((getPosATL _chopper) select 2) < 1 };
     
     {
-        private ["_parachute", "_dropUnit"];
-        
-        // This code is a workaround. An ArmA bug causes chutes to fall empty if commented code below is used. Problem is not completely solved, since chutes still are empty, but at least the AI units are not seen slammed to the ground.
+    	unassignVehicle _x;
+    	moveOut _x;
+    } foreach units _dropGroup;
 
-        unassignVehicle _x;
-        _x action ["eject", _chopper];
-        _x leaveVehicle _chopper;
-        
-        waitUntil {vehicle _x != _chopper};
-        
-        //_parachute = "ParachuteEast" createVehicle position _chopper;
-        //_parachute setPosATL getPosATL _chopper;
-        
-        (typeof _x) createUnit [[0, 0, 100], _dropGroup, "", 0.5, "PRIVATE"];
-        
-        _dropUnit = units _dropGroup select _i;
-        _dropUnit call drn_fnc_Escape_OnSpawnGeneralSoldierUnit;
-        //_dropUnit moveInDriver _parachute;
-        _i = _i + 1;
-        
-        deleteVehicle _x;
-        
-        sleep 0.5;
-    } foreach _dropUnits;
-
-    _dropUnits = units _dropGroup;
     [_dropGroup, _dropPosition] call _onGroupDropped;
     
 	while {!(_chopper getVariable "missionCompleted")} do {
@@ -92,10 +71,10 @@ if (_debug) then {
 
 _chopper flyInHeight 250;
 _chopper engineOn true;
-_chopper move [position _chopper select 0, position _chopper select 1, 85];
-while {(position _chopper) select 2 < 75} do {
-	sleep 1;
-};
+//_chopper move [position _chopper select 0, position _chopper select 1, 85];
+//while {(position _chopper) select 2 < 75} do {
+//	sleep 1;
+//};
 
 _waypoint = _group addWaypoint [_dropPosition, 0];
 _waypoint setWaypointType "MOVE";

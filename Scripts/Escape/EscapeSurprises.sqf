@@ -46,7 +46,7 @@ diag_log ("ESCAPE SURPRISE: " + str _surprise);
 // Drop Chopper
 
 _surpriseArgs = [(_enemyFrequency + 2) + floor random (_enemyFrequency * 2)]; // [NoOfDropUnits]
-_timeInSek = 5 * 60 + random (60 * 60);
+_timeInSek = time + 5 * 60 + random (60 * 60);
 //_timeInSek = 0; //time + (_timeInSek * (0.5 + (4 - _enemyFrequency) / 4));
 _condition = { true };
 _surprise = ["DROPCHOPPER", _timeInSek, _condition, false, _surpriseArgs];
@@ -145,8 +145,7 @@ while {true} do {
                     
                     // Create next drop chopper
                     _surpriseArgs = [(_enemyFrequency + 2) + floor random (_enemyFrequency * 2)]; // [NoOfDropUnits]
-                    _timeInSek = random (45 * 60);
-                    _timeInSek = time + (_timeInSek * (0.5 + (4 - _enemyFrequency) / 4));
+                    _timeInSek = time + 30 * 60 + random (90 * 60);
                     _condition = {true};
                     _surprise = ["DROPCHOPPER", _timeInSek, _condition, false, _surpriseArgs];
                     _surprises set [count _surprises, _surprise];

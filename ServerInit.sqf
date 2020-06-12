@@ -21,17 +21,17 @@ _useCivilians = true;
 
 _guardsExist = true;
 _comCenGuardsExist = true;
-_guardsAreArmed = false;
-_guardLivesLong = false;
+_guardsAreArmed = true;
+_guardLivesLong = true;
 
 _forceComCentersApart = true;
 drn_var_onlyPutComCentersOnFewPlaces = true;
 
 // Debug Variables
 
-_debugEscapeSurprises = true;
+_debugEscapeSurprises = false;
 _debugAmmoAndComPatrols = false;
-_debugSearchLeader = true;
+_debugSearchLeader = false;
 _debugVillagePatrols = false;
 _debugMilitaryTraffic = false;
 _debugAmbientInfantry = false;

@@ -336,8 +336,8 @@ cl_Engima_AmbientInfantry_Classes_AmbientInfantry_Run = { params ["_class_fields
 
                         _groupsCount = _groupsCount - 1;
 
-                        if (((_class_fields select 1) select 17)) then { 
-                            player commandChat "Removing ambient infantry group. (Total: " + str _groupsCount + ")" }; }; } else { 
+                        if (((_class_fields select 1) select 17)) then {
+                            player commandChat "Removing ambient infantry group. (Total: " + str _groupsCount + ")"; }; }; } else { 
 
 
 
@@ -424,8 +424,8 @@ cl_Engima_AmbientInfantry_Classes_AmbientInfantry_Run = { params ["_class_fields
 
                         [_group, _groupsCount] call ((_class_fields select 1) select 13);
 
-                        if (((_class_fields select 1) select 17)) then { 
-                            player commandChat "Creating ambient infantry group. (Total: " + str _groupsCount + ")" }; }; }; }; };
+                        if (((_class_fields select 1) select 17)) then {
+                            player commandChat "Creating ambient infantry group. (Total: " + str _groupsCount + ")"; }; }; }; }; };
 
 
 
